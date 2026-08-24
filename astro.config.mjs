@@ -48,10 +48,13 @@ export default defineConfig({
     // (issue #126): 193 auto-generated /api/reference/operations/* pages (also
     // noindexed via the Starlight Head override) plus the noindexed legal and
     // app-store-compliance pages previously made up ~83% of a 285-URL sitemap
-    // on a domain Google is still forming an opinion of.
+    // on a domain Google is still forming an opinion of. Paid /lp/ destinations
+    // are noindex (Layout) and stay out of the sitemap so they don't compete
+    // with the public compare pages.
     sitemap({
       filter: (page) =>
         !page.includes('/api/reference/operations/') &&
+        !page.includes('/lp/') &&
         !['/terms/', '/privacy/', '/cookies/', '/delete-account/'].some((path) =>
           page.endsWith(path)
         ),

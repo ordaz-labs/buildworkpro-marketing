@@ -30,6 +30,7 @@ const breadcrumbLabels: Record<string, string> = {
   features: 'Features',
   solutions: 'Solutions',
   compare: 'Compare',
+  lp: 'Landing',
   blog: 'Blog',
   docs: 'Docs',
   api: 'API',
@@ -510,6 +511,29 @@ const geoDefaultEnabled = import.meta.env.PROD;
             track(
               { name: 'ViewContent', params: { content_type: 'feature', content_name: fm[1] } },
               { name: 'view_feature', params: { feature: fm[1] } }
+            );
+          }
+
+          // Compare pages (/compare/<slug>/) — not the /compare/ hub.
+          // content_name drops the trailing -alternative so /compare/procore-alternative/
+          // fires content_name: 'procore' (and the same for other competitors).
+          const cm = location.pathname.match(/^\/compare\/([^/]+)\/?$/);
+          if (cm) {
+            const name = cm[1].replace(/-alternative$/, '');
+            track(
+              { name: 'ViewContent', params: { content_type: 'compare', content_name: name } },
+              { name: 'view_compare', params: { compare: name } }
+            );
+          }
+
+          // Ads landing pages (/lp/<slug>/). Hyphens → underscores so
+          // /lp/procore-alternative/ fires content_name: 'procore_alternative'.
+          const lm = location.pathname.match(/^\/lp\/([^/]+)\/?$/);
+          if (lm) {
+            const name = lm[1].replace(/-/g, '_');
+            track(
+              { name: 'ViewContent', params: { content_type: 'lp', content_name: name } },
+              { name: 'view_lp', params: { lp: name } }
             );
           }
 
