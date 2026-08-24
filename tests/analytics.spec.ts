@@ -94,6 +94,20 @@ test.describe('conversion-event tracking', () => {
     expect((ga[0] as unknown[])[2]).toMatchObject({ feature: 'construction-bidding' });
   });
 
+  test('compare page sends view_compare to GA cookielessly on load', async ({ page }) => {
+    await page.goto('/compare/procore-alternative/');
+    const ga = await gaEvents(page, 'view_compare');
+    expect(ga.length).toBeGreaterThan(0);
+    expect((ga[0] as unknown[])[2]).toMatchObject({ compare: 'procore' });
+  });
+
+  test('ads LP sends view_lp to GA cookielessly on load', async ({ page }) => {
+    await page.goto('/lp/procore-alternative/');
+    const ga = await gaEvents(page, 'view_lp');
+    expect(ga.length).toBeGreaterThan(0);
+    expect((ga[0] as unknown[])[2]).toMatchObject({ lp: 'procore_alternative' });
+  });
+
   test('pricing scroll sends view_pricing to GA cookielessly', async ({ page }) => {
     await page.goto('/');
     await page.locator('#pricing').scrollIntoViewIfNeeded();
@@ -128,5 +142,41 @@ test.describe('conversion-event tracking', () => {
     await page.waitForFunction(() => window.__bwpPixelLoaded === true);
     expect((await gaEvents(page, 'view_feature')).length).toBeGreaterThan(0);
     expect((await metaEvents(page, 'ViewContent')).length).toBeGreaterThan(0);
+  });
+
+  test('returning accepter: compare ViewContent uses content_type compare', async ({ page }) => {
+    await page.addInitScript(() => {
+      try {
+        localStorage.setItem('bwp-cookies-accepted', '1');
+      } catch {
+        /* ignore */
+      }
+    });
+    await page.goto('/compare/procore-alternative/');
+    await page.waitForFunction(() => window.__bwpPixelLoaded === true);
+    const events = await metaEvents(page, 'ViewContent');
+    expect(events.length).toBeGreaterThan(0);
+    expect((events[0] as unknown[])[2]).toMatchObject({
+      content_type: 'compare',
+      content_name: 'procore',
+    });
+  });
+
+  test('returning accepter: ads LP ViewContent uses content_type lp', async ({ page }) => {
+    await page.addInitScript(() => {
+      try {
+        localStorage.setItem('bwp-cookies-accepted', '1');
+      } catch {
+        /* ignore */
+      }
+    });
+    await page.goto('/lp/procore-alternative/');
+    await page.waitForFunction(() => window.__bwpPixelLoaded === true);
+    const events = await metaEvents(page, 'ViewContent');
+    expect(events.length).toBeGreaterThan(0);
+    expect((events[0] as unknown[])[2]).toMatchObject({
+      content_type: 'lp',
+      content_name: 'procore_alternative',
+    });
   });
 });
