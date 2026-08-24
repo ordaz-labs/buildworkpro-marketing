@@ -23353,7 +23353,7 @@
     "/oauth/register": {
       "post": {
         "summary": "Dynamic Client Registration (RFC 7591)",
-        "description": "Self-registers a new OAuth client. Public endpoint — no authentication required. Per-IP rate-limited to 5 requests/minute. Each redirect_uri is validated against the SSRF guard.",
+        "description": "Self-registers a new OAuth client. Public endpoint — no authentication required. Per-IP rate-limited to 5 requests/minute. Each redirect_uri must be https, a loopback http URL on any port (http://127.0.0.1:{port}, http://localhost:{port}, http://[::1]:{port} — RFC 8252 §7.3), or a private-use scheme such as cursor:// (RFC 8252 §7.1); script-injection schemes (javascript:, data:, file:, blob:), embedded credentials, and fragments are rejected.",
         "security": [],
         "tags": [
           "OAuth"
