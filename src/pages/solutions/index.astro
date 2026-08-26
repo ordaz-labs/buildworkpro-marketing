@@ -6,6 +6,14 @@ import Footer from '../../components/Footer.astro';
 
 const solutions = [
   {
+    title: 'Glazing Contractors',
+    description:
+      'Storefronts, showers, railings, and impact openings. Bid by mark from supplier parts, turn field measures into paid change orders, and bill GCs with AIA-style pay apps.',
+    href: '/solutions/glazing-contractors/',
+    color: 'sky',
+    icon: 'M4 4h16v16H4V4zm0 8h16M12 4v16',
+  },
+  {
     title: 'HVAC Contractors',
     description:
       'From ductwork rough-in to equipment startup. Bid commercial and residential mechanical jobs, coordinate sheet metal crews, and submit pay apps without the month-end scramble.',
@@ -56,6 +64,7 @@ const solutions = [
 ];
 
 const colorMap: Record<string, { bg: string; icon: string; ring: string }> = {
+  sky: { bg: 'bg-sky-50', icon: 'text-sky-600', ring: 'ring-sky-100' },
   rose: { bg: 'bg-rose-50', icon: 'text-rose-600', ring: 'ring-rose-100' },
   amber: { bg: 'bg-amber-50', icon: 'text-amber-600', ring: 'ring-amber-100' },
   cyan: { bg: 'bg-cyan-50', icon: 'text-cyan-600', ring: 'ring-cyan-100' },
@@ -67,7 +76,7 @@ const colorMap: Record<string, { bg: string; icon: string; ring: string }> = {
 
 <Layout
   title="Construction Software by Trade – Solutions | BuildWorkPro"
-  description="Trade construction software for HVAC, electrical, plumbing, concrete, roofing & framing subs — bidding, pay apps, projects. $79/month flat."
+  description="Trade construction software for glazing, HVAC, electrical, plumbing, concrete, roofing & framing subs — bidding, pay apps, projects. $79/month flat."
 >
   <Header />
   <main class="pt-32 pb-20">
