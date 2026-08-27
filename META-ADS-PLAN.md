@@ -2,6 +2,8 @@
 
 _Not published (repo-root reference). Created 2026-06-10. Status: infra built, awaiting billing + launch._
 
+> **2026-08-27 — strategy change.** Cold interest-targeted prospecting (Ad set A below) is being retired: the ICP is too narrow for Meta's interest graph to find, which is why CPMs kept climbing against flat signups. Meta's role becomes **retargeting a named list** we build ourselves — Custom Audience upload plus site-visitor retargeting, pointed at `/lp/<trade>/?src=retarget`. The campaign structure below stays valid for the retargeting ad set; treat the cold-interest ad set as superseded. See `OUTBOUND-PLAN.md`.
+
 ## Assets created (Meta Business Suite)
 
 - **Business portfolio:** Buildworkpro — ID `997660364713364` (repurposed from the old Eikon Solutions profile; legal name kept as Eikon Solutions LLC per decision)
