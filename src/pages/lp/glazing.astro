@@ -1,0 +1,319 @@
+---
+// Outbound destination for the glazing vertical (named-list playbook): cold
+// email, direct mail, and Meta retargeting all land here. Same minimal-chrome
+// pattern as /lp/procore-alternative — logo + one CTA, noindex, out of the
+// sitemap. Headline variants are keyed off ?src= so each channel's landing
+// copy continues its message; UTM/click-id passthrough to app signup is
+// handled globally by Layout.
+import Layout from '../../layouts/Layout.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import { config } from '../../config';
+
+// Glazing-tuned subset of the compare-page rows. "GC platforms" rather than a
+// named competitor: outbound recipients are mostly comparing against
+// spreadsheets or a Procore quote, and the named comparison lives on
+// /compare/procore-alternative/ for the ones who want it.
+const comparisonRows = [
+  {
+    label: 'Built for',
+    bwp: 'Glass & glazing subcontractors',
+    other: 'General contractors & owners',
+    bwpWins: true,
+  },
+  {
+    label: 'Pricing',
+    bwp: '$79/month flat, published',
+    other: 'Custom quote — commonly $4,500–$10,000+/year*',
+    bwpWins: true,
+  },
+  {
+    label: 'Bidding',
+    bwp: 'Line items by mark, priced from supplier parts and labor rates',
+    other: 'Bid management oriented to GCs receiving bids',
+    bwpWins: true,
+  },
+  {
+    label: 'Pay applications',
+    bwp: 'AIA-style progress billing with retainage, included',
+    other: 'Enterprise tiers or add-on modules',
+    bwpWins: true,
+  },
+  {
+    label: 'How you buy',
+    bwp: 'Self-serve signup, 14-day free trial',
+    other: 'Sales demo and quote process',
+    bwpWins: true,
+  },
+  {
+    label: 'Users',
+    bwp: 'Unlimited',
+    other: 'Per-user or volume-based licensing',
+    bwpWins: true,
+  },
+];
+
+const stats = [
+  { n: '3,224', label: 'bid line items priced' },
+  { n: '143', label: 'projects run' },
+  { n: '1,160', label: 'contacts managed' },
+  { n: '17', label: 'months in production' },
+];
+---
+
+<Layout
+  title="Glazing Contractor Software — $79/month | BuildWorkPro"
+  description="Software for glass & glazing subs: bid storefronts and showers by mark from supplier parts, price field measures as change orders, bill GCs with AIA-style pay apps. $79/month flat."
+  noindex
+>
+  <!-- Minimal ads chrome: logo home + one trial CTA. No mega-nav, no contact CTA. -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="/" class="flex items-center">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="/logo-190.webp 190w, /logo-380.webp 380w"
+              sizes="(min-width: 1024px) 193px, 177px"
+            />
+            <img
+              src="/logo.png"
+              alt="BuildWorkPro"
+              width="950"
+              height="236"
+              class="h-11 lg:h-12 w-auto"
+              decoding="async"
+            />
+          </picture>
+        </a>
+        <a
+          href={config.signupUrl}
+          class="text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 px-5 py-2.5 rounded-lg transition-all hover:-translate-y-0.5"
+        >
+          Start free trial
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-12 pb-20">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="text-center">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
+          For glass & glazing contractors
+        </p>
+        <h1
+          id="lp-headline"
+          class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight"
+        >
+          Glazing Software Built Inside a Glass Shop
+        </h1>
+        <p
+          id="lp-subheadline"
+          class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed"
+        >
+          Bid storefronts, showers, railings, and impact openings by mark — priced from your
+          supplier parts and labor rates. Turn field measures into paid change orders and bill GCs
+          with AIA-style pay applications. <strong class="text-slate-700">$79/month flat</strong>,
+          unlimited users.
+        </p>
+        <div class="mt-8">
+          <a
+            href={config.signupUrl}
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Start free trial
+          </a>
+          <p class="mt-3 text-sm text-slate-500">14-day free trial · No credit card required</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof: the founder's own glazing company runs on it, disclosed plainly. -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="rounded-2xl border border-brand-100 bg-brand-50 p-8">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-3">
+          The first customer was a glazing contractor — ours
+        </h2>
+        <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+          BuildWorkPro was built inside National Glass and Construction, our founder's own South
+          Florida glass and glazing company — by a glazier who needed the software, not a software
+          company guessing at how glass shops work. Every feature below runs that company's real
+          bids, pay apps, and jobs today.
+        </p>
+        <div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {
+            stats.map((s) => (
+              <div class="rounded-xl border border-brand-100 bg-white p-4 text-center">
+                <div class="text-2xl sm:text-3xl font-extrabold text-brand-600 tabular-nums">
+                  {s.n}
+                </div>
+                <div class="mt-1 text-xs sm:text-sm text-slate-500">{s.label}</div>
+              </div>
+            ))
+          }
+        </div>
+        <p class="mt-4 text-sm">
+          <a href="/customers/national-glass/" class="text-brand-600 font-medium hover:underline">
+            Read the full customer story →
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- The glazing workflow, in the trade's own terms -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            Bid by mark, from supplier parts
+          </h3>
+          <p class="text-sm text-slate-500">
+            Every opening is a line item with its mark; hardware, glass, and metal go in as costed
+            sublines straight from your supplier part numbers, with your labor rates and markup
+            applied systematically. The GC sees a clean PDF proposal, not your cost breakdown.
+          </p>
+        </div>
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            Field measures become paid change orders
+          </h3>
+          <p class="text-sm text-slate-500">
+            The opening that measured two inches off, the glass that arrived broken, the scope the
+            GC added on site — write it up as a priced change order backed by dated site-log photos.
+            Approved, it rolls into the contract sum so the next pay app bills the right number.
+          </p>
+        </div>
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <h3 class="text-base font-semibold text-slate-900 mb-2">Bill GCs the way they expect</h3>
+          <p class="text-sm text-slate-500">
+            Build a schedule of values by floor, elevation, or scope, then submit AIA-style pay
+            applications for the percent complete each period — retainage calculated on every line,
+            approval status tracked from submitted to paid.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <Screenshot
+            src="/screenshots/06-bid-detail-marks.png"
+            alt="BuildWorkPro bid organized by marks with line items priced from supplier parts and labor rates"
+            caption="Bids organized by mark — every opening priced from parts, labor, and markup."
+            eager
+          />
+        </div>
+        <div>
+          <Screenshot
+            src="/screenshots/13-pay-app-detail.png"
+            alt="BuildWorkPro pay application with schedule of values, retainage, and approval status"
+            caption="AIA-style pay applications with schedule of values and retainage."
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
+        BuildWorkPro vs GC platforms at a glance
+      </h2>
+      <ComparisonTable rows={comparisonRows} competitor="GC platforms" />
+      <p class="mt-3 text-xs text-slate-400 px-2">
+        *GC-oriented platforms typically don't publish pricing; quotes are based on annual
+        construction volume and licensed products. Range reflects figures commonly reported in
+        independent pricing analyses as of June 2026 — see the full
+        <a href="/compare/procore-alternative/" class="underline hover:text-slate-500"
+          >Procore comparison</a
+        >.
+      </p>
+    </section>
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-16">
+      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          Run your glass shop on it free for 14 days
+        </h2>
+        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
+          $79/month or $790/year. Every feature, unlimited users — estimators, PMs, and installers
+          included. No demo call, no quote process.
+        </p>
+        <div class="mt-8">
+          <a
+            href={config.signupUrl}
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Start free trial
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm">&copy; {new Date().getFullYear()} BuildWorkPro. All rights reserved.</p>
+        <nav class="flex items-center gap-4 text-sm" aria-label="Legal">
+          <a href="/privacy/" class="hover:text-white transition-colors">Privacy</a>
+          <a href="/terms/" class="hover:text-white transition-colors">Terms</a>
+          <button
+            type="button"
+            id="footer-cookie-settings"
+            class="hover:text-white transition-colors cursor-pointer"
+          >
+            Cookie settings
+          </button>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<script>
+  // Channel-matched headlines: ?src=<key> swaps the hero copy so the page
+  // continues the message that brought the visitor here. Only predefined copy
+  // is ever rendered — the param selects a key, its value never reaches the
+  // DOM — and an unknown or absent src leaves the server-rendered default.
+  const VARIANTS: Record<string, { headline: string; subheadline: string }> = {
+    // Cold email: the email said "you're pricing glass jobs in spreadsheets".
+    email: {
+      headline: 'Still Pricing Glass Jobs in Spreadsheets?',
+      subheadline:
+        'Bid storefronts, showers, railings, and impact openings by mark — priced from your ' +
+        'supplier parts and labor rates, with margin applied once instead of re-derived every ' +
+        'bid. Built inside a working glass shop. $79/month flat, unlimited users.',
+    },
+    // Direct mail: the postcard led with the price against the software quote.
+    mail: {
+      headline: 'The Glazing Software That Costs Less Than a Shower Door',
+      subheadline:
+        'Bids by mark from supplier parts, change orders for field measures, AIA-style pay apps ' +
+        'to your GCs — $79/month flat instead of a quote-based platform. Built inside a working ' +
+        'glass shop, and you can try all of it free for 14 days.',
+    },
+    // Meta retargeting: they've seen the site before; lower the commitment bar.
+    retarget: {
+      headline: 'Take Another Look — On a Real Glazing Bid',
+      subheadline:
+        'Start a 14-day free trial, no credit card, and price one real job in it: line items by ' +
+        'mark, supplier parts as sublines, your labor rates and markup. If it beats your ' +
+        'spreadsheet, it costs $79/month flat. If not, walk away.',
+    },
+  };
+
+  const src = new URLSearchParams(location.search).get('src');
+  const variant = src ? VARIANTS[src] : undefined;
+  if (variant) {
+    const headline = document.getElementById('lp-headline');
+    const subheadline = document.getElementById('lp-subheadline');
+    if (headline) headline.textContent = variant.headline;
+    if (subheadline) subheadline.textContent = variant.subheadline;
+  }
+
+  document.getElementById('footer-cookie-settings')?.addEventListener('click', () => {
+    (window as any).bwpOpenCookieSettings?.();
+  });
+</script>

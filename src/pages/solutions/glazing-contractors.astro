@@ -1,0 +1,367 @@
+---
+// The seventh trade page — and the one with the receipts: BuildWorkPro was
+// built inside a glazing contractor (see /customers/national-glass/), so this
+// page gets a proof section the other six don't have. Follows the shared
+// solutions-page pattern otherwise. Screenshots come from the root set —
+// 06-bid-detail-marks is already glazing's native workflow (bids by mark).
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import { config } from '../../config';
+import { solutionsIncluded } from '../../data/included';
+
+const included = solutionsIncluded;
+
+const faqs = [
+  {
+    question: 'What is the best software for glass and glazing contractors?',
+    answer:
+      'BuildWorkPro was built inside a working glazing contractor — National Glass and Construction, the founder’s own South Florida glass company — so the workflow matches how glass shops actually run: line-item bids organized by mark and priced from supplier parts, change orders for field measures, AIA-style pay applications to GCs, and dated site logs, at $79/month flat with unlimited users. It fits commercial and residential glazing subs doing storefronts, shower enclosures, railings, mirrors, and impact windows and doors.',
+  },
+  {
+    question: 'How do I bid glazing jobs from supplier part numbers?',
+    answer:
+      'Each opening goes in as a line item with its mark, and the hardware, glass, and metal that make it up go in as costed sublines — priced from your supplier part numbers and kept in a product catalog you reuse bid after bid. Labor comes from your saved labor rates, markup is applied systematically instead of re-derived in a spreadsheet each time, and the GC or homeowner sees a clean PDF proposal without your cost breakdown.',
+  },
+  {
+    question: 'How does progress billing work for glazing subcontractors?',
+    answer:
+      'You build a schedule of values by floor, elevation, or scope — storefront, curtain wall, interior glass, mirrors — then submit an AIA-style pay application each period billing the percent complete on every line. Retainage is calculated automatically, and each pay app moves through approval statuses so you always know what has been submitted, approved, and paid.',
+  },
+  {
+    question: 'How do I handle field measures and broken glass as change orders?',
+    answer:
+      'The opening that measured off from the plans, the lite that arrived broken, the scope the GC added on site — each becomes a change order with priced line items, backed by dated site-log photos taken when it happened. Once approved (e-signature included), the change order rolls into the contract sum so your next pay application bills against the right number instead of the original contract.',
+  },
+  {
+    question: 'How much does glazing contractor software cost?',
+    answer:
+      'BuildWorkPro is $79/month flat, or $790/year — one price, unlimited users, every feature. There are no per-user fees, so adding estimators, project managers, and installers costs nothing extra. Every account starts with a 14-day free trial, no credit card required.',
+  },
+];
+
+const stats = [
+  { n: '3,224', label: 'bid line items priced' },
+  { n: '143', label: 'projects run' },
+  { n: '1,160', label: 'contacts managed' },
+  { n: '17', label: 'months in production' },
+];
+---
+
+<Layout
+  title="Glazing Contractor Software for Glass Shops | BuildWorkPro"
+  description="Glazing contractor software: bid storefronts and showers by mark from supplier parts, AIA-style pay apps, change orders for field measures. $79/month flat, 14-day free trial."
+>
+  <Header />
+  <main class="pt-32 pb-20">
+    <!-- Hero -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="text-center">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
+          For Glass & Glazing Contractors
+        </p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+          Glazing Contractor Software
+        </h1>
+        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          Storefronts, shower enclosures, railings, mirrors, and impact openings — run every glazing
+          job in one place. Bid by mark from your supplier parts and labor rates, turn field
+          measures into paid change orders, and bill GCs with AIA-style pay applications — for
+          $79/month flat.
+        </p>
+        <div class="mt-8">
+          <a
+            href={config.signupUrl}
+            class="inline-flex items-center px-8 py-3.5 text-base font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg"
+            >Start free trial</a
+          >
+          <p class="mt-3 text-sm text-slate-400">14-day free trial. No credit card required.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Built inside a glass shop — proof the other trade pages can't claim -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="rounded-2xl border border-brand-100 bg-brand-50 p-8">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-3">
+          Built inside a glazing contractor — literally
+        </h2>
+        <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+          BuildWorkPro started as the internal tool of National Glass and Construction, our
+          founder's own South Florida glass and glazing company. Every workflow on this page runs
+          that company's real bids, real pay applications, and real installs today — which is why
+          bids are organized by mark and supplier parts price as sublines, the way a glass shop
+          actually estimates.
+        </p>
+        <div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {
+            stats.map((s) => (
+              <div class="rounded-xl border border-brand-100 bg-white p-4 text-center">
+                <div class="text-2xl sm:text-3xl font-extrabold text-brand-600 tabular-nums">
+                  {s.n}
+                </div>
+                <div class="mt-1 text-xs sm:text-sm text-slate-500">{s.label}</div>
+              </div>
+            ))
+          }
+        </div>
+        <p class="mt-4 text-sm">
+          <a href="/customers/national-glass/" class="text-brand-600 font-medium hover:underline">
+            Read the National Glass customer story →
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Why glazing contractors use BuildWorkPro -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-12">
+        Why glazing contractors use BuildWorkPro
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <div class="inline-flex p-2.5 rounded-xl bg-brand-50 mb-4">
+            <svg
+              class="w-5 h-5 text-brand-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            Bid by mark, priced from supplier parts
+          </h3>
+          <p class="text-sm text-slate-500">
+            Every opening is a line item with its mark — W1, D3, SF-2 — and the hardware, glass, and
+            metal that make it up go in as costed sublines from your supplier part numbers, with
+            your markup applied systematically. See
+            <a href="/features/construction-bidding/" class="text-brand-600 hover:underline"
+              >bidding & estimating</a
+            >.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <div class="inline-flex p-2.5 rounded-xl bg-brand-50 mb-4">
+            <svg
+              class="w-5 h-5 text-brand-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            A catalog that remembers your parts and rates
+          </h3>
+          <p class="text-sm text-slate-500">
+            Hinges, channels, rollers, glass makeups, and metal live in a product catalog with your
+            costs; installer and fabricator labor lives in saved labor rates. The next shower or
+            storefront prices from the catalog in minutes instead of from last month's spreadsheet.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <div class="inline-flex p-2.5 rounded-xl bg-brand-50 mb-4">
+            <svg
+              class="w-5 h-5 text-brand-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            Field measures become paid change orders
+          </h3>
+          <p class="text-sm text-slate-500">
+            The opening that measured off from the plans, the lite that arrived broken, the scope
+            the GC added on site — write it up as a
+            <a href="/features/change-orders/" class="text-brand-600 hover:underline"
+              >change order</a
+            >
+            with priced line items. Once approved, it rolls into the contract sum so the next pay app
+            bills the right number.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <div class="inline-flex p-2.5 rounded-xl bg-brand-50 mb-4">
+            <svg
+              class="w-5 h-5 text-brand-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            Bill by floor, elevation, or scope
+          </h3>
+          <p class="text-sm text-slate-500">
+            Build a schedule of values that mirrors the job — storefront by elevation, interior
+            glass by floor, showers by unit — and submit AIA-style
+            <a href="/features/pay-applications/" class="text-brand-600 hover:underline"
+              >pay applications</a
+            >
+            for the percent complete each period, with retainage tracked on every line.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <div class="inline-flex p-2.5 rounded-xl bg-brand-50 mb-4">
+            <svg
+              class="w-5 h-5 text-brand-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            Put deliveries and damage on the record
+          </h3>
+          <p class="text-sm text-slate-500">
+            Glass arrived scratched, the opening wasn't ready, the inspector signed off — write a
+            dated
+            <a href="/features/site-logs/" class="text-brand-600 hover:underline">site log</a>
+            with photos the day it happens. When a GC questions the schedule or a backcharge appears months
+            later, you have a contemporaneous record instead of memory.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+          <div class="inline-flex p-2.5 rounded-xl bg-brand-50 mb-4">
+            <svg
+              class="w-5 h-5 text-brand-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-base font-semibold text-slate-900 mb-2">
+            One pipeline for GCs, PMs, and homeowners
+          </h3>
+          <p class="text-sm text-slate-500">
+            Glazing work comes from everywhere — GCs bidding you on storefronts, property managers
+            with broken glass, homeowners wanting showers. Track every lead on one
+            <a href="/features/construction-crm/" class="text-brand-600 hover:underline">pipeline</a
+            >
+            with each bid and job tied to the contact it came from.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product screenshots -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 space-y-10">
+      <Screenshot
+        src="/screenshots/06-bid-detail-marks.png"
+        alt="BuildWorkPro bid organized by marks with line items priced from supplier parts and labor rates"
+        caption="A glazing bid organized by mark — every opening a line item, supplier parts and labor priced as sublines underneath."
+      />
+      <Screenshot
+        src="/screenshots/13-pay-app-detail.png"
+        alt="BuildWorkPro pay application with schedule of values, retainage, and approval status"
+        caption="An AIA-style pay application against a schedule of values — percent complete per line, retainage calculated automatically."
+      />
+    </section>
+
+    <!-- What's included -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-8">
+        Everything you need at one flat price
+      </h2>
+      <p class="text-center text-slate-500 mb-8">
+        $79/month for unlimited users and projects. No per-user fees.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-3">
+        {
+          included.map((item) => (
+            <div class="flex items-center gap-2.5">
+              <svg
+                class="w-4 h-4 text-brand-600 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-sm text-slate-600">{item}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <FAQSection faqs={faqs} />
+
+    <!-- CTA -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
+        Bid it, measure it, bill it — one system
+      </h2>
+      <p class="text-lg text-slate-500 mb-8">
+        $79/month flat covers your whole company — unlimited users, every feature, no per-user fees.
+        Try everything free for 14 days, no credit card required.
+      </p>
+      <a
+        href={config.signupUrl}
+        class="inline-flex items-center px-8 py-3.5 text-base font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg"
+        >Start free trial</a
+      >
+      <p class="mt-8 text-sm text-slate-400">
+        Comparing tools? See how BuildWorkPro stacks up as a
+        <a href="/compare/procore-alternative/" class="text-brand-600 hover:underline"
+          >Procore alternative</a
+        >
+        or a
+        <a href="/compare/buildertrend-alternative/" class="text-brand-600 hover:underline"
+          >Buildertrend alternative</a
+        >.
+      </p>
+    </section>
+  </main>
+  <Footer />
+</Layout>
