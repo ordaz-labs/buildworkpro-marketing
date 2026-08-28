@@ -160,10 +160,12 @@ test.describe('/templates/aia-g702-g703/', () => {
     expect(jsonld.some((s) => s.includes('FAQPage'))).toBe(true);
   });
 
-  test('links down the funnel to the pay applications feature', async ({ page }) => {
+  test('links down the funnel to AIA billing software', async ({ page }) => {
     await page.goto('/templates/aia-g702-g703/');
     // Scoped to main: the header Features dropdown contains the same href in a
     // hidden menu item, which .first() would otherwise match.
-    await expect(page.locator('main a[href="/features/pay-applications/"]').first()).toBeVisible();
+    const featureLink = page.locator('main a[href="/features/pay-applications/"]').first();
+    await expect(featureLink).toBeVisible();
+    await expect(featureLink).toHaveText(/AIA billing software/i);
   });
 });
