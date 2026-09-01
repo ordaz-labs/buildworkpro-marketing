@@ -32,6 +32,7 @@ const breadcrumbLabels: Record<string, string> = {
   compare: 'Compare',
   lp: 'Landing',
   blog: 'Blog',
+  templates: 'Templates',
   docs: 'Docs',
   api: 'API',
   security: 'Security',
@@ -500,6 +501,24 @@ const geoDefaultEnabled = import.meta.env.PROD;
         }
         document.addEventListener('click', onCtaActivate);
         document.addEventListener('auxclick', onCtaActivate); // middle-click → new tab
+
+        // Template downloads (issue #145). GA fires cookielessly for every
+        // visitor; the Meta custom event fires only when the pixel is loaded
+        // (Accept, or the US geo-default). Standard Meta events don't fit a
+        // file download, so this is trackCustom rather than bwpTrack's track.
+        function onTemplateDownload(e) {
+          const el = e.target && e.target.closest && e.target.closest('a.template-download');
+          if (!el) return;
+          const template = el.getAttribute('data-template') || '';
+          if (window.bwpTrack)
+            window.bwpTrack(null, {
+              name: 'template_download',
+              params: { template: template },
+            });
+          if (window.fbq) window.fbq('trackCustom', 'TemplateDownload', { template: template });
+        }
+        document.addEventListener('click', onTemplateDownload);
+        document.addEventListener('auxclick', onTemplateDownload);
 
         // 2 & 3. High-intent page views, fired immediately on load. GA4
         //        captures them cookielessly for every visitor; Meta captures

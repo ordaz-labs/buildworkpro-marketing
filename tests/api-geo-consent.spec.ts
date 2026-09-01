@@ -67,3 +67,33 @@ test('declining after a US default load is remembered on the next pageview', asy
   await page.waitForTimeout(800);
   expect(await page.evaluate(() => window.__bwpPixelLoaded === true)).toBe(false);
 });
+
+test('US visitor: template download fires TemplateDownload without Accept', async ({ page }) => {
+  await page.route('https://connect.facebook.net/**', (r) => r.abort());
+  await page.route('https://www.googletagmanager.com/**', (r) => r.abort());
+  await stubGeo(page, JSON.stringify({ country: 'US' }));
+  await page.goto('/templates/aia-g702-g703/');
+  await page.waitForFunction(() => window.__bwpPixelLoaded === true);
+  await page.evaluate(() => {
+    document.addEventListener('click', (e) => e.preventDefault(), true);
+  });
+  await page.locator('a.template-download').first().click();
+  const events = await page.evaluate(() => {
+    const q = (window.fbq && window.fbq.queue) || [];
+    return q.filter((a) => a[0] === 'trackCustom' && a[1] === 'TemplateDownload');
+  });
+  expect(events.length).toBeGreaterThan(0);
+  expect((events[0] as unknown[])[2]).toMatchObject({ template: 'aia-g702-g703' });
+});
+
+test('EEA visitor: template download does not load the Pixel', async ({ page }) => {
+  await page.route('https://connect.facebook.net/**', (r) => r.abort());
+  await stubGeo(page, JSON.stringify({ country: 'DE' }));
+  await page.goto('/templates/aia-g702-g703/');
+  await page.waitForTimeout(800);
+  await page.evaluate(() => {
+    document.addEventListener('click', (e) => e.preventDefault(), true);
+  });
+  await page.locator('a.template-download').first().click();
+  expect(await page.evaluate(() => typeof window.fbq)).toBe('undefined');
+});

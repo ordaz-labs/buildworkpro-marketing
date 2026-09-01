@@ -11,6 +11,15 @@ test.describe('templates hub', () => {
     await expect(
       page.getByRole('link', { name: /Pay Application Template/i }).first()
     ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: /Construction RFI Template/i }).first()
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: /Construction Submittal Log Template/i }).first()
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: /Construction T&M Ticket Template/i }).first()
+    ).toBeVisible();
   });
 
   test('the complete-pack email form renders without gating the downloads', async ({ page }) => {
@@ -20,20 +29,53 @@ test.describe('templates hub', () => {
     await expect(form.locator('input[type="email"]')).toBeVisible();
     // Consent stays explicit — same GDPR pattern as the contact form.
     await expect(form.locator('#template-pack-consent')).toBeAttached();
+    // Transactional only: no ESP / nurture list exists on this site.
+    await expect(page.getByText(/not\s+a newsletter/i)).toBeVisible();
     // The individual downloads above the form must remain ungated links, not
     // form-triggered — the open-file strategy is the whole point (Q5).
     await expect(
       page.getByRole('link', { name: /Pay Application Template/i }).first()
     ).toBeVisible();
   });
+
+  test('the complete-pack form requires Turnstile before posting', async ({ page }) => {
+    // Stub Turnstile so the widget never issues a token. Aborting the real
+    // script 404s Vite and puts an overlay over the submit button.
+    await page.addInitScript(() => {
+      (window as unknown as { turnstile: { render: () => string; reset: () => void } }).turnstile =
+        {
+          render() {
+            return 'mock';
+          },
+          reset() {},
+        };
+    });
+    await page.route('https://challenges.cloudflare.com/**', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/javascript', body: '' })
+    );
+    const posts: string[] = [];
+    await page.route('**/api/template-pack/**', async (route) => {
+      posts.push(route.request().url());
+      await route.abort();
+    });
+    await page.goto('/templates/');
+    await page.locator('#template-pack-form input[name="email"]').fill('test@example.com');
+    await page.locator('#template-pack-consent').check();
+    await page.locator('#template-pack-submit').click();
+    await expect(page.locator('#template-pack-status')).toContainText(/verification/i);
+    expect(posts).toHaveLength(0);
+  });
 });
 
-// Pages 6–9 share one page template — loop-verify render + real-file download.
+// Shared page template — loop-verify render + real-file download.
 for (const [slug, h1] of [
   ['change-order', /Construction Change Order Template/i],
   ['punch-list', /Construction Punch List Template/i],
   ['construction-invoice', /Construction Invoice Template/i],
   ['construction-schedule', /Construction Schedule Template/i],
+  ['rfi', /Construction RFI Template/i],
+  ['submittal-log', /Construction Submittal Log Template/i],
+  ['tm-ticket', /Construction T&M Ticket Template/i],
 ] as const) {
   test(`/templates/${slug}/ renders and its file downloads`, async ({ page, request }) => {
     await page.goto(`/templates/${slug}/`);

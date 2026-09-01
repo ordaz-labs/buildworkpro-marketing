@@ -11,11 +11,16 @@ import { checkRateLimit, type RateLimiter } from '../../lib/rate-limit';
 
 export const prerender = false;
 
-// The complete template pack (issue #601). Files live in public/templates-files/
-// and are open downloads by design — this email is a convenience bundle, not a
-// gate. Keep this list in sync with the `live` array in src/pages/templates/index.astro.
+// The complete template pack (issue #145 / backlog #601). Files live in
+// public/templates-files/ and are open downloads by design — this email is a
+// convenience bundle, not a gate. Keep this list in sync with the `live` array
+// in src/pages/templates/index.astro. Daily-report lives on a blog post, not
+// the hub cards, but ships in the pack.
 const SITE = 'https://buildworkpro.com';
 const PACK: Array<{ title: string; file: string }> = [
+  { title: 'Construction RFI Template', file: 'rfi-template.docx' },
+  { title: 'Construction Submittal Log Template', file: 'submittal-log-template.xlsx' },
+  { title: 'Construction T&M Ticket Template', file: 'tm-ticket-template.xlsx' },
   {
     title: 'Pay Application Template (G702 & G703 style)',
     file: 'pay-application-template-g702-g703-style.xlsx',
@@ -39,8 +44,8 @@ function buildPackEmail(): string {
   ).join('');
   return `
     <div style="font-family:sans-serif;font-size:15px;color:#0f172a;line-height:1.6;max-width:560px">
-      <h2 style="font-size:20px">Your 10 free construction templates</h2>
-      <p>Here's the complete BuildWorkPro template pack — every file is a direct download, ready to use:</p>
+      <h2 style="font-size:20px">Your free construction templates</h2>
+      <p>Here's the complete BuildWorkPro template pack — every file is a direct download, ready to use. This is a one-time email, not a newsletter:</p>
       <ul style="padding-left:20px">${items}</ul>
       <p>Each template has a guide explaining how to fill it out at
         <a href="${SITE}/templates/" style="color:#2563eb">buildworkpro.com/templates</a>.</p>
@@ -96,7 +101,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     await sendEmail(apiKey, {
-      subject: 'Your 10 free construction templates',
+      subject: 'Your free construction template pack',
       htmlContent: buildPackEmail(),
       to: { email },
     });
