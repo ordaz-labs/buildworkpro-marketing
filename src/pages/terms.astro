@@ -17,7 +17,7 @@ import { config } from '../config';
         <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Legal</p>
         <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Terms of Service</h1>
         <p class="mt-3 text-sm text-slate-400">
-          Effective Date: April 9, 2026 &middot; Last Updated: April 9, 2026
+          Effective Date: April 9, 2026 &middot; Last Updated: September 1, 2026
         </p>
       </div>
 
@@ -82,6 +82,16 @@ import { config } from '../config';
           organization.
         </p>
 
+        <h3>1.5 Mobile Application Access</h3>
+        <p>
+          The BuildWorkPro iOS and Android applications are a companion to the web Platform. They
+          are intended for members of an organization that already holds a BuildWorkPro account.
+          Field users are typically invited by an organization administrator rather than creating a
+          new organization from the application. Signing in on a mobile device &mdash; with a
+          username and password, or via Google or Apple sign-in where your organization has enabled
+          it &mdash; constitutes access to the Platform under these Terms.
+        </p>
+
         <h2>2. Subscription, Fees, and Payment</h2>
         <h3>2.1 Subscription Plans</h3>
         <p>
@@ -110,8 +120,9 @@ import { config } from '../config';
 
         <h3>2.4 Cancellation and Refunds</h3>
         <p>
-          You may cancel your subscription at any time through the billing section of your account
-          settings. Upon cancellation:
+          An organization administrator may cancel the subscription at any time through the billing
+          section of the web application. The iOS and Android applications do not process
+          subscription payments or cancellations. Upon cancellation:
         </p>
         <ul>
           <li>
@@ -148,13 +159,28 @@ import { config } from '../config';
           required.
         </p>
 
+        <h3>2.7 Mobile Application and In-App Purchases</h3>
+        <p>
+          BuildWorkPro is a business-to-business service sold to organizations for their employees
+          and contractors. Subscriptions are purchased by the organization through the web
+          application and billed by Stripe, Inc., as described above. The iOS and Android
+          applications read that existing subscription; they do not offer in-app purchases, paid
+          upgrades, or a separate mobile-only plan, and no payment is processed through the Apple
+          App Store or Google Play. Organization administrators manage billing, cancellation, and
+          refunds through the billing section of the web application (or by contacting
+          <a href={`mailto:${config.email.support}`}>{config.email.support}</a>), not from inside
+          the mobile application.
+        </p>
+
         <h2>3. Permitted Use and Restrictions</h2>
         <h3>3.1 License Grant</h3>
         <p>
           Subject to your compliance with these Terms and payment of applicable fees, BuildWorkPro
           grants you a limited, non-exclusive, non-transferable, non-sublicensable, revocable
-          license to access and use the Platform solely for your internal business purposes in
-          connection with the management of construction projects and related operations.
+          license to access and use the Platform, including installing and using the iOS application
+          obtained from the Apple App Store and the Android application obtained from Google Play,
+          solely for your internal business purposes in connection with the management of
+          construction projects and related operations.
         </p>
 
         <h3>3.2 Acceptable Use</h3>
@@ -199,6 +225,19 @@ import { config } from '../config';
           </li>
         </ul>
 
+        <h3>3.3 Mobile Application and Device Permissions</h3>
+        <p>
+          Certain features of the mobile application require operating-system permission (camera and
+          photo library for site-log and project photos, location when clocking in or out or filing
+          a site log, notifications for operational alerts, and Face ID or an equivalent biometric
+          check if you enable the optional app lock). These permissions are optional. Declining them
+          does not prevent you from signing in or from recording work; the affected feature is
+          simply unavailable or, in the case of location, the record is saved without coordinates.
+          You may revoke a permission at any time in your device settings. Over-the-air application
+          updates may be delivered through Expo Application Services in addition to updates you
+          install from the Apple App Store or Google Play.
+        </p>
+
         <h2>4. Intellectual Property</h2>
         <h3>4.1 BuildWorkPro&rsquo;s Intellectual Property</h3>
         <p>
@@ -212,9 +251,9 @@ import { config } from '../config';
         <h3>4.2 Your Data and Content</h3>
         <p>
           <strong
-            >You retain full ownership of all data, content, documents, and materials you or your
-            authorized users input, upload, or create within the Platform (&ldquo;Customer
-            Data&rdquo;).</strong
+            >You retain full ownership of all data, content, documents, photos, and materials you or
+            your authorized users input, upload, capture on a mobile device, or create within the
+            Platform (&ldquo;Customer Data&rdquo;).</strong
           > BuildWorkPro does not claim any intellectual property rights over Customer Data.
         </p>
         <p>
@@ -235,12 +274,13 @@ import { config } from '../config';
 
         <h2>5. Data Export and Portability</h2>
         <p>
-          You may export your Customer Data at any time through the Platform&rsquo;s built-in export
-          functionality in standard, machine-readable formats (e.g., CSV). The Platform&rsquo;s REST
-          API may also be used for programmatic data access and extraction, subject to applicable
-          rate limits and authentication requirements. BuildWorkPro will not restrict your ability
-          to retrieve your own data during the term of your subscription or the 30-day
-          post-termination retention period.
+          You may export your Customer Data at any time through the web application&rsquo;s built-in
+          export functionality in standard, machine-readable formats (e.g., CSV). The
+          Platform&rsquo;s REST API may also be used for programmatic data access and extraction,
+          subject to applicable rate limits and authentication requirements. Export tools are
+          provided in the web application rather than in the mobile companion app. BuildWorkPro will
+          not restrict your ability to retrieve your own data during the term of your subscription
+          or the 30-day post-termination retention period.
         </p>
 
         <h2>6. Service Availability and Support</h2>
@@ -359,10 +399,14 @@ import { config } from '../config';
         <h2>10. Termination</h2>
         <h3>10.1 Termination by You</h3>
         <p>
-          You may cancel your subscription and terminate your account at any time through the
-          account settings of the Platform, or by contacting <a
-            href={`mailto:${config.email.support}`}>{config.email.support}</a
-          >.
+          An organization administrator may cancel the organization&rsquo;s subscription at any time
+          through the billing section of the web application, or by contacting
+          <a href={`mailto:${config.email.support}`}>{config.email.support}</a>. Individual users,
+          including field crew using the mobile application, may sign out at any time and may delete
+          their own user account from the More tab of the mobile application (or as described at
+          <a href="/delete-account/">{config.siteUrl.replace('https://', '')}/delete-account/</a>).
+          Deleting a user account does not, by itself, cancel the organization&rsquo;s paid
+          subscription.
         </p>
 
         <h3>10.2 Termination by BuildWorkPro</h3>
