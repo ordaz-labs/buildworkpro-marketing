@@ -213,22 +213,4 @@ const faqs = [
     </section>
   </main>
   <Footer />
-
-  <script is:inline>
-    // Downloads are the page's conversion event — GA-only (bwpTrack sends GA
-    // for every visitor; Meta standard events don't fit a file download).
-    document.querySelectorAll('.template-download').forEach(function (el) {
-      el.addEventListener('click', function () {
-        if (window.bwpTrack)
-          window.bwpTrack(null, {
-            name: 'template_download',
-            params: { template: el.dataset.template },
-          });
-        // Post-#125 the pixel runs by default for US visitors — downloads
-        // become a retargeting audience (custom event; not a standard one).
-        if (window.fbq)
-          window.fbq('trackCustom', 'TemplateDownload', { template: el.dataset.template });
-      });
-    });
-  </script>
 </Layout>

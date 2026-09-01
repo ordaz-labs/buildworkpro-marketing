@@ -39,6 +39,13 @@ function metaEvents(page: Page, name: string) {
   }, name);
 }
 
+function metaCustomEvents(page: Page, name: string) {
+  return page.evaluate((n) => {
+    const q = (window.fbq && window.fbq.queue) || [];
+    return q.filter((a) => a[0] === 'trackCustom' && a[1] === n);
+  }, name);
+}
+
 // Cancel real navigation so the page (and its tracker state) survive a CTA
 // click. preventDefault in a capture listener stops navigation but still lets
 // the bubble-phase analytics listener run.
@@ -178,5 +185,37 @@ test.describe('conversion-event tracking', () => {
       content_type: 'lp',
       content_name: 'procore_alternative',
     });
+  });
+
+  test('template download before consent sends template_download to GA, nothing to Meta', async ({
+    page,
+  }) => {
+    await page.goto('/templates/aia-g702-g703/');
+    await cancelNavigation(page);
+    await page.locator('a.template-download').first().click();
+    const ga = await gaEvents(page, 'template_download');
+    expect(ga.length).toBeGreaterThan(0);
+    expect((ga[0] as unknown[])[2]).toMatchObject({ template: 'aia-g702-g703' });
+    expect(await page.evaluate(() => typeof window.fbq)).toBe('undefined');
+  });
+
+  test('after accept, template download fires GA + Meta TemplateDownload', async ({ page }) => {
+    await page.goto('/templates/aia-g702-g703/');
+    await page.click('#cookie-accept');
+    await page.waitForFunction(() => window.__bwpPixelLoaded === true);
+    await cancelNavigation(page);
+    await page.locator('a.template-download').first().click();
+    expect((await gaEvents(page, 'template_download')).length).toBeGreaterThan(0);
+    const meta = await metaCustomEvents(page, 'TemplateDownload');
+    expect(meta.length).toBeGreaterThan(0);
+    expect((meta[0] as unknown[])[2]).toMatchObject({ template: 'aia-g702-g703' });
+  });
+
+  test('after decline, template download never reaches the Pixel', async ({ page }) => {
+    await page.goto('/templates/aia-g702-g703/');
+    await page.click('#cookie-decline');
+    await cancelNavigation(page);
+    await page.locator('a.template-download').first().click();
+    expect(await page.evaluate(() => typeof window.fbq)).toBe('undefined');
   });
 });

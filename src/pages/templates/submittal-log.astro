@@ -1,49 +1,49 @@
 ---
-// Pages 6-9 of the /templates/ hub (issue #134). This one: change order template — 1,000/mo KD0, transactional intent 0.98. Ungated per Q5.
+// Submittal log — submittal log ~170/mo KD0 (issue #145 optional hub addition). Ungated per Q5.
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import { config } from '../../config';
 
-const FILE = '/templates-files/change-order-template.docx';
+const FILE = '/templates-files/submittal-log-template.xlsx';
 
 const whatsInside = [
-  'Description and reason for the change — the fields disputes turn on',
-  'Contract-sum adjustment table: original sum → prior COs → this CO → new sum',
-  'Schedule adjustment with a new completion date',
-  'Full-and-final compensation language covering cumulative impacts',
-  'No-work-before-signature clause',
-  'Dual signature blocks (contractor + owner/GC)',
+  '40 rows: spec section, description, type, revision, dates, status, reviewer',
+  'Live counts of Not Submitted / Submitted / Approved / Revise-Rejected',
+  'Dropdowns for type (product data, shop drawings, samples, mock-up) and status',
+  'Lead-time and action-required-by columns so nothing sits in limbo',
+  'Sample storefront rows showing the level of detail reviewers expect',
+  'Landscape print layout that still fits a tabloid sheet',
 ];
 
 const faqs = [
   {
-    question: 'What should a change order include?',
+    question: 'What is a submittal log?',
     answer:
-      "A description of the changed work and why it changed, the price adjustment shown against the running contract sum (original sum, prior change orders, this change, new total), any schedule adjustment, and both parties' signatures. The running-total table matters: it keeps every CO reconciled to the same contract sum your pay applications bill against.",
+      'The running register of every product data sheet, shop drawing, sample, and mock-up you owe the architect or GC — numbered, dated, and statused so you can see what is still outstanding before it delays fabrication or installation.',
   },
   {
-    question: 'Can I start the changed work on a verbal approval?',
+    question: 'What belongs on a construction submittal?',
     answer:
-      "Don't. Unsigned extra work is the most common way subs lose money — 'we'll square up later' becomes an argument about scope, price, and memory. This template says the changed work does not proceed until both parties sign, and holding that line is what makes the paper trail worth anything.",
+      'Whatever the spec section requires: product data, shop drawings, samples, mock-ups, calculations. Each item gets its own row (and a new row for each revision). Mixing three products onto one line is how "approved as noted" becomes an argument about which note applied to which item.',
   },
   {
-    question: 'How do change orders affect my pay applications?',
+    question: 'When should I submit?',
     answer:
-      'Approved change orders adjust the contract sum, and the changed work becomes billable lines in your schedule of values. On the first pay application after approval, the CO amount shows up in the change-orders total and the new lines carry forward every period after.',
+      "Early enough that review time plus fabrication lead time still hits the install date. The template's lead-time column exists so you work backwards from the need-by date instead of discovering a 6-week glass lead after the opening is framed.",
   },
   {
-    question: 'What if the GC refuses to sign but directs the work?',
+    question: 'What do the status values mean?',
     answer:
-      "Document the directive in writing the same day — a confirming email works — note it in your daily report, and track the costs separately. State law and your contract's claims provisions control from there; the worst position is doing the work with no record at all.",
+      'Not Submitted (still in your court), Submitted (with the reviewer), Approved, Approved as Noted (install to the markups), Revise and Resubmit, Rejected. Counts at the top only work if you use those exact phrases — they are in the dropdown.',
   },
 ];
 ---
 
 <Layout
-  title="Free Construction Change Order Template (Word)"
-  description="Free construction change order template: description, contract-sum adjustment table, time extension, and dual signatures — an editable Word doc, no email required."
+  title="Free Construction Submittal Log Template (Excel)"
+  description="Free construction submittal log: 40-row Excel tracker with status counts, type dropdowns, lead time, and reviewer columns. No email required."
 >
   <Header />
   <main class="pt-32 pb-20">
@@ -53,30 +53,30 @@ const faqs = [
           Free template
         </p>
         <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Construction Change Order Template
+          Construction Submittal Log Template
         </h1>
         <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          A verbal OK is not a change order. This one-page form prices the change, adjusts the
-          contract sum and schedule, and gets both signatures before the work starts.
+          A 40-row register of every shop drawing, product data sheet, and sample you owe — with
+          status counts so outstanding reviews are visible before they delay the job.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={FILE}
             download
-            data-template="change-order"
+            data-template="submittal-log"
             class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
           >
-            Download the free template (.docx)
+            Download the free template (.xlsx)
           </a>
           <a
-            href="/blog/construction-change-order-management/"
+            href="/templates/"
             class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
           >
-            Read the change order guide
+            See all free templates
           </a>
         </div>
         <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Opens in Word &amp; Google Docs
+          No email required · Works in Excel, Google Sheets &amp; Numbers
         </p>
       </div>
     </section>
@@ -106,7 +106,7 @@ const faqs = [
       </div>
       <p
         class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto"
-        set:html={`Approved change orders flow into the contract sum on your <a href="/templates/aia-g702-g703/" class="text-brand-600 underline underline-offset-2 font-medium">pay application</a> — the two templates are built to reconcile.`}
+        set:html={`Unclear drawings usually surface here first — write them up with the <a href="/templates/rfi/" class="text-brand-600 underline underline-offset-2 font-medium">RFI template</a> instead of stalling the submittal.`}
       />
     </section>
 
@@ -115,12 +115,11 @@ const faqs = [
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
       <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
         <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          Approved online, applied automatically
+          Submittals that sit on the project, not a hidden spreadsheet
         </h2>
         <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          In BuildWorkPro, change orders are priced with real line items, e-signed by your customer
-          from an emailed link, and applied to the contract value and the next pay application the
-          moment they're approved.
+          BuildWorkPro keeps project documents, tasks, and closeout in one place so shop drawings
+          and product data are not a side spreadsheet nobody opens.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
@@ -130,10 +129,10 @@ const faqs = [
             Start free trial
           </a>
           <a
-            href="/features/change-orders/"
+            href="/features/project-management/"
             class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
           >
-            See change orders in BuildWorkPro
+            See project management in BuildWorkPro
           </a>
         </div>
         <p class="mt-6 text-sm text-slate-500">
@@ -141,9 +140,6 @@ const faqs = [
           free trial · No credit card required
         </p>
       </div>
-      <p class="mt-8 text-xs text-slate-400 max-w-2xl mx-auto">
-        Not legal advice — have your attorney review before relying on it.
-      </p>
     </section>
   </main>
   <Footer />

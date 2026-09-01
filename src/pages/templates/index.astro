@@ -1,14 +1,34 @@
 ---
-// The /templates/ hub (issue #134). Live templates get cards with downloads;
-// the planned set is listed as coming-soon so the hub communicates scope
-// without shipping thin placeholder pages. Build order and keyword data:
-// gameplan artifact + .growth-review/sweep-2026-08-10/.
+// The /templates/ hub (issue #134, follow-ups in #145). Live templates get
+// cards with downloads. Build order and keyword data: gameplan artifact +
+// .growth-review/sweep-2026-08-10/.
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { config } from '../../config';
 
 const live = [
+  {
+    title: 'Construction RFI Template',
+    description:
+      'One-question Request for Information: suggested interpretation, cost/schedule impact flags, and a response block that is not a change order.',
+    href: '/templates/rfi/',
+    format: 'Word (.docx)',
+  },
+  {
+    title: 'Construction Submittal Log Template',
+    description:
+      '40-row register of shop drawings, product data, and samples with live status counts, type dropdowns, and lead-time columns.',
+    href: '/templates/submittal-log/',
+    format: 'Excel (.xlsx)',
+  },
+  {
+    title: 'Construction T&M Ticket Template',
+    description:
+      'Labor, overtime, materials, and equipment with computed totals and dual signatures — the backup behind the change order.',
+    href: '/templates/tm-ticket/',
+    format: 'Excel (.xlsx)',
+  },
   {
     title: 'Construction Change Order Template',
     description:
@@ -134,8 +154,9 @@ const live = [
           Want the whole set?
         </h2>
         <p class="mt-3 text-slate-500 leading-relaxed">
-          Every template above is a free, direct download — no email needed. But if you'd rather
-          grab everything at once, we'll send you all 10 files in a single email.
+          Every template above is a free, direct download — no email needed. If you'd rather get
+          everything at once, we'll email the download links to this address. One-time message, not
+          a newsletter — we don't add you to a marketing list.
         </p>
         <form id="template-pack-form" class="mt-6 space-y-4">
           <div class="flex flex-col sm:flex-row gap-3">
@@ -152,7 +173,7 @@ const live = [
               id="template-pack-submit"
               class="px-6 py-2.5 rounded-lg bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 transition-colors whitespace-nowrap"
             >
-              Email me all 10
+              Email me the pack
             </button>
           </div>
           <div class="flex items-start gap-3">
@@ -262,7 +283,7 @@ const live = [
           { name: 'generate_lead', params: { form: 'template-pack' } }
         );
 
-        status.textContent = 'Sent! Check your inbox for all 10 templates.';
+        status.textContent = 'Sent! Check your inbox for the download links.';
         status.className =
           'text-sm rounded-lg px-4 py-3 bg-green-50 text-green-700 border border-green-200';
         form.reset();
@@ -275,7 +296,7 @@ const live = [
           'text-sm rounded-lg px-4 py-3 bg-red-50 text-red-700 border border-red-200';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Email me all 10';
+        submitBtn.textContent = 'Email me the pack';
       }
     });
   }

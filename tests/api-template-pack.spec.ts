@@ -53,4 +53,16 @@ test.describe('POST /api/template-pack/', () => {
     expect(response.status()).toBeLessThan(500);
     expect(response.status()).not.toBe(404);
   });
+
+  test('Turnstile runs before email validation — a token-less invalid email is still 400', async ({
+    request,
+  }) => {
+    const response = await request.post(PACK, {
+      data: { email: 'not-an-email' },
+      failOnStatusCode: false,
+    });
+
+    expect(response.status()).toBe(400);
+    expect(await response.json()).toEqual({ error: 'Verification required.' });
+  });
 });
