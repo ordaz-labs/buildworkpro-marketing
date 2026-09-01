@@ -7,7 +7,59 @@ import Screenshot from '../../components/Screenshot.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import { config } from '../../config';
 
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'BuildWorkPro AIA Billing Software',
+  description:
+    'AIA billing software for subcontractors: G702/G703-style pay applications with a schedule of values, retainage, and an approval workflow. $79/month, 14-day free trial.',
+  applicationCategory: 'BusinessApplication',
+  applicationSubCategory: 'AIA Billing Software',
+  operatingSystem: 'Web',
+  url: `${config.siteUrl}/features/pay-applications/`,
+  image: `${config.siteUrl}/screenshots/13-pay-app-detail.png`,
+  featureList: [
+    'AIA G702/G703-style pay applications',
+    'Schedule of values',
+    'Retainage tracking',
+    'Stored materials',
+    'Approval workflow',
+    'PDF pay apps emailed to the GC',
+  ],
+  audience: {
+    '@type': 'BusinessAudience',
+    audienceType: 'Subcontractors and specialty trade contractors',
+  },
+  offers: {
+    '@type': 'Offer',
+    name: 'BuildWorkPro monthly plan',
+    url: config.signupUrl,
+    price: '79',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    category: 'SaaS subscription',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '79',
+      priceCurrency: 'USD',
+      billingIncrement: 1,
+      unitText: 'MONTH',
+    },
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': `${config.siteUrl}/#organization`,
+    name: 'BuildWorkPro',
+    url: config.siteUrl,
+  },
+};
+
 const faqs = [
+  {
+    question: 'What is AIA billing software?',
+    answer:
+      'AIA billing software is construction pay application software that produces G702/G703-style progress billing: a schedule of values, retainage, stored materials, and previous applications rolled into the current amount due. BuildWorkPro is AIA billing software for subcontractors — it prefills the contract sum from your accepted bid, carries every period forward, tracks retainage, and emails an AIA-style PDF to your GC. It is not a licensed AIA Contract Documents product; confirm with your GC whether they require the official forms.',
+  },
   {
     question: 'What is a pay application?',
     answer:
@@ -42,9 +94,14 @@ const faqs = [
 ---
 
 <Layout
-  title="Pay Application Software — AIA-Style Billing | BuildWorkPro"
-  description="Create AIA-style pay applications with a schedule of values, retainage, and an approval workflow, then email the PDF to your GC. $79/month, 14-day free trial."
+  title="AIA Billing Software for Subcontractors | G702/G703 Pay Apps"
+  description="AIA G702/G703 pay apps for subcontractors: schedule of values, retainage, approval workflow, and PDF billing for your GC. $79/mo, 14-day free trial."
 >
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(softwareApplicationSchema)}
+  />
   <Header />
   <main class="pt-32 pb-20">
     <!-- Hero -->
@@ -52,10 +109,10 @@ const faqs = [
       <div class="text-center">
         <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Features</p>
         <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
-          Pay Application Software for Subcontractors
+          AIA Billing Software for Subcontractors
         </h1>
         <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Bill your GC each period with AIA-style pay applications: a schedule of values that
+          Bill your GC each period with G702/G703-style pay applications: a schedule of values that
           prefills from your accepted bid and approved change orders, retainage tracked on every pay
           app, and an approval workflow from draft through paid. Email the PDF without leaving
           BuildWorkPro.
@@ -90,7 +147,7 @@ const faqs = [
     <!-- Overview -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
       <div class="prose prose-lg prose-slate mx-auto">
-        <h2>Bill every period without the end-of-month scramble</h2>
+        <h2>Pay application software that bills every period without the scramble</h2>
         <p>
           If you bill a GC monthly, you know the drill: dig out last month's pay app, reconcile what
           you already billed, chase down approved change orders, rebuild the spreadsheet, and hope
@@ -113,8 +170,59 @@ const faqs = [
         <p>
           New to progress billing? Our
           <a href="/blog/aia-pay-application-guide/">guide to AIA pay applications</a> explains the format,
-          the math, and what GCs look for before they approve.
+          the math, and what GCs look for before they approve. If you still bill from a spreadsheet, start
+          with the free
+          <a href="/templates/aia-g702-g703/">G702/G703-style pay application template</a>.
         </p>
+      </div>
+    </section>
+
+    <!-- AIA billing vs Excel -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-4">
+        AIA billing vs Excel G702/G703
+      </h2>
+      <p class="text-slate-500 text-center max-w-2xl mx-auto mb-10 leading-relaxed">
+        Most GCs expect G702/G703-style paperwork. You can fill that by hand in Excel, or let AIA
+        billing software carry the schedule of values, retainage, and previous applications forward
+        each period.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white">
+          <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            Spreadsheet
+          </p>
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">Excel G702/G703 template</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li>You rebuild or copy the workbook every billing period.</li>
+            <li>Previous applications are rolled forward by hand — easy to miss a line.</li>
+            <li>Change orders live in another file, so the contract sum can drift.</li>
+            <li>Formulas break the moment someone overtypes a cell.</li>
+          </ul>
+          <p class="mt-6 text-sm text-slate-500">
+            Fine for one job.
+            <a href="/templates/aia-g702-g703/" class="text-brand-600 hover:underline"
+              >Download the free G702/G703-style template</a
+            >
+            if you want the math wired before you switch tools.
+          </p>
+        </div>
+        <div class="p-8 rounded-2xl border border-brand-200 bg-brand-50/40 ring-1 ring-brand-100">
+          <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-2">Software</p>
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">BuildWorkPro AIA billing</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li>Schedule of values prefills from your accepted bid and approved change orders.</li>
+            <li>Previous applications lock and carry forward automatically.</li>
+            <li>Retainage is a field on every pay app, not a side calculation.</li>
+            <li>
+              Email an AIA-style PDF to your GC from the pay app — no export-import round trip.
+            </li>
+          </ul>
+          <p class="mt-6 text-sm text-slate-500">
+            $79/month flat, 14-day free trial. Not an official AIA form — GCs who require the
+            licensed documents should say so up front.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -368,7 +476,7 @@ const faqs = [
     <!-- Bottom CTA -->
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
-        Get the pay app out the door on time
+        Switch from Excel G702/G703 to AIA billing software
       </h2>
       <p class="text-lg text-slate-500 mb-8">
         Pay applications are included in the $79/month flat plan — unlimited users, every feature.

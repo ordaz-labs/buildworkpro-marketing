@@ -1,5 +1,14 @@
 ---
-const features = [
+type Feature = {
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  href?: string;
+  anchor?: string;
+};
+
+const features: Feature[] = [
   {
     title: 'Project Management',
     description:
@@ -23,8 +32,10 @@ const features = [
   },
   {
     title: 'Pay Applications',
+    href: '/features/pay-applications/',
+    anchor: 'AIA billing software',
     description:
-      'AIA-style pay apps with schedule of values and retainage, prefilled from your bid and approved change orders. Track each one from Draft through Approved to Paid.',
+      'with a schedule of values and retainage, prefilled from your bid and approved change orders. Track each one from Draft through Approved to Paid.',
     icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
     color: 'rose',
   },
@@ -111,7 +122,21 @@ const colorMap: Record<string, { bg: string; icon: string; ring: string }> = {
                 </svg>
               </div>
               <h3 class="text-lg font-semibold text-slate-900 mb-2">{feature.title}</h3>
-              <p class="text-slate-500 leading-relaxed">{feature.description}</p>
+              <p class="text-slate-500 leading-relaxed">
+                {feature.href && feature.anchor ? (
+                  <>
+                    <a
+                      href={feature.href}
+                      class="font-medium text-brand-600 hover:text-brand-700 hover:underline"
+                    >
+                      {feature.anchor}
+                    </a>{' '}
+                    {feature.description}
+                  </>
+                ) : (
+                  feature.description
+                )}
+              </p>
             </div>
           );
         })
