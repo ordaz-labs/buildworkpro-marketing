@@ -171,17 +171,17 @@ import { config } from '../config';
             tenant.
           </li>
           <li>
-            <strong>Location:</strong> The mobile application collects your device location at two
-            specific moments, and only if you grant location permission: when you clock in or out of a
-            shift, and when you file a site log. The coordinates are stored on that individual time
-            entry or site log so your organization can verify where field work was recorded, and are
-            visible to administrators and managers within your organization who can already view those
-            records. We request &ldquo;when in use&rdquo; permission only &mdash; the application never
-            requests or receives background location, and never tracks your position between those
-            moments. If you decline the permission, disable location services, or no fix is available,
-            the punch or log is saved without coordinates; the application never blocks you from
-            recording work because location is unavailable. Location data is not used for advertising,
-            profiling, or any purpose other than the record it is attached to.
+            <strong>Location:</strong> The mobile application collects your device location at two specific
+            moments, and only if you grant location permission: when you clock in or out of a shift, and
+            when you file a site log. The coordinates are stored on that individual time entry or site
+            log so your organization can verify where field work was recorded, and are visible to administrators
+            and managers within your organization who can already view those records. We request &ldquo;when
+            in use&rdquo; permission only &mdash; the application never requests or receives background
+            location, and never tracks your position between those moments. If you decline the permission,
+            disable location services, or no fix is available, the punch or log is saved without coordinates;
+            the application never blocks you from recording work because location is unavailable. Location
+            data is not used for advertising, profiling, or any purpose other than the record it is attached
+            to.
           </li>
           <li>
             <strong>Device Identifiers:</strong> The application stores a session identifier and CSRF
@@ -190,15 +190,14 @@ import { config } from '../config';
             is collected.
           </li>
           <li>
-            <strong>Diagnostics:</strong> The mobile application includes crash and error reporting
-            provided by Sentry (see Section 5). When enabled, it transmits crash reports, stack traces,
-            unhandled errors, and a sample of performance traces, together with the application version,
-            operating system version, and device model. Reporting is configured with personal-data
-            collection disabled, so these reports are not associated with your account identity or IP
-            address. Diagnostic breadcrumbs
+            <strong>Diagnostics:</strong> The mobile application includes crash and error reporting provided
+            by Sentry (see Section 5). When enabled, it transmits crash reports, stack traces, unhandled
+            errors, and a sample of performance traces, together with the application version, operating
+            system version, and device model. Reporting is configured with personal-data collection disabled,
+            so these reports are not associated with your account identity or IP address. Diagnostic breadcrumbs
             recorded around sign-in contain only non-reversible fingerprints and true/false flags, never
-            passwords, session cookies, or security tokens. The application does not collect product
-            usage or behavioural analytics.
+            passwords, session cookies, or security tokens. The application does not collect product usage
+            or behavioural analytics.
           </li>
           <li>
             <strong>Push Notifications:</strong> If you grant notification permission, the application
@@ -344,8 +343,8 @@ import { config } from '../config';
                 and request metadata for the purpose of monitoring and incident response
               </li>
               <li>
-                <strong>Functional Software, Inc. (Sentry)</strong> &mdash; Crash and error reporting for
-                the mobile application; receives crash reports, stack traces, a sample of performance
+                <strong>Functional Software, Inc. (Sentry)</strong> &mdash; Crash and error reporting
+                for the mobile application; receives crash reports, stack traces, a sample of performance
                 traces, and device, operating-system and application-version metadata. Configured with
                 personal-data collection disabled, so reports carry no account identity or IP address
               </li>
