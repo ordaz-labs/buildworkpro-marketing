@@ -1,0 +1,150 @@
+---
+// RFI template — rfi template ~390/mo KD1 (issue #145 optional hub addition). Ungated per Q5.
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import { config } from '../../config';
+
+const FILE = '/templates-files/rfi-template.docx';
+
+const whatsInside = [
+  'Project, numbering, spec/drawing reference, and a response-required date',
+  'One-question field — the rule that keeps answers usable',
+  "Contractor's suggested interpretation so the reviewer can say yes or no",
+  'Cost / schedule / work-on-hold impact flags if the answer is late',
+  'Response block that is not a change order by itself',
+  'Dual signature lines (contractor + architect/engineer/GC)',
+];
+
+const faqs = [
+  {
+    question: 'What is an RFI in construction?',
+    answer:
+      'A Request for Information is a written question to the architect, engineer, or GC when the drawings, specs, or field conditions are unclear. It creates a dated record of what was asked, who answered, and when — so nobody is later arguing from memory.',
+  },
+  {
+    question: 'When should I send an RFI instead of just calling?',
+    answer:
+      'Whenever the answer could change scope, price, or schedule, or whenever you need the answer to survive a personnel change. A phone call is fine for "which way does this door swing"; it is not a record. Write the RFI the same day you notice the gap.',
+  },
+  {
+    question: 'Does an RFI response change the contract?',
+    answer:
+      'No. An RFI documents a question. If the answer adds work, deletes work, or costs time, that is a change order — use the change order template and attach the RFI as backup. Treating an RFI reply as authorization is how extra work goes unsigned.',
+  },
+  {
+    question: 'How many questions belong on one RFI?',
+    answer:
+      'One. A bundled RFI gets a bundled, unusable answer, and you cannot close the items independently. If three details are unclear, send three RFIs so each can be numbered, answered, and — if needed — turned into its own change order.',
+  },
+];
+---
+
+<Layout
+  title="Free Construction RFI Template (Word)"
+  description="Free construction RFI template: one-question form with suggested solution, impact flags, and a response block. Editable Word doc, no email required."
+>
+  <Header />
+  <main class="pt-32 pb-20">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="text-center">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
+          Free template
+        </p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
+          Construction RFI Template
+        </h1>
+        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          A one-page Request for Information: the question, your suggested reading, the impact if it
+          sits unanswered, and a response block that is not a change order.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href={FILE}
+            download
+            data-template="rfi"
+            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Download the free template (.docx)
+          </a>
+          <a
+            href="/templates/change-order/"
+            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
+          >
+            Answer adds work? Use the change order
+          </a>
+        </div>
+        <p class="mt-3 text-center text-sm text-slate-500">
+          No email required · Works in Word, Google Docs &amp; Pages
+        </p>
+      </div>
+    </section>
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
+        What's in the template
+      </h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {
+          whatsInside.map((item) => (
+            <div class="flex items-start gap-3">
+              <svg
+                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-600">{item}</span>
+            </div>
+          ))
+        }
+      </div>
+      <p
+        class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto"
+        set:html={`If the answer changes price or time, that is a <a href="/templates/change-order/" class="text-brand-600 underline underline-offset-2 font-medium">change order</a> — attach this RFI as backup, do not treat the reply as authorization.`}
+      />
+    </section>
+
+    <FAQSection faqs={faqs} />
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
+      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
+          RFIs that live on the project, not in a pile of Word files
+        </h2>
+        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
+          BuildWorkPro keeps questions, change orders, and daily reports on the project record —
+          visible to the office and the field, instead of buried in email.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href={config.signupUrl}
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Start free trial
+          </a>
+          <a
+            href="/features/project-management/"
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
+          >
+            See project management in BuildWorkPro
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-slate-500">
+          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
+          free trial · No credit card required
+        </p>
+      </div>
+      <p class="mt-8 text-xs text-slate-400 max-w-2xl mx-auto">
+        Not legal advice — have your attorney review before relying on it. An RFI documents a
+        question; it does not change the contract.
+      </p>
+    </section>
+  </main>
+  <Footer />
+</Layout>
