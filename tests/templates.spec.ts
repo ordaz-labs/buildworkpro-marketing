@@ -30,7 +30,7 @@ test.describe('templates hub', () => {
     // Consent stays explicit — same GDPR pattern as the contact form.
     await expect(form.locator('#template-pack-consent')).toBeAttached();
     // Transactional only: no ESP / nurture list exists on this site.
-    await expect(page.getByText(/not a newsletter/i)).toBeVisible();
+    await expect(page.getByText(/not\s+a newsletter/i)).toBeVisible();
     // The individual downloads above the form must remain ungated links, not
     // form-triggered — the open-file strategy is the whole point (Q5).
     await expect(
