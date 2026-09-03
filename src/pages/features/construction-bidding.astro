@@ -45,12 +45,22 @@ const faqs = [
     answer:
       'Bidding is included in the single BuildWorkPro plan: $79/month (or $790/year) with unlimited users, unlimited projects, and every feature. There is a 14-day free trial with no credit card required.',
   },
+  {
+    question: 'How is construction bidding software different from GC project software?',
+    answer:
+      'GC platforms are built to receive and level bids from many trades. Construction bidding software for subcontractors is built to create those bids: line-item estimates with material, labor, and other costs; margin and overhead applied as rates; a branded PDF proposal; and a one-click path from a won bid into a project and the first pay application. BuildWorkPro is the second kind.',
+  },
+  {
+    question: 'Is there a free construction bidding software option?',
+    answer:
+      'BuildWorkPro includes a 14-day free trial with no credit card required, so you can build line-item bids, apply margin and overhead, and export PDF proposals before you pay. After the trial, bidding is part of the single $79/month plan (or $790/year) with unlimited users — there is no separate bidding SKU and no forever-free tier.',
+  },
 ];
 ---
 
 <Layout
-  title="Construction Estimating & Bidding Software for Subcontractors | BuildWorkPro"
-  description="Construction estimating software for subs: line-item bids with material, labor & overhead, margin control, PDF proposals. $79/month flat, 14-day trial."
+  title="Construction Bidding Software for Subs | BuildWorkPro"
+  description="Construction bidding software for subcontractors: line-item estimates, margin & overhead, PDF proposals. $79/mo flat, 14-day free trial."
 >
   <Header />
   <main class="pt-32 pb-20">
@@ -59,12 +69,12 @@ const faqs = [
       <div class="text-center">
         <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Features</p>
         <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
-          Construction Bidding & Estimating Software
+          Construction Bidding Software for Subcontractors
         </h1>
         <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Build accurate bids with line items broken into material, labor, and other costs. Apply
-          margin, overhead, and commission systematically, send a polished PDF proposal, and convert
-          the win straight into a project — all from one platform.
+          Built around how subs actually estimate: line items broken into material, labor, and other
+          costs; margin, overhead, and commission applied as rates; a branded PDF proposal; and a
+          won bid that converts straight into a project.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
@@ -118,9 +128,9 @@ const faqs = [
         <h2>Stop losing money on inaccurate bids</h2>
         <p>
           For subcontractors, every bid is a balancing act. Price too high and you lose the job.
-          Price too low and you eat into your margin on every hour worked. BuildWorkPro gives you
-          structured estimating so you break down costs by material, labor, and other expense — then
-          apply margin, overhead, and commission on the
+          Price too low and you eat into your margin on every hour worked. Construction bidding
+          software should make that math systematic: break costs into material, labor, and other
+          expense, then apply margin, overhead, and commission on the
           <a href="/docs/bids/rates/">Rates tab</a> instead of guessing a single markup number.
         </p>
         <p>
@@ -137,6 +147,106 @@ const faqs = [
           straight into <a href="/features/project-management/">project scheduling</a> and your first
           <a href="/features/pay-applications/">pay application</a> — no re-entering numbers.
         </p>
+      </div>
+    </section>
+
+    <!-- Subcontractor estimating workflow -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="prose prose-lg prose-slate mx-auto">
+        <h2>The subcontractor estimating workflow</h2>
+        <p>
+          GC software is built to collect bids. Construction bidding software for subcontractors is
+          built to <em>create</em> them. The workflow is takeoff → cost the work → protect margin → send
+          a proposal the GC will open → convert the win into a job without retyping the numbers.
+        </p>
+        <h3>Line-item bids with material, labor, and other costs</h3>
+        <p>
+          Each bid is a list of line items, and each line breaks into cost items typed as Material,
+          Labor, or Other — with quantities, units, buy and sell tax, and live rollups. Pull prices
+          from a reusable catalog (or import a vendor CSV) instead of hunting last month's
+          spreadsheet. Duplicate a past bid or load a
+          <a href="/docs/bids/templates/">template</a> when the work repeats.
+        </p>
+        <h3>Margin, overhead, and commission as rates — not a guessed markup</h3>
+        <p>
+          The Rates tab applies margin, commission, and overhead to the whole estimate so the sell
+          price is systematic. Job-wide costs like mobilization, a dumpster, or permits go in
+          Project Costs and spread across line-item sell prices. Markup and margin are not the same
+          number —
+          <a href="/blog/construction-markup-vs-margin/">confusing them</a> donates profit on every bid.
+        </p>
+        <h3>PDF proposals, then bid-to-project</h3>
+        <p>
+          Generate a branded PDF with scope, payment terms, and conditions, and control how much
+          cost detail the GC sees. Send it from BuildWorkPro — optionally for
+          <a href="/features/construction-bidding/#e-signatures">e-signature</a>. When the bid is
+          accepted, one click converts it into a project: the contract value carries over and
+          prefills the schedule of values on the first pay application.
+        </p>
+      </div>
+    </section>
+
+    <!-- vs GC-first tools -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-4">
+        Not GC bid-leveling software
+      </h2>
+      <p class="text-slate-500 text-center max-w-2xl mx-auto mb-10 leading-relaxed">
+        Most construction platforms are built for general contractors who buy work. Subcontractors
+        sell work — so contractor bidding software has to estimate, price, and propose, not just
+        track inbound numbers.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white">
+          <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            GC-first tools
+          </p>
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">Bid leveling and coordination</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li>Built to receive and compare bids from many trades, not to build yours.</li>
+            <li>Estimating often still happens in Excel, then gets pasted into the GC's portal.</li>
+            <li>Quote-based or per-user pricing that punishes putting the field on the system.</li>
+            <li>
+              Won work does not become <em>your</em> project, pay app, or change-order record.
+            </li>
+          </ul>
+          <p class="mt-6 text-sm text-slate-500">
+            Fine when a GC requires collaborator access on their job. That access is not a system of
+            record for your company — see
+            <a
+              href="/blog/subcontractor-vs-general-contractor-software/"
+              class="text-brand-600 hover:underline"
+              >subcontractor vs. general contractor software</a
+            >.
+          </p>
+        </div>
+        <div class="p-8 rounded-2xl border border-brand-200 bg-brand-50/40 ring-1 ring-brand-100">
+          <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-2">
+            Subcontractor bidding
+          </p>
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">
+            BuildWorkPro construction bidding
+          </h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li>You build the estimate: line items, catalog prices, and typed cost detail.</li>
+            <li>
+              Margin, overhead, and commission live on the Rates tab, not in a side spreadsheet.
+            </li>
+            <li>
+              Branded PDF proposals, optional e-signature, status from draft through accepted.
+            </li>
+            <li>
+              A won bid converts into a project and prefills the first
+              <a href="/features/pay-applications/" class="text-brand-600 hover:underline"
+                >pay application</a
+              >.
+            </li>
+          </ul>
+          <p class="mt-6 text-sm text-slate-500">
+            $79/month flat, unlimited users, 14-day free trial. Bidding is included — not a separate
+            estimating SKU.
+          </p>
+        </div>
       </div>
     </section>
 
