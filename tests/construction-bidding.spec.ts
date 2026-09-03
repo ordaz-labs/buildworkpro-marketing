@@ -59,7 +59,7 @@ test.describe('internal links to construction bidding software', () => {
     await page.goto('/features/change-orders/');
     const link = page.locator('main a[href="/features/construction-bidding/"]').first();
     await expect(link).toBeVisible();
-    await expect(link).toHaveText(/construction bid/i);
+    await expect(link).toHaveText(/original bid/i);
   });
 
   test('construction CRM converts a lead into a construction bid', async ({ page }) => {
