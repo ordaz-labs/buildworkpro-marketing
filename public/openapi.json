@@ -90,7 +90,8 @@
           "audit:read",
           "settings:read",
           "settings:write",
-          "offline_access"
+          "offline_access",
+          "platform_admin:read"
         ],
         "description": "Available API scopes"
       },
@@ -8906,6 +8907,18 @@
                       "null"
                     ]
                   },
+                  "buyTaxPercent": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "sellTaxPercent": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "order": {
                     "type": [
                       "integer",
@@ -9084,6 +9097,18 @@
                     ]
                   },
                   "volumeCf": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "buyTaxPercent": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "sellTaxPercent": {
                     "type": [
                       "string",
                       "null"
