@@ -1580,6 +1580,26 @@
           "bidId": {
             "type": "integer"
           },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "item",
+              "section",
+              "note"
+            ],
+            "description": "item = priced line; section = header grouping the rows after it; note = customer-visible text."
+          },
+          "isOptional": {
+            "type": "boolean",
+            "description": "An optional (alternate) priced line, quoted outside the bid total."
+          },
+          "markName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Human-friendly mark name, e.g. W-01. Null on section and note rows."
+          },
           "description": {
             "type": [
               "string",
@@ -1603,15 +1623,26 @@
               "string",
               "null"
             ]
+          },
+          "order": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Sort position within the bid. A section covers every following row until the next section."
           }
         },
         "required": [
           "id",
           "bidId",
+          "kind",
+          "isOptional",
+          "markName",
           "description",
           "quantity",
           "unitPrice",
-          "total"
+          "total",
+          "order"
         ]
       },
       "PayApp": {
@@ -8667,9 +8698,10 @@
                     "enum": [
                       "phases",
                       "tasks",
-                      "blank"
+                      "blank",
+                      "sections"
                     ],
-                    "description": "How bid line items map onto the new project: one phase per line item (\"phases\"), one task per line item (\"tasks\"), or no phases/tasks (\"blank\"). The legacy web route's \"template\" strategy is not supported on v1."
+                    "description": "How bid line items map onto the new project: one phase per line item (\"phases\"), one task per line item (\"tasks\"), no phases/tasks (\"blank\"), or one phase per section header with its lines as tasks (\"sections\"). The legacy web route's \"template\" strategy is not supported on v1."
                   },
                   "templateId": {
                     "type": "integer"
@@ -8919,6 +8951,19 @@
                       "null"
                     ]
                   },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "item",
+                      "section",
+                      "note"
+                    ],
+                    "description": "item = priced line; section = header grouping the rows after it; note = customer-visible text."
+                  },
+                  "isOptional": {
+                    "type": "boolean",
+                    "description": "An optional (alternate) priced line, quoted outside the bid total."
+                  },
                   "order": {
                     "type": [
                       "integer",
@@ -9113,6 +9158,19 @@
                       "string",
                       "null"
                     ]
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "item",
+                      "section",
+                      "note"
+                    ],
+                    "description": "item = priced line; section = header grouping the rows after it; note = customer-visible text."
+                  },
+                  "isOptional": {
+                    "type": "boolean",
+                    "description": "An optional (alternate) priced line, quoted outside the bid total."
                   },
                   "order": {
                     "type": [
