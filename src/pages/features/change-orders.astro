@@ -9,6 +9,11 @@ import { config } from '../../config';
 
 const faqs = [
   {
+    question: 'What is construction change order software?',
+    answer:
+      'Construction change order software — also called change order management software — is the system a contractor uses to document a scope change, price it, get it approved, and bill it. In BuildWorkPro that workflow is built for subcontractors: each change order is tied to a project, numbered automatically, priced as add/modify/remove line items against the original bid, signed or approved, then rolled into the next pay application. It is not a GC portal for collecting extras from many trades.',
+  },
+  {
     question: 'What is a change order in construction?',
     answer:
       'A change order is a written record of a change to a project’s scope and its cost impact — work added, modified, or removed after the contract was signed. Once approved, it adjusts the contract value so the changed work is billable. For subcontractors, it replaces the verbal go-ahead that too often turns into unpaid work.',
@@ -29,9 +34,19 @@ const faqs = [
       'When you create a pay application, the Change Orders Total prefills from the project’s approved change orders, alongside the Original Contract Sum from the accepted bid. The first pay app on a project also seeds its schedule of values from pending approved change orders. Approved scope changes show up in your billing without re-entering any numbers.',
   },
   {
-    question: 'Why document a scope change before doing the work?',
+    question: 'Does BuildWorkPro produce AIA-style change order documents?',
     answer:
-      'Because a verbal OK leaves you with nothing if payment is disputed. A change order written and priced before the work starts records exactly what changed, what it costs, and what it does to the contract value. And if the change is rejected, you find out before your crew spends the hours — not after.',
+      'Yes. You send the customer a priced change-order PDF with the description, reason, line items, and the contract-sum adjustment — the same information a GC expects on a G701-style form. BuildWorkPro is not a licensed AIA Contract Documents product. If a job requires the official AIA G701, transfer the same numbers onto that form. For a paper workflow, the free construction change order template at buildworkpro.com/templates/change-order/ covers the manual version.',
+  },
+  {
+    question: 'How is change order software different from GC project software?',
+    answer:
+      'GC platforms are built to receive, log, and approve change orders from many trades on the GC’s job. Change order software for subcontractors is built to create those extras: write the scope change, price it against your bid, get a signature, and bill it on your pay app. Collaborator access on a GC’s project is not a system of record for your company. BuildWorkPro is the second kind.',
+  },
+  {
+    question: 'Is there a construction change order app?',
+    answer:
+      'BuildWorkPro is construction change order software you open in a browser on a phone, tablet, or desktop — so a superintendent can start a CO from the field without installing a separate app. Native iOS and Android apps are not the current product. There is a 14-day free trial with no credit card required, then change orders are included in the $79/month plan.',
   },
   {
     question: 'How much does it cost?',
@@ -42,8 +57,8 @@ const faqs = [
 ---
 
 <Layout
-  title="Construction Change Order Management Software | BuildWorkPro"
-  description="Document scope changes as priced line items, get them approved, and bill them on your next pay app. $79/month flat, unlimited users, 14-day free trial."
+  title="Construction Change Order Software | BuildWorkPro"
+  description="Construction change order software for subcontractors: price scope changes, get approval, and bill them on the next pay app. $79/mo, 14-day free trial."
 >
   <Header />
   <main class="pt-32 pb-20">
@@ -52,12 +67,12 @@ const faqs = [
       <div class="text-center">
         <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Features</p>
         <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
-          Change Order Software for Subcontractors
+          Construction Change Order Software for Subcontractors
         </h1>
         <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Document every scope change before the work starts. Price it as line items, move it
-          through a clear approval workflow, and let the approved amount adjust your contract value
-          — so changed work gets billed instead of forgotten.
+          Document the scope change, price it as line items, get it approved, and bill it on the
+          next pay app. Construction change order software built for specialty subcontractors — not
+          a GC portal for collecting extras from other trades.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
@@ -113,6 +128,122 @@ const faqs = [
             >construction change order management</a
           >.
         </p>
+      </div>
+    </section>
+
+    <!-- Subcontractor change-order workflow -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="prose prose-lg prose-slate mx-auto">
+        <h2>The subcontractor change-order workflow</h2>
+        <p>
+          GC software is built to <em>receive</em> extras. Construction change order software for
+          subcontractors is built to <em>create</em> them. The workflow is scope change → price →
+          approval → billing — written down before the crew starts, so the extra work is a contract
+          adjustment instead of a memory.
+        </p>
+        <h3>Document the scope change</h3>
+        <p>
+          The moment the GC directs work outside the original scope, open a change order on the
+          project: title, reason (customer request, field conditions, design change, or other), and
+          a description of what changed. It starts in Draft with an automatic number like CO-001.
+          That record is the notice trail most subcontracts require — not a text that says "we'll
+          square up later."
+        </p>
+        <h3>Price it against the original bid</h3>
+        <p>
+          Cost items carry a change type — Add, Modify, or Remove — with quantity, unit price,
+          labor, and tax. Each line can reference the
+          <a href="/features/construction-bidding/">original bid</a> line it affects, so the extra
+          is priced the same way the job was estimated. Deductive change orders use the same
+          workflow when scope comes out. The total can be positive or negative; the contract always
+          matches what was actually approved.
+        </p>
+        <h3>Get a signature that is the approval</h3>
+        <p>
+          Submit the change order, email the priced PDF, and optionally send it for
+          <a href="/features/change-orders/#e-signatures">e-signature</a>. A signed change order is
+          an approved one: the net amount adjusts the project's contract value. Company admins and
+          managers can also record Approve or Reject without a signature. You cannot submit a change
+          order without at least one cost item — there is always a priced record behind the yes.
+        </p>
+        <h3>Bill it on the pay application</h3>
+        <p>
+          Approved construction change orders prefill the Change Orders Total on the next
+          <a href="/features/pay-applications/">AIA-style pay application</a>, alongside the original
+          contract sum from the accepted bid. The first pay app on a project can also seed its
+          schedule of values from pending approved change orders. Changed work goes on the invoice,
+          not into a closeout fight.
+        </p>
+        <h3>AIA-style change order documents</h3>
+        <p>
+          The PDF your GC gets carries the description, reason, line items, and the running
+          contract-sum adjustment — the same information a G701-style change order is supposed to
+          show. BuildWorkPro is not a licensed AIA Contract Documents product; if a job requires the
+          official G701, transfer the same numbers onto that form. For a paper workflow, start with
+          the free
+          <a href="/templates/change-order/">construction change order template</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- vs GC-first tools -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-4">
+        Not GC change-order software
+      </h2>
+      <p class="text-slate-500 text-center max-w-2xl mx-auto mb-10 leading-relaxed">
+        Most change order management software is built for general contractors who approve extras.
+        Specialty subcontractors write, price, and bill them — so the tool has to be a system of
+        record for your company, not a guest login on the GC's job.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-8 rounded-2xl border border-slate-200 bg-white">
+          <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            GC-first tools
+          </p>
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">Receive and approve extras</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li>Built to collect change orders from many trades on the GC's project.</li>
+            <li>Your priced extra often still starts in Excel, then gets pasted into their portal.</li>
+            <li>Collaborator access covers that GC's job — not every customer you work for.</li>
+            <li>
+              Approved extras live in the GC's budget, not in
+              <em>your</em> contract value and next pay app.
+            </li>
+          </ul>
+          <p class="mt-6 text-sm text-slate-500">
+            Fine when a GC requires you to log a CO in their system. That login is not how you get
+            paid across every job — see
+            <a
+              href="/blog/subcontractor-vs-general-contractor-software/"
+              class="text-brand-600 hover:underline"
+              >subcontractor vs. general contractor software</a
+            >.
+          </p>
+        </div>
+        <div class="p-8 rounded-2xl border border-brand-200 bg-brand-50/40 ring-1 ring-brand-100">
+          <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-2">
+            Subcontractor change orders
+          </p>
+          <h3 class="text-lg font-semibold text-slate-900 mb-4">
+            BuildWorkPro construction change orders
+          </h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li>You write the extra: reason, description, and line-item pricing against the bid.</li>
+            <li>Draft → Submitted → Approved, with e-signature as the approval if you want it.</li>
+            <li>Approving adjusts <em>your</em> contract value — including deductive COs.</li>
+            <li>
+              The approved total prefills the next
+              <a href="/features/pay-applications/" class="text-brand-600 hover:underline"
+                >pay application</a
+              >. No re-entry.
+            </li>
+          </ul>
+          <p class="mt-6 text-sm text-slate-500">
+            $79/month flat, unlimited users, 14-day free trial. Change orders are included — not a
+            separate module.
+          </p>
+        </div>
       </div>
     </section>
 
