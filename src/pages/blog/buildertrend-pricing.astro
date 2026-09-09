@@ -1,9 +1,10 @@
 ---
-// Competitor cost-guide post (issue #148/#603). "buildertrend pricing" queries
-// are demonstrably winnable by low-authority sites — an entire micro-industry
-// (buildertrendpricing.com, projul, costbench) ranks for them because
-// Buildertrend stopped publishing prices in 2026. Figures verified 08-10 from
-// the intel sweep; re-verify before meaningful edits.
+// Competitor cost-guide post (issue #148/#603). "buildertrend pricing" /
+// "buildertrend cost" are demonstrably winnable by low-authority sites —
+// an entire micro-industry (buildertrendpricing.com, projul, costbench)
+// ranks for them because Buildertrend stopped publishing prices in 2026.
+// Figures framed as last-published / independently reported; re-verify
+// before meaningful edits. Do not invent current quote amounts.
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -12,9 +13,14 @@ import BlogPostFooter from '../../components/BlogPostFooter.astro';
 
 const faqs = [
   {
-    question: 'How much does Buildertrend cost per month?',
+    question: 'How much does Buildertrend cost?',
     answer:
-      'Buildertrend no longer publishes prices — as of 2026, its pricing page collects your builder type, annual construction volume, and contact details, and a sales rep quotes you. The last published tiers, still reported by independent pricing trackers, ran roughly $339–$499/month (Essential), $499–$799 (Advanced), and $829–$1,099 (Complete), with unlimited users. Actual quotes vary by volume and negotiation.',
+      'Buildertrend no longer publishes prices. As of 2026, its pricing page collects your builder type, annual construction volume, and contact details, then a sales rep quotes you. Independent trackers still report the last public tiers at roughly $339–$499/month (Essential), $499–$799 (Advanced), and $829–$1,099 (Complete), unlimited users. Actual Buildertrend cost varies by volume and negotiation — verify with Buildertrend.',
+  },
+  {
+    question: "What are Buildertrend's pricing plans?",
+    answer:
+      'The last published plans were Essential, Advanced, and Complete. Essential covered core scheduling, communications, and daily logs; Advanced added financial tools and change orders; Complete was the full feature set with priority support. Those names and ranges are a baseline for quotes, not a live price list — Buildertrend may bundle differently on a custom quote.',
   },
   {
     question: 'Does Buildertrend have a free trial?',
@@ -41,8 +47,8 @@ const faqs = [
 
 <Layout
   ogType="article"
-  title="Buildertrend Pricing (2026): What It Actually Costs"
-  description="Buildertrend stopped publishing prices in 2026. Here's what quotes actually run — legacy tiers, the price-hike pattern, hidden switching costs — with sources."
+  title="Buildertrend Pricing 2026: Cost, Plans & Quotes"
+  description="Buildertrend pricing is quote-only in 2026. Approximate last-published plan costs, what each tier covered, and how the cost compares for subcontractors."
 >
   <Header />
   <main class="pt-32 pb-20">
@@ -50,32 +56,36 @@ const faqs = [
       <div class="mb-12">
         <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Blog</p>
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-          Buildertrend Pricing (2026): What It Actually Costs
+          Buildertrend Pricing 2026: Cost, Plans &amp; Quotes
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published August 10, 2026 · 7 min read</p>
+        <p class="mt-4 text-sm text-slate-400">
+          Published August 10, 2026 · Updated September 9, 2026 · 9 min read
+        </p>
       </div>
 
       <div
         class="prose prose-slate max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-brand-600"
       >
         <p>
-          Try to find a price on buildertrend.com and you'll find a form instead: builder type,
-          annual construction volume, name, phone. As of 2026, Buildertrend quotes every customer
-          individually — even the button that says "See pricing" leads to the form. This guide
-          assembles what the quotes actually run, from the last published tiers and the independent
-          pricing trackers that follow them, so you can walk into the sales call knowing the range.
+          Buildertrend pricing is no longer a number on the website. Try to find a cost on
+          buildertrend.com and you'll get a form instead: builder type, annual construction volume,
+          name, phone. As of 2026, every customer is quoted individually — even the button that says
+          "See pricing" leads to sales. This guide assembles what those quotes tend to run, from the
+          last published plans and the independent trackers that still follow them, so you can walk
+          into the call knowing the range — and whether you're even pricing the right product.
         </p>
 
         <div class="not-prose rounded-2xl border border-slate-200 bg-slate-50 p-6 my-8">
           <h2 class="mt-0 text-base font-semibold text-slate-900">Key takeaways</h2>
           <ul class="mb-0 mt-3 space-y-2 text-sm text-slate-600">
             <li>
-              Buildertrend killed public pricing in 2026 — quotes are custom, based on your builder
-              type and construction volume.
+              Buildertrend pricing is custom as of 2026 — quotes are based on builder type and
+              construction volume, not a public rate card.
             </li>
             <li>
-              The last published tiers ran <strong>$339–$1,099/month</strong> (Essential, Advanced, Complete),
-              unlimited users, with ~10% off for paying annually up front.
+              The last published plans ran about <strong>$339–$1,099/month</strong> (Essential, Advanced,
+              Complete), unlimited users, with ~10% off for paying annually. Treat those as approximate,
+              independently reported ranges — not a live price list.
             </li>
             <li>
               Long-term users report significant renewal increases — entry prices near $199/month in
@@ -86,8 +96,11 @@ const faqs = [
               export if you leave.
             </li>
             <li>
-              Buildertrend's "specialty contractor" means homeowner-facing reno trades — if you bill
-              GCs with pay applications, you're pricing the wrong tool entirely.
+              Buildertrend's "specialty contractor" buyer is a homeowner-facing reno trade. If you
+              bill GCs with pay applications, you're pricing the wrong tool — see
+              <a href="/compare/buildertrend-alternative/" class="text-brand-600 hover:underline"
+                >BuildWorkPro vs Buildertrend</a
+              >.
             </li>
           </ul>
         </div>
@@ -101,47 +114,87 @@ const faqs = [
           which is worth weighing against flat-priced alternatives before you're locked into an
           annual agreement.
         </p>
-
-        <h2>The numbers, from the last published tiers</h2>
         <p>
-          Before pricing went behind the form, Buildertrend published three tiers. Independent
+          Buildertrend does not charge per seat on the last published plans — unlimited users was
+          the headline. The cost driver is who you are (builder type) and how much work you put
+          through the platform (volume), plus whichever bundle the rep attaches to the quote. If a
+          competing site lists a single "Buildertrend cost" as if it were a SKU, that figure is
+          someone's report of a quote, not a catalog price.
+        </p>
+
+        <h2>Buildertrend cost by plan (last published)</h2>
+        <p>
+          Before pricing went behind the form, Buildertrend published three plans. Independent
           pricing analyses (Projul, CostBench, and the exact-match site buildertrendpricing.com,
-          which exists precisely because this information is hard to get) still track them as the
-          baseline quotes tend to follow:
+          which exists because this information is hard to get) still track them as the baseline
+          quotes tend to follow. Figures below are approximate and publicly reported as of August
+          2026 — verify current pricing with Buildertrend; custom quotes vary.
         </p>
         <div class="not-prose overflow-x-auto rounded-2xl border border-slate-200 my-6">
           <table class="w-full text-sm">
             <thead>
               <tr class="bg-slate-50">
-                <th class="text-left px-5 py-3 font-semibold text-slate-900">Tier</th>
-                <th class="text-left px-5 py-3 font-semibold text-slate-900"
-                  >Last published range</th
-                >
-                <th class="text-left px-5 py-3 font-semibold text-slate-900">Notes</th>
+                <th class="text-left px-5 py-3 font-semibold text-slate-900">Plan</th>
+                <th class="text-left px-5 py-3 font-semibold text-slate-900">Reported monthly</th>
+                <th class="text-left px-5 py-3 font-semibold text-slate-900">Approx. annual*</th>
+                <th class="text-left px-5 py-3 font-semibold text-slate-900">What it covered</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
               <tr>
                 <td class="px-5 py-3 font-medium text-slate-700">Essential</td>
                 <td class="px-5 py-3 text-slate-600">$339–$499/month</td>
-                <td class="px-5 py-3 text-slate-500">Core scheduling, comms, daily logs</td>
+                <td class="px-5 py-3 text-slate-600">~$4,100–$6,000/year</td>
+                <td class="px-5 py-3 text-slate-500">Scheduling, comms, daily logs</td>
               </tr>
               <tr>
                 <td class="px-5 py-3 font-medium text-slate-700">Advanced</td>
                 <td class="px-5 py-3 text-slate-600">$499–$799/month</td>
-                <td class="px-5 py-3 text-slate-500">Adds financial tools, change orders</td>
+                <td class="px-5 py-3 text-slate-600">~$6,000–$9,600/year</td>
+                <td class="px-5 py-3 text-slate-500">Financial tools, change orders</td>
               </tr>
               <tr>
                 <td class="px-5 py-3 font-medium text-slate-700">Complete</td>
                 <td class="px-5 py-3 text-slate-600">$829–$1,099/month</td>
-                <td class="px-5 py-3 text-slate-500">Full feature set, priority support</td>
+                <td class="px-5 py-3 text-slate-600">~$9,900–$13,200/year</td>
+                <td class="px-5 py-3 text-slate-500">Full set, priority support</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <p class="text-sm text-slate-500">
+          *Annual column is the monthly range × 12, rounded. Paying a year up front has typically
+          earned about 10% off that math. All three plans included unlimited users. Promotions come
+          and go — $300 off the first month has been common.
+        </p>
+
+        <h2>What each Buildertrend plan included</h2>
         <p>
-          All tiers include unlimited users. Promotions come and go — $300 off the first month has
-          been common — and paying a year up front has typically earned about 10% off.
+          Public marketing for those three tiers was never a full spec sheet, and a 2026 custom
+          quote may mix features differently. The split that independent write-ups still use:
+        </p>
+        <ul>
+          <li>
+            <strong>Essential</strong> — the operations layer: scheduling, crew/client communications,
+            and daily logs. Enough to run a residential job's day-to-day, not the full financial stack.
+          </li>
+          <li>
+            <strong>Advanced</strong> — adds the money tools most growing builders actually buy Buildertrend
+            for: estimates that turn into budgets, invoicing/draws, and change orders. This is where a
+            lot of quotes clustered.
+          </li>
+          <li>
+            <strong>Complete</strong> — the rest of the platform plus priority support. Selections, allowances,
+            and the homeowner portal are the product's reputation; whether they sit in Advanced or Complete
+            on <em>your</em> quote is a question for the rep, not a blog.
+          </li>
+        </ul>
+        <p>
+          If you need a client portal, finish selections, and consumer financing because your
+          customer is a homeowner, those workflows are why Buildertrend's cost can be justified. If
+          you do not, you are paying for a product category you will not open. Ask the rep to list
+          what is in the quote versus what is an add-on — plan names are not a substitute for a
+          line-item of modules.
         </p>
 
         <h2>The renewal pattern to price in</h2>
@@ -153,6 +206,12 @@ const faqs = [
           since Buildertrend acquired CoConstruct in 2021, the residential mid-market has had one
           fewer place to go. Budget for the trajectory, not the teaser.
         </p>
+        <p>
+          That is the difference between "Buildertrend cost this month" and "Buildertrend cost over
+          a three-year contract." A first-year number in the last-published Essential band can still
+          become a Complete-band bill without you adding users — because volume and the vendor's
+          quote model moved, not your seat count.
+        </p>
 
         <h2>The exit cost nobody quotes</h2>
         <p>
@@ -162,42 +221,117 @@ const faqs = [
           export before you sign, because switching costs are part of the real price.
         </p>
 
-        <h2>The question before the price question</h2>
+        <h2>Buildertrend pricing for subcontractors</h2>
         <p>
           Buildertrend's "specialty contractor" segment means outdoor living, kitchen and bath,
           pools, decks — trades selling projects to homeowners, with client portals, selections, and
           consumer financing. If that's your business, Buildertrend is a genuine contender and the
-          quote may be worth it. But if your customer is a general contractor and your month ends
-          with a <a href="/blog/aia-pay-application-guide/"
-            >pay application against a schedule of values</a
-          >, you'd be paying four figures for homeowner workflows you'll never open. Our <a
-            href="/compare/buildertrend-alternative/"
-            >full BuildWorkPro vs Buildertrend comparison</a
-          > walks the fit question honestly.
+          quote may be worth it. Our
+          <a href="/compare/buildertrend-alternative/">BuildWorkPro vs Buildertrend comparison</a>
+          walks that fit question honestly.
+        </p>
+        <p>
+          If your customer is a general contractor and your month ends with a
+          <a href="/blog/aia-pay-application-guide/">pay application against a schedule of values</a
+          >, you would be paying four figures for homeowner workflows you will never open — and
+          still stitching
+          <a href="/blog/construction-change-order-management/">change orders</a> and retainage in a spreadsheet.
+          That is the subcontractor angle on Buildertrend cost: the sticker is only half of it; the other
+          half is buying the wrong billing loop.
         </p>
 
-        <h2>The flat-price contrast</h2>
+        <h2>Buildertrend cost vs BuildWorkPro</h2>
         <p>
-          BuildWorkPro publishes its price: <a href="/pricing/">$79/month flat, or $790/year</a> — every
-          feature, unlimited users, built for the sub-to-GC loop (bids, AIA-style pay applications, change
-          orders, e-signatures, QuickBooks sync). There's no quote call because there's nothing to quote,
-          and the 14-day trial needs no credit card. A 5-person crew's annual math: $790 vs. roughly $6,000–$13,000
-          at the last published Buildertrend tiers.
+          BuildWorkPro publishes its price:
+          <a href="/pricing/">$79/month flat, or $790/year</a> — every feature, unlimited users, built
+          for the sub-to-GC loop (bids, AIA-style pay applications, change orders, e-signatures, QuickBooks
+          sync). There is no quote call because there is nothing to quote, and the 14-day trial needs
+          no credit card. A 5-person crew's annual math at the last published Buildertrend tiers: $790
+          vs. roughly $4,100–$13,200 before whatever the current custom quote does at renewal.
         </p>
+        <div class="not-prose overflow-x-auto rounded-2xl border border-slate-200 my-6">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-slate-50">
+                <th class="text-left px-5 py-3 font-semibold text-slate-900"></th>
+                <th class="text-left px-5 py-3 font-semibold text-slate-900">Buildertrend</th>
+                <th class="text-left px-5 py-3 font-semibold text-slate-900">BuildWorkPro</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="px-5 py-3 font-medium text-slate-700">Pricing model</td>
+                <td class="px-5 py-3 text-slate-600">Custom quote by type &amp; volume</td>
+                <td class="px-5 py-3 text-slate-600">Published flat rate</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium text-slate-700">Reported / list price</td>
+                <td class="px-5 py-3 text-slate-600">~$339–$1,099/mo last published</td>
+                <td class="px-5 py-3 text-slate-600">$79/mo or $790/year</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium text-slate-700">Users</td>
+                <td class="px-5 py-3 text-slate-600">Unlimited</td>
+                <td class="px-5 py-3 text-slate-600">Unlimited</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium text-slate-700">How you buy</td>
+                <td class="px-5 py-3 text-slate-600">Demo and sales quote</td>
+                <td class="px-5 py-3 text-slate-600">Self-serve, 14-day trial, no card</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium text-slate-700">Built for</td>
+                <td class="px-5 py-3 text-slate-600">Home builders &amp; remodelers</td>
+                <td class="px-5 py-3 text-slate-600">Trade subs billing GCs</td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3 font-medium text-slate-700">Progress billing</td>
+                <td class="px-5 py-3 text-slate-600">Residential invoicing and draws</td>
+                <td class="px-5 py-3 text-slate-600">AIA-style pay apps, SOV, retainage</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Shopping the other volume-quoted platform? Independent ranges for
+          <a href="/blog/procore-pricing-for-subcontractors/">Procore pricing for subcontractors</a>
+          run much higher and scale with annual construction volume. Different buyer, same lesson: if
+          the vendor will not print a price, budget the quote <em>and</em> the renewal.
+        </p>
+
+        <h2>Questions worth asking before you sign</h2>
+        <p>
+          A sales-led Buildertrend pricing call is more useful if you arrive with a short list. None
+          of these require you to accept the first number:
+        </p>
+        <ul>
+          <li>What is the year-one price, and what is the renewal price if volume stays flat?</li>
+          <li>Which modules are in this quote, and which are add-ons later?</li>
+          <li>
+            Is there an onboarding, implementation, or training fee on top of the subscription?
+          </li>
+          <li>Month-to-month versus annual — and what happens if I cancel mid-term?</li>
+          <li>Show me the full-account export (not item-by-item download) before I sign.</li>
+          <li>
+            If I am a sub billing GCs, which of these features will my superintendent actually use?
+          </li>
+        </ul>
       </div>
 
       <p class="mt-10 text-xs text-slate-400">
         Sources: buildertrend.com pricing flow; Projul, CostBench, and buildertrendpricing.com
         pricing analyses; Capterra and TrustRadius verified reviews. Figures as of August 2026 —
-        custom quotes vary; verify current pricing with Buildertrend.
+        last-published plan ranges are approximate and independently reported; custom quotes vary.
+        Verify current pricing with Buildertrend.
       </p>
 
       <FAQSection bare class="mt-16" faqs={faqs} heading="Buildertrend pricing FAQ" />
 
       <BlogPostFooter
-        headline="Buildertrend Pricing (2026): What It Actually Costs"
-        description="Buildertrend stopped publishing prices in 2026. Here's what quotes actually run — legacy tiers, the price-hike pattern, hidden switching costs — with sources."
+        headline="Buildertrend Pricing 2026: Cost, Plans & Quotes"
+        description="Buildertrend pricing is quote-only in 2026. Approximate last-published plan costs, what each tier covered, and how the cost compares for subcontractors."
         datePublished="2026-08-10"
+        dateModified="2026-09-09"
         related={[
           {
             href: '/compare/buildertrend-alternative/',
