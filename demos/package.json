@@ -3,14 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Programmatic marketing demo pipeline: Playwright capture → ElevenLabs narration → Remotion composition.",
+  "description": "Programmatic marketing demo pipeline: Playwright capture \u2192 ElevenLabs narration \u2192 Remotion composition.",
   "scripts": {
     "capture": "tsx src/capture.ts",
     "narrate": "tsx src/narrate.ts",
     "render": "remotion render src/remotion/index.ts DemoVideo output/final.mp4",
     "studio": "remotion studio src/remotion/index.ts",
     "build": "tsx src/pipeline.ts",
-    "build:script": "tsx src/pipeline.ts"
+    "build:script": "tsx src/pipeline.ts",
+    "render:smoke": "tsx src/smoke.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@elevenlabs/elevenlabs-js": "^2.45.0",

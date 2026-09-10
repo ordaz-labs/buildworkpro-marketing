@@ -1,0 +1,159 @@
+{
+  "slug": "04-office-sim",
+  "title": "The office agent (simulated preview)",
+  "subtitle": "app.buildworkpro.com/leads",
+  "layout": "split",
+  "phone": {
+    "theme": "grokbot",
+    "name": "Office Bot",
+    "subtitle": "Grok Bot · always on",
+    "transcriptStatus": "draft"
+  },
+  "_notes": [
+    "SIMULATION. The app side is real screenshots from public/screenshots/ (Comfort Climate HVAC seed tenant) with a slow push-in; the phone lines are placeholders written to match what is visible in those screenshots. Render with `npx tsx src/simulate.ts scripts/04-office-sim.json`. The render carries a 'simulated preview' badge and must not be published.",
+    "For the real cut use scripts/04-office.json: live capture + a transcript from an actual Grok Bot run."
+  ],
+  "intro": {
+    "title": "Your office agent read the inbox",
+    "subtitle": "Grok Bot on the phone. BuildWorkPro on the desk.",
+    "durationMs": 2500
+  },
+  "outro": {
+    "title": "Your agents do the work. BuildWorkPro keeps the record.",
+    "cta": "buildworkpro.com/agents",
+    "durationMs": 3500
+  },
+  "scenes": [
+    {
+      "id": "inbox-before",
+      "title": "6:40 AM, before you're up",
+      "narration": "It's 6:40 on a Tuesday. My office agent has already read the inbox.",
+      "caption": {
+        "text": "6:40 AM",
+        "position": "top"
+      },
+      "minDurationMs": 6000,
+      "still": {
+        "src": "../public/screenshots/02-pipeline-kanban.png",
+        "focusX": 50,
+        "focusY": 40,
+        "zoom": 1.05
+      },
+      "messages": [
+        {
+          "from": "agent",
+          "text": "Morning. Two GC emails overnight look like real work.",
+          "atMs": 1200,
+          "time": "6:40 AM"
+        }
+      ],
+      "actions": []
+    },
+    {
+      "id": "two-leads",
+      "title": "Two requests become two leads",
+      "narration": "Two real requests become two leads in BuildWorkPro, tied to the right contacts. Nobody typed anything into a CRM.",
+      "caption": {
+        "text": "2 leads created, contacts linked",
+        "position": "bottom"
+      },
+      "minDurationMs": 8000,
+      "still": {
+        "src": "../public/screenshots/02-pipeline-kanban.png",
+        "focusX": 24,
+        "focusY": 45,
+        "zoom": 1.3
+      },
+      "messages": [
+        {
+          "from": "agent",
+          "text": "Created leads for Data Center HVAC Install ($58,964) and Pharmacy HVAC Upgrade ($59,308). Contacts linked.",
+          "atMs": 1500,
+          "time": "6:41 AM"
+        }
+      ],
+      "actions": []
+    },
+    {
+      "id": "lead-detail",
+      "title": "Walkthrough on the calendar, close date on the lead",
+      "narration": "The walkthrough lands on my calendar. The close date lands on the lead.",
+      "caption": {
+        "text": "Close date set on the lead",
+        "position": "bottom"
+      },
+      "minDurationMs": 7000,
+      "still": {
+        "src": "../public/screenshots/02-pipeline-kanban.png",
+        "focusX": 24,
+        "focusY": 42,
+        "zoom": 1.5
+      },
+      "messages": [
+        {
+          "from": "agent",
+          "text": "The Data Center GC wants a walkthrough Thursday 9 AM. It's on your calendar. Close date set to May 10 on the lead.",
+          "atMs": 1000,
+          "time": "6:41 AM"
+        }
+      ],
+      "actions": []
+    },
+    {
+      "id": "activity",
+      "title": "One line from you, a draft for review",
+      "narration": "I answer with one line. The reply is drafted. I read it before it goes anywhere.",
+      "caption": {
+        "text": "Drafted, not sent",
+        "position": "bottom"
+      },
+      "minDurationMs": 8000,
+      "still": {
+        "src": "../public/screenshots/01-dashboard.png",
+        "focusX": 50,
+        "focusY": 19,
+        "zoom": 1.15
+      },
+      "messages": [
+        {
+          "from": "you",
+          "text": "Draft the walkthrough confirmation and ask for the equipment schedule.",
+          "atMs": 800,
+          "time": "7:05 AM"
+        },
+        {
+          "from": "agent",
+          "text": "Draft is in your Gmail for review. Logged it on the lead.",
+          "atMs": 3800,
+          "time": "7:05 AM"
+        }
+      ],
+      "actions": []
+    },
+    {
+      "id": "pay-app",
+      "title": "Already thinking about Friday",
+      "narration": "And it's already thinking about Friday.",
+      "caption": {
+        "text": "Payment due this period",
+        "position": "bottom"
+      },
+      "minDurationMs": 7000,
+      "still": {
+        "src": "../public/screenshots/13-pay-app-detail.png",
+        "focusX": 72,
+        "focusY": 30,
+        "zoom": 1.18
+      },
+      "messages": [
+        {
+          "from": "agent",
+          "text": "Also: PA-001 for Atlantic School is approved, $50,156.40 due this period. I'll flag it Friday if the payment hasn't landed.",
+          "atMs": 900,
+          "time": "7:06 AM"
+        }
+      ],
+      "actions": []
+    }
+  ]
+}

@@ -1,47 +1,64 @@
-import { Composition, staticFile } from "remotion";
-import fs from "node:fs";
-import path from "node:path";
-import { DemoVideo, demoVideoSchema } from "./DemoVideo.js";
+import { Composition } from "remotion";
+import { DemoVideo, demoVideoSchema, type DemoVideoProps } from "./DemoVideo";
+import { SplitScreen, splitScreenSchema, type SplitScreenProps } from "./SplitScreen";
 
-const FPS = Number(process.env.DEMO_FPS || 30);
-const WIDTH = Number(process.env.DEMO_WIDTH || 1920);
-const HEIGHT = Number(process.env.DEMO_HEIGHT || 1080);
+// Remotion bundles this file for the browser, so nothing here may touch the
+// filesystem. All data arrives through input props: the pipeline renders with
+//   --props=output/<slug>/timings.json --public-dir=output/<slug>
+// and the compositions resolve clips/audio with staticFile(basename).
+// calculateMetadata derives the duration from those props, so a cold
+// `remotion studio` with no props still mounts with a placeholder.
 
-function loadTimings(slug: string) {
-  const file = path.resolve("output", slug, "timings.json");
-  if (!fs.existsSync(file)) return null;
-  return JSON.parse(fs.readFileSync(file, "utf8"));
+const DEFAULT_FPS = 30;
+
+function totalFrames(props: { timings?: Array<{ durationFrames: number }>; script?: { intro?: { durationMs: number }; outro?: { durationMs: number } }; fps?: number }) {
+  const fps = props.fps ?? DEFAULT_FPS;
+  const scenes = (props.timings ?? []).reduce((acc, t) => acc + t.durationFrames, 0);
+  const intro = Math.ceil(((props.script?.intro?.durationMs ?? 0) / 1000) * fps);
+  const outro = Math.ceil(((props.script?.outro?.durationMs ?? 0) / 1000) * fps);
+  return Math.max(scenes + intro + outro, fps);
 }
+
+const placeholder = { fps: DEFAULT_FPS, timings: [], script: { slug: "demo", title: "Run capture + narrate first", layout: "full" as const, scenes: [] } };
 
 export const RemotionRoot: React.FC = () => {
-  // Default composition pulls from the demo slug passed via DEMO_SLUG env var,
-  // or the first folder under output/ if not set. Falls back to placeholder.
-  const slug = process.env.DEMO_SLUG || firstOutputSlug() || "demo";
-  const data = loadTimings(slug);
-
-  const totalFrames = data
-    ? data.timings.reduce((acc: number, t: { durationFrames: number }) => acc + t.durationFrames, 0) +
-      Math.ceil(((data.script.intro?.durationMs ?? 0) / 1000) * FPS) +
-      Math.ceil(((data.script.outro?.durationMs ?? 0) / 1000) * FPS)
-    : FPS * 10;
-
   return (
-    <Composition
-      id="DemoVideo"
-      component={DemoVideo}
-      durationInFrames={Math.max(totalFrames, FPS)}
-      fps={FPS}
-      width={WIDTH}
-      height={HEIGHT}
-      schema={demoVideoSchema}
-      defaultProps={{ slug }}
-    />
+    <>
+      <Composition
+        id="DemoVideo"
+        component={DemoVideo}
+        schema={demoVideoSchema}
+        defaultProps={placeholder as DemoVideoProps}
+        fps={DEFAULT_FPS}
+        width={1920}
+        height={1080}
+        durationInFrames={DEFAULT_FPS * 5}
+        calculateMetadata={({ props }) => ({ durationInFrames: totalFrames(props), fps: props.fps ?? DEFAULT_FPS })}
+      />
+      {/* Phone left, app right. 16:9 for the site, YouTube, X landscape. */}
+      <Composition
+        id="SplitScreen"
+        component={SplitScreen}
+        schema={splitScreenSchema}
+        defaultProps={{ ...placeholder, orientation: "landscape" } as SplitScreenProps}
+        fps={DEFAULT_FPS}
+        width={1920}
+        height={1080}
+        durationInFrames={DEFAULT_FPS * 5}
+        calculateMetadata={({ props }) => ({ durationInFrames: totalFrames(props), fps: props.fps ?? DEFAULT_FPS })}
+      />
+      {/* Phone top, app bottom. 9:16 for Reels, Stories, X vertical. */}
+      <Composition
+        id="SplitScreenVertical"
+        component={SplitScreen}
+        schema={splitScreenSchema}
+        defaultProps={{ ...placeholder, orientation: "portrait" } as SplitScreenProps}
+        fps={DEFAULT_FPS}
+        width={1080}
+        height={1920}
+        durationInFrames={DEFAULT_FPS * 5}
+        calculateMetadata={({ props }) => ({ durationInFrames: totalFrames(props), fps: props.fps ?? DEFAULT_FPS })}
+      />
+    </>
   );
 };
-
-function firstOutputSlug(): string | null {
-  const out = path.resolve("output");
-  if (!fs.existsSync(out)) return null;
-  const dirs = fs.readdirSync(out, { withFileTypes: true }).filter((d) => d.isDirectory());
-  return dirs[0]?.name ?? null;
-}

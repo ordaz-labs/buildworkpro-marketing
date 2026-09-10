@@ -1,0 +1,127 @@
+{
+  "slug": "04-office",
+  "title": "The office agent",
+  "subtitle": "app.buildworkpro.com/leads",
+  "layout": "split",
+  "phone": {
+    "theme": "grokbot",
+    "name": "Office Bot",
+    "subtitle": "Grok Bot · always on",
+    "transcriptStatus": "draft"
+  },
+  "_notes": [
+    "PHONE LINES ARE PLACEHOLDERS for timing. Before any public cut, run the real flow through Grok Bot with a staged test inbox, keep the transcript, re-typeset it into `messages[]`, and set phone.transcriptStatus to \"real\". The pipeline refuses to render a draft unless DEMO_ALLOW_DRAFT_TRANSCRIPT=1.",
+    "App side runs against the local seed tenant (Comfort Climate HVAC, rmoreno). The leads and contacts below are fictional and HVAC-flavored so they fit that tenant; they are created through the same REST surface the MCP tools write through, which is what the agent would have done.",
+    "Scene 5 shows the seed's first pay app rather than one the agent drafted (creating a pay app needs a project with a schedule of values). Either seed a draft pay app or cut the scene to the project summary before publishing.",
+    "Selectors were written from the app's routes and the existing 03-manage-project script; run `npm run capture -- scripts/04-office.json` once against the seeded app and adjust any that miss."
+  ],
+  "intro": {
+    "title": "Your office agent read the inbox",
+    "subtitle": "Grok Bot on the phone. BuildWorkPro on the desk.",
+    "durationMs": 2500
+  },
+  "outro": {
+    "title": "Your agents do the work. BuildWorkPro keeps the record.",
+    "cta": "buildworkpro.com/agents",
+    "durationMs": 3500
+  },
+  "scenes": [
+    {
+      "id": "inbox-before",
+      "title": "6:40 AM, before you're up",
+      "narration": "It's 6:40 on a Tuesday. My office agent has already read the inbox.",
+      "caption": { "text": "6:40 AM", "position": "top" },
+      "minDurationMs": 6000,
+      "messages": [
+        { "from": "agent", "text": "Morning. Two GC emails overnight look like real work.", "atMs": 1200, "time": "6:40 AM" }
+      ],
+      "actions": [
+        { "type": "navigate", "url": "${BWP_DEMO_URL}/leads" },
+        { "type": "waitFor", "selector": "main", "timeoutMs": 15000 },
+        { "type": "wait", "ms": 1200 },
+        { "type": "hover", "selector": "main h1, main h2", "comment": "settle on the pipeline before anything changes" },
+        { "type": "wait", "ms": 1500 }
+      ]
+    },
+    {
+      "id": "two-leads",
+      "title": "Two requests become two leads",
+      "narration": "Two real requests become two leads in BuildWorkPro, tied to the right contacts. Nobody typed anything into a CRM.",
+      "caption": { "text": "2 leads created, contacts linked", "position": "bottom" },
+      "minDurationMs": 8000,
+      "messages": [
+        { "from": "agent", "text": "Created leads for Riverside Office Park (rooftop unit replacement) and Harbor Point (VRF system RFI). Contacts linked.", "atMs": 1500, "time": "6:41 AM" }
+      ],
+      "actions": [
+        { "type": "api", "method": "POST", "path": "/api/contacts", "body": { "name": "Marta Ruiz", "company": "Riverside Office Park", "email": "marta@example.com", "phone": "305-555-0142" }, "saveAs": "OFFICE_CONTACT_A" },
+        { "type": "api", "method": "POST", "path": "/api/contacts", "body": { "name": "Dev Patel", "company": "Harbor Point Development", "email": "dev@example.com", "phone": "305-555-0177" }, "saveAs": "OFFICE_CONTACT_B" },
+        { "type": "api", "method": "POST", "path": "/api/leads", "body": { "name": "Riverside Office Park — rooftop unit replacement", "source": "email", "projectType": "commercial", "estimatedValue": "48920.00", "expectedCloseDate": "2026-09-19", "contactId": "${OFFICE_CONTACT_A}", "description": "GC email: replace four rooftop units, walkthrough requested Thursday 9 AM." }, "saveAs": "OFFICE_LEAD_A" },
+        { "type": "api", "method": "POST", "path": "/api/leads", "body": { "name": "Harbor Point — VRF system RFI", "source": "email", "projectType": "commercial", "estimatedValue": "156800.00", "contactId": "${OFFICE_CONTACT_B}", "description": "GC email: RFI on the VRF system for the Harbor Point build-out." }, "saveAs": "OFFICE_LEAD_B" },
+        { "type": "navigate", "url": "${BWP_DEMO_URL}/leads" },
+        { "type": "waitFor", "selector": "text=Riverside Office Park", "timeoutMs": 15000 },
+        { "type": "wait", "ms": 800 },
+        { "type": "highlight", "selector": "text=Riverside Office Park", "durationMs": 1400 },
+        { "type": "highlight", "selector": "text=Harbor Point", "durationMs": 1400 },
+        { "type": "wait", "ms": 800 }
+      ]
+    },
+    {
+      "id": "lead-detail",
+      "title": "Walkthrough on the calendar, due date on the lead",
+      "narration": "The walkthrough lands on my calendar. The due date lands on the lead.",
+      "caption": { "text": "Bid due Sept 19", "position": "bottom" },
+      "minDurationMs": 7000,
+      "messages": [
+        { "from": "agent", "text": "Riverside wants a walkthrough Thursday 9 AM. It's on your calendar. Bid due the 19th, set on the lead.", "atMs": 1000, "time": "6:41 AM" }
+      ],
+      "actions": [
+        { "type": "navigate", "url": "${BWP_DEMO_URL}/leads/${OFFICE_LEAD_A}" },
+        { "type": "waitFor", "selector": "main h1", "timeoutMs": 15000 },
+        { "type": "wait", "ms": 1200 },
+        { "type": "hover", "selector": "text=/Expected Close|Close Date|Due/i" },
+        { "type": "wait", "ms": 1800 }
+      ]
+    },
+    {
+      "id": "activity",
+      "title": "One line from you, a draft for review",
+      "narration": "I answer with one line. The reply is drafted. I read it before it goes anywhere.",
+      "caption": { "text": "Drafted, not sent", "position": "bottom" },
+      "minDurationMs": 8000,
+      "messages": [
+        { "from": "you", "text": "Draft the walkthrough confirmation and ask for the equipment schedule.", "atMs": 800, "time": "7:05 AM" },
+        { "from": "agent", "text": "Draft is in your Gmail for review. Logged it on the lead.", "atMs": 3800, "time": "7:05 AM" }
+      ],
+      "actions": [
+        { "type": "api", "method": "POST", "path": "/api/leads/${OFFICE_LEAD_A}/activities", "body": { "type": "email", "subject": "Walkthrough confirmation drafted", "description": "Draft reply in Gmail for Ivan's review: confirm Thursday 9 AM walkthrough, ask for the equipment schedule. Not sent." } },
+        { "type": "navigate", "url": "${BWP_DEMO_URL}/leads/${OFFICE_LEAD_A}" },
+        { "type": "waitFor", "selector": "main h1", "timeoutMs": 15000 },
+        { "type": "wait", "ms": 800 },
+        { "type": "click", "selector": "[role='tab']:has-text('Activit')" },
+        { "type": "wait", "ms": 1000 },
+        { "type": "highlight", "selector": "text=Walkthrough confirmation drafted", "durationMs": 1600 },
+        { "type": "wait", "ms": 1200 }
+      ]
+    },
+    {
+      "id": "pay-app",
+      "title": "Already thinking about Friday",
+      "narration": "And it's already thinking about Friday.",
+      "caption": { "text": "Pay app draft, ready for review", "position": "bottom" },
+      "minDurationMs": 7000,
+      "messages": [
+        { "from": "agent", "text": "Also: the Bayview pay app is due Friday. Ran it against the schedule of values. The draft is ready for your review.", "atMs": 900, "time": "7:06 AM" }
+      ],
+      "actions": [
+        { "type": "navigate", "url": "${BWP_DEMO_URL}/pay-apps" },
+        { "type": "waitFor", "selector": "main table tbody tr, [role='row']", "timeoutMs": 15000 },
+        { "type": "wait", "ms": 900 },
+        { "type": "click", "selector": "main table tbody tr >> nth=0" },
+        { "type": "waitFor", "selector": "main h1", "timeoutMs": 15000 },
+        { "type": "wait", "ms": 1200 },
+        { "type": "scroll", "deltaY": 500, "durationMs": 1200 },
+        { "type": "wait", "ms": 1200 }
+      ]
+    }
+  ]
+}
