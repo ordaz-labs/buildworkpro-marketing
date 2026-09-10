@@ -1,0 +1,93 @@
+---
+title: Install in Hermes Agent
+description: Connect BuildWorkPro to Hermes Agent by Nous Research from a YAML config or the web dashboard. OAuth-based, no API key required.
+lastUpdated: 2026-09-09
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Hermes Agent is Nous Research's open-source, self-hosted agent. It connects to MCP servers from a YAML config file or from its local web dashboard, and it speaks OAuth 2.1 with PKCE, so the BuildWorkPro server connects with a browser sign-in and no API key. Once connected, Hermes can read your bids, projects and pay applications and create records within the scopes you grant.
+
+## Prerequisites
+
+- Hermes Agent installed. Docs are at [hermes-agent.nousresearch.com](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp).
+- A BuildWorkPro account with access to the organization you want to connect.
+- A browser to complete the sign-in. Hermes waits for the OAuth callback on a local loopback port.
+
+You do **not** need an API key. Hermes registers itself with BuildWorkPro using Dynamic Client Registration the first time you connect.
+
+## Connect the server
+
+<Steps>
+
+1. **Add the server to your config.**
+
+   Edit `~/.hermes/config.yaml` and add a `buildworkpro` entry under `mcp_servers`:
+
+   ```yaml
+   mcp_servers:
+     buildworkpro:
+       url: "https://app.buildworkpro.com/api/mcp"
+       auth: oauth
+   ```
+
+   `auth: oauth` tells Hermes to run the MCP SDK's OAuth 2.1 PKCE flow — metadata discovery, client identification, token exchange and refresh — against the server.
+
+   If you prefer the dashboard, run `hermes dashboard`, open the MCP page and add an HTTP server with the same URL. The dashboard's Profile Builder does the same while creating a profile, alongside the model and skills.
+
+2. **Sign in.**
+
+   ```bash
+   hermes mcp login buildworkpro
+   ```
+
+   Hermes prints an authorize URL, opens your browser when it can, and waits for the callback. The browser shows the BuildWorkPro consent screen listing exactly which scopes Hermes is requesting; approve, or deny if it asks for more than you want. Tokens are saved to `~/.hermes/mcp-tokens/buildworkpro.json` with owner-only permissions and reused across sessions until a refresh fails.
+
+   If you skip this step, Hermes runs the same flow the first time it connects to the server.
+
+3. **Reload.**
+
+   If Hermes is already running, type `/reload-mcp` in the chat to pick up the new server. BuildWorkPro tools register under the `mcp__buildworkpro__` prefix, for example `mcp__buildworkpro__bids_list`.
+
+4. **Test it.**
+
+   Ask:
+
+   > List my open bids.
+
+   Hermes calls `bids_list`, scoped to your organization, and returns the results.
+
+</Steps>
+
+## A profile for the work
+
+Hermes organizes work into profiles: an identity, a model, a set of skills, and the MCP servers that profile can reach. That maps well onto BuildWorkPro's scopes. An estimating profile whose tool list is limited to bids, catalog and project reads can build and price draft bids from your catalog (`products_list`, `labor_rates_list`, `bids_create`); a reporting profile limited to read tools can summarize projects (`projects_summary`) and walk through pay application math (`pay_apps_calculate`) without being able to change anything. Use `tools.include` per profile so each role only sees the tools it needs.
+
+## What you can ask
+
+> Summarize my active projects and flag any with an unapproved change order.
+>
+> Explain the math on pay application 7: work completed to date, retainage, and the amount due this period.
+>
+> Draft a bid to Acme Construction for "Storefront glass, 4th Street" with the line items from bid #98, repriced from my current catalog.
+>
+> Which leads have had no activity in the last two weeks?
+
+The full inventory of tools, resources, and prompts is in the [Tools catalog](/api/mcp/tools-catalog/).
+
+## Managing the connection
+
+- **Revoke access:** In BuildWorkPro, go to **Settings -> Authorized apps** and remove the Hermes entry. Access ends immediately.
+- **Scopes are per request:** the consent screen is approve-or-deny for the set Hermes asks for. To narrow what a profile can actually call, use `tools.include` below. If tool calls start failing with authorization errors, `hermes mcp reauth buildworkpro` refreshes the credentials.
+- **Limit the tools:** Use the `tools.include` and `tools.exclude` lists on the server entry to register only the BuildWorkPro tools a profile should have. The full option set is in the [MCP config reference](https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference).
+- **Multiple organizations:** A connection is scoped to one organization. To switch, sign out of BuildWorkPro, sign in to the other organization, and log in again.
+
+<Aside type="caution" title="Watch out for">
+  - Hermes runs on your machine with the tools you give it. Review every write action (creating a
+  bid, updating a contact) before confirming, and exclude `bids_send`, `pay_apps_approve` and
+  `change_orders_approve` with `tools.exclude` on any profile that should not take those actions.
+  - The token file in `~/.hermes/mcp-tokens/` is a live credential for your BuildWorkPro account.
+  Treat it like a password; revoke the connection if the machine is shared or lost.
+  - Tool calls fetch live data each time. If a record changed moments ago, ask Hermes to refetch
+  rather than relying on an earlier answer.
+</Aside>

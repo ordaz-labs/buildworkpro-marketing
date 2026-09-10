@@ -1,0 +1,446 @@
+---
+// The /agents/ hub (marketing#183). Replaces /features/ai-assistant/ (301 in
+// astro.config.mjs). Every capability named here is something the live MCP
+// tool surface does; every agent named here has an install guide under
+// /api/mcp/. Third-party names are text wordmarks, never logos. The example
+// day is labeled as illustrative — the routine is the founder's, the job names
+// are not real customers.
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FAQSection from '../components/FAQSection.astro';
+import AgentSplitScreen from '../components/AgentSplitScreen.astro';
+import AgentCrew from '../components/AgentCrew.astro';
+import { config } from '../config';
+
+type Status = 'available' | 'testing';
+
+const agents: { name: string; where: string; body: string; href: string; status: Status }[] = [
+  {
+    name: 'Claude',
+    where: 'Web, desktop, iPhone, Android',
+    body: 'Add BuildWorkPro as a connector, sign in once, and talk. The bid is waiting in your account when you sit down.',
+    href: '/api/mcp/claude-desktop/',
+    status: 'available',
+  },
+  {
+    name: 'Claude Code',
+    where: 'Terminal',
+    body: 'One command adds the server. This is how our founder does takeoffs: the drawings in a folder, the bid priced from the catalog.',
+    href: '/api/mcp/claude-code/',
+    status: 'available',
+  },
+  {
+    name: 'ChatGPT',
+    where: 'Plus, Team, Enterprise',
+    body: 'Add a custom connector with the same sign-in and the same scopes.',
+    href: '/api/mcp/chatgpt/',
+    status: 'available',
+  },
+  {
+    name: 'Grok Bot',
+    where: 'macOS, Windows, iPhone · beta',
+    body: 'xAI’s always-on agent on a cloud computer. Add BuildWorkPro as a custom MCP server; it reads your inbox and calendar through its own connectors and keeps the CRM current while you’re on site. Also covers the Grok app.',
+    href: '/api/mcp/grok-bot/',
+    status: 'available',
+  },
+  {
+    name: 'OpenClaw',
+    where: 'Self-hosted · WhatsApp, Telegram, Discord, Slack',
+    body: 'Open-source agent that lives in your chat channels. The MCP servers you use in Claude Code work here unchanged.',
+    href: '/api/mcp/openclaw/',
+    status: 'available',
+  },
+  {
+    name: 'Hermes Agent',
+    where: 'Self-hosted · Nous Research',
+    body: 'Connects over MCP with sign-in built in. Configure it from the dashboard or the command line.',
+    href: '/api/mcp/hermes-agent/',
+    status: 'available',
+  },
+  {
+    name: 'Any MCP client',
+    where: 'Cursor, custom agents, and more',
+    body: 'The connection is an open standard. If your agent can add a custom MCP server, it can run BuildWorkPro.',
+    href: '/api/mcp/overview/',
+    status: 'available',
+  },
+  {
+    name: 'Meta Muse',
+    where: 'Web, iPhone, Android, WhatsApp',
+    body: 'Launched September 8 with built-in connectors and the ability to connect services that have a public API using your credentials. We’re testing it against the BuildWorkPro API. No setup guide yet.',
+    href: '/api/',
+    status: 'testing',
+  },
+];
+
+const day = [
+  {
+    time: '6:40 AM',
+    who: 'Office agent, morning routine',
+    said: '“Two GC emails overnight look like real work. Leads created for the storefront job and the curtain wall RFI, contacts linked. Walkthrough Thursday 9 AM is on your calendar.”',
+    recorded: ['2 leads in the New stage, 2 contacts updated', 'Bid due date set on the lead'],
+  },
+  {
+    time: '8:15 AM',
+    who: 'You, in Claude Code',
+    said: '“New bid for the storefront job. Plans are in the folder: 12 openings, our standard hardware, usual labor rates.”',
+    recorded: ['Draft bid with 14 priced lines from your catalog', 'Waiting for your review'],
+  },
+  {
+    time: '10:30 AM',
+    who: 'Office agent',
+    said: '“The GC replied with a revised opening schedule. Filed it on the lead and logged the exchange. Your reply is drafted.”',
+    recorded: ['Attachment on the lead, activity logged', 'Nothing sent'],
+  },
+  {
+    time: '1:15 PM',
+    who: 'You, in Claude on your phone',
+    said: '“The office build-out wants two more doors. Draft the change order at our standard door rate.”',
+    recorded: ['Change order draft with 2 lines on the project'],
+  },
+  {
+    time: '4:30 PM',
+    who: 'Office agent',
+    said: '“The pay app for the office build-out is due Friday. Ran it against the schedule of values. The draft is ready for your review.”',
+    recorded: ['Pay application draft, calculated'],
+  },
+  {
+    time: '6:00 PM',
+    who: 'Office agent, end of day',
+    said: '“Today: 1 bid to review, 2 new leads, 1 change order draft, 1 pay app draft.”',
+    recorded: ['Nothing sent. Everything waiting for you.'],
+  },
+];
+
+const safe = [
+  [
+    'You see exactly what it asks for',
+    'The consent screen lists every scope an agent requests before you approve. Read scopes only look. Write scopes create and update. Sending a bid, approving a pay app, or approving a change order are separate scopes, and the approval ones are flagged.',
+  ],
+  [
+    'Approve or deny, then narrow',
+    'If an agent asks for more than you want it to have, deny and reconnect later. Agents like OpenClaw and Hermes can also be limited to a list of tools on their side, so a field agent never even sees the tools that send or approve.',
+  ],
+  [
+    'You review, you send',
+    'An agent can draft the bid and the follow-up. A bid reaches a customer when you send it, or when the send scope was in the request you approved.',
+  ],
+  [
+    'Revoke in one click',
+    'Settings → Authorized apps lists every agent you have connected. Revoke one and it loses access immediately.',
+  ],
+  [
+    'Every record has an owner',
+    'Agents act under your login and your role. A lead, bid, or site log an agent creates is yours, follows your permissions, and is found and edited in the app like anything else.',
+  ],
+];
+
+const faqs = [
+  {
+    question: 'Do I need to be technical to use this?',
+    answer:
+      'No. If you can send a text message, you can use it. You connect BuildWorkPro to your agent once, and from then on you just talk — describe the job, ask the question, request the change. There are no commands or prompts to memorize.',
+  },
+  {
+    question: 'Which agents work with BuildWorkPro?',
+    answer:
+      'Claude (web, desktop, and phone), Claude Code, ChatGPT, Grok Bot and the Grok app, OpenClaw, and Hermes Agent, each with an install guide in our docs. The connection is an open standard, so any agent that can add a custom MCP server works too. We are testing Meta Muse.',
+  },
+  {
+    question: 'Which agent should I start with?',
+    answer:
+      'The one you already pay for. If you use Claude or ChatGPT, connect that. If you want an agent that keeps working while you are on site, Grok Bot. If you want your crew to text an agent from the field, OpenClaw.',
+  },
+  {
+    question: 'Do I need to run a server?',
+    answer:
+      'No. BuildWorkPro hosts the connection. You paste one address into your agent and sign in. OpenClaw and Hermes Agent are agents you host yourself, but the BuildWorkPro side needs nothing from you.',
+  },
+  {
+    question: 'Can the agent send a bid to my customer without me?',
+    answer:
+      'Only if the send scope was in the request you approved on the consent screen; it is listed there by name. The workflow that works is the one our founder uses: the agent builds, you review in BuildWorkPro, and you decide what goes out.',
+  },
+  {
+    question: 'Can my crew text it?',
+    answer:
+      'With an agent that lives in a chat channel, like OpenClaw on WhatsApp or Telegram, yes. The agent works under the account you connected. If your crew would rather use the app, unlimited users are included.',
+  },
+  {
+    question: 'Does the agent connection cost extra?',
+    answer:
+      'No. Like everything else in BuildWorkPro, it is included in the $79/month plan — no AI add-on, no token bill, no higher tier. You do need your own account with the agent, and some of them, Grok Bot for one, require a paid plan on their side.',
+  },
+  {
+    question: 'What is this technically?',
+    answer:
+      'For the curious: the connection uses the Model Context Protocol (MCP), an open standard that lets AI agents securely operate applications on your behalf. BuildWorkPro runs a live MCP server covering bids, projects, contacts, leads, site logs, change orders, pay applications, and more — the developer details are in our docs.',
+  },
+];
+
+const statusBadge: Record<Status, string> = {
+  available: 'bg-emerald-50 text-emerald-700 ring-emerald-100',
+  testing: 'bg-amber-50 text-amber-700 ring-amber-100',
+};
+---
+
+<Layout
+  title="AI Agents for Subcontractors: Claude, ChatGPT, Grok Bot & More | BuildWorkPro"
+  description="Run BuildWorkPro from the AI agent you already use. Claude, Claude Code, ChatGPT, Grok Bot, OpenClaw, and Hermes Agent build bids, work your inbox into the CRM, and draft change orders. You review and send. Included at $79/month."
+>
+  <Header />
+  <main class="pt-32 pb-20">
+    <!-- Hero -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-center">
+        <div class="max-w-2xl">
+          <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
+            AI agents
+          </p>
+          <h1
+            class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance leading-[1.1]"
+          >
+            Run BuildWorkPro from the agent you already talk to
+          </h1>
+          <p class="mt-6 text-lg text-slate-500 leading-relaxed">
+            Connect Claude, ChatGPT, Grok Bot, OpenClaw or Hermes Agent once. Then describe the job,
+            forward the email, ask the question. The bid, the lead, the change order, the pay app
+            land in your account with your permissions, and you review before anything goes out.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row items-center gap-3">
+            <a
+              href={config.signupUrl}
+              class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              Start free trial
+            </a>
+            <a
+              href="#connect"
+              class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
+            >
+              Connect your agent
+            </a>
+          </div>
+        </div>
+        <AgentSplitScreen eager />
+      </div>
+    </section>
+
+    <!-- Founder proof -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="rounded-2xl border border-brand-100 bg-brand-50 p-8">
+        <p class="text-slate-700 leading-relaxed">
+          "When I start a new bid, I usually just start chatting with Claude on my computer or my
+          phone. I give it the information and it builds the bid for me. When it's done, I review it
+          in BuildWorkPro and send it. Projects work the same way — the team and I run almost
+          everything through natural conversation now."
+        </p>
+        <p class="mt-4 text-sm text-slate-500">
+          — Ivan, founder of BuildWorkPro and owner of
+          <a
+            href="/customers/national-glass/"
+            class="text-brand-600 underline underline-offset-2 font-medium"
+            >National Glass and Construction</a
+          >
+        </p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 scroll-mt-24">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">How it works</h2>
+      <ol class="space-y-6">
+        {
+          [
+            [
+              'Connect once',
+              'Paste one address into your agent and sign in to BuildWorkPro. A consent screen shows exactly what the agent is asking for before you approve. Install guides for every agent are below.',
+            ],
+            [
+              "Talk like you'd talk to your estimator",
+              '"New bid for the storefront job — twelve openings, our standard hardware, usual labor rates." Or forward the GC\'s email and say "make this a lead." The agent creates the record, adds the line items, prices them from your catalog.',
+            ],
+            [
+              'Review and send in BuildWorkPro',
+              "Everything the agent builds lands in your account looking like you made it, because it did it with your permissions. Open it, check the numbers, adjust what needs adjusting, and send it when it's right.",
+            ],
+          ].map(([title, body], i) => (
+            <li class="flex gap-4">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center text-sm font-bold">
+                {i + 1}
+              </div>
+              <div>
+                <h3 class="text-base font-semibold text-slate-900 mb-1">{title}</h3>
+                <p class="text-slate-500 text-sm">{body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <AgentCrew compact />
+
+    <!-- A day -->
+    <section id="day" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
+      <div class="text-center mb-10">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
+          What a day looks like
+        </p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">
+          What the agent said. What BuildWorkPro recorded.
+        </h2>
+        <p class="mt-3 text-sm text-slate-500">
+          An example day. The routine is our founder's; the jobs and names are illustrative.
+        </p>
+      </div>
+      <ol
+        class="rounded-2xl border border-slate-100 overflow-hidden divide-y divide-slate-100 list-none m-0 p-0"
+      >
+        {
+          day.map((d) => (
+            <li class="grid sm:grid-cols-[88px_minmax(0,1.2fr)_minmax(0,1fr)] gap-3 sm:gap-5 p-5 bg-white">
+              <span class="font-mono text-sm text-amber-700 pt-1">{d.time}</span>
+              <div class="rounded-2xl rounded-bl-md bg-slate-50 border border-slate-100 px-4 py-3">
+                <span class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                  {d.who}
+                </span>
+                <p class="text-sm text-slate-700">{d.said}</p>
+              </div>
+              <ul class="list-none m-0 p-0 flex flex-col gap-1.5 sm:pt-1">
+                <li class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  Recorded
+                </li>
+                {d.recorded.map((r) => (
+                  <li class="text-sm text-slate-900 flex items-start gap-2">
+                    <span
+                      class="mt-2 w-1.5 h-1.5 rounded-full bg-brand-600 shrink-0"
+                      aria-hidden="true"
+                    />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- Connect -->
+    <section id="connect" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
+      <div class="text-center mb-10">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Works with</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">
+          Connect the agent you already use
+        </h2>
+        <p class="mt-3 text-sm text-slate-500 max-w-2xl mx-auto">
+          Same address, same sign-in, same scopes for every one of them. Pick yours and follow the
+          guide.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {
+          agents.map((a) => (
+            <a
+              href={a.href}
+              class="group flex flex-col gap-2 p-6 rounded-2xl border border-slate-100 hover:border-slate-200 bg-white hover:shadow-lg transition-all duration-300"
+            >
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="text-lg font-semibold text-slate-900 group-hover:text-brand-600 transition-colors">
+                  {a.name}
+                </h3>
+                <span
+                  class={`text-[11px] font-medium px-2 py-0.5 rounded-full ring-1 whitespace-nowrap ${statusBadge[a.status]}`}
+                >
+                  {a.status === 'available' ? 'Available' : 'Testing'}
+                </span>
+              </div>
+              <p class="text-xs text-slate-400">{a.where}</p>
+              <p class="text-sm text-slate-500 leading-relaxed flex-grow">{a.body}</p>
+              <span class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 group-hover:gap-2 transition-all">
+                {a.status === 'available' ? 'Setup guide' : 'Developer docs'}
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Safe -->
+    <section id="safe" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
+      <div class="text-center mb-10">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
+          How it stays safe
+        </p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">
+          An agent gets exactly the access you grant
+        </h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {
+          safe.map(([title, body]) => (
+            <div class="p-6 rounded-2xl border border-slate-100 bg-white">
+              <h3 class="text-base font-semibold text-slate-900 mb-1">{title}</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">{body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-6 text-sm text-slate-500 text-center">
+        Details for the technically curious: the
+        <a href="/api/mcp/overview/" class="text-brand-600 underline underline-offset-2"
+          >MCP overview</a
+        > and the
+        <a href="/api/mcp/tools-catalog/" class="text-brand-600 underline underline-offset-2"
+          >tools catalog</a
+        > list every tool and the scope it needs.
+      </p>
+    </section>
+
+    <FAQSection faqs={faqs} heading="AI agents FAQ" />
+
+    <!-- CTA -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
+      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
+          Your agents do the work. BuildWorkPro keeps the record.
+        </h2>
+        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
+          Every feature, unlimited users, and the agent connection — all in the one $79/month plan.
+          Try the whole thing free for 14 days.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href={config.signupUrl}
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Start free trial
+          </a>
+          <a
+            href="/api/mcp/overview/"
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
+          >
+            Setup guides in the docs
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-slate-500">
+          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
+          free trial · No credit card required
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

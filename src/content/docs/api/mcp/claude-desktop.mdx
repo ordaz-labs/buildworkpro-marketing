@@ -51,7 +51,7 @@ You do **not** need an API key. Claude Desktop registers itself with BuildWorkPr
 
    Open a new chat and click the tools icon in the message input. You'll see **buildworkpro** listed with a "Sign in" prompt. Click it. Your browser opens to `https://app.buildworkpro.com/oauth/authorize` with a consent screen showing exactly which scopes Claude is requesting (for example `contacts:read`, `bids:read`, `projects:read`).
 
-   Review the scopes, choose which ones to grant, and confirm. The browser hands an authorization code back to Claude Desktop. You're now connected.
+   Review the scopes and approve, or deny if the request covers more than you want Claude to have. The browser hands an authorization code back to Claude Desktop. You're now connected.
 
 5. **Test it.**
 
@@ -70,7 +70,7 @@ You do **not** need an API key. Claude Desktop registers itself with BuildWorkPr
 </Steps>
 
 <Aside type="caution" title="Scope grants matter">
-The consent screen lets you control exactly what Claude can do. Read scopes (`*:read`) are safe — they only let Claude fetch data. Write scopes (`*:write`) let Claude create or update records. Workflow scopes (`bids:send`, `pay_apps:approve`, `change_orders:approve`) let Claude take actions that affect your business. Grant only what you trust the model with. You can revoke access at any time in **Settings -> Developer -> Connected apps**.
+The consent screen shows exactly what Claude is asking for; it is approve-or-deny for that set. Read scopes (`*:read`) only let Claude fetch data. Write scopes (`*:write`) let Claude create or update records. Workflow scopes (`bids:send`, `pay_apps:approve`, `change_orders:approve`) let Claude take actions that affect your business, and the approval scopes are flagged as dangerous on the screen. If the request includes more than you trust the model with, deny it. You can revoke access at any time in **Settings -> Authorized apps**.
 </Aside>
 
 ## stdio install (local development only)
@@ -120,5 +120,5 @@ The stdio entry point is shipped in the BuildWorkPro repo. It reads the `BUILDWO
 
 - **Server doesn't appear in the tool list.** Quit and relaunch Claude Desktop fully — config is read once at startup.
 - **OAuth redirect fails.** Make sure you're signed into BuildWorkPro in the same browser Claude opens. If your default browser is different, sign in there first.
-- **"Insufficient scope" error.** Claude requested a scope you didn't grant. Disconnect from **Settings -> Developer -> Connected apps**, reconnect, and grant the missing scope on the consent screen.
+- **"Insufficient scope" error.** Claude requested a scope you didn't grant. Disconnect from **Settings -> Authorized apps**, reconnect, and grant the missing scope on the consent screen.
 - **Tool calls fail with 401.** Your refresh token may have expired or been revoked. Disconnect and reconnect.

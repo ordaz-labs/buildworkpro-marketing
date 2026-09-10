@@ -1,0 +1,92 @@
+---
+// "Meet the crew" — the four jobs an AI agent can do in BuildWorkPro today,
+// each tied to the agents that fit it and the MCP tools it actually uses.
+// Every tool name below is a registered MCP tool (see /api/mcp/tools-catalog/).
+// The field clerk is last and is credited to agents that live in a chat
+// channel (OpenClaw), deliberately — BuildWorkPro has no WhatsApp or SMS inbox.
+interface Props {
+  /** Section eyebrow/heading variant for the /agents/ page. */
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+
+const roles = [
+  {
+    role: 'The estimator',
+    title: 'Takeoff to bid, priced from your catalog',
+    body: 'Reads the drawings with you, works the takeoff, then builds the bid from your products and labor rates. You review the numbers and send.',
+    runs: ['Claude Code', 'Claude', 'ChatGPT'],
+    uses: 'bids_create · bid_line_items_create_many · products_list · labor_rates_list',
+  },
+  {
+    role: 'The office',
+    title: 'Inbox and calendar to CRM, every morning',
+    body: 'Reads your email and calendar through its own connectors, turns real requests into leads and contacts, puts walkthroughs and due dates where they belong, and drafts the follow-up when a bid goes quiet. Keeps working after you close the laptop.',
+    runs: ['Grok Bot', 'Claude', 'ChatGPT'],
+    uses: 'leads_create · contacts_update · lead_activities_create · draft_bid_followup',
+  },
+  {
+    role: 'The controller',
+    title: 'Change orders and pay apps, ready to approve',
+    body: 'Drafts the change order when the GC adds scope, preps the pay application against the schedule of values, and summarizes the month.',
+    runs: ['ChatGPT', 'Claude', 'Grok Bot'],
+    uses: 'change_orders_create · pay_apps_calculate · projects_summary',
+  },
+  {
+    role: 'The field clerk',
+    title: 'Crew notes to site log',
+    body: 'With an agent that lives in a chat channel, your crew’s notes and photos become the daily log: personnel, work performed, photos attached, hours logged. OpenClaw runs on WhatsApp and Telegram natively.',
+    runs: ['OpenClaw', 'Hermes Agent'],
+    uses: 'site_logs_create · documents_create_upload_url · time_entries_create',
+  },
+];
+---
+
+<section id="crew" class={compact ? 'py-16' : 'py-24 lg:py-32'}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto text-center mb-14">
+      <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
+        Meet the crew
+      </p>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
+        Four jobs your agents already know how to do
+      </h2>
+      <p class="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">
+        Give an agent the role, connect it once, and talk. Each one works inside your account with
+        the permissions you grant and nothing more.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        roles.map((r) => (
+          <article class="flex flex-col gap-3 p-6 rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-lg hover:border-slate-200 transition-all duration-300">
+            <p class="text-xs font-bold uppercase tracking-wider text-amber-700">{r.role}</p>
+            <h3 class="text-lg font-semibold text-slate-900 leading-snug">{r.title}</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">{r.body}</p>
+            <ul class="flex flex-wrap gap-1.5 list-none m-0 p-0" aria-label="Runs on">
+              {r.runs.map((name) => (
+                <li class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                  {name}
+                </li>
+              ))}
+            </ul>
+            <p class="pt-2 border-t border-dashed border-slate-200 font-mono text-[11px] leading-relaxed text-slate-400 break-words">
+              {r.uses}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto">
+      Every tool runs under a scope you see on the consent screen before you approve. Nothing
+      reaches a customer unless the send scope was in what you approved, and you can revoke any
+      agent in one click.
+      <a href="/agents/#safe" class="text-brand-600 underline underline-offset-2"
+        >How it stays safe</a
+      >
+    </p>
+  </div>
+</section>

@@ -1,0 +1,105 @@
+---
+title: Install in Grok Bot
+description: Connect BuildWorkPro to Grok Bot, xAI's always-on agent, or to the Grok chat app as a custom connector. OAuth-based, no API key required.
+lastUpdated: 2026-09-09
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Grok Bot is xAI's always-on agent. You create named Bots that run on a persistent cloud computer with their own browser, files and terminal, and they keep working after you close the app. Grok Bot has been in beta since August 11, 2026, with desktop and mobile apps. Connect the BuildWorkPro MCP server and a Bot can turn what lands in your inbox and calendar into leads, contacts and follow-ups in BuildWorkPro.
+
+## Prerequisites
+
+- Grok Bot installed, on an eligible xAI or Cursor plan. Check [xAI's Grok Bot documentation](https://docs.x.ai/grok-bot/overview) for current plan requirements and downloads.
+- A BuildWorkPro account with access to the organization you want to connect.
+
+Because a Bot runs on a cloud computer, a custom MCP server has to be reachable over the internet. BuildWorkPro's hosted endpoint is — there is nothing to tunnel or self-host. You do **not** need an API key. Grok Bot registers itself with BuildWorkPro using Dynamic Client Registration the first time you connect.
+
+## Connect a Bot
+
+<Steps>
+
+1. **Create or open a Bot.**
+
+   Pick a suggested teammate or choose **Create your own** and give the Bot a short name, one primary job, and a description of how it should work. For the office role below: name it "Office", job "Lead intake", and describe what it may and may not do (draft follow-ups, never send).
+
+2. **Add the BuildWorkPro server.**
+
+   Connectors in Grok Bot live under **Settings -> Plugins**. Add the BuildWorkPro server URL wherever Grok Bot lets you add a custom MCP server or connector:
+
+   ```
+   https://app.buildworkpro.com/api/mcp
+   ```
+
+   The server publishes its own OAuth metadata, so the URL is all Grok Bot needs.
+
+3. **Sign in when prompted.**
+
+   When the Bot shows the connect prompt, complete the sign-in in your browser. You land on the BuildWorkPro consent screen listing exactly which scopes are being requested. Approve, or deny if it asks for more than you want.
+
+4. **Attach it to a task.**
+
+   In a conversation with the Bot, type `@` to attach the BuildWorkPro connector to the task, then ask:
+
+   > List my open leads and who they are assigned to.
+
+   The Bot calls `leads_list`, scoped to your organization, and reports back.
+
+</Steps>
+
+<Aside type="note" title="Grok Bot is in beta">
+  The exact menu path for adding a custom MCP server is still changing during the beta, and team
+  accounts inherit their organization's connector policy rather than a separate Grok Bot list. If
+  the steps above don't match what you see, check xAI's Grok Bot documentation at
+  [docs.x.ai/grok-bot](https://docs.x.ai/grok-bot/computer-and-apps) for the current path. The
+  server URL and OAuth flow are stable — only the Grok-side install UX is moving.
+</Aside>
+
+## The office role
+
+Grok Bot's own connectors give it your inbox and calendar; BuildWorkPro gives it somewhere to put the work. A Bot whose approved scopes include lead and contact read and write can take a real request from a GC, create the lead (`leads_create`), update the contact's phone or email if it changed (`contacts_update`), and log the touch (`lead_activities_create`) — then draft a follow-up for you to send.
+
+A routine tells one Bot when to run a workflow, on a schedule or, where supported, after an event, and routines keep running while your laptop is closed. Ask the Bot to save a morning routine:
+
+> Every weekday at 7:00 ET: check the inbox and calendar for new bid requests, site visits, or GC questions. Create a lead in BuildWorkPro for each new request, log any conversation on existing leads, and draft replies for my review. Do not send anything.
+
+Manage it from the Bot's conversation details under the **Routines** tab, where you can pause, test, edit the schedule, or delete it.
+
+## Connect the Grok app instead
+
+If you use Grok's chat app (web, iOS or Android) rather than Grok Bot, it supports custom MCP connectors on paid plans — check xAI for current availability:
+
+1. Go to [grok.com/connectors](https://grok.com/connectors).
+2. Click **New Connector**, then select **Custom**.
+3. Enter `https://app.buildworkpro.com/api/mcp` and complete the sign-in on the BuildWorkPro consent screen.
+
+Grok discovers the tools the server exposes and makes them available in conversations alongside its built-in connectors. A chat connection works while you are in the conversation — routines and always-on work are Grok Bot features.
+
+## What you can ask
+
+> Find the contact at Acme Construction whose email is jane@example.com and update her phone number to 305-555-0100.
+>
+> Create a lead "Brickell storefront replacement" from referral, estimated value $85,000, and log that we spoke today.
+>
+> List leads that have had no activity in 14 days and draft a check-in for each.
+>
+> Summarize my active projects for a Monday stand-up.
+
+The full inventory of tools, resources, and prompts is in the [Tools catalog](/api/mcp/tools-catalog/).
+
+## Managing the connection
+
+- **Revoke access:** In BuildWorkPro, go to **Settings -> Authorized apps** and remove the Grok entry. Access ends immediately. Uninstall the connector on the Grok side as well, as xAI recommends.
+- **Scopes are per request:** the consent screen is approve-or-deny for the set Grok asks for. If you approved more than you are comfortable with, revoke in BuildWorkPro; Grok will ask again the next time it connects.
+- **Multiple organizations:** A connection is scoped to one organization. To switch, sign out of BuildWorkPro, sign in to the other organization, and reconnect.
+
+<Aside type="caution" title="Watch out for">
+  - Installed connectors are account-wide: every Bot you run can call BuildWorkPro with the
+  scopes you granted. Check the consent screen for `bids:send`, `pay_apps:approve` and `change_orders:approve`
+  before approving; deny if a Bot should not have them.
+  - All your Bots share one cloud computer, including its browser sessions. Do not treat separate
+  Bots as a security boundary.
+  - Routines run without you watching. Have the Bot draft; you send. Review every lead and contact
+  it creates before you act on it.
+  - Let the tools fetch customer data rather than pasting it into the chat.
+</Aside>
