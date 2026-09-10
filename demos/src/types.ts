@@ -49,8 +49,20 @@ export const PhoneMessage = z.object({
 });
 export type PhoneMessage = z.infer<typeof PhoneMessage>;
 
+// A still image standing in for the app capture (simulations, or a scene that
+// is better as a slow push-in on a real screenshot than as a recording).
+// `src` is resolved relative to demos/; focus is the push-in target in %.
+export const Still = z.object({
+  src: z.string(),
+  focusX: z.number().min(0).max(100).default(50),
+  focusY: z.number().min(0).max(100).default(50),
+  zoom: z.number().min(1).max(1.6).default(1.08),
+});
+export type Still = z.infer<typeof Still>;
+
 export const Scene = z.object({
   id: z.string(),
+  still: Still.optional(),
   title: z.string(),
   narration: z.string(),
   caption: Caption.optional(),
@@ -91,6 +103,8 @@ export type DemoScript = z.infer<typeof DemoScript>;
 
 export type SceneTiming = {
   sceneId: string;
+  // Present when videoFile is an image: push-in target and amount.
+  still?: { focusX: number; focusY: number; zoom: number };
   // Basenames inside output/<slug>/ — the Remotion side resolves them with
   // staticFile() against --public-dir, never with file:// paths.
   videoFile: string;
@@ -105,4 +119,7 @@ export type TimingsFile = {
   script: DemoScript;
   timings: SceneTiming[];
   fps: number;
+  // True when the app side is stills, not recordings — the composition
+  // renders a "simulated preview" badge so the cut can't pass as footage.
+  simulation?: boolean;
 };

@@ -64,6 +64,7 @@ npm run studio                                       # interactive Remotion edit
 - **`scroll`** actions smooth-scroll by `deltaY` or to a `selector`.
 - **Transcript rule.** The phone side is a claim about what the agent said. Keep `transcriptStatus: "draft"` while timing a rough cut (render with `DEMO_ALLOW_DRAFT_TRANSCRIPT=1`); before a public cut, run the real flow through the agent, keep the transcript, re-typeset it into `messages[]`, and set `"real"`. The pipeline refuses to render a draft otherwise.
 - **`DEMO_ASPECT=16x9` or `9x16`** renders one cut while iterating.
+- **Simulated preview without the app.** Give every scene a `still` (a real screenshot under `../public/screenshots/`, with `focusX`/`focusY`/`zoom` for the push-in) and run `npx tsx src/simulate.ts scripts/04-office-sim.json`. It narrates with ElevenLabs when a key is set (silence otherwise), points each scene at its still, and renders both cuts with a "simulated preview" badge burned in. For review only.
 
 ## Auth, headless, and props
 

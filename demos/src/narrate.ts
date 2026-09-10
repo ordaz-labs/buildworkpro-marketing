@@ -78,6 +78,7 @@ export function buildTimings(script: DemoScript, clips: Array<{ sceneId: string;
     const ms = Math.max(scene.minDurationMs, c.durationMs + 600, lastBubble);
     return {
       sceneId: c.sceneId,
+      ...(scene.still ? { still: { focusX: scene.still.focusX, focusY: scene.still.focusY, zoom: scene.still.zoom } } : {}),
       videoFile: `${c.sceneId}.webm`,
       audioFile: `${c.sceneId}.mp3`,
       durationFrames: Math.ceil((ms / 1000) * fps),

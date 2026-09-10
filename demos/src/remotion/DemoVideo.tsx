@@ -6,7 +6,13 @@ import { z } from "zod";
 // resolved with staticFile() against --public-dir=output/<slug>.
 
 export const captionSchema = z.object({ text: z.string(), position: z.enum(["top", "bottom", "center"]).default("bottom") });
-export const timingSchema = z.object({ sceneId: z.string(), videoFile: z.string(), audioFile: z.string(), durationFrames: z.number() });
+export const timingSchema = z.object({
+  sceneId: z.string(),
+  videoFile: z.string(),
+  audioFile: z.string(),
+  durationFrames: z.number(),
+  still: z.object({ focusX: z.number(), focusY: z.number(), zoom: z.number() }).optional(),
+});
 export const scriptSchema = z.object({
   slug: z.string(),
   title: z.string(),
@@ -27,7 +33,7 @@ export const scriptSchema = z.object({
     })
   ),
 });
-export const demoVideoSchema = z.object({ script: scriptSchema, timings: z.array(timingSchema), fps: z.number().optional() });
+export const demoVideoSchema = z.object({ script: scriptSchema, timings: z.array(timingSchema), fps: z.number().optional(), simulation: z.boolean().optional() });
 export type DemoVideoProps = z.infer<typeof demoVideoSchema>;
 export type Caption = z.infer<typeof captionSchema>;
 export type Timing = z.infer<typeof timingSchema>;

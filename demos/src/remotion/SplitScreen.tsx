@@ -1,4 +1,4 @@
-import { AbsoluteFill, Audio, OffthreadVideo, Series, staticFile, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Img, OffthreadVideo, Series, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { z } from "zod";
 import { CaptionOverlay, TitleCard, demoVideoSchema, type Timing } from "./DemoVideo";
 import { PhoneChat } from "./PhoneChat";
@@ -12,7 +12,7 @@ import { PhoneChat } from "./PhoneChat";
 export const splitScreenSchema = demoVideoSchema.extend({ orientation: z.enum(["landscape", "portrait"]).default("landscape") });
 export type SplitScreenProps = z.infer<typeof splitScreenSchema>;
 
-export const SplitScreen: React.FC<SplitScreenProps> = ({ script, timings, orientation }) => {
+export const SplitScreen: React.FC<SplitScreenProps> = ({ script, timings, orientation, simulation }) => {
   const { fps, width, height } = useVideoConfig();
   const portrait = orientation === "portrait";
   const scale = portrait ? 0.62 : 1;
@@ -56,7 +56,8 @@ export const SplitScreen: React.FC<SplitScreenProps> = ({ script, timings, orien
                   </div>
                 ) : (
                   <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <div style={{ position: "relative", width: appWidth + phoneWidth * 0.55, height: Math.max(appHeight, phoneWidth * (19.5 / 9)) }}>
+                    {/* The phone overlaps only the app window's left gutter (~6%), so the first column of content stays visible. */}
+                    <div style={{ position: "relative", width: appWidth + phoneWidth * 0.78, height: Math.max(appHeight, phoneWidth * (19.5 / 9)) }}>
                       <div style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}>
                         <AppWindow timing={t} width={appWidth} height={appHeight} url={script.subtitle} />
                       </div>
@@ -68,6 +69,7 @@ export const SplitScreen: React.FC<SplitScreenProps> = ({ script, timings, orien
                 )}
                 {/* Top captions sit above the app window's chrome bar, not on it. */}
                 {scene?.caption && <CaptionOverlay {...scene.caption} scale={scale} topPct={portrait ? "4%" : "2.5%"} />}
+                {simulation && <SimulationBadge scale={scale} />}
               </AbsoluteFill>
             </Series.Sequence>
           );
@@ -94,9 +96,60 @@ const AppWindow: React.FC<{ timing: Timing; width: number; height: number; url?:
           {url ?? "app.buildworkpro.com"}
         </div>
       </div>
-      <div style={{ width, height, background: "#0b1220" }}>
-        <OffthreadVideo src={staticFile(timing.videoFile)} muted style={{ width, height, objectFit: "cover", objectPosition: "top left", display: "block" }} />
+      <div style={{ width, height, background: "#0b1220", overflow: "hidden" }}>
+        {isImage(timing.videoFile) ? (
+          <PushIn file={timing.videoFile} width={width} height={height} still={timing.still} />
+        ) : (
+          <OffthreadVideo src={staticFile(timing.videoFile)} muted style={{ width, height, objectFit: "cover", objectPosition: "top left", display: "block" }} />
+        )}
       </div>
     </div>
   );
 };
+
+const isImage = (file: string) => /\.(png|jpe?g|webp)$/i.test(file);
+
+// A real screenshot standing in for footage: slow push-in toward the focus
+// point over the scene, so the frame never sits dead still.
+const PushIn: React.FC<{ file: string; width: number; height: number; still?: { focusX: number; focusY: number; zoom: number } }> = ({ file, width, height, still }) => {
+  const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
+  const zoomTo = still?.zoom ?? 1.08;
+  const scale = interpolate(frame, [0, Math.max(1, durationInFrames - 1)], [1, zoomTo], { extrapolateRight: "clamp" });
+  return (
+    <Img
+      src={staticFile(file)}
+      style={{
+        width,
+        height,
+        objectFit: "cover",
+        objectPosition: "top left",
+        display: "block",
+        transform: `scale(${scale})`,
+        transformOrigin: `${still?.focusX ?? 50}% ${still?.focusY ?? 50}%`,
+      }}
+    />
+  );
+};
+
+const SimulationBadge: React.FC<{ scale: number }> = ({ scale }) => (
+  <div
+    style={{
+      position: "absolute",
+      left: 28 * scale,
+      bottom: 24 * scale,
+      padding: `${8 * scale}px ${14 * scale}px`,
+      borderRadius: 8 * scale,
+      background: "rgba(245, 158, 11, 0.16)",
+      border: "1px solid rgba(245, 158, 11, 0.55)",
+      color: "#fbbf24",
+      fontSize: 20 * scale,
+      fontWeight: 700,
+      letterSpacing: 1.5,
+      textTransform: "uppercase",
+      fontFamily: "Inter, system-ui, sans-serif",
+    }}
+  >
+    Simulated preview · stills + placeholder transcript
+  </div>
+);
