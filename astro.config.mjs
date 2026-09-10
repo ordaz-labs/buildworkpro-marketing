@@ -28,11 +28,13 @@ export default defineConfig({
   // - /api/recipes/                        : only a sidebar group, no index page.
   // - /api/reference/operations/projectsid/patch/ : stale OpenAPI URL scheme; the
   //   current page is .../operations/patchprojectsbyid/.
+  // - /features/ai-assistant/             : became the /agents/ hub (marketing#183).
   //
   // NOTE: /pricing/ used to 301 here as a stop-gap for the 404. It is now a real
   // page (src/pages/pricing.astro) — a redirect and a page cannot both own the
   // URL, so the rule had to go with it.
   redirects: {
+    '/features/ai-assistant/': { status: 301, destination: '/agents/' },
     '/api/recipes/02-export-bids-to-pdf/': { status: 301, destination: '/api/' },
     '/api/recipes/': { status: 301, destination: '/api/' },
     '/api/reference/operations/projectsid/patch/': {
@@ -114,7 +116,7 @@ export default defineConfig({
             { label: 'Concepts', items: [{ autogenerate: { directory: 'api/concepts' } }] },
             { label: 'Webhooks', items: [{ autogenerate: { directory: 'api/webhooks' } }] },
             {
-              label: 'MCP (Claude / ChatGPT)',
+              label: 'MCP (AI agents)',
               items: [{ autogenerate: { directory: 'api/mcp' } }],
             },
             { label: 'Recipes', items: [{ autogenerate: { directory: 'api/recipes' } }] },

@@ -63,9 +63,9 @@ const integrations: Integration[] = [
     color: 'emerald',
   },
   {
-    title: 'Claude Desktop',
+    title: 'Claude',
     description:
-      'Connect Claude Desktop to BuildWorkPro via MCP. Ask Claude to draft bids, summarize projects, and pull contact data — all on your behalf.',
+      'Connect Claude — web, desktop, or phone — via MCP. Ask it to draft bids, summarize projects, and pull contact data, all on your behalf.',
     href: '/api/mcp/claude-desktop/',
     status: 'available',
     icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
@@ -76,6 +76,42 @@ const integrations: Integration[] = [
     description:
       'Add the BuildWorkPro MCP server to ChatGPT Pro/Team/Enterprise so ChatGPT can read and act on your data with your authorization.',
     href: '/api/mcp/chatgpt/',
+    status: 'available',
+    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+    color: 'rose',
+  },
+  {
+    title: 'Claude Code',
+    description:
+      'Add the BuildWorkPro server to Claude Code and do takeoffs and bids from the terminal, priced from your catalog and labor rates.',
+    href: '/api/mcp/claude-code/',
+    status: 'available',
+    icon: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+    color: 'rose',
+  },
+  {
+    title: 'Grok Bot',
+    description:
+      'xAI’s always-on agent. Add BuildWorkPro as a custom MCP server and it keeps your CRM current from your inbox and calendar while you’re on site.',
+    href: '/api/mcp/grok-bot/',
+    status: 'available',
+    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+    color: 'rose',
+  },
+  {
+    title: 'OpenClaw',
+    description:
+      'Self-hosted, open-source agent that lives on WhatsApp, Telegram, and other channels. The MCP servers you use in Claude Code work here unchanged.',
+    href: '/api/mcp/openclaw/',
+    status: 'available',
+    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+    color: 'rose',
+  },
+  {
+    title: 'Hermes Agent',
+    description:
+      'Nous Research’s self-improving agent connects over MCP with the same sign-in and scopes as every other client.',
+    href: '/api/mcp/hermes-agent/',
     status: 'available',
     icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
     color: 'rose',
@@ -128,7 +164,7 @@ const statusBadge: Record<Status, { label: string; classes: string }> = {
 
 <Layout
   title="QuickBooks, Zapier & API Integrations | BuildWorkPro"
-  description="Connect BuildWorkPro to your existing tools. QuickBooks Online, REST API, webhooks, OAuth, Gmail, Google Calendar, Claude Desktop, ChatGPT, and Zapier."
+  description="Connect BuildWorkPro to your existing tools. QuickBooks Online, REST API, webhooks, OAuth, Gmail, Google Calendar, Claude, ChatGPT, Grok Bot, OpenClaw, Hermes Agent, and Zapier."
 >
   <Header />
   <main class="pt-32 pb-20">
@@ -144,7 +180,7 @@ const statusBadge: Record<Status, { label: string; classes: string }> = {
         <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
           A modern API surface, signed webhooks, and a growing list of native integrations. Sync
           your books with QuickBooks Online, and wire BuildWorkPro into Gmail, your calendar, and AI
-          assistants like Claude and ChatGPT — without leaving the platform.
+          agents like Claude, ChatGPT and Grok Bot — without leaving the platform.
         </p>
       </div>
 

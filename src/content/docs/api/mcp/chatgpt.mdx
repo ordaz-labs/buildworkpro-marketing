@@ -35,7 +35,7 @@ You do **not** need an API key. ChatGPT registers itself with BuildWorkPro using
 
 3. **Register and authorize.**
 
-   ChatGPT performs Dynamic Client Registration with BuildWorkPro, then redirects you to the authorize page. Review the scopes ChatGPT is requesting and choose which to grant.
+   ChatGPT performs Dynamic Client Registration with BuildWorkPro, then redirects you to the authorize page. Review the scopes ChatGPT is requesting and approve or deny the request.
 
 4. **Confirm connection.**
 
@@ -75,8 +75,8 @@ The full inventory of tools, resources, and prompts is in the [Tools catalog](/a
 
 ## Managing the connection
 
-- **Revoke access:** In BuildWorkPro, go to **Settings -> Developer -> Connected apps** and remove the ChatGPT entry. ChatGPT loses access immediately.
-- **Change scopes:** Disconnect from BuildWorkPro, reconnect from ChatGPT, and grant a new set of scopes on the consent screen.
+- **Revoke access:** In BuildWorkPro, go to **Settings -> Authorized apps** and remove the ChatGPT entry. ChatGPT loses access immediately.
+- **Scopes are per request:** the consent screen is approve-or-deny for the set ChatGPT asks for. If you approved more than you are comfortable with, revoke in BuildWorkPro; ChatGPT will ask again the next time it connects.
 - **Multiple tenants:** ChatGPT connects to one tenant per account. To switch tenants, sign out of BuildWorkPro, sign back in to the desired tenant, then reconnect.
 
 <Aside type="caution" title="Watch out for">

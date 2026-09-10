@@ -1,18 +1,18 @@
 ---
-title: MCP — Use BuildWorkPro from Claude and ChatGPT
-description: Connect BuildWorkPro to Claude Desktop, ChatGPT, and other MCP clients. Read bids, draft follow-ups, summarize projects from your AI assistant.
-lastUpdated: 2026-06-30
+title: MCP — Use BuildWorkPro from your AI agent
+description: Connect BuildWorkPro to Claude, Claude Code, ChatGPT, Grok Bot, OpenClaw, Hermes Agent, and any other MCP client. Read bids, draft follow-ups, summarize projects from your agent.
+lastUpdated: 2026-09-09
 ---
 
 import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-The Model Context Protocol (MCP) is Anthropic's open standard for connecting large language models to external tools and data. An MCP-aware client — Claude Desktop, ChatGPT, Cursor, your own agent — speaks one protocol, and any MCP server (BuildWorkPro included) can plug in. The model gets structured access to your records, with scoped permissions, instead of you copy-pasting screenshots into a chat.
+The Model Context Protocol (MCP) is Anthropic's open standard for connecting large language models to external tools and data. An MCP-aware client — Claude, Claude Code, ChatGPT, Grok Bot, OpenClaw, Hermes Agent, your own agent — speaks one protocol, and any MCP server (BuildWorkPro included) can plug in. The model gets structured access to your records, with scoped permissions, instead of you copy-pasting screenshots into a chat.
 
 ## What you get
 
 The BuildWorkPro MCP server exposes the same domain you already use through the REST API, packaged for LLMs:
 
-- **56 tools** across 12 entity domains plus identity. Read your contacts, leads, bids, projects, pay applications, change orders, time entries, site logs, products, documents, webhooks, and team members. Create new records and drive workflow steps (send a bid, accept a bid, approve a pay app, approve a change order).
+- **295 tools** across bids, projects, contacts, leads, pay applications, change orders, invoices, site logs, time entries, products, documents, messaging, calendar, webhooks, and identity. Read your contacts, leads, bids, projects, pay applications, change orders, time entries, site logs, products, documents, webhooks, and team members. Create new records and drive workflow steps (send a bid, accept a bid, approve a pay app, approve a change order).
 - **7 resources** (`bid://`, `project://`, `contact://`, `lead://`, `payapp://`, `changeorder://`, and `sitelog://` URI schemes) that let the model fetch a single record by id with one round trip and pin it into context.
 - **11 prompts** the model can call by name to compose useful workflows, including `draft_bid_followup`, `summarize_open_projects`, `weekly_status_report`, `draft_lead_followup`, `explain_pay_app_math`, and `pipeline_weekly_summary`.
 
@@ -22,12 +22,12 @@ Tools are scoped. Listing contacts requires `contacts:read`; creating a bid requ
 
 The server uses **OAuth 2.1 with Dynamic Client Registration (RFC 7591)** — the same flow Zapier uses. You don't paste an API key into your AI client. Instead:
 
-1. The MCP client (Claude, ChatGPT) registers itself with BuildWorkPro automatically the first time you connect.
+1. The MCP client (Claude, ChatGPT, Grok Bot, and the rest) registers itself with BuildWorkPro automatically the first time you connect.
 2. You're redirected to the BuildWorkPro authorize page in your browser.
-3. You see a consent screen listing the exact scopes the AI is requesting and choose what to grant.
+3. You see a consent screen listing the exact scopes the AI is requesting, with the ones that can approve money flagged, and you approve or deny the request.
 4. The client receives a refresh token and exchanges it for short-lived access tokens.
 
-Your AI assistant gets only the scopes you grant. Revoke access at any time from **Settings -> Developer -> Connected apps**.
+Your AI assistant gets only the scopes it asked for and you approved. Revoke access at any time from **Settings -> Authorized apps**.
 
 ## Two install paths
 
@@ -52,6 +52,26 @@ Your AI assistant gets only the scopes you grant. Revoke access at any time from
     title="Install in ChatGPT"
     description="Same OAuth flow, ChatGPT-specific install path."
     href="/api/mcp/chatgpt/"
+  />
+  <LinkCard
+    title="Install in Claude Code"
+    description="One command, then sign in. Takeoffs and bids from the terminal."
+    href="/api/mcp/claude-code/"
+  />
+  <LinkCard
+    title="Install in Grok Bot"
+    description="xAI's always-on agent. Also covers the Grok app's custom connector."
+    href="/api/mcp/grok-bot/"
+  />
+  <LinkCard
+    title="Install in OpenClaw"
+    description="Self-hosted agent on WhatsApp, Telegram, and more."
+    href="/api/mcp/openclaw/"
+  />
+  <LinkCard
+    title="Install in Hermes Agent"
+    description="Nous Research's agent, OAuth-based."
+    href="/api/mcp/hermes-agent/"
   />
   <LinkCard
     title="Tools catalog"

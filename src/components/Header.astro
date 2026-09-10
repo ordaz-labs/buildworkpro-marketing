@@ -2,7 +2,7 @@
 import { config } from '../config';
 
 const features = [
-  { label: 'AI Assistant (Claude & ChatGPT)', href: '/features/ai-assistant/' },
+  { label: 'AI Agents (Claude, ChatGPT, Grok Bot)', href: '/agents/' },
   { label: 'Bidding & Estimating', href: '/features/construction-bidding/' },
   { label: 'Pay Applications', href: '/features/pay-applications/' },
   { label: 'Change Orders', href: '/features/change-orders/' },
@@ -57,6 +57,13 @@ const compare = [
       <!-- Desktop Nav. lg:, not md:: at exactly 768px the full nav (5 items + Log in
            + CTA + 180px logo) cannot fit — "Log in" wraps into "Blog" on iPad portrait. -->
       <nav class="hidden lg:flex items-center gap-6 lg:gap-8" aria-label="Primary">
+        <a
+          href="/agents/"
+          class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+        >
+          Agents
+        </a>
+
         <!-- Features dropdown -->
         <div class="relative group/menu">
           <button
@@ -279,6 +286,10 @@ const compare = [
     class="hidden lg:hidden bg-white border-t border-slate-100 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto"
   >
     <div class="px-4 py-4 space-y-1">
+      <a href="/agents/" class="block py-3 text-sm font-medium text-slate-700 hover:text-brand-600">
+        Agents
+      </a>
+
       <!-- Features accordion -->
       <details class="group">
         <summary
