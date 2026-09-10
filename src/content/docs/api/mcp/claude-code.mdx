@@ -1,0 +1,106 @@
+---
+title: Install in Claude Code
+description: Connect BuildWorkPro to Claude Code with one command. OAuth-based, no API key required.
+lastUpdated: 2026-09-09
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Claude Code is Anthropic's agent for the terminal. It already reads the files in your working directory — plan sets included. Connect the BuildWorkPro MCP server and it can also read your product catalog and labor rates, build bids, and log field work, all scoped to the permissions you grant on the consent screen.
+
+## Prerequisites
+
+- Claude Code installed and signed in. Anthropic's MCP documentation is at [code.claude.com/docs/en/mcp](https://code.claude.com/docs/en/mcp).
+- A BuildWorkPro account with access to the organization you want to connect.
+- A browser on the same machine to complete the OAuth consent flow.
+
+You do **not** need an API key. Claude Code registers itself with BuildWorkPro using Dynamic Client Registration the first time you connect.
+
+## Connect the server
+
+<Steps>
+
+1. **Add the server.**
+
+   ```bash
+   claude mcp add --transport http buildworkpro https://app.buildworkpro.com/api/mcp
+   ```
+
+   By default the server is stored at **local** scope — available in the current project only. Two alternatives:
+
+   - `--scope user` makes it available in every project on your machine.
+   - `--scope project` writes it to a `.mcp.json` file in the project root that you can check into version control so teammates get the same server. Claude Code asks for approval before using a project-scoped server.
+
+   ```bash
+   claude mcp add --transport http buildworkpro --scope user https://app.buildworkpro.com/api/mcp
+   ```
+
+2. **Authenticate.**
+
+   Start a session with `claude`, then run:
+
+   ```text
+   /mcp
+   ```
+
+   Select `buildworkpro` and follow the steps in your browser to log in. The browser opens the BuildWorkPro consent screen listing exactly which scopes Claude Code is requesting. Choose which to grant and confirm. Tokens are stored by Claude Code and refreshed automatically.
+
+   On a recent Claude Code release you can run the same flow from the shell without opening a session: `claude mcp login buildworkpro`.
+
+3. **Check the connection.**
+
+   ```bash
+   claude mcp list
+   claude mcp get buildworkpro
+   ```
+
+   `claude mcp list` should show `buildworkpro` as connected. If it reports that the server needs authentication, repeat step 2.
+
+4. **Test it.**
+
+   In the session, ask:
+
+   > List my open bids.
+
+   Claude Code calls `bids_list`, scoped to your organization, and returns the results.
+
+</Steps>
+
+## From plan set to bid
+
+This is how our founder bids his own work. Put the plan PDFs in the working directory and start Claude Code there. Reading the drawings is Claude Code's own capability — nothing about that step touches BuildWorkPro. Then ask:
+
+> Read the plans in ./plans, do a takeoff for the storefront glass and doors, and build a draft bid for Acme Construction priced from my product catalog and labor rates.
+
+Claude Code reads the PDFs, calls `products_list` and `labor_rates_list` to price the takeoff from your own catalog, then `bids_create` and `bid_line_items_create_many` to build the draft. You review the numbers in BuildWorkPro and send. If you did not grant `bids:send`, the bid stays a draft until you send it from the app — which is the safer default.
+
+## What you can ask
+
+Once connected, Claude Code can call any tool the scopes you granted allow. Examples:
+
+> Which products in my catalog match "1/2 inch tempered"? Show SKU and unit price.
+>
+> Compare the line items on bid #123 against my current labor rates and flag anything priced below rate.
+>
+> Summarize my active projects and list any with no site log in the last 7 days.
+>
+> Log 6 hours on project 12 for today with the note "final glazing, north elevation".
+
+The full inventory of tools, resources, and prompts is in the [Tools catalog](/api/mcp/tools-catalog/).
+
+## Managing the connection
+
+- **Revoke access:** In BuildWorkPro, go to **Settings -> Developer -> Connected apps** and remove the Claude Code entry. Claude Code loses access immediately. On the Claude Code side, run `claude mcp logout buildworkpro` (or choose **Clear authentication** in the `/mcp` menu) to drop the stored tokens.
+- **Change scopes:** Disconnect from BuildWorkPro, then run `/mcp` again and grant a new set of scopes on the consent screen.
+- **Remove the server:** `claude mcp remove buildworkpro`.
+- **Multiple organizations:** Each connection is scoped to one organization. To switch, sign out of BuildWorkPro, sign in to the other organization, and re-authenticate.
+
+<Aside type="caution" title="Watch out for">
+  - Claude Code edits files and calls BuildWorkPro tools in the same session. Review every write
+  action (creating a bid, updating a contact) before confirming, and keep `bids:send`,
+  `pay_apps:approve` and `change_orders:approve` ungranted unless you need them.
+  - Takeoff quantities are the model's reading of the drawings. Check counts and dimensions in
+  BuildWorkPro before the bid goes out.
+  - A project-scoped `.mcp.json` holds only the server URL, not credentials. Each teammate who
+  uses it signs in with their own BuildWorkPro account and sees only what their role allows.
+</Aside>

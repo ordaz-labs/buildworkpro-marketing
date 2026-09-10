@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import AgentCrew from '../components/AgentCrew.astro';
 import LogoCloud from '../components/LogoCloud.astro';
 import Features from '../components/Features.astro';
 import FeatureShowcase from '../components/FeatureShowcase.astro';
@@ -41,6 +42,7 @@ const softwareApplicationSchema = {
     'Crew time tracking',
     'Construction CRM and sales pipeline',
     'Reports and analytics',
+    'MCP connection for AI agents (Claude, ChatGPT, Grok Bot, OpenClaw, Hermes Agent)',
   ],
   audience: {
     '@type': 'BusinessAudience',
@@ -83,6 +85,7 @@ const softwareApplicationSchema = {
   <Header />
   <main>
     <Hero />
+    <AgentCrew />
     <LogoCloud />
     <Features />
     <FeatureShowcase />
