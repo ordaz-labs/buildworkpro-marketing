@@ -53,7 +53,7 @@ You do **not** need an API key. OpenClaw registers itself with BuildWorkPro usin
    openclaw mcp login buildworkpro
    ```
 
-   Follow the printed authorization URL. It opens the BuildWorkPro consent screen listing exactly which scopes OpenClaw is requesting; grant some or all and confirm. OpenClaw normally captures the loopback redirect and saves the credentials automatically. If the browser cannot reach the callback listener (a headless server, for example), use the printed `--code` command:
+   Follow the printed authorization URL. It opens the BuildWorkPro consent screen listing exactly which scopes OpenClaw is requesting; approve, or deny if it asks for more than you want. OpenClaw normally captures the loopback redirect and saves the credentials automatically. If the browser cannot reach the callback listener (a headless server, for example), use the printed `--code` command:
 
    ```bash
    openclaw mcp login buildworkpro --code <code-from-browser>
@@ -92,19 +92,21 @@ The agent lives where your crew already talks. When the foreman posts the day's 
 >
 > Summarize project 12: status, open change orders, and hours this week.
 
+Logging hours for someone else needs a manager or company admin role; other roles can only log their own time.
+
 The full inventory of tools, resources, and prompts is in the [Tools catalog](/api/mcp/tools-catalog/).
 
 ## Managing the connection
 
-- **Revoke access:** In BuildWorkPro, go to **Settings -> Developer -> Connected apps** and remove the OpenClaw entry. Access ends immediately. Run `openclaw mcp logout buildworkpro` to clear the stored credentials on the OpenClaw side.
-- **Change scopes:** Log out, revoke in BuildWorkPro, then run `openclaw mcp login buildworkpro` again and grant the new set on the consent screen.
+- **Revoke access:** In BuildWorkPro, go to **Settings -> Authorized apps** and remove the OpenClaw entry. Access ends immediately. Run `openclaw mcp logout buildworkpro` to clear the stored credentials on the OpenClaw side.
+- **Scopes are per request:** the consent screen is approve-or-deny for the set OpenClaw asks for. To narrow what the agent can actually call, use the tool filter below; to cut access entirely, revoke in BuildWorkPro and `openclaw mcp logout buildworkpro`.
 - **Limit the tools:** Pass `--include` when adding the server, or set `toolFilter.include` on the entry, to register only the tools an agent should have — for example the site-log and time-entry tools and nothing that sends or approves.
 - **Several agents:** The [OpenClaw MCP docs](https://docs.openclaw.ai/tools/mcp) cover scoping a server to a single agent.
 
 <Aside type="caution" title="Watch out for">
   - Anyone who can message the channel can drive the tools. Restrict who can reach the agent, and
-  grant only the scopes the field workflow needs — keep `bids:send`, `pay_apps:approve` and
-  `change_orders:approve` off.
+  use `toolFilter.include` so the field agent only registers the site-log and time-entry tools —
+  nothing that sends or approves.
   - By default OpenClaw uses one BuildWorkPro sign-in for everyone who talks to the agent, so
   every site log and time entry is attributed to that user. If several people use the channel,
   set `oauth.identity: "per-requester"` (see the

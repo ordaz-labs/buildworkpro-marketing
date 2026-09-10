@@ -115,24 +115,24 @@ const day = [
 
 const safe = [
   [
-    'You choose the scopes',
-    'The consent screen lists exactly what an agent asks for. Read scopes only look. Write scopes create and update. Sending a bid, approving a pay app, or approving a change order are separate grants.',
+    'You see exactly what it asks for',
+    'The consent screen lists every scope an agent requests before you approve. Read scopes only look. Write scopes create and update. Sending a bid, approving a pay app, or approving a change order are separate scopes, and the approval ones are flagged.',
   ],
   [
-    'Read-only is the default posture',
-    'Grant read scopes first, see what the agent does with them, add write scopes when you trust it.',
+    'Approve or deny, then narrow',
+    'If an agent asks for more than you want it to have, deny and reconnect later. Agents like OpenClaw and Hermes can also be limited to a list of tools on their side, so a field agent never even sees the tools that send or approve.',
   ],
   [
     'You review, you send',
-    'An agent can draft the bid and the follow-up. A bid reaches a customer when you send it, or when you have explicitly granted the send scope.',
+    'An agent can draft the bid and the follow-up. A bid reaches a customer when you send it, or when the send scope was in the request you approved.',
   ],
   [
     'Revoke in one click',
-    'Settings → Developer → Connected apps lists every agent you have connected. Remove one and it loses access immediately.',
+    'Settings → Authorized apps lists every agent you have connected. Revoke one and it loses access immediately.',
   ],
   [
-    'Every action is on the record',
-    'Agents act under your login and your role. What they create shows up in the activity feed like anything else, with your name on it.',
+    'Every record has an owner',
+    'Agents act under your login and your role. A lead, bid, or site log an agent creates is yours, follows your permissions, and is found and edited in the app like anything else.',
   ],
 ];
 
@@ -160,7 +160,7 @@ const faqs = [
   {
     question: 'Can the agent send a bid to my customer without me?',
     answer:
-      'Only if you grant it the send scope. The workflow that works is the one our founder uses: the agent builds, you review in BuildWorkPro, and you decide what goes out.',
+      'Only if the send scope was in the request you approved on the consent screen; it is listed there by name. The workflow that works is the one our founder uses: the agent builds, you review in BuildWorkPro, and you decide what goes out.',
   },
   {
     question: 'Can my crew text it?',
@@ -255,7 +255,7 @@ const statusBadge: Record<Status, string> = {
           [
             [
               'Connect once',
-              'Paste one address into your agent and sign in to BuildWorkPro. A consent screen shows exactly what the agent is asking for; you grant what you want. Install guides for every agent are below.',
+              'Paste one address into your agent and sign in to BuildWorkPro. A consent screen shows exactly what the agent is asking for before you approve. Install guides for every agent are below.',
             ],
             [
               "Talk like you'd talk to your estimator",

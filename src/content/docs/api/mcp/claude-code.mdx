@@ -43,7 +43,7 @@ You do **not** need an API key. Claude Code registers itself with BuildWorkPro u
    /mcp
    ```
 
-   Select `buildworkpro` and follow the steps in your browser to log in. The browser opens the BuildWorkPro consent screen listing exactly which scopes Claude Code is requesting. Choose which to grant and confirm. Tokens are stored by Claude Code and refreshed automatically.
+   Select `buildworkpro` and follow the steps in your browser to log in. The browser opens the BuildWorkPro consent screen listing exactly which scopes Claude Code is requesting. Approve, or deny if it asks for more than you want. Tokens are stored by Claude Code and refreshed automatically.
 
    On a recent Claude Code release you can run the same flow from the shell without opening a session: `claude mcp login buildworkpro`.
 
@@ -90,15 +90,16 @@ The full inventory of tools, resources, and prompts is in the [Tools catalog](/a
 
 ## Managing the connection
 
-- **Revoke access:** In BuildWorkPro, go to **Settings -> Developer -> Connected apps** and remove the Claude Code entry. Claude Code loses access immediately. On the Claude Code side, run `claude mcp logout buildworkpro` (or choose **Clear authentication** in the `/mcp` menu) to drop the stored tokens.
-- **Change scopes:** Disconnect from BuildWorkPro, then run `/mcp` again and grant a new set of scopes on the consent screen.
+- **Revoke access:** In BuildWorkPro, go to **Settings -> Authorized apps** and remove the Claude Code entry. Claude Code loses access immediately. On the Claude Code side, run `claude mcp logout buildworkpro` (or choose **Clear authentication** in the `/mcp` menu) to drop the stored tokens.
+- **Scopes are per request:** the consent screen is approve-or-deny for the set Claude Code asks for. If you approved more than you are comfortable with, revoke in BuildWorkPro and sign in again the next time you need it.
 - **Remove the server:** `claude mcp remove buildworkpro`.
 - **Multiple organizations:** Each connection is scoped to one organization. To switch, sign out of BuildWorkPro, sign in to the other organization, and re-authenticate.
 
 <Aside type="caution" title="Watch out for">
   - Claude Code edits files and calls BuildWorkPro tools in the same session. Review every write
-  action (creating a bid, updating a contact) before confirming, and keep `bids:send`,
-  `pay_apps:approve` and `change_orders:approve` ungranted unless you need them.
+  action (creating a bid, updating a contact) before confirming, and treat `bids:send`,
+  `pay_apps:approve` and `change_orders:approve` on the consent screen as the reason to deny
+  if you don't want the model taking those actions.
   - Takeoff quantities are the model's reading of the drawings. Check counts and dimensions in
   BuildWorkPro before the bid goes out.
   - A project-scoped `.mcp.json` holds only the server URL, not credentials. Each teammate who

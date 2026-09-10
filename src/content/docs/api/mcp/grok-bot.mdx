@@ -35,7 +35,7 @@ Because a Bot runs on a cloud computer, a custom MCP server has to be reachable 
 
 3. **Sign in when prompted.**
 
-   When the Bot shows the connect prompt, complete the sign-in in your browser. You land on the BuildWorkPro consent screen listing exactly which scopes are being requested. Grant some or all, then confirm.
+   When the Bot shows the connect prompt, complete the sign-in in your browser. You land on the BuildWorkPro consent screen listing exactly which scopes are being requested. Approve, or deny if it asks for more than you want.
 
 4. **Attach it to a task.**
 
@@ -57,7 +57,7 @@ Because a Bot runs on a cloud computer, a custom MCP server has to be reachable 
 
 ## The office role
 
-Grok Bot's own connectors give it your inbox and calendar; BuildWorkPro gives it somewhere to put the work. A Bot granted the lead and contact read and write scopes can take a real request from a GC, create the lead (`leads_create`), update the contact's phone or email if it changed (`contacts_update`), and log the touch (`lead_activities_create`) — then draft a follow-up for you to send.
+Grok Bot's own connectors give it your inbox and calendar; BuildWorkPro gives it somewhere to put the work. A Bot whose approved scopes include lead and contact read and write can take a real request from a GC, create the lead (`leads_create`), update the contact's phone or email if it changed (`contacts_update`), and log the touch (`lead_activities_create`) — then draft a follow-up for you to send.
 
 A routine tells one Bot when to run a workflow, on a schedule or, where supported, after an event, and routines keep running while your laptop is closed. Ask the Bot to save a morning routine:
 
@@ -89,14 +89,14 @@ The full inventory of tools, resources, and prompts is in the [Tools catalog](/a
 
 ## Managing the connection
 
-- **Revoke access:** In BuildWorkPro, go to **Settings -> Developer -> Connected apps** and remove the Grok entry. Access ends immediately. Uninstall the connector on the Grok side as well, as xAI recommends.
-- **Change scopes:** Disconnect from BuildWorkPro, reconnect from Grok, and grant a new set of scopes on the consent screen.
+- **Revoke access:** In BuildWorkPro, go to **Settings -> Authorized apps** and remove the Grok entry. Access ends immediately. Uninstall the connector on the Grok side as well, as xAI recommends.
+- **Scopes are per request:** the consent screen is approve-or-deny for the set Grok asks for. If you approved more than you are comfortable with, revoke in BuildWorkPro; Grok will ask again the next time it connects.
 - **Multiple organizations:** A connection is scoped to one organization. To switch, sign out of BuildWorkPro, sign in to the other organization, and reconnect.
 
 <Aside type="caution" title="Watch out for">
   - Installed connectors are account-wide: every Bot you run can call BuildWorkPro with the
-  scopes you granted. Grant the read and write scopes the office role needs and keep `bids:send`,
-  `pay_apps:approve` and `change_orders:approve` off unless a Bot must have them.
+  scopes you granted. Check the consent screen for `bids:send`, `pay_apps:approve` and `change_orders:approve`
+  before approving; deny if a Bot should not have them.
   - All your Bots share one cloud computer, including its browser sessions. Do not treat separate
   Bots as a security boundary.
   - Routines run without you watching. Have the Bot draft; you send. Review every lead and contact
