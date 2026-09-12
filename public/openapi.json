@@ -62,6 +62,7 @@
           "invoices:read",
           "invoices:write",
           "invoices:delete",
+          "projects:reassign",
           "bids:send",
           "bids:accept_reject",
           "pay_apps:approve",
@@ -895,6 +896,74 @@
             "type": "boolean"
           }
         }
+      },
+      "MoveResult": {
+        "type": "object",
+        "properties": {
+          "fromProjectId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "toProjectId": {
+            "type": "integer"
+          },
+          "cleared": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "fromProjectId",
+          "toProjectId",
+          "cleared"
+        ]
+      },
+      "SweepResult": {
+        "type": "object",
+        "properties": {
+          "moved": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          },
+          "dropped": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          }
+        },
+        "required": [
+          "moved",
+          "dropped"
+        ]
+      },
+      "AttachedRecords": {
+        "type": "object",
+        "properties": {
+          "counts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          },
+          "total": {
+            "type": "integer"
+          },
+          "invoiceTotal": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "counts",
+          "total",
+          "invoiceTotal"
+        ]
       },
       "Project": {
         "type": "object",
@@ -6290,6 +6359,642 @@
         },
         "operationId": "postLeadsBulk",
         "x-rate-limit-cost": 100
+      }
+    },
+    "/invoices/{id}/move": {
+      "post": {
+        "summary": "Move a invoice to another project",
+        "description": "Re-points the invoice at `targetProjectId`, which must belong to your organization and must not be deleted. Needs `projects:reassign` rather than this resource's own write scope. QuickBooks is deliberately NOT rewritten: the QBO invoice keeps the customer it was pushed with, so BuildWorkPro and QuickBooks disagree about the owning job until someone reconciles them by hand. The invoice's `qboId` is left intact, and any payment-term installment link is cleared.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MoveResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postInvoicesByIdMove",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/change-orders/{id}/move": {
+      "post": {
+        "summary": "Move a change order to another project",
+        "description": "Re-points the change order at `targetProjectId`, which must belong to your organization and must not be deleted. Needs `projects:reassign` rather than this resource's own write scope.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "ChangeOrders"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MoveResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postChangeOrdersByIdMove",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/site-logs/{id}/move": {
+      "post": {
+        "summary": "Move a site log to another project",
+        "description": "Re-points the site log at `targetProjectId`, which must belong to your organization and must not be deleted. Needs `projects:reassign` rather than this resource's own write scope.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "SiteLogs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MoveResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postSiteLogsByIdMove",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/time-entries/{id}/move": {
+      "post": {
+        "summary": "Move a time entry to another project",
+        "description": "Re-points the time entry at `targetProjectId`, which must belong to your organization and must not be deleted. Needs `projects:reassign` rather than this resource's own write scope. Its task and phase links are cleared, because those belong to the old project.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "TimeEntries"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MoveResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postTimeEntriesByIdMove",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/projects/{id}/attached-records": {
+      "get": {
+        "summary": "Count the records still attached to a project",
+        "description": "What a sweep would touch, broken down by record type, with the total invoiced value. Answers with an empty summary rather than 404 when nothing is attached. Needs only `projects:read`: this is the count that warns a caller before deleting a project, and deleting does not require the reassignment scope.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Counts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/AttachedRecords"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getProjectsByIdAttachedRecords",
+        "x-rate-limit-cost": 1
+      }
+    },
+    "/projects/{id}/archived": {
+      "get": {
+        "summary": "Read a soft-deleted project",
+        "description": "The ordinary project endpoints hide deleted rows. This one returns a deleted project read-only, so records stranded on it can be identified before they are moved.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Archived project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getProjectsByIdArchived",
+        "x-rate-limit-cost": 1
+      }
+    },
+    "/projects/{id}/reassign-records": {
+      "post": {
+        "summary": "Move every record off a project",
+        "description": "Sweeps all reassignable records from this project onto `targetProjectId` in one operation — the tool for a project deleted by mistake. `dropped` counts records the policy could not carry across (pay apps stay put: their certificates are a cumulative per-project chain). QuickBooks is never rewritten.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Swept",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/SweepResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postProjectsByIdReassignRecords",
+        "x-rate-limit-cost": 5
       }
     },
     "/projects/count": {
@@ -12158,11 +12863,6 @@
                 "properties": {
                   "invoiceNumber": {
                     "type": "string"
-                  },
-                  "projectId": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
                   },
                   "contactId": {
                     "type": "integer",
