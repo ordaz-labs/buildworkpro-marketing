@@ -13625,6 +13625,107 @@
         "x-rate-limit-cost": 5
       }
     },
+    "/invoices/{id}/send-via-quickbooks": {
+      "post": {
+        "summary": "Send an invoice from QuickBooks Online",
+        "description": "Pushes the draft invoice to QuickBooks Online, then asks QuickBooks to email it (with a Pay Now link when the organization uses QuickBooks Payments). A send failure after a successful push leaves the invoice as a draft so a retry can update and re-send.",
+        "security": [
+          {
+            "bearerAuth": [
+              "invoices:send"
+            ]
+          }
+        ],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sendTo": {
+                    "type": "string",
+                    "maxLength": 254,
+                    "format": "email"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Invoice"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postInvoicesByIdSendViaQuickbooks",
+        "x-rate-limit-cost": 5
+      }
+    },
     "/invoices/{id}/mark-paid": {
       "post": {
         "summary": "Mark an invoice paid in full",
