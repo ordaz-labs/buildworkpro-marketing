@@ -16753,6 +16753,57 @@
         "x-rate-limit-cost": 5
       }
     },
+    "/site-logs/{id}/report.pdf": {
+      "get": {
+        "summary": "Download a site log as a daily report PDF",
+        "description": "Renders the site log as an `application/pdf` daily report: tenant branding, project and address, date and weather, tags, personnel, notes, work performed / materials / visitors / issues, photo thumbnails, and a filed-by / reviewed-by footer. Same renderer and branding as the session `GET /api/site-logs/:id/report.pdf` route.",
+        "operationId": "getSiteLogsByIdReportPdf",
+        "security": [
+          {
+            "bearerAuth": [
+              "site_logs:read"
+            ]
+          }
+        ],
+        "tags": [
+          "SiteLogs"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daily report PDF",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-rate-limit-cost": 50
+      }
+    },
     "/site-logs/exports": {
       "post": {
         "summary": "Start CSV export of site logs",
