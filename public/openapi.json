@@ -1090,6 +1090,24 @@
               "null"
             ]
           },
+          "architectName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "architectProjectNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "contractFor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "assignedTo": {
             "type": [
               "integer",
@@ -1280,6 +1298,30 @@
             ],
             "maxLength": 20
           },
+          "architectName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "description": "Architect or engineer of record; printed in the pay application's \"Via architect / engineer\" cell."
+          },
+          "architectProjectNumber": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 100,
+            "description": "The architect's own project number, printed on the pay application and its continuation sheet."
+          },
+          "contractFor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "description": "Scope line printed in the pay application's \"Contract for\" cell (e.g. \"Structural steel — Phase 2\")."
+          },
           "assignedTo": {
             "type": [
               "integer",
@@ -1430,6 +1472,30 @@
               "null"
             ],
             "maxLength": 20
+          },
+          "architectName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "description": "Architect or engineer of record; printed in the pay application's \"Via architect / engineer\" cell."
+          },
+          "architectProjectNumber": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 100,
+            "description": "The architect's own project number, printed on the pay application and its continuation sheet."
+          },
+          "contractFor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "description": "Scope line printed in the pay application's \"Contract for\" cell (e.g. \"Structural steel — Phase 2\")."
           },
           "assignedTo": {
             "type": [
@@ -1818,6 +1884,16 @@
               "string",
               "null"
             ]
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "includeNotary": {
+            "type": "boolean",
+            "description": "Print the notary acknowledgment block on the pay application PDF. Defaults to true."
           },
           "createdAt": {
             "anyOf": [
@@ -11344,6 +11420,9 @@
                       "null"
                     ]
                   },
+                  "includeNotary": {
+                    "type": "boolean"
+                  },
                   "changeOrders": {
                     "anyOf": [
                       {
@@ -11585,6 +11664,9 @@
                       "string",
                       "null"
                     ]
+                  },
+                  "includeNotary": {
+                    "type": "boolean"
                   },
                   "changeOrders": {
                     "anyOf": [
