@@ -1,4 +1,9 @@
 ---
+// Organic bet: GSC 2026-08-16 → 2026-09-12 showed a new query
+// "buildertrend alternative" landing here (~41 impressions, avg pos ~36, 0 clicks).
+// Title / H1 / meta lead with that intent. Pricing figures stay last-published /
+// independently reported — same caveats as /blog/buildertrend-pricing/. Do not
+// invent current quote amounts, testimonials, or FL/NOA numbers.
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -24,7 +29,7 @@ const comparisonRows = [
   {
     label: 'How you buy',
     bwp: 'Self-serve signup, 14-day free trial',
-    other: 'Demo and quote process',
+    other: 'Demo and quote process — no self-serve trial',
     bwpWins: true,
   },
   {
@@ -59,8 +64,8 @@ const comparisonRows = [
   },
   {
     label: 'Sales pipeline & CRM',
-    bwp: 'Included',
-    other: 'Included',
+    bwp: 'Included — GC and vendor contacts, lead → bid → job',
+    other: 'Included — homeowner/client-centric',
     bwpWins: false,
   },
   {
@@ -98,12 +103,27 @@ const faqs = [
   {
     question: 'How much does Buildertrend cost compared to BuildWorkPro?',
     answer:
-      'As of mid-2026, Buildertrend uses quote-based pricing tied to your construction volume; before that change its published plans started around $339–$499 per month. BuildWorkPro publishes one flat price: $79/month or $790/year with every feature and unlimited users included — roughly a tenth of Buildertrend’s historical entry tier.',
+      'As of mid-2026, Buildertrend uses quote-based pricing tied to your construction volume; before that change its published plans started around $339–$499 per month. BuildWorkPro publishes one flat price: $79/month or $790/year with every feature and unlimited users included — roughly a tenth of Buildertrend’s historical entry tier. Verify current Buildertrend pricing with Buildertrend.',
   },
   {
     question: 'Is Buildertrend built for subcontractors?',
     answer:
-      'Buildertrend is primarily designed for home builders and remodelers — companies whose client is a homeowner. Its standout features (client portal, selections, allowances, financing tools) serve that relationship. A subcontractor working under GCs has a different workflow: estimate to a GC, win the contract, bill progress monthly with retainage, and document the field. BuildWorkPro is designed around that loop.',
+      'Buildertrend is primarily designed for home builders and remodelers — companies whose client is a homeowner. Its standout features (client portal, selections, allowances, financing tools) serve that relationship. A “specialty contractor” in Buildertrend’s marketing is typically a homeowner-facing reno trade, not a sub billing a GC. A subcontractor working under GCs has a different workflow: estimate to a GC, win the contract, bill progress monthly with retainage, and document the field. BuildWorkPro is designed around that loop.',
+  },
+  {
+    question: 'Does Buildertrend have a free trial?',
+    answer:
+      'No. Buildertrend is demo-led: you schedule a call or submit a contact form. There is no self-serve trial where you can evaluate the product on your own work first. BuildWorkPro is the opposite — a 14-day free trial with every feature and no credit card, so you can run a real bid and pay application before paying.',
+  },
+  {
+    question: 'What should I look for in a Buildertrend alternative?',
+    answer:
+      'Match the tool to who you bill. If your customer is a homeowner, you want a client portal, selections, and allowances — Buildertrend’s strengths, and the reason most “best Buildertrend alternative” roundups compare other builder platforms. If your customer is a GC, look for schedule-of-values billing with retainage, proposals written for GCs, change orders that roll into the next pay app, and published pricing you can evaluate without a sales call.',
+  },
+  {
+    question: 'Is JobTread a good Buildertrend alternative?',
+    answer:
+      'For home builders and GCs who want budget-centric job financials and a strong training community, JobTread is one of the names that comes up most often. It is still builder-first, starts at $199/month plus per-user fees, and has no free trial. If you are the sub billing against someone else’s contract, that is the workflow BuildWorkPro is built around, at $79/month flat.',
   },
   {
     question: 'Can I switch from Buildertrend to BuildWorkPro?',
@@ -119,8 +139,8 @@ const faqs = [
 ---
 
 <Layout
-  title="Buildertrend Alternative for Trade Contractors | BuildWorkPro"
-  description="Buildertrend is for home builders selling to homeowners. BuildWorkPro is for subs billing GCs — pay apps, change orders, CRM at $79/month flat."
+  title="Buildertrend Alternative 2026 for Subcontractors"
+  description="Buildertrend alternative for subcontractors (2026): homeowner tools vs GC billing. Features, pricing, and who each fits. BuildWorkPro is $79/month flat."
 >
   <Header />
   <main class="pt-32 pb-20">
@@ -129,12 +149,13 @@ const faqs = [
       <div class="text-center">
         <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Compare</p>
         <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
-          The Buildertrend Alternative for Trade Contractors
+          Buildertrend Alternative 2026 for Subcontractors
         </h1>
         <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Buildertrend is built for home builders and remodelers whose client is a homeowner. If
-          your client is a GC — and your month ends with a pay application, not a homeowner invoice
-          — you're shopping in the wrong aisle. BuildWorkPro runs the subcontractor's workflow for
+          Looking for a Buildertrend alternative? Buildertrend is built for home builders and
+          remodelers whose client is a homeowner. If your client is a GC — and your month ends with
+          a pay application, not a homeowner invoice — you're shopping in the wrong aisle.
+          BuildWorkPro runs the subcontractor's workflow for
           <a href="/pricing/" class="underline underline-offset-2 hover:text-brand-600"
             >$79/month flat</a
           >.
@@ -180,11 +201,92 @@ const faqs = [
       </div>
     </section>
 
+    <!-- Who each fits -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="prose prose-slate max-w-none">
+        <h2>Who each product is actually for</h2>
+        <p>
+          Most “best Buildertrend alternative” lists compare other home-builder platforms. That is
+          the right shortlist if you sell to homeowners. It is the wrong shortlist if you are a
+          trade sub whose customer is a general contractor. The split is who you bill — not how many
+          modules the brochure lists.
+        </p>
+        <p>
+          <strong>Buildertrend fits</strong> custom home builders, remodelers, and homeowner-facing specialty
+          trades. The product is organized around a client relationship: selections and allowances, a
+          portal for the homeowner, consumer financing, and residential draws. If that is your business,
+          stay in that category —
+          <a href="/compare/jobtread-alternative/">JobTread</a> is the builder-first name that comes up
+          most often next to Buildertrend.
+        </p>
+        <p>
+          <strong>BuildWorkPro fits</strong> specialty subcontractors — electrical, plumbing, HVAC, roofing,
+          concrete, framing, glazing — who bid to GCs and get paid on progress. The loop is estimate →
+          win → monthly
+          <a href="/features/pay-applications/">pay application</a> with retainage → closeout. That is
+          a different job than sending a homeowner an invoice, which is why a Buildertrend alternative
+          for subs is not the same product as a Buildertrend alternative for builders.
+        </p>
+        <p>
+          If you are still mapping GC software vs sub software more broadly, start with
+          <a href="/blog/subcontractor-vs-general-contractor-software/"
+            >subcontractor vs general contractor software</a
+          >.
+        </p>
+      </div>
+    </section>
+
+    <!-- Feature-by-feature -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="prose prose-slate max-w-none">
+        <h2>Features that actually differ</h2>
+        <h3>Progress billing vs residential invoicing</h3>
+        <p>
+          Subs billing GCs live on a schedule of values, stored materials, and retainage — AIA-style
+          <a href="/features/pay-applications/">pay applications</a> that match how the prime contract
+          pays. That workflow is first-class in BuildWorkPro, including the
+          <a href="/blog/aia-pay-application-guide/">AIA G702/G703-style pay app</a> path. Buildertrend
+          is oriented to residential invoicing and draws for a homeowner client. Both are billing; they
+          are not the same billing.
+        </p>
+        <h3>Bids written for a GC, not a kitchen selection</h3>
+        <p>
+          A sub’s proposal needs line items, labor rates, markup, and exclusions a GC can evaluate.
+          BuildWorkPro’s
+          <a href="/features/construction-bidding/">construction bidding</a> is built for that, then converts
+          a won bid into the project you will bill. Buildertrend’s proposals are oriented to homeowner
+          clients — a different audience and a different document.
+        </p>
+        <h3>Change orders that roll into the next pay app</h3>
+        <p>
+          Scope changes on a GC job have to be priced, approved, and billed against the updated
+          contract value. BuildWorkPro
+          <a href="/features/change-orders/">change orders</a> are numbered against the project and flow
+          into the next pay application. Buildertrend also handles change orders — in the homeowner /
+          builder context where selections and client approval are the point.
+        </p>
+        <h3>CRM: GC pipeline vs homeowner clients</h3>
+        <p>
+          Both products include a sales pipeline. The difference is who sits in it. BuildWorkPro’s
+          <a href="/features/construction-crm/">construction CRM</a> is GC, owner, and vendor contacts
+          with leads that convert to bids and jobs. Buildertrend’s CRM is organized around the homeowner
+          relationship that the rest of the platform serves.
+        </p>
+        <h3>Field documentation</h3>
+        <p>
+          Daily logs and time tracking are included on both sides. BuildWorkPro’s
+          <a href="/features/site-logs/">site logs</a> and
+          <a href="/features/time-tracking/">time tracking</a> document self-performed work for the sub’s
+          own record — not a homeowner progress feed.
+        </p>
+      </div>
+    </section>
+
     <!-- Honest section -->
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
       <div class="prose prose-slate max-w-none">
-        <h2 class="text-2xl font-bold text-slate-900">Where Buildertrend genuinely wins</h2>
-        <p class="text-slate-600">
+        <h2>Where Buildertrend genuinely wins</h2>
+        <p>
           For a custom home builder or remodeler, Buildertrend's homeowner-facing tools are the
           point: clients pick finishes through selections and allowances, follow progress in a
           portal, approve change orders, and even arrange financing. If that's your business,
@@ -192,12 +294,26 @@ const faqs = [
           We assembled last-published plans, renewal quotes, and switching costs in
           <a href="/blog/buildertrend-pricing/">Buildertrend pricing and cost</a>.
         </p>
-        <p class="text-slate-600">
+        <p>
           None of that machinery helps a trade sub. Your GC doesn't want a selections portal — they
           want a clean bid with labor rates and exclusions, a monthly pay application that matches
           the schedule of values, and change orders priced and approved before the work happens.
           That billing loop — bid → contract → monthly pay app with retainage → closeout — is the
           core of BuildWorkPro, not an adaptation of a homeowner workflow.
+        </p>
+        <h2>Pricing posture: published flat vs a volume quote</h2>
+        <p>
+          Buildertrend pricing is custom as of 2026 — the public site collects builder type and
+          construction volume, then a rep quotes you. Independent trackers still cite last-published
+          entry tiers around $339–$499+ per month (unlimited users). Treat those as a baseline for
+          the call, not a live rate card; details and sources live on
+          <a href="/blog/buildertrend-pricing/">Buildertrend pricing and cost</a>.
+        </p>
+        <p>
+          BuildWorkPro publishes one number:
+          <a href="/pricing/">$79/month</a> (or $790/year) with every feature and unlimited users, plus
+          a 14-day trial with no credit card. There is no volume form and no demo gate. If you need the
+          homeowner portal, that price does not buy it — and we will not pretend it does.
         </p>
       </div>
     </section>
@@ -233,6 +349,59 @@ const faqs = [
 
     <FAQSection faqs={faqs} />
 
+    <!-- Related reading -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-8">
+        Related comparisons and guides
+      </h2>
+      <ul class="space-y-3 text-slate-600">
+        <li>
+          <a href="/blog/buildertrend-pricing/" class="text-brand-600 hover:underline font-medium"
+            >Buildertrend pricing and cost</a
+          >
+          — last-published plans, quote posture, and switching costs (2026).
+        </li>
+        <li>
+          <a
+            href="/blog/subcontractor-vs-general-contractor-software/"
+            class="text-brand-600 hover:underline font-medium">Subcontractor vs GC software</a
+          >
+          — why the homeowner/builder stack is the wrong aisle for subs.
+        </li>
+        <li>
+          <a
+            href="/compare/jobtread-alternative/"
+            class="text-brand-600 hover:underline font-medium">BuildWorkPro vs JobTread</a
+          >
+          — the builder-first alternative that shows up next to Buildertrend most often.
+        </li>
+        <li>
+          <a
+            href="/compare/contractor-foreman-alternative/"
+            class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Contractor Foreman</a
+          >
+          — broader all-in-one with five tiers vs one flat sub plan.
+        </li>
+        <li>
+          <a href="/compare/procore-alternative/" class="text-brand-600 hover:underline font-medium"
+            >BuildWorkPro vs Procore</a
+          >
+          — GC/owner platform vs the sub’s system of record.
+        </li>
+        <li>
+          <a href="/features/pay-applications/" class="text-brand-600 hover:underline font-medium"
+            >AIA-style pay applications</a
+          >
+          and
+          <a
+            href="/features/construction-bidding/"
+            class="text-brand-600 hover:underline font-medium">construction bidding</a
+          >
+          — the two workflows this comparison turns on.
+        </li>
+      </ul>
+    </section>
+
     <!-- CTA -->
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
@@ -261,6 +430,14 @@ const faqs = [
           Comparing GC platforms too? See
           <a href="/compare/procore-alternative/" class="text-slate-300 underline hover:text-white"
             >BuildWorkPro vs Procore</a
+          >. Other Buildertrend-adjacent options:
+          <a href="/compare/jobtread-alternative/" class="text-slate-300 underline hover:text-white"
+            >vs JobTread</a
+          >
+          and
+          <a
+            href="/compare/contractor-foreman-alternative/"
+            class="text-slate-300 underline hover:text-white">vs Contractor Foreman</a
           >.
         </p>
       </div>

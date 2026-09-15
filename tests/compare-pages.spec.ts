@@ -84,6 +84,39 @@ test('procore pricing title, H1, and meta lead with the money query', async ({ p
   expect(jsonld.some((s) => s.includes("What are Procore's pricing plans?"))).toBe(true);
 });
 
+test('buildertrend alternative title, H1, and meta lead with the query', async ({ page }) => {
+  const response = await page.goto('/compare/buildertrend-alternative/');
+  expect(response?.status()).toBe(200);
+
+  await expect(page).toHaveTitle(/^Buildertrend Alternative 2026 for Subcontractors$/);
+  const title = await page.title();
+  expect(title.length).toBeLessThanOrEqual(60);
+
+  await expect(page.locator('main h1')).toHaveText(
+    /Buildertrend Alternative 2026 for Subcontractors/
+  );
+
+  const description = await page.locator('meta[name="description"]').getAttribute('content');
+  expect(description).toMatch(/^Buildertrend alternative/i);
+  expect(description).toMatch(/subcontractors/i);
+  expect(description).toMatch(/2026/);
+  expect(description!.length).toBeLessThanOrEqual(155);
+
+  await expect(page.locator('main a[href="/blog/buildertrend-pricing/"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/features/pay-applications/"]').first()).toBeVisible();
+  await expect(
+    page.locator('main a[href="/features/construction-bidding/"]').first()
+  ).toBeVisible();
+  await expect(page.locator('main a[href="/compare/jobtread-alternative/"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/pricing/"]').first()).toBeVisible();
+
+  const jsonld = await page.locator('script[type="application/ld+json"]').allTextContents();
+  expect(jsonld.some((s) => s.includes('FAQPage'))).toBe(true);
+  expect(
+    jsonld.some((s) => s.includes('What is the best Buildertrend alternative for subcontractors?'))
+  ).toBe(true);
+});
+
 test('compare and Procore pricing pages link to buildertrend pricing', async ({ page }) => {
   await page.goto('/compare/buildertrend-alternative/');
   const compareLink = page.locator('main a[href="/blog/buildertrend-pricing/"]').first();
