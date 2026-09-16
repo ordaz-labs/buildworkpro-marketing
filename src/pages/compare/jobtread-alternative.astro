@@ -1,1 +1,217 @@
-LOAD_FROM_/workspace/jobtread-slim.astro
+---
+// Organic bet: GSC 2026-08-17→2026-09-13 "jobtread alternative" (~35 impr, was 2;
+// pos ~40, 0 clicks). Title/H1/meta lead with query. Pricing as-of Aug 2026 —
+// verify before edits. No invented testimonials or fake prices.
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import CompareCta from '../../components/CompareCta.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import { config } from '../../config';
+
+const comparisonRows = [
+  { label: 'Built for', bwp: 'Trade subcontractors who bid to GCs', other: 'Builders and GCs — subs are one of ten segments', bwpWins: true },
+  { label: 'Pricing', bwp: '$79/month flat, published', other: '$199/month base + $20 per user (annual ~$159 + $16)*', bwpWins: true },
+  { label: 'Cost for a 5-person crew', bwp: '$79/month', other: '~$279/month (~$223 billed annually)', bwpWins: true },
+  { label: 'Free trial', bwp: '14 days, every feature, no credit card', other: 'None — you pay first, then onboarding begins', bwpWins: true },
+  { label: 'Users', bwp: 'Unlimited, included', other: 'Per-user pricing beyond the first seat', bwpWins: true },
+  { label: 'AIA-style pay applications (SOV, retainage)', bwp: 'Core, first-class workflow', other: 'Not the focus — financials center on builder budgets', bwpWins: true },
+  { label: 'How you buy', bwp: 'Self-serve signup, running the same day', other: 'Sign up, then an assigned success manager onboards you', bwpWins: true },
+  { label: 'Work by chatting with Claude or ChatGPT', bwp: 'Included — the assistant builds bids & projects in your account', other: 'Not offered', bwpWins: true },
+  { label: 'E-signatures', bwp: 'Built in, included', other: 'Included', bwpWins: false },
+  { label: 'QuickBooks Online sync', bwp: 'Included — connect from Settings', other: 'Included', bwpWins: false },
+  { label: 'Community, training & events', bwp: 'Docs and guides', other: 'Genuinely strong — bootcamps, certifications, an annual conference', bwpWins: false },
+];
+
+const faqs = [
+  {
+    question: 'What is the best JobTread alternative for subcontractors?',
+    answer:
+      'BuildWorkPro. JobTread is built around builders and GCs — subs are one of ten segments. BuildWorkPro is built only for trade subs who bid to GCs and bill monthly against a schedule of values: bidding, AIA-style pay apps, change orders, site logs, time tracking, and CRM at $79/month flat with unlimited users.',
+  },
+  {
+    question: 'How does JobTread pricing compare to BuildWorkPro?',
+    answer:
+      'JobTread starts at $199/month for one user billed monthly (about $159 annually), plus $20/month per additional user in a 2–10 person team (as of August 2026). A 5-person crew runs roughly $279/month — about 3.5× BuildWorkPro at $79/month flat. Verify current JobTread pricing on their site.',
+  },
+  {
+    question: 'Does JobTread have a free trial?',
+    answer:
+      'No. You subscribe first; a success manager onboards you, with a 30-day money-back guarantee on monthly plans. BuildWorkPro is self-serve: 14-day free trial, every feature, no credit card.',
+  },
+  {
+    question: 'What should I look for in a JobTread alternative?',
+    answer:
+      'Match the tool to who you bill. If you hold the prime contract and want budget-centric financials plus guided onboarding and community, JobTread has genuine strengths. If you are a specialty sub billing GCs, look for SOV pay apps with retainage, GC-written proposals, change orders that roll into the next pay app, published flat pricing, and a self-serve trial.',
+  },
+  {
+    question: 'When is JobTread the better choice?',
+    answer:
+      "If you're a home builder, remodeler, or GC who holds the prime contract and values guided onboarding and the category's best community — JobTread has genuine strengths. BuildWorkPro fits when you're the sub billing against someone else's contract at one flat price.",
+  },
+];
+---
+
+<Layout
+  title="JobTread Alternative 2026 for Subcontractors"
+  description="JobTread alternative for subcontractors (2026): builder-first pricing vs flat sub plan. Features, who each fits. BuildWorkPro is $79/month."
+>
+  <Header />
+  <main class="pt-32 pb-20">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <div class="text-center">
+        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Compare</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+          JobTread Alternative 2026 for Subcontractors
+        </h1>
+        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          Looking for a JobTread alternative? JobTread was built for the builder who holds the
+          contract. If you're the sub billing against it — SOV, retainage, monthly pay apps — you
+          shouldn't need a $199 base plan, per-user fees, or sales-led onboarding. BuildWorkPro runs
+          the sub's loop for
+          <a href="/pricing/" class="underline underline-offset-2 hover:text-brand-600">$79/month flat</a>.
+        </p>
+        <div class="mt-8"><CompareCta /></div>
+      </div>
+    </section>
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="rounded-2xl border border-brand-100 bg-brand-50 p-8">
+        <h2 class="text-base font-semibold text-slate-900 mb-3">The short version</h2>
+        <p class="text-slate-600 leading-relaxed text-sm">
+          <strong>Choose JobTread</strong> if you're a builder/GC who wants budget-centric financials,
+          guided onboarding, and the category's best community — and per-user pricing fits.
+          <strong>Choose BuildWorkPro</strong> if you're a specialty sub who bids to GCs, bills with
+          retainage, and wants every feature, unlimited users, and a self-serve trial at $79 flat.
+        </p>
+      </div>
+    </section>
+
+    <section id="comparison" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 scroll-mt-24">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
+        BuildWorkPro vs JobTread at a glance
+      </h2>
+      <ComparisonTable rows={comparisonRows} competitor="JobTread" />
+      <p class="mt-3 text-xs text-slate-400 px-2">
+        *JobTread published pricing as of August 2026: $199/month base (1 user) monthly, ~20% less
+        annually; +$20/month per user for teams of 2–10. No free trial; 30-day money-back on monthly
+        plans. Verify current pricing with JobTread.
+      </p>
+      <div class="mt-10"><CompareCta secondaryHref="/pricing/" secondaryLabel="See pricing" /></div>
+    </section>
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="prose prose-slate max-w-none">
+        <h2>Who each product is actually for</h2>
+        <p>
+          Most “best JobTread alternative” lists compare other builder platforms — right if you hold
+          the prime contract, wrong if you are a trade sub billing a GC. <strong>JobTread fits</strong>
+          builders and GCs with budget-centric financials and a strong education ecosystem.
+          <strong>BuildWorkPro fits</strong> specialty subs: estimate → win → monthly
+          <a href="/features/pay-applications/">pay application</a> with retainage → closeout.
+        </p>
+        <h2>Features that actually differ</h2>
+        <p>
+          AIA-style <a href="/features/pay-applications/">pay applications</a>,
+          <a href="/features/construction-bidding/">construction bidding</a> for GCs,
+          <a href="/features/change-orders/">change orders</a> into the next pay app, and
+          <a href="/features/construction-crm/">construction CRM</a> for GC/vendor contacts are
+          first-class in BuildWorkPro. JobTread centers on builder budgets; its community remains
+          the category’s strongest.
+        </p>
+        <h2>Where JobTread genuinely wins</h2>
+        <p>
+          Bootcamps, certifications, an annual conference — if you want to be taught your software,
+          nobody at this price point does it better. The catch for a sub: ~$199/month before the
+          first crew seat, every hire raises the bill, no trial, and SOV billing isn’t the center of
+          gravity. That loop is all BuildWorkPro does at $79 flat.
+        </p>
+        <h2>Pricing posture</h2>
+        <p>
+          JobTread as of August 2026: $199/month base + $20/user (2–10); ~$279/month for five people.
+          Verify with JobTread — figures are as-of. BuildWorkPro:
+          <a href="/pricing/">$79/month</a> (or $790/year), unlimited users, 14-day trial, no card.
+        </p>
+      </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-4">
+        The subcontractor workflow, end to end
+      </h2>
+      <p class="text-center text-slate-500 max-w-2xl mx-auto mb-10">
+        Estimate it, win it, bill it — without per-seat math.
+      </p>
+      <div class="grid md:grid-cols-2 gap-8">
+        <Screenshot
+          src="/screenshots/05-bid-detail-overview.png"
+          alt="BuildWorkPro bid detail with line items, labor rates, and markup"
+          caption="Bids: line items, labor rates, markup, PDF proposal — convert the win into a project."
+        />
+        <Screenshot
+          src="/screenshots/13-pay-app-detail.png"
+          alt="BuildWorkPro pay application with schedule of values and retainage"
+          caption="Pay apps: AIA-style SOV and retainage, prefilled from bid and change orders."
+        />
+      </div>
+    </section>
+
+    <FAQSection faqs={faqs} />
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-8">
+        Related comparisons and guides
+      </h2>
+      <ul class="space-y-3 text-slate-600">
+        <li>
+          <a href="/compare/buildertrend-alternative/" class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Buildertrend</a>
+          — homeowner/builder stack vs the sub’s billing loop.
+        </li>
+        <li>
+          <a href="/compare/knowify-alternative/" class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Knowify</a>
+          — trade-focused with per-user and tier gating.
+        </li>
+        <li>
+          <a href="/compare/contractor-foreman-alternative/" class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Contractor Foreman</a>
+          — five tiers vs one flat sub plan.
+        </li>
+        <li>
+          <a href="/compare/procore-alternative/" class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Procore</a>
+          — GC/owner platform vs the sub’s system of record.
+        </li>
+        <li>
+          <a href="/features/pay-applications/" class="text-brand-600 hover:underline font-medium">Pay applications</a>,
+          <a href="/features/construction-bidding/" class="text-brand-600 hover:underline font-medium">bidding</a>,
+          <a href="/features/change-orders/" class="text-brand-600 hover:underline font-medium">change orders</a>,
+          <a href="/features/construction-crm/" class="text-brand-600 hover:underline font-medium">CRM</a>
+          — workflows this comparison turns on.
+        </li>
+      </ul>
+    </section>
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          Their price is per user. Ours isn't.
+        </h2>
+        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
+          $79/month flat — every feature, unlimited users, trial without a conversation first.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href={config.signupUrl} class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm">Start free trial</a>
+          <a href="/contact/" class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20">Talk to us</a>
+        </div>
+        <p class="mt-6 text-sm text-slate-500">
+          Also see
+          <a href="/compare/knowify-alternative/" class="text-slate-300 underline hover:text-white">vs Knowify</a>,
+          <a href="/compare/buildertrend-alternative/" class="text-slate-300 underline hover:text-white">vs Buildertrend</a>,
+          <a href="/compare/contractor-foreman-alternative/" class="text-slate-300 underline hover:text-white">vs Contractor Foreman</a>,
+          <a href="/compare/procore-alternative/" class="text-slate-300 underline hover:text-white">vs Procore</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
