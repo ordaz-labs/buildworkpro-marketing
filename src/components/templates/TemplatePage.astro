@@ -1,0 +1,441 @@
+---
+// Shared layout for every /templates/<slug>/ page. Pages pass structured content
+// (downloads, what's inside, how-to, FAQs, related) and drop long-form guide
+// sections into the default slot. Preview images and file sizes come from
+// src/data/templates-manifest.json, written by scripts/templates/build.mjs.
+import Layout from '../../layouts/Layout.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import FAQSection from '../FAQSection.astro';
+import { config } from '../../config';
+import { TEMPLATES, type TemplateSlug } from '../../data/templates';
+import { manifest } from '../../data/templates-manifest';
+
+type Download = { format: 'pdf' | 'xlsx' | 'docx' | 'example'; label?: string; note?: string };
+
+interface Props {
+  slug: TemplateSlug;
+  /** <title>. Keep the primary keyword first, "Free" and the formats in. */
+  title: string;
+  description: string;
+  h1: string;
+  /** Kicker above the H1 (defaults to "Free template"). */
+  kicker?: string;
+  intro: string;
+  /** Download order: first entry is the primary button. */
+  downloads: Download[];
+  whatsInside: string[];
+  howTo: [string, string][];
+  faqs: { question: string; answer: string }[];
+  /** Slugs of related templates (3–4). */
+  related: TemplateSlug[];
+  feature: { href: string; label: string; heading: string; body: string };
+  cta: { heading: string; body: string; linkLabel?: string };
+  disclaimer?: string;
+  /** ISO date the page/template content was last updated. */
+  updated: string;
+  /** Optional alt text override for the preview image. */
+  previewAlt?: string;
+}
+
+const {
+  slug,
+  title,
+  description,
+  h1,
+  kicker = 'Free template',
+  intro,
+  downloads,
+  whatsInside,
+  howTo,
+  faqs,
+  related,
+  feature,
+  cta,
+  disclaimer,
+  updated,
+  previewAlt,
+} = Astro.props;
+
+const entry = manifest[slug];
+if (!entry)
+  throw new Error(
+    `templates-manifest.json has no entry for "${slug}" — run node scripts/templates/build.mjs ${slug}`
+  );
+const previews = entry.previews ?? [];
+const files = entry.files;
+
+const FORMAT_META: Record<Download['format'], { name: string; opens: string; badge: string }> = {
+  pdf: {
+    name: 'PDF',
+    opens: 'Fillable — type in Acrobat, Preview or Chrome, or print and fill by hand',
+    badge: 'PDF',
+  },
+  xlsx: {
+    name: 'Excel',
+    opens: 'Formulas included · Works in Excel, Google Sheets and Numbers',
+    badge: 'XLSX',
+  },
+  docx: { name: 'Word', opens: 'Editable · Works in Word, Google Docs and Pages', badge: 'DOCX' },
+  example: {
+    name: 'Completed example',
+    opens: 'See every field filled in on a realistic job',
+    badge: 'PDF',
+  },
+};
+
+function fmtBytes(bytes: number) {
+  if (bytes >= 1024 * 1024) return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+  return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+}
+
+const dl = downloads
+  .filter((d) => files[d.format])
+  .map((d, i) => {
+    const f = files[d.format]!;
+    const meta = FORMAT_META[d.format];
+    const bits = [fmtBytes(f.bytes)];
+    if (f.pages) bits.push(`${f.pages} page${f.pages === 1 ? '' : 's'}`);
+    if (f.sheets) bits.push(`${f.sheets.length} sheets`);
+    return {
+      href: `/templates-files/${f.file}`,
+      label:
+        d.label ??
+        (d.format === 'example'
+          ? 'View a completed example'
+          : `Download ${meta.name} (.${d.format})`),
+      note: d.note ?? meta.opens,
+      badge: meta.badge,
+      size: bits.join(' · '),
+      primary: i === 0,
+      format: d.format,
+    };
+  });
+
+const relatedCards = related
+  .map((s) => TEMPLATES[s])
+  .filter(Boolean)
+  .map((t) => ({ ...t, preview: manifest[t.slug]?.previews?.[0] }));
+const heroPreview = previews[0];
+const previewSrc = heroPreview ? `/templates-previews/${heroPreview.file}` : null;
+const previewWebp = heroPreview ? `/templates-previews/${heroPreview.webp}` : null;
+const alt = previewAlt ?? `${h1} — completed example page 1`;
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const updatedLabel = new Date(updated + 'T12:00:00Z').toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// WebPage + downloadable-document structured data (Google shows no template rich
+// result, but the dateModified/author/isAccessibleForFree signals still help).
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': pageUrl,
+      url: pageUrl,
+      name: title,
+      description,
+      dateModified: updated,
+      isAccessibleForFree: true,
+      author: { '@type': 'Organization', name: 'BuildWorkPro', url: config.siteUrl },
+      publisher: { '@type': 'Organization', name: 'BuildWorkPro', url: config.siteUrl },
+      ...(previewSrc
+        ? {
+            primaryImageOfPage: {
+              '@type': 'ImageObject',
+              url: new URL(previewSrc, Astro.site).href,
+              width: heroPreview.width,
+              height: heroPreview.height,
+            },
+          }
+        : {}),
+    },
+    ...dl
+      .filter((d) => d.format !== 'example')
+      .map((d) => ({
+        '@type': 'DigitalDocument',
+        name: `${h1} (${d.badge})`,
+        url: new URL(d.href, Astro.site).href,
+        encodingFormat:
+          d.format === 'pdf'
+            ? 'application/pdf'
+            : d.format === 'xlsx'
+              ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+              : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        isAccessibleForFree: true,
+        dateModified: updated,
+        author: { '@type': 'Organization', name: 'BuildWorkPro' },
+      })),
+  ],
+};
+---
+
+<Layout title={title} description={description} image={previewSrc ?? undefined}>
+  <Header />
+  <main class="pt-28 sm:pt-32 pb-20">
+    <!-- Hero: copy + downloads left, preview right -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 lg:mb-20">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div class="lg:col-span-6">
+          <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">{kicker}</p>
+          <h1
+            class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance"
+          >
+            {h1}
+          </h1>
+          <p class="mt-5 text-lg text-slate-500 leading-relaxed">{intro}</p>
+
+          <div class="mt-7 flex flex-col gap-3">
+            {
+              dl.map((d) => (
+                <a
+                  href={d.href}
+                  download
+                  data-template={slug}
+                  data-format={d.format}
+                  class:list={[
+                    'template-download group flex items-center gap-4 rounded-xl px-4 py-3 transition-all',
+                    d.primary
+                      ? 'bg-brand-600 text-white hover:bg-brand-700 hover:-translate-y-0.5 hover:shadow-lg'
+                      : 'border border-slate-200 bg-white text-slate-800 hover:border-brand-300 hover:shadow-sm',
+                  ]}
+                >
+                  <span
+                    class:list={[
+                      'shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-lg text-[11px] font-bold tracking-wider',
+                      d.primary
+                        ? 'bg-white/15 text-white'
+                        : 'bg-slate-100 text-slate-600 group-hover:bg-brand-50 group-hover:text-brand-700',
+                    ]}
+                  >
+                    {d.badge}
+                  </span>
+                  <span class="min-w-0">
+                    <span class="block font-semibold text-sm">{d.label}</span>
+                    <span
+                      class:list={[
+                        'block text-xs mt-0.5',
+                        d.primary ? 'text-brand-100' : 'text-slate-500',
+                      ]}
+                    >
+                      {d.note} · {d.size}
+                    </span>
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+          <p class="mt-4 text-sm text-slate-500">
+            Free · No email required · Free to use and share for your own business
+          </p>
+          <p class="mt-1 text-xs text-slate-400">
+            Updated {updatedLabel} · Built by the BuildWorkPro team, checked on real subcontractor jobs.
+          </p>
+        </div>
+
+        <div class="lg:col-span-6">
+          {
+            heroPreview && (
+              <figure class="rounded-2xl border border-slate-200 shadow-xl shadow-slate-900/10 overflow-hidden bg-slate-50 p-3 sm:p-4">
+                <picture>
+                  <source srcset={previewWebp!} type="image/webp" />
+                  <img
+                    src={previewSrc!}
+                    alt={alt}
+                    width={heroPreview.width}
+                    height={heroPreview.height}
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
+                    class="w-full h-auto block rounded-lg border border-slate-200 bg-white"
+                  />
+                </picture>
+                <figcaption class="pt-3 text-xs text-slate-400 text-center">
+                  Page 1 of the completed example. Your download is blank and ready to fill in.
+                </figcaption>
+              </figure>
+            )
+          }
+          {
+            previews.length > 1 && (
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                {previews.slice(1).map((p, i) => (
+                  <picture>
+                    <source srcset={`/templates-previews/${p.webp}`} type="image/webp" />
+                    <img
+                      src={`/templates-previews/${p.file}`}
+                      alt={`${h1} — page ${i + 2} of the completed example`}
+                      width={p.width}
+                      height={p.height}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-auto block rounded-lg border border-slate-200 shadow-sm bg-white"
+                    />
+                  </picture>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- What's inside -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 lg:mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
+        What's in the template
+      </h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {
+          whatsInside.map((item) => (
+            <div class="flex items-start gap-3 rounded-xl border border-slate-100 bg-white p-4">
+              <svg
+                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-slate-600 text-sm leading-relaxed">{item}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- How to use -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 lg:mb-20">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
+        How to fill it out
+      </h2>
+      <ol class="space-y-6">
+        {
+          howTo.map(([stepTitle, body], i) => (
+            <li class="flex gap-4">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center text-sm font-bold">
+                {i + 1}
+              </div>
+              <div>
+                <h3 class="text-base font-semibold text-slate-900 mb-1">{stepTitle}</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">{body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- Long-form guide sections from the page -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 lg:mb-20">
+      <div
+        class="prose prose-slate max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-brand-600 prose-h2:text-2xl prose-h3:text-lg prose-p:text-slate-600 prose-li:text-slate-600"
+      >
+        <slot />
+      </div>
+    </section>
+
+    <!-- Feature funnel -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 lg:mb-20">
+      <div class="rounded-2xl border border-brand-200 bg-brand-50/50 px-8 py-10 text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight text-balance">
+          {feature.heading}
+        </h2>
+        <p class="mt-4 text-slate-600 max-w-xl mx-auto leading-relaxed" set:html={feature.body} />
+        <a
+          href={feature.href}
+          class="mt-6 inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          {feature.label}
+        </a>
+      </div>
+    </section>
+
+    <FAQSection faqs={faqs} />
+
+    <!-- Related templates -->
+    {
+      relatedCards.length > 0 && (
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 lg:mb-20">
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
+            Templates that go with this one
+          </h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {relatedCards.map((t) => (
+              <a
+                href={`/templates/${t.slug}/`}
+                class="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-brand-200 transition-all"
+              >
+                {t.preview && (
+                  <div class="bg-slate-50 p-3 border-b border-slate-100">
+                    <img
+                      src={`/templates-previews/${t.preview.webp}`}
+                      alt=""
+                      width={t.preview.width}
+                      height={t.preview.height}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-32 object-cover object-top rounded border border-slate-200 bg-white"
+                    />
+                  </div>
+                )}
+                <div class="p-5">
+                  <h3 class="text-base font-bold text-slate-900 group-hover:text-brand-700 transition-colors">
+                    {t.title}
+                  </h3>
+                  <p class="mt-1.5 text-sm text-slate-500 leading-relaxed">{t.short}</p>
+                  <span class="mt-3 inline-block text-xs font-semibold text-slate-400">
+                    {t.formats.join(' · ')}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <p class="mt-8 text-center text-sm text-slate-500">
+            <a href="/templates/" class="font-semibold text-brand-600 hover:text-brand-700">
+              Browse all free construction templates →
+            </a>
+          </p>
+        </section>
+      )
+    }
+
+    <!-- CTA -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-4">
+      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
+          {cta.heading}
+        </h2>
+        <p class="mt-4 text-slate-400 max-w-xl mx-auto">{cta.body}</p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href={config.signupUrl}
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Start free trial
+          </a>
+          <a
+            href={feature.href}
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
+          >
+            {cta.linkLabel ?? feature.label}
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-slate-500">
+          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
+          free trial · No credit card required
+        </p>
+      </div>
+      {disclaimer && <p class="mt-8 text-xs text-slate-400 max-w-2xl mx-auto">{disclaimer}</p>}
+    </section>
+  </main>
+  <Footer />
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+</Layout>

@@ -1,150 +1,202 @@
 ---
-// Pages 6-9 of the /templates/ hub (issue #134). This one: change order template — 1,000/mo KD0, transactional intent 0.98. Ungated per Q5.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/change-order-template.docx';
-
-const whatsInside = [
-  'Description and reason for the change — the fields disputes turn on',
-  'Contract-sum adjustment table: original sum → prior COs → this CO → new sum',
-  'Schedule adjustment with a new completion date',
-  'Full-and-final compensation language covering cumulative impacts',
-  'No-work-before-signature clause',
-  'Dual signature blocks (contractor + owner/GC)',
-];
+// Change order cluster: "change order template" 1,000 · "change order template
+// word" 1,000 · "change order form" 880 · "construction change order template"
+// 590 · "change order forms for construction" 390 · "change order template
+// excel" 170 — all KD 0 (DataForSEO, US, 2026-09). Ungated per the Q5 decision.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
-    question: 'What should a change order include?',
+    question: 'What should a construction change order include?',
     answer:
-      "A description of the changed work and why it changed, the price adjustment shown against the running contract sum (original sum, prior change orders, this change, new total), any schedule adjustment, and both parties' signatures. The running-total table matters: it keeps every CO reconciled to the same contract sum your pay applications bill against.",
+      'A description of the changed work and why it changed; a reference to the drawing, RFI or directive that triggered it; the price broken into line items with quantities and unit prices; the markup applied; the adjustment to the contract time; a running contract-sum ladder (original sum, prior change orders, this change, revised sum); and signatures from both parties. The ladder is the part most people skip, and it is what keeps every change order reconciled to the same contract sum your pay applications bill against.',
   },
   {
     question: 'Can I start the changed work on a verbal approval?',
     answer:
-      "Don't. Unsigned extra work is the most common way subs lose money — 'we'll square up later' becomes an argument about scope, price, and memory. This template says the changed work does not proceed until both parties sign, and holding that line is what makes the paper trail worth anything.",
+      'Don\'t. Unsigned extra work is the most common way subcontractors lose money — "we\'ll square up later" becomes an argument about scope, price and memory. This form states that the changed work does not proceed until both parties sign. If the GC directs you to proceed before signing, send a confirming email the same day, note it in your daily report, and track the labor and materials on a T&M ticket so the cost is documented either way.',
   },
   {
-    question: 'How do change orders affect my pay applications?',
+    question: 'How much markup can I put on a change order?',
     answer:
-      'Approved change orders adjust the contract sum, and the changed work becomes billable lines in your schedule of values. On the first pay application after approval, the CO amount shows up in the change-orders total and the new lines carry forward every period after.',
+      'Whatever your contract allows. Most subcontracts cap overhead and profit on changes at a stated percentage — 10% to 20% on self-performed work is typical, often with a lower rate on subcontracted work and on deducts. The template has a single markup rate line so the math is visible; if your contract sets unit rates or a fixed markup, use those.',
+  },
+  {
+    question: 'How do change orders affect my pay application?',
+    answer:
+      'An approved change order raises (or lowers) the contract sum, and the changed work becomes new line items on your schedule of values. On the first pay application after approval, the amount shows in the net change by change orders line and the new lines carry forward every period after. Keep the change order number consistent across the change order, the schedule of values and the pay application so the GC can trace it.',
+  },
+  {
+    question: 'What is the difference between a change order and a construction change directive?',
+    answer:
+      'A change order is a signed agreement on scope, price and time. A construction change directive (or field directive) is a one-sided instruction from the owner or architect to proceed with a change before price and time are agreed — the contract then sets how the cost is determined later. If you receive a directive, do the work, document every hour and delivery, and convert it to a signed change order as soon as the cost is known.',
   },
   {
     question: 'What if the GC refuses to sign but directs the work?',
     answer:
-      "Document the directive in writing the same day — a confirming email works — note it in your daily report, and track the costs separately. State law and your contract's claims provisions control from there; the worst position is doing the work with no record at all.",
+      "Document the directive in writing the same day (a confirming email works), note it in your daily report, and keep the costs on a separate T&M ticket. Your contract's claims and notice provisions control from there, and most have deadlines measured in days, so read them before the work starts. The worst position is doing the work with no record at all.",
+  },
+  {
+    question: 'Is a change order legally binding?',
+    answer:
+      'Once both parties sign, yes — it amends the contract. That is why the form carries full-and-final compensation language and a no-work-before-signature clause: it settles the price and time for that change so neither side can reopen it later. This template is a general-purpose form, not legal advice; have your attorney confirm it fits your contract and state.',
   },
 ];
 ---
 
-<Layout
-  title="Free Construction Change Order Template (Word)"
-  description="Free construction change order template: description, contract-sum adjustment table, time extension, and dual signatures — an editable Word doc, no email required."
+<TemplatePage
+  slug="change-order"
+  title="Free Change Order Template — Fillable PDF, Word & Excel | BuildWorkPro"
+  description="Free construction change order template: fillable PDF form, editable Word doc and Excel workbook with a change order log. Prices the change, adjusts the contract sum and time, and gets both signatures. No email required."
+  h1="Construction Change Order Template"
+  intro="A verbal OK is not a change order. This one-page form prices the change line by line, adjusts the contract sum and schedule, and gets both signatures before the work starts — as a fillable PDF, an editable Word document, or an Excel workbook with a change order log."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF form' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'xlsx', label: 'Download Excel workbook with CO log (.xlsx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with your company, the project, and who the change order goes to',
+    'Reason for change checkboxes: owner request, design change, field conditions, code requirement',
+    'Reference line for the RFI, drawing revision or directive that triggered the change',
+    'Line-item pricing with quantity, unit, unit price and add/deduct amounts',
+    'Overhead & profit line and the net change, computed in the Excel version',
+    'Contract-sum ladder: original → prior change orders → this change → revised contract sum',
+    'Schedule adjustment in calendar days with the revised completion date',
+    'Full-and-final compensation and no-work-before-signature language',
+    'Dual signature blocks for the contractor and the owner or GC',
+    'Excel only: a change order log that tracks every CO and the running contract sum',
+  ]}
+  howTo={[
+    [
+      'Number it and reference the trigger',
+      'Use the next number in your project sequence (CO-001, CO-002…) and cite the RFI, drawing revision, directive or site condition that caused the change. That reference is what wins a dispute later.',
+    ],
+    [
+      'Describe the change and pick the reason',
+      'Say what is added, deleted or revised in plain words — locations, quantities, drawing numbers. Tick the reason: the reason decides who pays if the change order is ever contested.',
+    ],
+    [
+      'Price it line by line',
+      'One line per material, labor or subcontract item with quantity, unit and unit price. Deducts go in as negative amounts. Attach the T&M ticket or vendor quote as backup — priced changes with backup get approved, changes without get negotiated.',
+    ],
+    [
+      'Apply markup and fill the contract-sum ladder',
+      'Add overhead & profit at the rate your contract allows. Then carry the original contract sum, the net of all previously approved change orders, this change, and the revised total. The Excel version does this math for you.',
+    ],
+    [
+      'State the time impact and get both signatures',
+      'Enter the change in calendar days and the revised substantial completion date, even if it is zero. Sign, get the owner or GC to sign, and only then start the work. File the signed copy with the pay application it is billed on.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['tm-ticket', 'rfi', 'aia-g702-g703', 'schedule-of-values']}
+  feature={{
+    href: '/features/change-orders/',
+    label: 'See change orders in BuildWorkPro',
+    heading: 'Approved online, applied automatically',
+    body: 'In BuildWorkPro a change order is priced with real line items against the original bid, e-signed by your customer from an emailed link, and applied to the contract value and the next pay application the moment it is approved — no retyping the ladder. <a href="/features/change-orders/" class="font-semibold text-brand-700 hover:underline">Construction change order software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Stop chasing signatures on paper',
+    body: 'BuildWorkPro numbers each change order, prices it from your bid, collects a legally binding e-signature, and rolls the approved amount into your contract value and next pay application.',
+  }}
+  disclaimer="General-purpose form, not legal advice. Your contract may set specific notice periods, pricing rules and documentation requirements for changes — follow those first, and have your attorney review before relying on it."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Construction Change Order Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          A verbal OK is not a change order. This one-page form prices the change, adjusts the
-          contract sum and schedule, and gets both signatures before the work starts.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="change-order"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.docx)
-          </a>
-          <a
-            href="/blog/construction-change-order-management/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            Read the change order guide
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Opens in Word &amp; Google Docs
-        </p>
-      </div>
-    </section>
+  <h2>What a change order is (and what it is not)</h2>
+  <p>
+    A construction change order is a written amendment to the contract that changes the scope of
+    work, the contract sum, the contract time, or all three. Once signed by both parties it is as
+    binding as the original agreement. It is not a request for information (an RFI asks a question
+    and changes nothing by itself), and it is not a time-and-materials ticket (a T&amp;M ticket
+    records hours and materials for work already directed — it is the backup for a change order, not
+    a substitute for one).
+  </p>
+  <p>
+    For a subcontractor the change order does one job above all others: it turns extra work into
+    billable contract value <em>before</em> the work is done. Every dollar you put into unsigned extras
+    is a dollar you will spend the rest of the project negotiating for.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What's in the template
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p
-        class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto"
-        set:html={`Approved change orders flow into the contract sum on your <a href="/templates/aia-g702-g703/" class="text-brand-600 underline underline-offset-2 font-medium">pay application</a> — the two templates are built to reconcile.`}
-      />
-    </section>
+  <h2>The contract-sum ladder — why every change order needs one</h2>
+  <p>The most useful part of this form is a five-line table most change order forms leave out:</p>
+  <table>
+    <thead>
+      <tr><th>Line</th><th>Where it comes from</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Original contract sum</td><td>Your signed subcontract or accepted proposal</td></tr>
+      <tr
+        ><td>Net change by prior change orders</td><td
+          >Sum of every previously approved CO (adds minus deducts)</td
+        ></tr
+      >
+      <tr><td>Contract sum before this change order</td><td>Line 1 + line 2</td></tr>
+      <tr><td>This change order</td><td>Net change on this form, after markup</td></tr>
+      <tr
+        ><td>Revised contract sum</td><td
+          >Line 3 + line 4 — the number your next pay application bills against</td
+        ></tr
+      >
+    </tbody>
+  </table>
+  <p>
+    Carrying the ladder on every change order means the GC, the owner and your own bookkeeper are
+    always looking at the same contract value. When application for payment #7 shows a contract sum
+    to date, it should equal the last line of your most recent change order. If it doesn't,
+    something was billed twice or never billed at all.
+  </p>
 
-    <FAQSection faqs={faqs} />
+  <h2>A worked example</h2>
+  <p>
+    The preview above shows the completed example that ships with the download: a mechanical
+    subcontractor on a medical office building adds a condensate drain line after a drawing revision
+    (RFI-014 → M-402 Rev. 2). Five priced lines — four adds and one deduct for the PVC drain the
+    revision deleted — subtotal to $5,030.00; 15% overhead and profit brings the net change to
+    $5,784.50; the ladder carries a $486,200.00 original contract and $12,450.00 of prior change
+    orders to a revised $504,434.50; and the contract time grows by three calendar days. That is
+    everything a GC's project manager needs to approve it without a phone call.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          Approved online, applied automatically
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          In BuildWorkPro, change orders are priced with real line items, e-signed by your customer
-          from an emailed link, and applied to the contract value and the next pay application the
-          moment they're approved.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/change-orders/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See change orders in BuildWorkPro
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-      <p class="mt-8 text-xs text-slate-400 max-w-2xl mx-auto">
-        Not legal advice — have your attorney review before relying on it.
-      </p>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>Change order vs. RFI vs. T&amp;M ticket</h2>
+  <ul>
+    <li>
+      <strong>RFI</strong> — a question about the documents. Send it the day you spot the gap. If the
+      answer adds or removes work, the RFI number goes on the reference line of a change order.
+      <a href="/templates/rfi/">RFI template</a>.
+    </li>
+    <li>
+      <strong>T&amp;M ticket</strong> — the same-day, signed record of hours, materials and equipment
+      spent on directed extra work. It proves cost; it does not change the contract. Attach it to the
+      change order as backup. <a href="/templates/tm-ticket/">T&amp;M ticket template</a>.
+    </li>
+    <li>
+      <strong>Change order</strong> — the signed agreement on scope, price and time. It is the only one
+      of the three that changes what you get paid.
+    </li>
+  </ul>
+
+  <h2>Common mistakes this form is built to prevent</h2>
+  <ul>
+    <li>Starting on a handshake — the no-work-before-signature line exists for a reason.</li>
+    <li>Pricing a lump sum with no lines — a number without backup gets negotiated down.</li>
+    <li>Forgetting the time impact — a change with zero days should say zero days, in writing.</li>
+    <li>Skipping the ladder — the contract sum drifts, and pay applications stop reconciling.</li>
+    <li>
+      Losing the reference — a change order that does not cite the RFI or drawing revision is hard
+      to defend a year later.
+    </li>
+    <li>
+      Filing it separately from billing — keep the signed CO with the pay application it is billed
+      on.
+    </li>
+  </ul>
+  <p>
+    Read the longer guide to <a href="/blog/construction-change-order-management/"
+      >managing change orders as a subcontractor</a
+    >, then pair this form with the <a href="/templates/aia-g702-g703/">pay application template</a> so
+    approved changes flow straight into your billing.
+  </p>
+</TemplatePage>
