@@ -81,7 +81,7 @@ for (const t of TEMPLATE_LIST) {
     test('renders with the H1, downloads and preview', async ({ page, request }) => {
       await page.goto(`/templates/${t.slug}/`);
       await expect(page.locator('main h1')).toBeVisible();
-      await expect(page.locator('title')).toHaveText(/Free/i);
+      await expect(page).toHaveTitle(/Free/i);
 
       const links = page.locator('main a.template-download');
       const count = await links.count();
