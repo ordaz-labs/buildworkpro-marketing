@@ -1,0 +1,226 @@
+---
+// Daily report cluster: "construction daily report template" 720 · "daily
+// construction report template" 720 · "daily report template" 720 · "daily log
+// template" 390 · "construction daily log template" 210 · "daily report template
+// excel" 110 (DataForSEO, US, 2026-09). The blog guide at
+// /blog/construction-daily-report-template/ stays the long-form guide and links here.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What should a construction daily report include?',
+    answer:
+      'Eight things: the project and date header, who was on site (by name or classification, with hours and where they worked), the work performed with locations that match the drawings, equipment on site and any idle time, materials delivered and where they were stored, visitors and inspections with results, safety talks and incidents, and delays or disruptions with their cause. The weather block belongs in the header — AM and PM conditions, not just "sunny". Every section of this template maps to one of those eight.',
+  },
+  {
+    question: 'Is a daily report the same as a daily log or site log?',
+    answer:
+      'Yes. General contractors tend to say daily report; subcontractors and field software say daily log or site log. The document is the same: a dated, same-day record of what happened on the job. What matters is that it is written by the person who was there, on the day it happened.',
+  },
+  {
+    question: 'Who fills out the daily report, and when?',
+    answer:
+      'The foreman or site lead, before the crew leaves. A report written Friday for Monday through Thursday is a reconstruction, and reconstructions lose to contemporaneous records in almost every dispute. The form has a prepared-by signature for the foreman and a reviewed-by line for the project manager or superintendent, who should read it within a day or two.',
+  },
+  {
+    question: 'Do I still need my own daily report if the GC has its own form?',
+    answer:
+      'Yes. Fill out whatever the GC requires, and keep your own. The GC form manages the project; your record protects you. GC forms rarely have a place for delays caused by others, idle equipment, or work you could not start because an area was not ready — and those are the entries that support a schedule extension or a change order later.',
+  },
+  {
+    question: 'Can a daily report be used as evidence in a dispute?',
+    answer:
+      'Contemporaneous daily reports are routinely used in delay claims, payment disputes and litigation, and dated, consistent records carry far more weight than after-the-fact summaries. That is why the form asks for specifics — times, locations, quantities, names — and why the fine print says to keep it factual. This is general guidance, not legal advice; a construction attorney can tell you how records are treated in your state.',
+  },
+  {
+    question: 'What is the difference between a daily report and a T&M ticket or timesheet?',
+    answer:
+      'The daily report records the whole day for the whole site. A T&M ticket records the hours, materials and equipment spent on one piece of directed extra work, signed by the GC that day, so it can be priced into a change order. A timesheet records one person’s hours for the week for payroll and job costing. The crew table on the daily report should reconcile with both — same people, same hours.',
+  },
+  {
+    question: 'How does the Excel version help with crew hours?',
+    answer:
+      'The Daily Report sheet totals crew hours and headcount as you type them. The Weekly Summary sheet is a person-by-day grid: copy each day’s hours across, and it totals hours per person, hours per day, headcount per day, and days worked, with a row that flags any day a report was not filed. It is the quick check that your daily reports, timesheets and payroll all say the same thing.',
+  },
+];
+---
+
+<TemplatePage
+  slug="daily-report"
+  title="Free Construction Daily Report Template — Fillable PDF, Word & Excel | BuildWorkPro"
+  description="Free construction daily report template: fillable PDF, Word and Excel with a weekly crew-hours summary. Crew, weather, work, delays, safety. No email required."
+  h1="Construction Daily Report Template"
+  intro="One page, filed before the crew leaves: who was on site and for how long, what got built and where, what was delivered, who visited, what went wrong and why. Fillable PDF for the field, Word if the GC wants edits, and an Excel workbook that totals crew hours by day and by week."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF form' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'xlsx', label: 'Download Excel workbook with weekly summary (.xlsx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with your company, the project and GC, report number, date and contract day',
+    'Weather block: AM and PM temperature and conditions, wind and precipitation, hours lost to weather',
+    'Crew table by name or classification with hours and area or task, totalled with a headcount',
+    'Equipment on site: owned or rented, hours used, idle time and the reason',
+    'Materials delivered with quantity, vendor and ticket number, and where they were stored',
+    'Work performed box sized for locations that match the drawings — building, floor, room, gridline',
+    'Delays, disruptions and issues with cause, who, times and impact',
+    'Visitors and inspections with results, plus safety talk, incidents and photo references',
+    'Prepared-by and reviewed-by signature lines for the foreman and the project manager',
+    'Excel only: a Weekly Summary that totals crew hours by person and by day and flags missing reports',
+  ]}
+  howTo={[
+    [
+      'Number it and set the header',
+      'Give each report the next number in the project sequence and fill the date, the contract day, and who prepared it. A stack of reports with no header is nearly useless in a dispute, so the header is not optional.',
+    ],
+    [
+      'Record the weather twice',
+      'Morning and afternoon: temperature, conditions, wind and precipitation. If weather stopped or slowed work, write the hours lost and what was affected — "rain 7:00–10:30, underground rough-in stopped 3.5 hrs" is evidence, "rain" is not.',
+    ],
+    [
+      'List everyone on site and what they did',
+      'Name or classification, hours, and the area or task. A headcount is not a record. The hours here should match the timesheets for the same day, and the total is what a T&M ticket or change order will be checked against.',
+    ],
+    [
+      'Write the work, the deliveries and the problems with locations',
+      'Work performed goes by building, floor, room and gridline, including what was planned but could not be done and why. Log every delivery with vendor, ticket number and storage location — that entry backs up stored-material billing. Put delays and issues in their own box with the cause and who it involved, in plain facts.',
+    ],
+    [
+      'Sign it the same day and get it reviewed',
+      'The foreman signs before leaving; the project manager or superintendent reviews and signs within a day or two. Attach the photos you referenced. File it with the project, not in a truck.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['tm-ticket', 'timesheet', 'work-order', 'punch-list']}
+  feature={{
+    href: '/features/site-logs/',
+    label: 'See site logs in BuildWorkPro',
+    heading: 'The same report, filed from a phone',
+    body: 'In BuildWorkPro a site log is tied to the project and the date, records personnel on site, work performed, materials received, visitors and issues, takes photos straight from the job site, and is tagged Progress, Issue, Delay, Safety, Delivery or Inspection so every delay on a job is one filter away months later. A manager marks it reviewed. <a href="/features/site-logs/" class="font-semibold text-brand-700 hover:underline">Construction daily log software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Stop losing the record in a glovebox',
+    body: 'BuildWorkPro site logs are filed from the field with crew, work, deliveries, issues and photos on the project record — searchable, taggable and reviewed, so the day exists when a question comes up months later.',
+  }}
+  disclaimer="General-purpose form, not legal advice. Daily reports are evidence — keep them factual and same-day. Follow any reporting format your contract or GC requires in addition to your own record."
+  updated="2026-09-17"
+>
+  <h2>What a daily report is for</h2>
+  <p>
+    A construction daily report is the dated, same-day record of everything that happened on a job
+    site: who was there, what got built, what arrived, who visited, and what went wrong. Most
+    general contractors require one before they will sign off on a day&rsquo;s work. Even when
+    nobody asks, it is the cheapest protection a subcontractor carries. When a delay claim lands,
+    when a GC disputes a change order, or when an inspector asks what was on site last Tuesday, the
+    daily reports answer the question &mdash; if they were written on the day and say something
+    specific.
+  </p>
+  <p>
+    This template is built around the eight sections our
+    <a href="/blog/construction-daily-report-template/">daily report guide</a> walks through (identification,
+    personnel, work performed, equipment, materials, visitors and inspections, safety, delays) and it
+    fits on one page so it actually gets filled out.
+  </p>
+
+  <h2>Field-by-field notes</h2>
+  <ul>
+    <li>
+      <strong>Report number and contract day.</strong> Number reports in sequence and note the contract
+      day (day 79 of 171, say). A gap in the sequence is a gap in the record.
+    </li>
+    <li>
+      <strong>Weather, twice.</strong> AM and PM temperature and conditions, wind and precipitation, and
+      a separate line for hours lost to weather and what was affected. Weather delays are only recoverable
+      if you wrote down the times.
+    </li>
+    <li>
+      <strong>Crew table.</strong> One row per person or classification, with hours and the area or task.
+      The total and headcount are what your timesheets, T&amp;M tickets and any labor claim will be reconciled
+      against, so make them agree.
+    </li>
+    <li>
+      <strong>Equipment.</strong> Owned or rented, hours used, and idle time with the reason. Idle rented
+      equipment is a real cost in a disruption claim &mdash; but only if you logged it the day it sat.
+    </li>
+    <li>
+      <strong>Materials delivered.</strong> Quantity, vendor and ticket number, where it was stored, and
+      any shorts or damage. This is your chain of custody and the backup for billing stored materials
+      on a <a href="/templates/aia-g702-g703/">pay application</a>.
+    </li>
+    <li>
+      <strong>Work performed.</strong> Use locations that match the drawings &mdash; building, floor,
+      room, gridline &mdash; and quantities. Record what was planned but could not be done, and why. &ldquo;Continued
+      rough-in&rdquo; is not a record.
+    </li>
+    <li>
+      <strong>Delays, disruptions and issues.</strong> The most skipped section and the most valuable
+      one. Areas not ready, missing RFI answers, other trades in your space, late deliveries caused by
+      others. Cause, who, times, impact. Facts, not opinions.
+    </li>
+    <li>
+      <strong>Visitors, inspections, safety, photos.</strong> Who came and why; what was inspected and
+      the result; the toolbox talk topic and attendance; incidents or near-misses (write &ldquo;None&rdquo;
+      if none); and the photo file references so the pictures can be found later.
+    </li>
+  </ul>
+
+  <h2>A worked example</h2>
+  <p>
+    The preview shows the completed example that ships with the download. On Tuesday, August 18,
+    2026 &mdash; report DR-056, contract day 79 &mdash; a mechanical subcontractor has six people on
+    site for 48.0 hours: a foreman, two journeyman plumbers, an apprentice, and a sheet metal
+    journeyman and apprentice. A 90-ton crane sets RTU-2 and RTU-3 on the roof between 7:00 and
+    11:30, domestic water rough-in in Suites 210&ndash;214 is complete, and the corridor trunk duct
+    is hung on gridlines C&ndash;F. Three deliveries are logged with ticket numbers and storage
+    locations. The city rough plumbing inspection passes. And in the delays box, the foreman records
+    that a roof drain conflicts with the RTU-3 curb and that RFI-016 went to the GC at 3:15 PM
+    &mdash; the entry that will matter when that conflict becomes a
+    <a href="/templates/change-order/">change order</a>. Twelve photos are referenced by file name.
+    That is a day&rsquo;s worth of protection on one page.
+  </p>
+
+  <h2>Daily report vs. T&amp;M ticket vs. timesheet</h2>
+  <p>
+    Three field documents overlap and are often confused. The daily report covers the whole day for
+    the whole site. A <a href="/templates/tm-ticket/">T&amp;M ticket</a> covers one piece of directed
+    extra work &mdash; its hours, materials and equipment &mdash; signed by the GC the same day so it
+    can be priced into a change order. A
+    <a href="/templates/timesheet/">weekly timesheet</a> covers one person&rsquo;s hours for payroll and
+    job costing. The crew table on the daily report should reconcile with both: the same people, the same
+    hours. If the daily report says eight hours and the T&amp;M ticket says ten, the ticket will be questioned.
+  </p>
+  <p>
+    A <a href="/templates/work-order/">work order</a> is different again: it authorizes a specific job
+    before it starts. The daily report is what proves it happened.
+  </p>
+
+  <h2>Using the Excel workbook</h2>
+  <p>
+    The Daily Report sheet mirrors the PDF and totals crew hours and headcount as you type. The
+    Weekly Summary sheet is a person-by-day grid for the week: enter the week-ending Sunday and the
+    dates fill in, copy each person&rsquo;s hours from the daily reports, and it totals hours per
+    person and per day, days worked, and headcount by day. A final row asks whether a daily report
+    was filed each day &mdash; a &ldquo;No&rdquo; is a gap you want to know about before anyone else
+    does. Every formula in the workbook has been checked with real numbers.
+  </p>
+
+  <h2>Common mistakes this form is built to prevent</h2>
+  <ul>
+    <li>Writing a headcount instead of names, hours and areas.</li>
+    <li>Summarizing (&ldquo;weather delay&rdquo;) instead of recording times and impact.</li>
+    <li>Leaving the delays box empty because nothing was &ldquo;our fault&rdquo;.</li>
+    <li>Filling in a week of reports on Friday from memory.</li>
+    <li>Editorializing about the GC instead of stating what happened and when.</li>
+    <li>Skipping days &mdash; a rained-out day with no work is still a report.</li>
+  </ul>
+  <p>
+    For the habit side &mdash; who owns it, when it gets filed, how to make it stick with a crew
+    &mdash; read
+    <a href="/blog/construction-site-log-best-practices/">construction site log best practices</a>.
+    When a day&rsquo;s issue turns into extra work, move to the
+    <a href="/templates/tm-ticket/">T&amp;M ticket</a> and then the
+    <a href="/templates/change-order/">change order</a>; the daily report is the paper trail
+    underneath both.
+  </p>
+</TemplatePage>
