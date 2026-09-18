@@ -1,0 +1,245 @@
+---
+// Budget cluster: "construction budget template" 480 · "construction budget
+// template excel" 210 · "home construction budget template" 170 · "construction
+// cost breakdown template" 140 · "job cost template" 70 · "job costing template
+// excel" 70 (DataForSEO, US, 2026-09). Ungated per Q5.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What should a construction budget include?',
+    answer:
+      'One row per cost code with the cost type (labor, material, equipment, subcontract, other), the original budget from the estimate, approved changes, the revised budget, committed cost, actual cost to date, projected final cost, variance and percent spent — and a summary that compares projected final cost with the revised contract value to show the gross profit you are on track to keep. Overhead and profit are not job costs and do not belong in the rows; contingency and sales tax do.',
+  },
+  {
+    question: 'What is the difference between a budget and a schedule of values?',
+    answer:
+      'The budget is the cost side: what the job will cost you, by cost code. The schedule of values is the revenue side: the contract sum broken into lines you bill the customer against each month. They use similar categories but different numbers — the SOV line for rooftop units is the sell price, the budget line is what you paid for them. Tracking both is how you know whether a job is profitable, not just whether it is billed.',
+  },
+  {
+    question: 'How often should I update the job cost budget?',
+    answer:
+      'Weekly for actual costs, from payroll and vendor invoices; monthly for the forecast, when you have a real view of what is left. A budget reviewed at the end of the job is a history. The template’s percent-spent column is only useful if it is current enough to compare with percent complete this week.',
+  },
+  {
+    question: 'What is committed cost?',
+    answer:
+      'Money you have promised but not yet been invoiced for — purchase orders and subcontracts you have issued. A $75,790 equipment PO is committed the day you sign it, even though the invoice arrives at delivery. Tracking committed cost alongside actual cost stops the budget from looking healthy just because the big invoices have not landed yet.',
+  },
+  {
+    question: 'How do change orders affect the budget?',
+    answer:
+      'Twice. The change order’s price goes into the contract value at the top, raising the revised contract. Its cost — the labor, material and equipment you priced before markup — goes into the approved changes column on the cost codes where the work happens, raising the revised budget. Posting change costs to a single "changes" line hides which trades are running over.',
+  },
+  {
+    question: 'What are cost codes and which ones should I use?',
+    answer:
+      'Cost codes are the categories you budget and post costs to. The template ships a CSI MasterFormat-style starter list — 01 general requirements, 22 plumbing, 23 HVAC, 26 electrical and so on, with sub-codes for labor, material and subcontracts — that you can edit freely. Which codes you use matters less than using the same ones on every job, so that this job’s plumbing labor overrun can be compared with the last three.',
+  },
+  {
+    question: 'How do I calculate projected final cost?',
+    answer:
+      'Actual cost to date plus your estimate of the cost to complete, where you have one. Where you do not, the template uses the largest of the revised budget, the committed amount and the actual to date, which is the most conservative number available without a forecast. Variance is revised budget minus projected final, so a positive variance is money you are on track to keep.',
+  },
+];
+---
+
+<TemplatePage
+  slug="construction-budget"
+  title="Free Construction Budget Template — Job Cost Tracker (Excel + PDF) | BuildWorkPro"
+  description="Free construction budget template (Excel + PDF): job cost tracker by cost code — budget, changes, committed, actual, projected, variance. No email required."
+  h1="Construction Budget Template"
+  intro="A job cost tracker by cost code: original budget, approved changes, revised budget, committed, actual to date, projected final, variance and percent spent — with a summary that puts projected cost against the contract value so you know the margin you are actually keeping. Excel with a CSI-style cost code list, or a landscape fillable PDF."
+  downloads={[
+    { format: 'xlsx', label: 'Download Excel budget workbook (.xlsx)' },
+    { format: 'pdf', label: 'Download fillable PDF (landscape)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'One row per cost code with a type flag: labor, material, equipment, subcontract or other',
+    'Original budget and approved changes, with the revised budget computed',
+    'Committed cost (POs and subcontracts issued) and actual cost to date, side by side',
+    'Estimate-to-complete input, with projected final cost computed from it — or from the larger of budget, committed and actual when you have no forecast',
+    'Variance in dollars, red when over and green when under, and percent spent per code',
+    'Contract block: original contract, approved change orders, revised contract, projected gross profit and margin against the margin you bid',
+    'Excel: a Cost Codes sheet with a CSI MasterFormat-style starter list for a trade contractor, editable',
+    'Excel: frozen headers, a type dropdown, conditional formatting and a flag when a code is more than 100% spent',
+    'PDF: one landscape page with a totals row and summary cards, fillable in Acrobat, Preview or Chrome',
+    'Completed example: the $486,200 mechanical job mid-way, 74% of a $398,660 revised budget spent',
+  ]}
+  howTo={[
+    [
+      'Set the contract value',
+      'Enter the project and the original contract sum. As change orders are approved, add their price to the approved change orders cell — the revised contract updates and every margin figure is measured against it.',
+    ],
+    [
+      'Build the rows from your estimate',
+      'One row per cost code from the Cost Codes sheet, with its type. The original budget for each is the cost side of your estimate — direct cost by section plus contingency and sales tax as their own codes. Overhead and profit stay out; they are not job costs.',
+    ],
+    [
+      'Post approved changes to the codes where the work happens',
+      'When a change order is approved, put its cost — before markup — in the approved changes column on the affected codes. A relocated curb is crane, sheet metal labor and equipment; post it to those three, not to one "changes" line.',
+    ],
+    [
+      'Enter committed and actual cost every week',
+      'Committed is every PO and subcontract you have issued. Actual is posted payroll, vendor invoices and receipts. Both come from your accounting system; the template is where they meet the budget. Add an estimate to complete on any code where you know the cost to finish.',
+    ],
+    [
+      'Read the projection and act on it',
+      'Projected final, variance and percent spent by code, and projected gross profit and margin at the top. Compare percent spent with percent complete — labor at 75% spent on a job 60% done is the earliest warning you get — and reconcile the revised contract to your latest change order and pay application every month.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['construction-estimate', 'schedule-of-values', 'change-order', 'timesheet']}
+  feature={{
+    href: '/features/reports/',
+    label: 'See reporting in BuildWorkPro',
+    heading: 'The contract side, kept for you',
+    body: 'In BuildWorkPro the accepted bid becomes the project’s contract value, approved change orders adjust it and flow into the next pay application automatically, and the Reports module shows bid, project and activity KPIs for any period — exportable to CSV or PDF for the person keeping this budget. <a href="/features/reports/" class="font-semibold text-brand-700 hover:underline">Construction reporting software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Know your numbers before the job ends',
+    body: 'BuildWorkPro keeps the contract value, change orders, time entries and pay applications on the job record, so the revenue side of this budget reconciles itself and the reports tell you what you quoted, what you won and what each job type is worth.',
+  }}
+  disclaimer="A management tool, not accounting advice. Cost codes, committed-cost rules and overhead treatment should match your accounting system — confirm with your bookkeeper or CPA before relying on the margin figures."
+  updated="2026-09-17"
+>
+  <h2>What a construction budget is</h2>
+  <p>
+    A construction budget — a job cost report, once the job is running — is the cost side of the
+    project by cost code: what you planned to spend, what you have committed, what you have spent,
+    and what you now expect to spend by the end. Set against the contract value, it answers the only
+    question that matters mid-job: are we still going to make the margin we bid?
+  </p>
+  <p>
+    The numbers come from documents you already have. The original budget is the cost side of the
+    <a href="/templates/construction-estimate/">estimate</a> — direct cost by section, plus contingency
+    and sales tax — with overhead and profit left out, because they are not job costs. Approved changes
+    come from signed
+    <a href="/templates/change-order/">change orders</a>. Actual labor comes from
+    <a href="/templates/timesheet/">timesheets</a> and payroll; actual material and subcontract cost from
+    invoices; committed cost from the purchase orders and subcontracts you have issued. The template is
+    where they meet.
+  </p>
+
+  <h2>Column by column</h2>
+  <table>
+    <thead>
+      <tr><th>Column</th><th>What goes in it</th></tr>
+    </thead>
+    <tbody>
+      <tr
+        ><td>Original budget</td><td
+          >Cost from the estimate, by code. Never changes after the job starts</td
+        ></tr
+      >
+      <tr
+        ><td>Approved changes</td><td
+          >The cost (not the price) of signed change orders, posted to the codes where the work
+          happens</td
+        ></tr
+      >
+      <tr><td>Revised budget</td><td>Original + changes — the number you are managing to</td></tr>
+      <tr><td>Committed</td><td>POs and subcontracts issued, invoiced or not</td></tr>
+      <tr><td>Actual to date</td><td>Posted payroll, invoices and receipts</td></tr>
+      <tr
+        ><td>Est. to complete</td><td
+          >Your forecast of the cost to finish this code, where you have one (Excel)</td
+        ></tr
+      >
+      <tr
+        ><td>Projected final</td><td
+          >Actual + estimate to complete; otherwise the largest of revised budget, committed and
+          actual</td
+        ></tr
+      >
+      <tr
+        ><td>Variance</td><td
+          >Revised budget − projected final. Positive is favorable; red is over</td
+        ></tr
+      >
+      <tr><td>% spent</td><td>Actual ÷ revised budget — compare it with % complete</td></tr>
+    </tbody>
+  </table>
+  <p>
+    The contract block at the top does the same arithmetic on the revenue side: original contract +
+    approved change orders = revised contract, and revised contract − projected final cost =
+    projected gross profit, shown as a margin next to the margin you bid.
+  </p>
+
+  <h2>A worked example: the Harbor Point mechanical job at 74% spent</h2>
+  <p>
+    The completed example is the mechanical subcontract that runs through our template set,
+    snapshotted on September 17, 2026 with costs posted through September 11. The original budget is
+    $388,960.00 — the total estimated cost from the
+    <a href="/templates/construction-estimate/">estimate template</a>’s example, spread over
+    nineteen cost codes, with contingency ($10,848.06) and sales tax on materials ($16,509.94) as
+    their own lines. Three change orders have been approved for $11,154.50 of price; their cost
+    side, $9,699.56, is posted where the work happened: a relocated curb to crane, sheet metal labor
+    and RTU accessories; a deleted water heater as a credit to plumbing labor; a condensate drain to
+    piping, pipefitter labor and the core-drill line. Revised budget: $398,659.56 against a revised
+    contract of $497,354.50.
+  </p>
+  <p>
+    Committed cost stands at $257,687 and actual at $295,280, 74% of the revised budget. Projected
+    final cost is $397,145.06, a favorable variance of $1,514.50, for a projected gross profit of
+    $100,209.44 — a 20.1% margin against the 20.0% bid. The detail is more useful than the total.
+    The rooftop units came in $1,860 under budget, which is the buyout saving from the
+    <a href="/templates/bid-tabulation/">bid tabulation template</a>’s example. Plumbing labor is
+    $1,358 under. But sheet metal labor is projecting $853.70 over, pipefitters $736 over and
+    supervision $420 over, and those three lines are where the project manager’s attention goes this
+    week — not the healthy total.
+  </p>
+
+  <h2>Cost codes: use the same ones on every job</h2>
+  <p>
+    The workbook’s Cost Codes sheet is a CSI MasterFormat-style starter list for a trade contractor:
+    division 01 for supervision, equipment, permits, contingency and tax; 22 for plumbing labor,
+    piping, fixtures and equipment; 23 for HVAC labor, ductwork, piping, controls, insulation,
+    balancing and rooftop units; and a handful of 02–33 codes for the demolition, concrete,
+    electrical and site work a mechanical sub touches. Edit it to match how you actually buy and
+    track work — but then leave it alone. A code list that changes every job cannot tell you that
+    plumbing labor runs 8% over on medical work, and that is the number that fixes the next
+    estimate.
+  </p>
+
+  <h2>Budget vs. schedule of values vs. estimate</h2>
+  <ul>
+    <li>
+      <strong>Estimate</strong> — before the job; cost by section and the price you sold it for.
+      <a href="/templates/construction-estimate/">Template</a>.
+    </li>
+    <li>
+      <strong>Schedule of values</strong> — the contract sum broken into billable lines; the revenue side
+      you bill against on each <a href="/templates/aia-g702-g703/">pay application</a>.
+      <a href="/templates/schedule-of-values/">Template</a>.
+    </li>
+    <li>
+      <strong>Budget</strong> — the cost side, by cost code, tracked weekly. This template.
+    </li>
+  </ul>
+  <p>
+    The three should reconcile: the estimate’s total cost is the budget’s original total, the
+    estimate’s price is the SOV’s contract sum, and every approved change order moves both the SOV
+    and the budget. When the revised contract on this sheet does not match the contract sum to date
+    on your latest pay application, one of them is missing a change order.
+  </p>
+
+  <h2>Common mistakes this template is built to catch</h2>
+  <ul>
+    <li>
+      Budgeting from the sell price instead of the cost, and reporting a margin you never had.
+    </li>
+    <li>Ignoring committed cost until the invoice arrives, and finding out at month end.</li>
+    <li>Posting change-order costs to one line, so no trade ever shows as over.</li>
+    <li>Updating monthly from the P&amp;L instead of weekly from payroll and invoices.</li>
+    <li>Reading % spent without % complete beside it.</li>
+    <li>Changing cost codes every job, so nothing compares with anything.</li>
+  </ul>
+  <p>
+    For the discipline behind the sheet, read
+    <a href="/blog/job-costing-for-subcontractors/">job costing for subcontractors</a>, and pair the
+    budget with the <a href="/templates/change-order/">change order template</a> so every approved change
+    lands on both sides of it.
+  </p>
+</TemplatePage>

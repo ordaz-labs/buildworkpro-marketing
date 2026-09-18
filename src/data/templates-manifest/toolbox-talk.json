@@ -1,0 +1,30 @@
+{
+  "slug": "toolbox-talk",
+  "name": "Toolbox Talk Template",
+  "basename": "toolbox-talk-template",
+  "files": {
+    "pdf": {
+      "file": "toolbox-talk-template.pdf",
+      "bytes": 85115,
+      "pages": 1
+    },
+    "example": {
+      "file": "toolbox-talk-template-example.pdf",
+      "bytes": 40010,
+      "pages": 1
+    },
+    "docx": {
+      "file": "toolbox-talk-template.docx",
+      "bytes": 12217
+    }
+  },
+  "previews": [
+    {
+      "file": "toolbox-talk.png",
+      "webp": "toolbox-talk.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

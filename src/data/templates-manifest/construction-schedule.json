@@ -1,0 +1,35 @@
+{
+  "slug": "construction-schedule",
+  "name": "Construction Schedule Template",
+  "basename": "construction-schedule-template",
+  "files": {
+    "pdf": {
+      "file": "construction-schedule-template.pdf",
+      "bytes": 202674,
+      "pages": 1
+    },
+    "example": {
+      "file": "construction-schedule-template-example.pdf",
+      "bytes": 58099,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "construction-schedule-template.xlsx",
+      "bytes": 24302,
+      "sheets": [
+        "Schedule",
+        "Example",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "construction-schedule.png",
+      "webp": "construction-schedule.webp",
+      "width": 1200,
+      "height": 927,
+      "landscape": true
+    }
+  ]
+}

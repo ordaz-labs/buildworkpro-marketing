@@ -1,0 +1,35 @@
+{
+  "slug": "tm-ticket",
+  "name": "T&M Ticket Template",
+  "basename": "tm-ticket-template",
+  "files": {
+    "pdf": {
+      "file": "tm-ticket-template.pdf",
+      "bytes": 96043,
+      "pages": 1
+    },
+    "example": {
+      "file": "tm-ticket-template-example.pdf",
+      "bytes": 45977,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "tm-ticket-template.xlsx",
+      "bytes": 16757,
+      "sheets": [
+        "T&M Ticket",
+        "T&M Log",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "tm-ticket.png",
+      "webp": "tm-ticket.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

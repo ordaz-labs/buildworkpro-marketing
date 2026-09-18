@@ -1,0 +1,34 @@
+{
+  "slug": "bid-tabulation",
+  "name": "Bid Tabulation Template",
+  "basename": "bid-tabulation-template",
+  "files": {
+    "pdf": {
+      "file": "bid-tabulation-template.pdf",
+      "bytes": 138833,
+      "pages": 1
+    },
+    "example": {
+      "file": "bid-tabulation-template-example.pdf",
+      "bytes": 49375,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "bid-tabulation-template.xlsx",
+      "bytes": 13286,
+      "sheets": [
+        "Bid Tab",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "bid-tabulation.png",
+      "webp": "bid-tabulation.webp",
+      "width": 1200,
+      "height": 927,
+      "landscape": true
+    }
+  ]
+}

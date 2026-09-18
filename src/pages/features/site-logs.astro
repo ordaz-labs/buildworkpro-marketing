@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FAQSection from '../../components/FAQSection.astro';
+import TemplateCallout from '../../components/templates/TemplateCallout.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import { config } from '../../config';
 
@@ -355,6 +356,16 @@ const faqs = [
       </p>
     </section>
 
+    <TemplateCallout
+      slugs={[
+        'daily-report',
+        'tm-ticket',
+        'toolbox-talk',
+        'job-safety-analysis',
+        'punch-list',
+        'work-order',
+      ]}
+    />
     <FAQSection faqs={faqs} />
 
     <!-- Bottom CTA -->

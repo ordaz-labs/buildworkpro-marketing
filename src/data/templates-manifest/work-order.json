@@ -1,0 +1,39 @@
+{
+  "slug": "work-order",
+  "name": "Work Order Template",
+  "basename": "work-order-template",
+  "files": {
+    "pdf": {
+      "file": "work-order-template.pdf",
+      "bytes": 94625,
+      "pages": 1
+    },
+    "example": {
+      "file": "work-order-template-example.pdf",
+      "bytes": 45644,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "work-order-template.xlsx",
+      "bytes": 16896,
+      "sheets": [
+        "Work Order",
+        "Work Order Log",
+        "How to Use"
+      ]
+    },
+    "docx": {
+      "file": "work-order-template.docx",
+      "bytes": 13166
+    }
+  },
+  "previews": [
+    {
+      "file": "work-order.png",
+      "webp": "work-order.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

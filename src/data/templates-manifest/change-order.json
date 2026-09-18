@@ -1,0 +1,39 @@
+{
+  "slug": "change-order",
+  "name": "Construction Change Order Template",
+  "basename": "change-order-template",
+  "files": {
+    "pdf": {
+      "file": "change-order-template.pdf",
+      "bytes": 88772,
+      "pages": 1
+    },
+    "example": {
+      "file": "change-order-template-example.pdf",
+      "bytes": 58454,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "change-order-template.xlsx",
+      "bytes": 16055,
+      "sheets": [
+        "Change Order",
+        "CO Log",
+        "How to Use"
+      ]
+    },
+    "docx": {
+      "file": "change-order-template.docx",
+      "bytes": 12964
+    }
+  },
+  "previews": [
+    {
+      "file": "change-order.png",
+      "webp": "change-order.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

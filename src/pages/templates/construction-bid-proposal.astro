@@ -1,165 +1,243 @@
 ---
-// Page 5 of the /templates/ hub (issue #134): the proposal/bid-template
-// cluster — construction proposal template 1,300/mo KD2 + construction bid
-// template 720/mo KD0 + free variants, one canonical page. Ungated per Q5.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/construction-bid-proposal-template.docx';
-
-const whatsInside = [
-  'Proposal header with number, date, and a pricing-valid-until field',
-  'Scope of work section written to survive "while you\'re here" requests',
-  'Price table with base bid, alternates, and allowances',
-  'Inclusions AND exclusions sections — the paragraph that saves disputes',
-  'Terms: price validity, progress payments with retainage, written change orders',
-  'Acceptance signature block that turns the proposal into an agreement',
-];
+// Proposal cluster: "construction proposal template" 1,300 · "construction
+// proposal template word" 1,300 · "bid proposal template" 880 · "construction
+// bid template" 590 · "contractor proposal template" 320 (DataForSEO, US,
+// 2026-09). One canonical page, ungated per Q5. Linked from
+// /blog/how-to-create-construction-bid/ — keep this URL.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
     question: 'What should a construction bid proposal include?',
     answer:
-      'A clear scope of work, the price (with alternates broken out), what is included, what is excluded, the terms — how long the price holds, how you get paid, how changes are handled — and an acceptance signature block. The exclusions list is the most valuable paragraph: every exclusion you name is a dispute you never have.',
+      'A clear scope of work, the price (with alternates and allowances broken out), what is included, what is excluded, the schedule, the terms — how long the price holds, how you get paid, how changes are handled — and an acceptance signature block. The exclusions list is the most valuable paragraph: every exclusion you name is a dispute you never have.',
   },
   {
     question: 'What is the difference between a bid and a proposal?',
     answer:
-      'A bid is usually a price submitted into a competitive selection — often to a GC, against drawings and specs. A proposal is the fuller document around that price: scope, inclusions, exclusions, terms, and an acceptance line. This template is the proposal wrapper; pair it with our free estimate template for the math behind the number.',
+      'A bid is usually a price submitted into a competitive selection — often to a GC, against drawings and specs. A proposal is the fuller document around that price: scope, inclusions, exclusions, schedule, terms, and an acceptance line. This template is the proposal wrapper; pair it with our free estimate template for the math behind the number.',
   },
   {
     question: 'Should I show one lump sum or itemized pricing?',
     answer:
-      'Lead with the lump sum and break out alternates and allowances separately. Full line-item transparency invites line-item shopping; a single defensible number with clearly-priced alternates keeps the negotiation on scope, not on your unit costs.',
+      'Lead with the lump sum and break out alternates and allowances separately. Full line-item transparency invites line-item shopping; a single defensible number with clearly priced alternates keeps the negotiation on scope, not on your unit costs. If the bid form requires unit prices, add them as a separate schedule rather than exposing the whole estimate.',
   },
   {
     question: 'How long should my pricing stay valid?',
     answer:
-      'Thirty days is common; volatile material markets argue for less. The template carries a valid-until field and an escalation clause so an old proposal cannot bind you to old prices.',
+      'Thirty days is common; volatile material markets argue for less. The template carries a pricing-valid-through date and a validity clause with an escalation provision, so an old proposal cannot bind you to old prices.',
+  },
+  {
+    question: 'What are alternates and allowances?',
+    answer:
+      'An alternate is a priced option the owner can add or deduct — a higher-efficiency unit, a deleted scope item — shown as its own line so the base bid stays comparable. An allowance is an amount carried inside the base bid for something not yet defined, to be adjusted to actual cost. Both belong in the proposal in their own table, never buried in the lump sum.',
+  },
+  {
+    question: 'What is the difference between an accepted proposal and a subcontract?',
+    answer:
+      'An accepted proposal is an agreement on your terms; a subcontract is an agreement on the GC’s. The template’s agreement clause says the proposal governs unless superseded by a mutually executed subcontract consistent with it, which is why your inclusions, exclusions and terms need to be complete here — they are what you will be negotiating from. See our free subcontractor agreement template for what usually follows.',
   },
   {
     question: 'Can the client sign the proposal electronically?',
     answer:
-      'Yes — e-signatures are legally binding in the United States under the ESIGN Act. BuildWorkPro sends your bid for legally-binding e-signature from an emailed link, chases the reminders, files the certified signed PDF on the record, and converts the accepted bid straight into a project.',
+      'Yes — e-signatures are legally binding in the United States under the ESIGN Act. BuildWorkPro sends your bid for legally binding e-signature from an emailed link, chases the reminders, files the certified signed PDF on the record, and converts the accepted bid straight into a project.',
   },
 ];
 ---
 
-<Layout
-  title="Free Construction Bid Proposal Template (Word)"
-  description="Free construction bid proposal template: scope, price with alternates, inclusions/exclusions, terms, and an acceptance block — an editable Word doc, no email required."
+<TemplatePage
+  slug="construction-bid-proposal"
+  title="Free Construction Bid Proposal Template (Word + PDF) | BuildWorkPro"
+  description="Free construction bid proposal template (Word + PDF): scope, base bid and alternates, inclusions/exclusions, schedule, terms, acceptance. No email required."
+  h1="Construction Bid Proposal Template"
+  intro="The proposal wrapper around your number: scope of work, base bid with alternates and allowances, the inclusions and exclusions that prevent disputes, schedule, payment terms, and an acceptance block that makes the win official. An editable Word document, or a PDF with the page-one fields fillable."
+  downloads={[
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'pdf', label: 'Download PDF (page-1 fields fillable)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with your company, proposal number, date and a pricing-valid-through date',
+    'Project and submitted-to blocks, plus a line for the bid documents and addenda you priced',
+    'Scope of work section written to survive "while you’re here" requests',
+    'Base bid as a lump sum, with an alternates and allowances table showing adds and deducts',
+    'Inclusions and exclusions side by side — the paragraph that saves disputes',
+    'Schedule block: anticipated start, substantial completion, duration and lead-time notes',
+    'Payment terms: progress billing, retainage and payment due, plus six standard clauses (validity, payment, changes, schedule, insurance and warranty, agreement)',
+    'Acceptance signature block that turns the proposal into an agreement',
+    'Word: fully editable, with amber input areas; PDF: page-one fields fillable, prints on two pages',
+    'Completed example: a $486,200 mechanical subcontract proposal with three alternates and an allowance',
+  ]}
+  howTo={[
+    [
+      'Number it, date it, and name the documents',
+      'Use your proposal sequence, set the pricing-valid-through date (30 days is typical), and write down exactly which drawings, spec divisions and addenda the price is based on. If the GC issues Addendum 3 after you submit, that line is what protects your number.',
+    ],
+    [
+      'Write the scope by system',
+      'One short paragraph saying you furnish all labor, materials, equipment and supervision, then bullets by system or area referencing sheet numbers and spec sections. Specific beats long: the scope section is what you point to when extra work appears.',
+    ],
+    [
+      'Price it: base bid, then alternates and allowances',
+      'The base bid is one lump sum for the scope above — the number from your estimate. Put every owner option in the alternates table as an add or (deduct), and any amount carried for undefined work as an allowance, so nobody can compare your base bid to a competitor’s that quietly excluded something.',
+    ],
+    [
+      'Name the inclusions and the exclusions',
+      'Inclusions: permits you pull, submittals, hoisting, testing, start-up, warranty, cleanup, sales tax. Exclusions: other trades, cutting and patching, painting, fees, overtime, bonds, unforeseen conditions. Write the exclusions as if the dispute has already started.',
+    ],
+    [
+      'Set the schedule and terms, sign, and send',
+      'Fill in start and completion dates, lead times, progress billing, retainage and payment due. Read the six clauses and edit anything that does not fit your contract or state. Sign it, send it, and when it comes back signed, file it with the subcontract — it is what you negotiate the subcontract from.',
+    ],
+  ]}
+  faqs={faqs}
+  related={[
+    'construction-estimate',
+    'construction-quote',
+    'scope-of-work',
+    'subcontractor-agreement',
+  ]}
+  feature={{
+    href: '/features/construction-bidding/',
+    label: 'See bidding in BuildWorkPro',
+    heading: 'Send it, sign it, start the job',
+    body: 'BuildWorkPro builds the bid from your catalog with margin and overhead applied as rates, exports a branded PDF proposal with your scope, payment terms and conditions, sends it for legally binding e-signature, and converts the accepted bid into a project — reminders included. <a href="/features/construction-bidding/" class="font-semibold text-brand-700 hover:underline">Construction bidding software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Stop retyping proposals',
+    body: 'Build the estimate once, generate the proposal PDF from the same numbers, collect the e-signature from an emailed link, and turn the win into a project with the contract value already in place.',
+  }}
+  disclaimer="General-purpose form, not legal advice. Have your attorney review the terms and confirm they fit your state and the bid documents before relying on them."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <!-- Hero -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Construction Bid Proposal Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          The proposal wrapper around your number: scope, price with alternates, the
-          inclusions/exclusions lists that prevent disputes, and an acceptance block that makes the
-          win official.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="construction-bid-proposal"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.docx)
-          </a>
-          <a
-            href="/blog/how-to-create-construction-bid/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            Read the bidding guide
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Opens in Word &amp; Google Docs
-        </p>
-      </div>
-    </section>
+  <h2>What a bid proposal is (and why the exclusions matter most)</h2>
+  <p>
+    A construction bid proposal is the customer-facing offer: a price, the scope that price buys,
+    the conditions attached to it, and a line for the customer to accept. It is the document a GC
+    reads to decide whether your $486,200 and a competitor’s $471,000 are actually for the same work
+    — and, months later, the document everyone re-reads when something you never priced turns out to
+    be expected.
+  </p>
+  <p>
+    That second reading is why the exclusions list is the most valuable paragraph you will write. A
+    scope section says what you will do; an exclusions list says what you will not do, in words the
+    other side has already accepted. Power wiring to your equipment, roof flashing, cutting and
+    patching, utility fees, bonds, overtime: each one you name is an argument you never have. The
+    number behind the proposal comes from the
+    <a href="/templates/construction-estimate/">construction estimate template</a>; this page is
+    about everything wrapped around that number.
+  </p>
 
-    <!-- What's inside -->
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What the proposal covers
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto">
-        The number inside the proposal comes from the
-        <a
-          href="/templates/construction-estimate/"
-          class="text-brand-600 underline underline-offset-2 font-medium"
-          >free construction estimate template</a
-        > — material/labor split, overhead, and true-margin pricing.
-      </p>
-    </section>
+  <h2>Section by section</h2>
+  <ul>
+    <li>
+      <strong>Bid documents and addenda.</strong> Drawing set and date, spec divisions, addenda acknowledged.
+      If the documents change after you submit, this line is your price protection.
+    </li>
+    <li>
+      <strong>Scope of work.</strong> One sentence promising labor, materials, equipment and supervision,
+      then bullets by system with sheet and spec references. Reference the documents; do not restate them.
+    </li>
+    <li>
+      <strong>Base bid.</strong> One lump sum for the scope above. Say whether sales tax on materials
+      is included and whether bonds are.
+    </li>
+    <li>
+      <strong>Alternates and allowances.</strong> Priced options as adds and (deducts); allowances carried
+      in the base bid with the note that they adjust to actual cost.
+    </li>
+    <li>
+      <strong>Inclusions and exclusions.</strong> Side by side so a reader sees both at once.
+    </li>
+    <li>
+      <strong>Schedule.</strong> Start, substantial completion, duration, and the lead times your dates
+      depend on — submittal turnaround, equipment ship dates.
+    </li>
+    <li>
+      <strong>Payment terms and conditions.</strong> Progress billing, retainage, payment due, then six
+      short clauses: validity, payment, changes in writing, schedule, insurance and warranty, and what
+      happens when the proposal is accepted.
+    </li>
+    <li>
+      <strong>Acceptance.</strong> Two signature blocks. When the second one is signed, this is an agreement.
+    </li>
+  </ul>
 
-    <FAQSection faqs={faqs} />
+  <h2>A worked example: the $486,200 Harbor Point proposal</h2>
+  <p>
+    The completed example is a mechanical subcontractor’s proposal to a general contractor for the
+    plumbing and HVAC scope of a medical office building, dated May 4, 2026 and valid for 30 days.
+    The base bid is $486,200.00 — the estimate total from the
+    <a href="/templates/construction-estimate/">estimate template</a>’s example — with sales tax on
+    materials included and bonds excluded. Three alternates sit under it: high-efficiency rooftop
+    units per Addendum 2 (add $28,400), a BMS graphics package (add $6,750), and deleting the
+    exam-room reheat coils (deduct $9,300). One allowance is called out inside the base bid: $1,980
+    to install an owner-furnished water heater, credited if deleted.
+  </p>
+  <p>
+    That allowance is the kind of detail a proposal earns its keep on. On our
+    <a href="/templates/change-order/">change order template</a> the same job later deletes the water
+    heater installation, and the credit is exactly $1,980 — no negotiation, because the proposal already
+    said what it was worth. The schedule runs June 1 to November 18, 2026, progress billing is monthly
+    against a schedule of values with 10% retainage, and the GC signed the acceptance on May 18 — which
+    is the contract date on every other document in the set.
+  </p>
 
-    <!-- CTA -->
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          Send it, sign it, start the job
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro builds the bid from your catalog, exports the client-ready PDF, collects the
-          legally-binding e-signature, and converts the accepted bid into a project — reminders
-          included.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/construction-bidding/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See bidding in BuildWorkPro
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-      <p class="mt-8 text-xs text-slate-400 max-w-2xl mx-auto">
-        Not legal advice — have your attorney review the terms before relying on them.
-      </p>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>Bid vs. proposal vs. quote vs. estimate</h2>
+  <p>The words blur in practice, so here is how the four documents divide the work:</p>
+  <ul>
+    <li>
+      <strong>Estimate</strong> — internal cost build-up by section, with overhead and margin. Never sent
+      as-is. <a href="/templates/construction-estimate/">Template</a>.
+    </li>
+    <li>
+      <strong>Bid</strong> — the price itself, submitted into a competitive selection, often on the GC’s
+      bid form.
+    </li>
+    <li>
+      <strong>Proposal</strong> — the bid plus scope, alternates, inclusions, exclusions, schedule and
+      terms, with an acceptance line. This template.
+    </li>
+    <li>
+      <strong>Quote</strong> — a one-page fixed-price offer for a small direct job, with line items, a
+      deposit and an acceptance signature. <a href="/templates/construction-quote/">Template</a>.
+    </li>
+  </ul>
+  <p>
+    After acceptance the proposal is usually followed by a
+    <a href="/templates/subcontractor-agreement/">subcontract</a> on the GC’s form. The agreement clause
+    in this template makes the proposal the deal until that subcontract exists, and requires the subcontract
+    to be consistent with it — read the subcontract against your exclusions before you sign.
+  </p>
+
+  <h2>Alternates, allowances and unit prices</h2>
+  <p>
+    Owners rarely have every decision made at bid time. Alternates let them decide later without
+    re-bidding: price each one as a clean add or deduct against the base bid, with the same
+    inclusions and exclusions, and never fold them into the lump sum. Allowances cover things that
+    cannot be priced yet — a fixture package still being selected — and should be stated as carried
+    amounts that adjust to actual cost with a written change order. If the bid form asks for unit
+    prices, provide them as a separate schedule for adds and deducts, with a note that they apply to
+    changes ordered in writing, not to correcting quantities in the documents.
+  </p>
+
+  <h2>Common mistakes this form is built to prevent</h2>
+  <ul>
+    <li>No validity date — a proposal from March becomes a contract price in September.</li>
+    <li>Scope written as a restatement of the spec instead of a list of what you are doing.</li>
+    <li>Exclusions left generic ("anything not listed") — courts and GCs read that as nothing.</li>
+    <li>
+      Alternates buried in the lump sum, making your base bid look high against a stripped one.
+    </li>
+    <li>No schedule assumptions, so a late submittal approval becomes your delay.</li>
+    <li>Payment terms missing retainage, so the subcontract sets it at whatever the GC wants.</li>
+    <li>Sending the estimate instead of the proposal and inviting line-item negotiation.</li>
+  </ul>
+  <p>
+    The full process from plans to submission is in our guide to
+    <a href="/blog/how-to-create-construction-bid/">how to create a construction bid</a>. Pair this
+    proposal with the <a href="/templates/scope-of-work/">scope of work template</a> when the scope needs
+    more room than a page, and with the
+    <a href="/templates/subcontractor-agreement/">subcontractor agreement</a> for what comes next.
+  </p>
+</TemplatePage>

@@ -1,0 +1,38 @@
+{
+  "slug": "rfi",
+  "name": "RFI Template",
+  "basename": "rfi-template",
+  "files": {
+    "pdf": {
+      "file": "rfi-template.pdf",
+      "bytes": 62575,
+      "pages": 1
+    },
+    "example": {
+      "file": "rfi-template-example.pdf",
+      "bytes": 36324,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "rfi-template.xlsx",
+      "bytes": 13181,
+      "sheets": [
+        "RFI Log",
+        "How to Use"
+      ]
+    },
+    "docx": {
+      "file": "rfi-template.docx",
+      "bytes": 12081
+    }
+  },
+  "previews": [
+    {
+      "file": "rfi.png",
+      "webp": "rfi.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

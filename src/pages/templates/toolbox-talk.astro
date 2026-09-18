@@ -1,0 +1,209 @@
+---
+// Toolbox talk cluster: "toolbox talk template" 170 · "safety meeting
+// template" 110 · "toolbox talk form" 70 · "tailgate meeting template" 20
+// (DataForSEO, US, 2026-09).
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What is a toolbox talk?',
+    answer:
+      'A short, informal safety meeting held with the crew at the job site — usually at the start of the shift, standing around the truck or the tailgate — on one topic relevant to that day’s work. It is documented with the topic, the key points, the hazards discussed and a sign-in sheet, so there is a record of what the crew was told and when.',
+  },
+  {
+    question: 'How often should we hold toolbox talks?',
+    answer:
+      'Weekly is the common minimum, daily on many GC sites, and always before a high-risk task or when conditions change — a new crew member, a crane day, the first hot week of summer. Most GC site safety plans state the frequency they expect from subs; match it and keep the sign-in sheets.',
+  },
+  {
+    question: 'How long should a toolbox talk take?',
+    answer:
+      'Ten to twenty minutes. Three to five key points, the hazards specific to today, questions from the crew, and signatures. A talk that runs forty minutes is a training session, and a talk that runs three is a signature collection — neither changes behavior on the roof.',
+  },
+  {
+    question: 'What topics should toolbox talks cover?',
+    answer:
+      'Whatever the crew will face this week: ladders and fall protection, heat illness, housekeeping and slips, hand and power tools, electrical and lockout, silica dust, lifting and rigging, excavation, hot work, driving and backing, PPE, emergency procedures. Rotate through the general topics and add a specific one whenever the schedule brings a new hazard — the crane day, the first day in the mechanical room, the switch to night work.',
+  },
+  {
+    question: 'Why does everyone have to sign the sheet?',
+    answer:
+      'Because the sign-in is the proof that a specific person was told about a specific hazard on a specific date. After an incident, an OSHA visit or an insurance claim, “we talk about it all the time” is not a record; a signed sheet dated the morning of the lift is. Printed name plus signature, and the presenter signs too.',
+  },
+  {
+    question: 'What is the difference between a toolbox talk and a JSA?',
+    answer:
+      'A toolbox talk is a crew meeting on a topic; a job safety analysis breaks one specific task into steps with the hazard and control for each. On a normal day you hold the talk. On a high-risk day you hold the talk on the theme and review the JSA for the task, and both get filed with the daily report.',
+  },
+  {
+    question: 'How long should I keep toolbox talk records?',
+    answer:
+      'At least for the life of the project plus whatever your safety program, insurer and contract require — several years is common practice. Keep them with the daily report for that date so the talk, the work performed and any incident are on the same day’s record. This is general information, not legal advice.',
+  },
+];
+---
+
+<TemplatePage
+  slug="toolbox-talk"
+  title="Free Toolbox Talk Template — Safety Meeting Sign-In Sheet (PDF + Word) | BuildWorkPro"
+  description="Free toolbox talk template: topic, key points, hazards, corrective actions and a 14-row sign-in sheet on one page. Fillable PDF + Word. No email required."
+  h1="Toolbox Talk Template"
+  intro="A one-page record of the crew safety meeting: topic, presenter, three to five key points, the hazards discussed, questions the crew raised, corrective actions with an owner, and a 14-row attendee sign-in sheet. Fill it in on a phone or print it for the tailgate."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF form' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with the topic, presenter, reference materials, project, date, start and end time, location and attendee count',
+    'Key points box for the three to five things the crew must remember',
+    'Hazards discussed and questions / concerns raised, side by side, with who raised what',
+    'Corrective actions / follow-ups with action, owner and when',
+    '14-row attendee sign-in table: number, printed name, company / trade, signature',
+    'Presenter signature and a reviewed-by line for the supervisor or safety lead',
+    'Fillable PDF that works in Acrobat, Preview or Chrome; editable Word version with the same layout',
+    'Completed example: the tailgate talk before a crane lift, nine attendees including the crane operator and the GC superintendent',
+  ]}
+  howTo={[
+    [
+      'Pick a topic that matches the week',
+      'Look at the schedule: what is new this week, what went wrong last week, what the weather is doing. Write the topic and the materials you are using — a JSA, a manufacturer sheet, a safety bulletin — in the header so the talk can be reconstructed later.',
+    ],
+    [
+      'Write the key points before you speak',
+      'Three to five, in plain words, as instructions: “Nobody under the load — ever.” If you cannot write them down in five lines, the topic is too broad for one talk. Say them, then leave them written on the sheet.',
+    ],
+    [
+      'Make the hazards specific to today',
+      'Not “falls” but “roof edge on the east side, curb openings at RTU-2 and RTU-3, the ladder at the hatch.” Record what the crew asked or flagged, with names — the question a crew member raises is often the hazard the plan missed.',
+    ],
+    [
+      'Assign every corrective action',
+      'Anything the talk turned up — a missing ladder rung clip, signage not posted — gets an action, an owner and a time. Close the ones you can before the work starts and note it on the sheet.',
+    ],
+    [
+      'Sign in, sign off, file it',
+      'Everyone present prints and signs; the presenter signs; the supervisor or safety lead reviews. File the sheet with that day’s daily report and, on a high-risk day, with the JSA for the task.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['job-safety-analysis', 'daily-report', 'meeting-minutes', 'timesheet']}
+  feature={{
+    href: '/features/site-logs/',
+    label: 'See site logs in BuildWorkPro',
+    heading: 'The safety meeting, logged with the day',
+    body: 'BuildWorkPro site logs record personnel on site, work performed and issues for every day, tagged Safety when that is what the entry is about, with photos and a reviewed status — so the toolbox talk, the near miss and the crew count are on the same dated record. <a href="/features/site-logs/" class="font-semibold text-brand-700 hover:underline">Construction daily log software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'A daily record your crew will actually keep',
+    body: 'Field crew can write the day’s site log from the job without seeing bids or billing, managers mark it reviewed, and every safety entry on the project is one filter away when someone asks.',
+  }}
+  disclaimer="General-purpose form, not legal or safety-engineering advice. A toolbox talk records training and communication; it does not replace the task-specific hazard analysis, the written safety program or the training your jurisdiction and contract require."
+  updated="2026-09-17"
+>
+  <h2>What a toolbox talk does</h2>
+  <p>
+    A toolbox talk — tailgate meeting, safety huddle, whatever the site calls it — is the ten
+    minutes at the start of the shift when the foreman tells the crew what will hurt them today and
+    how not to let it. It is informal by design: standing up, at the work location, in the words the
+    crew uses. What makes it a record rather than a chat is the sheet — topic, key points, hazards,
+    and a signature from everyone who was there.
+  </p>
+  <p>
+    That sheet matters for two reasons. On the day, writing the key points forces the presenter to
+    decide what actually matters. Afterwards, the signed sheet is the proof that a specific crew was
+    told about a specific hazard on a specific date, which is what the GC’s safety officer, OSHA and
+    your insurer will ask for after an incident.
+  </p>
+
+  <h2>Field by field</h2>
+  <ul>
+    <li>
+      <strong>Topic and materials</strong> — the subject and what you used: a JSA number, a manufacturer’s
+      instructions, a safety bulletin, last week’s near-miss report.
+    </li>
+    <li>
+      <strong>Key points</strong> — three to five instructions the crew must remember, written as you
+      would say them. This is the box a crew member should be able to recite at lunch.
+    </li>
+    <li>
+      <strong>Hazards discussed</strong> — the hazards specific to today’s work and location, not the
+      general category.
+    </li>
+    <li>
+      <strong>Questions / concerns raised</strong> — with names. The question a crew member asks is often
+      the hazard the plan missed, and recording who raised it shows the talk was a conversation.
+    </li>
+    <li>
+      <strong>Corrective actions</strong> — anything the talk turned up, with an owner and a time. Close
+      what you can before the work starts.
+    </li>
+    <li>
+      <strong>Sign-in</strong> — printed name, company or trade, signature. Fourteen rows covers a crew
+      plus the visitors — the crane operator, the electrician, the GC superintendent — who should be signing
+      too.
+    </li>
+  </ul>
+
+  <h2>A worked example: the morning of a crane lift</h2>
+  <p>
+    The completed example is TBT-031, held at 6:30 on August 3, 2026 at a crane pad in a medical
+    office parking lot, twenty minutes before four rooftop units were lifted. The topic is crane
+    lifts and suspended loads; the materials are the JSA for the lift, the crane lift plan and the
+    rigging inspection checklist. The five key points are the ones that keep people alive on a pick:
+    nobody under the load, one named signal person and anyone can call stop, tag lines not hands,
+    tied off within six feet of the edge, and a wind limit with the morning’s reading (8 mph)
+    written next to it.
+  </p>
+  <p>
+    The questions box is where the sheet earns its keep. One crew member asked whether the relocated
+    RTU-2 curb — moved under a change order earlier in the job — had been re-checked for its anchor
+    pattern; the foreman confirmed it had. Another reported a missing rung clip on the roof-hatch
+    ladder. That became the first corrective action: replace the clip, foreman, done at 6:45 before
+    anyone went up. Nine people signed, including the crane operator from the rigging subcontractor,
+    the electrical foreman and the GC’s superintendent. The same morning’s
+    <a href="/templates/job-safety-analysis/">job safety analysis</a> carries the step-by-step detail;
+    the talk carries the crew-level message.
+  </p>
+
+  <h2>Topics for the rotation</h2>
+  <p>
+    Rotate through the general topics and add a specific one whenever the schedule brings a new
+    hazard. A working list for a mechanical, plumbing or electrical crew: ladders and fall
+    protection; heat illness and hydration; cold stress; housekeeping, cords and slips; hand and
+    power tools; electrical safety and lockout / tagout; silica and dust from cutting and coring;
+    lifting, rigging and suspended loads; excavation and trenching; hot work and fire watch;
+    confined spaces and mechanical rooms; hazardous materials and SDS; driving, backing and mobile
+    equipment; PPE inspection; emergency procedures and first aid; stop-work authority; and the
+    incident or near miss from last week, discussed without blame.
+  </p>
+
+  <h2>Toolbox talk, JSA and the daily report</h2>
+  <p>
+    The talk is the crew meeting; the <a href="/templates/job-safety-analysis/">JSA</a> is the task-specific
+    analysis; the <a href="/templates/daily-report/">daily report</a> is where both are referenced for
+    the day, alongside who was on site and what was done. Keep the three together by date. If a talk produces
+    a corrective action that involves the GC — signage, barricades, another trade’s equipment — carry
+    it to the next coordination meeting and record it in the <a href="/templates/meeting-minutes/"
+      >meeting minutes</a
+    > with an owner and a date.
+  </p>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>Reading a generic handout aloud with nothing about today’s site in it.</li>
+    <li>
+      Collecting signatures without a talk. The sheet records communication; it cannot invent it.
+    </li>
+    <li>
+      Leaving the questions box empty. A crew that asks nothing was not asked; a foreman who records
+      nothing missed the best information on the sheet.
+    </li>
+    <li>
+      Corrective actions with no owner or time, so the ladder clip is still missing next week.
+    </li>
+    <li>
+      Filing the sheets in a binder no one can find. Keep them with the daily report for the date.
+    </li>
+  </ul>
+</TemplatePage>

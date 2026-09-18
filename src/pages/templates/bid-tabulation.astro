@@ -1,0 +1,216 @@
+---
+// Bid tab cluster: "bid tabulation template" 90 · "bid tab template" 90 · "bid
+// comparison template" 70; "free bid leveling template" shows in GSC
+// (DataForSEO, US, 2026-09). Ungated per Q5.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What is a bid tabulation?',
+    answer:
+      'A bid tabulation (bid tab) is a side-by-side comparison of the bids received for one scope of work — a supplier package, a sub-tier trade, a rental — showing each bidder’s price and what it does and does not include. Leveling is the step that makes the prices comparable: adding the cost of anything a bidder excluded so every column carries the same scope. The result is a leveled total per bidder and a defensible reason for the award.',
+  },
+  {
+    question: 'What is the difference between a bid tab, bid leveling and a bid comparison?',
+    answer:
+      'They are the same document at three levels of effort. A bid comparison lists the prices. A bid tab adds a scope checklist so you can see who included what. Bid leveling prices the gaps — plug values for excluded items, quoted adds and deducts — so the totals are apples to apples. This template does all three on one page.',
+  },
+  {
+    question: 'What is a plug value?',
+    answer:
+      'Your estimate of what an item a bidder excluded will cost you to buy elsewhere — a curb from another supplier, freight from a carrier, a crane remobilization if equipment ships late. Enter one plug per scope item; it is added to the total of every bidder marked Excl on that row. Plug high rather than low: if you have no quote for the gap, price it at what a rushed purchase would cost.',
+  },
+  {
+    question: 'How many bids should I get?',
+    answer:
+      'Three is the working minimum for any package big enough to matter; five columns are on the template because equipment and specialty packages often draw more. One bid is a price, two is a coin toss, three is a market. Fewer than three on a large buy is worth a phone call to a fourth supplier before you award.',
+  },
+  {
+    question: 'Should I share the bid tab with the bidders?',
+    answer:
+      'Not the whole tab. Tell each bidder which of your scope items they excluded and ask them to confirm or revise before you award — that is fair and usually gets you a better number. Sharing competitors’ prices or plug values is not; it is also how bidders learn to bid low and exclude everything.',
+  },
+  {
+    question: 'What if a bidder’s quote does not say whether an item is included?',
+    answer:
+      'Treat silence as excluded until they confirm in writing — enter Excl, let the plug value do its work, and ask. Most disputes on purchase orders are over items that were never mentioned rather than items that were excluded. The notes column is there to record what they told you and when.',
+  },
+  {
+    question: 'Do subcontractors need to level bids, or is that a GC thing?',
+    answer:
+      'Every sub who buys equipment, material packages or sub-tier labor is leveling bids whether they write it down or not. A mechanical sub leveling four rooftop-unit quotes is the completed example on this page: the lowest base bid was $64,900 and the lowest leveled bid was $72,940 — from a different bidder. Writing it down is what turns a gut call into a number the budget review will accept.',
+  },
+];
+---
+
+<TemplatePage
+  slug="bid-tabulation"
+  title="Free Bid Tabulation Template — Compare & Level Sub and Supplier Bids (Excel) | BuildWorkPro"
+  description="Free bid tabulation template (Excel + PDF): level up to 5 sub or supplier bids with scope checks, plug values and a highlighted low bid. No email required."
+  h1="Bid Tabulation Template"
+  intro="Level supplier and sub-tier quotes side by side: mark each scope item Incl, Excl or a quoted add for every bidder, plug the gaps, and read an apples-to-apples leveled total with the low bid highlighted. Excel with the formulas and conditional formatting built in, or a landscape fillable PDF."
+  downloads={[
+    { format: 'xlsx', label: 'Download Excel bid tab (.xlsx)' },
+    { format: 'pdf', label: 'Download fillable PDF (landscape)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with the project, the bid package, spec section, bid due date and the budget you carried in the estimate',
+    'Bidder register for up to five bidders: name, contact and quote number, quote date, base bid',
+    'Scope checklist rows — every item or requirement the package must include — each with a plug value',
+    'Per-bidder cells that take Incl, Excl or a quoted add / (deduct) amount',
+    'Scope-gap row that adds the plug value for every Excl, and a quoted-adds row that sums the numbers',
+    'Leveled total per bidder with the low bid highlighted, plus rank, spread over the low bid and over / (under) budget',
+    'Notes column for what each bidder told you, and a leveling notes and recommended award block',
+    'Excel: live formulas, Incl / Excl colour coding and a conditional format that finds the low leveled bid automatically',
+    'PDF: one landscape page, fillable in Acrobat, Preview or Chrome',
+    'Completed example: four rooftop-unit quotes where the lowest base bid excludes $20,950 of scope',
+  ]}
+  howTo={[
+    [
+      'Define the package and the budget',
+      'Name the scope you are buying, cite the spec section and drawings, set the bid due date, and enter the amount you carried for this package on your estimate. The tab measures every bidder against that number.',
+    ],
+    [
+      'Enter the bidders and their base bids',
+      'One column per bidder: name, quote number and date, and the lump-sum base bid exactly as quoted. Do not adjust anything yet — the base bid should be traceable to the page they sent.',
+    ],
+    [
+      'List the scope items and plug each one',
+      'Every item and requirement the package must include: accessories, controls, freight, start-up, warranties, submittals, lead time, payment terms. Next to each, enter a plug value — what it would cost you to buy that item separately if a bidder left it out.',
+    ],
+    [
+      'Mark each cell Incl, Excl or a number',
+      'Read each quote against the checklist. Incl if it is in their price, Excl if it is not, or the add or (deduct) they quoted for that item. Silence counts as Excl until they confirm in writing. Put what they said in the notes.',
+    ],
+    [
+      'Read the leveled totals and write the award',
+      'The template adds the plugs for every Excl and the quoted adds, highlights the low leveled bid, ranks the rest, and shows each against the budget. Write your recommendation, then carry the winner’s exclusions into the purchase order or subcontract so the gaps get bought, not forgotten.',
+    ],
+  ]}
+  faqs={faqs}
+  related={[
+    'construction-estimate',
+    'construction-bid-proposal',
+    'subcontractor-agreement',
+    'scope-of-work',
+  ]}
+  feature={{
+    href: '/features/construction-bidding/',
+    label: 'See bidding in BuildWorkPro',
+    heading: 'Level the buy here, price the sell there',
+    body: 'BuildWorkPro is bidding software for the subcontractor side: the winning supplier number goes into a line-item bid priced from your catalog, margin and overhead are applied as rates, and the won bid converts into a project with its contract value in place. <a href="/features/construction-bidding/" class="font-semibold text-brand-700 hover:underline">Construction bidding software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Buy it right, then bid it right',
+    body: 'Once the tab tells you what the package really costs, BuildWorkPro turns that cost into a sell price with your margin, generates the proposal, and tracks the bid from sent to won.',
+  }}
+  disclaimer="Plug values are your estimate of what excluded items cost elsewhere — use real quotes where you have them. A low leveled bid still needs its exclusions written into the purchase order or subcontract. Not legal advice."
+  updated="2026-09-17"
+>
+  <h2>Why the lowest number is rarely the lowest bid</h2>
+  <p>
+    Every supplier and sub-tier quote is a price for a slightly different scope. One includes the
+    curbs, one excludes freight, one wants a deposit, one ships in sixteen weeks instead of twelve.
+    Compare the base bids and you are comparing four different things; award on the lowest and you
+    buy the missing pieces afterward at whatever they cost that week. Bid leveling is the fix: list
+    what the package must include, check each quote against it, price the gaps, and compare the
+    totals that result.
+  </p>
+  <p>
+    GCs do this to your bids with dedicated software — which is why our
+    <a href="/features/construction-bidding/">construction bidding</a> page is careful to say BuildWorkPro
+    is not GC bid-leveling software. But every subcontractor who buys equipment packages, material quotes
+    or sub-tier labor is leveling bids too, usually in their head. This template is the one-page version
+    that survives the budget review.
+  </p>
+
+  <h2>How the template levels: Incl, Excl, plugs and quoted adds</h2>
+  <p>
+    Each scope row has one plug value and one cell per bidder. The cell takes one of three things:
+  </p>
+  <ul>
+    <li><strong>Incl</strong> — the item is in the bidder’s price. Nothing is added.</li>
+    <li>
+      <strong>Excl</strong> — the item is not in the price. The row’s plug value is added to that bidder’s
+      total.
+    </li>
+    <li>
+      <strong>A number</strong> — the bidder quoted an add or (deduct) for that item. The number is added.
+    </li>
+  </ul>
+  <p>
+    Leveled total = base bid + the plugs for every Excl + the quoted adds. In Excel that is a
+    <code>SUMPRODUCT</code> on the Excl cells and a <code>SUM</code> on the numeric ones, per bidder,
+    with a conditional format that turns the lowest leveled total green. Rank, spread over the low bid
+    and over / (under) budget follow from it. The PDF prints the same grid with a line for each; you do
+    the arithmetic.
+  </p>
+
+  <h2>A worked example: four rooftop-unit quotes, $20,950 of hidden scope</h2>
+  <p>
+    The completed example is a mechanical subcontractor buying the packaged rooftop units for a
+    medical office building — the $74,800 materials line on our
+    <a href="/templates/construction-estimate/">estimate template</a>’s example. Four suppliers
+    quoted. Peak Mechanical Supply was low on base bid at $64,900; Mile High HVAC Supply was
+    $66,300; Front Range Equipment Sales $68,400; Colorado Air Products $71,800.
+  </p>
+  <p>
+    The checklist told a different story. Peak excluded curbs, economizers, controllers, hail
+    guards, freight, start-up and the five-year compressor warranty, could not meet the twelve-week
+    ship date, and wanted a 50% deposit: $20,950 of plugs, for a leveled total of $85,850 — highest
+    of the four. Mile High excluded curbs and hail guards ($5,450 in plugs) and quoted freight as a
+    $1,190 add, leveling to $72,940. Front Range excluded controllers and the compressor warranty
+    ($4,600), leveling to $73,000 — sixty dollars behind. Colorado Air included everything but
+    start-up and leveled to $74,000. The award went to Mile High at $67,490 on the purchase order,
+    with curbs and hail guards bought separately — $1,860 under the estimate, which is exactly the
+    favorable variance that shows on the RTU line of our
+    <a href="/templates/construction-budget/">construction budget template</a>.
+  </p>
+
+  <h2>Choosing plug values</h2>
+  <p>
+    A plug is only as good as its source. Use a real quote where you have one — the curb supplier’s
+    price, the carrier’s freight rate, the crane company’s remobilization charge. Where you do not,
+    price the item at what a rushed purchase would cost, not what a planned one would: the whole
+    point of the plug is that this item was not planned. Non-price requirements get plugs too. A
+    late ship date is a crane remobilization; a deposit demand is cash you would rather keep; a
+    missing warranty is a service call you will pay for. Zero is a valid plug for a compliance item
+    you simply want flagged — the Excl still shows in red, it just does not move the total.
+  </p>
+
+  <h2>After the tab: writing the award</h2>
+  <p>
+    The leveled total tells you who to buy from; it does not change what they quoted. The winning
+    bidder’s exclusions are still excluded, so the purchase order or subcontract has to say what you
+    are buying from them and what you are buying elsewhere, and any quoted adds you accepted have to
+    appear as line items. Put the scope checklist in the PO. For sub-tier labor the same list
+    becomes the scope exhibit of the
+    <a href="/templates/subcontractor-agreement/">subcontractor agreement</a>, and the
+    <a href="/templates/scope-of-work/">scope of work template</a> is the long form when the package needs
+    more than a checklist. Then file the tab with the job: when the budget review asks why you bought
+    from the second-lowest base bid, this page is the answer.
+  </p>
+
+  <h2>Common leveling mistakes</h2>
+  <ul>
+    <li>Awarding on base bid and discovering the exclusions on the invoice.</li>
+    <li>Plugging low because you want a particular bidder to win.</li>
+    <li>Treating silence as included — it is not until they say so in writing.</li>
+    <li>Ignoring non-price terms: lead time, deposits, warranty, payment terms.</li>
+    <li>
+      Leveling three quotes for three different quantities without checking the takeoff first.
+    </li>
+    <li>Sharing competitors’ numbers with bidders, and teaching them to bid low and exclude.</li>
+    <li>
+      Not carrying the winner’s exclusions into the PO — the gap you plugged still has to be bought.
+    </li>
+  </ul>
+  <p>
+    The winning number goes back into your estimate, and from there onto the
+    <a href="/templates/construction-bid-proposal/">bid proposal</a>. For the full sequence from
+    takeoff to submission, see <a href="/blog/how-to-create-construction-bid/"
+      >how to create a construction bid</a
+    >.
+  </p>
+</TemplatePage>

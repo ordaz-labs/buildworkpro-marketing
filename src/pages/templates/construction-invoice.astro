@@ -1,146 +1,222 @@
 ---
-// Construction invoice template — construction invoice template 1,300/mo KD0 + subcontractor invoice template 110/mo. Ungated per Q5.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/construction-invoice-template.xlsx';
-
-const whatsInside = [
-  '15 line items with quantity × rate amounts computed per line',
-  'Subtotal, adjustable sales-tax rate, and total due',
-  'Invoice number, date, due date, and terms fields',
-  'Payment-instructions block: checks, ACH, late-fee terms',
-  'Sample service-work rows showing the pattern',
-  'A pointer to the pay-app template when the client is a GC',
-];
+// Invoice cluster: contractor invoice template 1,900 · construction invoice
+// template 1,000 · construction invoice template word 1,000 · free construction
+// invoice template 170 · subcontractor invoice template 110 · progress invoice
+// template 30 (US, DataForSEO, 2026-09). Ungated per Q5.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
     question: 'What should a construction invoice include?',
     answer:
-      'Your business details and license number, the client and project, an invoice number and date, line items with quantities and rates, tax where applicable, the total due, the due date, and how to pay. Ambiguity delays payment — the template fields exist so nothing is left to interpretation.',
+      'Your business details and license number, the customer and the project or job address, an invoice number and issue date, a due date stated as a date, line items with quantities and unit prices, sales tax where applicable, any retainage held and payments already received, the balance due, and how to pay. Ambiguity delays payment — the template fields exist so nothing is left to interpretation.',
   },
   {
     question: 'What is the difference between an invoice and a pay application?',
     answer:
-      'An invoice bills a complete amount for work or service — common for direct-to-owner and service work. A pay application bills a percentage of progress against a schedule of values with retainage, on a monthly cycle — the format GCs require. If your client is a GC, you almost certainly need the pay application template instead.',
+      'An invoice bills a complete amount for work or service — direct-to-owner jobs, service calls, T&M work, small projects. A pay application bills a percentage of progress against a schedule of values with retainage, on a monthly cycle, and is the format general contractors require. If your customer is a GC, you almost certainly need the pay application template instead; some GCs want both, with the invoice referencing the application number for their accounts-payable system.',
+  },
+  {
+    question: 'What is a progress invoice?',
+    answer:
+      'An invoice for part of a job — a deposit, a milestone, or a percentage complete — rather than the whole amount at the end. It works like a pay application without the continuation sheet: state what portion the invoice covers, deduct payments already received, and carry the remaining contract balance in the notes so the customer can see the running total. On larger direct-to-owner jobs, a progress invoice with retainage held is normal.',
+  },
+  {
+    question: 'How do I show retainage on an invoice?',
+    answer:
+      'As a deduction after the total: bill the full value of the work, add tax, then subtract the retainage the customer holds (the template figures it as a rate on the subtotal, before tax) and any payments received to reach the balance due. Say in the notes when the retainage is released — on final acceptance, on a date, or on a milestone — and invoice it separately when that happens. Our retainage guide covers the rules by contract type.',
+  },
+  {
+    question: 'Should I charge sales tax on labor?',
+    answer:
+      'It depends on the state. Many states tax materials and not construction labor; some tax certain services; and contractors in some states pay tax on materials at purchase and do not charge it at all. The template has a taxable flag per line so you can tax materials and leave labor and subcontracted work untaxed where that is the rule. Confirm the treatment for your state and job type with your accountant.',
   },
   {
     question: 'What payment terms should I use?',
     answer:
-      'Net 15 or Net 30 are standard; shorter for service work. State the due date as a date, not just a term, and include a late-fee percentage where your state allows it — an invoice with consequences gets prioritized.',
+      'Net 15 or Net 30 are standard; due on receipt for service work. State the due date as a date, not just a term, and include a late-fee percentage where your state allows it — 1.5% per month is common. An invoice with a date and a consequence gets prioritized over one with neither.',
   },
   {
     question: 'How should I number invoices?',
     answer:
-      'Sequentially, with a scheme that sorts: year plus a running number (2026-041) or a project prefix. Never reuse or skip numbers — your bookkeeper, your accountant, and any audit will thank you.',
+      'Sequentially, with a scheme that sorts: year plus a running number (INV-2026-0147) or a project prefix. Never reuse or skip numbers, and never renumber a sent invoice — issue a credit and a new one instead. Your bookkeeper, your accountant and any audit will thank you.',
   },
 ];
 ---
 
-<Layout
-  title="Free Construction Invoice Template (Excel)"
-  description="Free construction invoice template: line items with computed amounts, sales tax, total due, and payment terms — an Excel workbook, no email required."
+<TemplatePage
+  slug="construction-invoice"
+  title="Free Contractor Invoice Template — Excel, Word & PDF | BuildWorkPro"
+  description="Free contractor invoice template: Excel with line items, sales tax, retainage and balance due, plus editable Word and fillable PDF. No email required."
+  h1="Contractor Invoice Template"
+  intro="A clean invoice that does its own math: line items, sales tax on the lines that are taxable, retainage held, payments received, and a balance due your customer cannot misread. Use it for the work you bill directly — service calls, T&M, owner-direct jobs — and the pay application template for the work you bill through a GC."
+  downloads={[
+    { format: 'xlsx', label: 'Download Excel workbook (.xlsx)' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'pdf', label: 'Download fillable PDF' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with your company and license, the customer, the project or job address, and a PO / reference line',
+    'Invoice number, issue date, due date and terms (Net 30 and the other common terms in a dropdown in Excel)',
+    'A boxed amount due at the top so the number the customer is looking for is the first thing they see',
+    '15 line items with quantity, unit, unit price and a taxable flag; amounts compute per line in Excel',
+    'Subtotal, taxable amount, sales tax at your rate, and total',
+    'Retainage held as a rate on the subtotal and a payments-received line, so deposits and holdbacks net to the balance due',
+    'How-to-pay block for check, ACH and memo-line instructions, plus notes and payment terms',
+    'Late-charge and what-is-taxed language you can keep or edit',
+    'A completed example: a $10,470 owner-direct cooling job with 8.81% tax on materials, 5% retainage and a $3,000 deposit',
+  ]}
+  howTo={[
+    [
+      'Number it and set the dates',
+      'Use the next number in your sequence, put the issue date on it, and state the due date as a date — Net 30 becomes October 8, not "30 days". Pick the terms and cite the PO, work authorization or quote the customer signed so their accounts-payable clerk can match it.',
+    ],
+    [
+      'Bill to the right party',
+      'The customer is whoever contracted with you and owes you the money — the owner on a direct job, the property manager, the homeowner. If a general contractor hired you, stop here: they will want a pay application against a schedule of values, not an invoice.',
+    ],
+    [
+      'Itemize the work',
+      'One line per material, labor block or service with quantity, unit and unit price. Mark the lines that are taxable in your state (usually materials, usually not labor). Attach the signed T&M ticket, work order or quote as backup — itemized invoices with backup get paid; lump sums get questioned.',
+    ],
+    [
+      'Apply tax, retainage and payments',
+      'Enter your sales tax rate; it applies only to the taxable lines. If the customer holds retainage, enter the rate — it is figured on the work, before tax. Deduct the deposit or prior payments. The balance due computes and fills the amount-due box.',
+    ],
+    [
+      'Tell them how to pay, then send it',
+      'Check payable to, ACH details, the invoice number on the memo line, and your late-charge terms. Save as PDF, send it the day the work is done, and log it — the invoice you send a week late is the one that gets paid a month late.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['aia-g702-g703', 'construction-quote', 'lien-waiver', 'tm-ticket']}
+  feature={{
+    href: '/features/pay-applications/',
+    label: 'See invoicing in BuildWorkPro',
+    heading: 'Invoices that come from the job, not a blank file',
+    body: 'BuildWorkPro generates invoices from your projects and approved <a href="/features/pay-applications/" class="font-semibold text-brand-700 hover:underline">pay applications</a>, numbers them automatically, emails the PDF, and syncs them to QuickBooks Online — the numbering, the records and the books all agree. $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Bill from the job, get paid on time',
+    body: 'BuildWorkPro turns approved pay applications and finished work into numbered invoices, emails them with the PDF attached, and keeps the books in sync — so the invoice goes out the day the work is done.',
+  }}
+  disclaimer="General-purpose form, not legal or accounting advice. Sales tax treatment of labor and materials, late-charge limits and retainage rules vary by state — confirm them with your accountant or attorney."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Construction Invoice Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          A clean invoice that does its own math: line items, tax, total due, and the payment terms
-          that get you paid on time — for the work you bill directly, not through a GC.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="construction-invoice"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.xlsx)
-          </a>
-          <a
-            href="/templates/aia-g702-g703/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            Billing a GC? Use the pay app template
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Works in Excel, Google Sheets &amp; Numbers
-        </p>
-      </div>
-    </section>
+  <h2>Invoice or pay application? Decide this first</h2>
+  <p>
+    Contractors bill two ways, and using the wrong document is the most common reason a bill sits in
+    someone's inbox. An <strong>invoice</strong> bills a complete amount for work or service: a service
+    call, a T&amp;M repair, a small project for a homeowner or a property owner who hired you directly.
+    It has line items, tax, terms and a due date, and the customer pays it from their accounts payable
+    like any other bill. A <strong>pay application</strong> bills a percentage of progress on a fixed-sum
+    contract against a schedule of values, with retainage withheld, on a monthly cycle — the format every
+    general contractor requires from its subcontractors.
+  </p>
+  <p>
+    The rule of thumb: if the customer is a GC, use the
+    <a href="/templates/aia-g702-g703/">pay application template</a>. If the customer is an owner, a
+    manager or a homeowner, use this one. Some GCs want both, an invoice on top of the pay
+    application for their AP system — in that case the invoice references the application number,
+    matches its current payment due, and carries the same retainage.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What's in the template
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p
-        class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto"
-        set:html={`Billing monthly against a schedule of values? That’s a <a href="/templates/aia-g702-g703/" class="text-brand-600 underline underline-offset-2 font-medium">pay application</a>, not an invoice — grab that template instead.`}
-      />
-    </section>
+  <h2>What goes on a contractor invoice, field by field</h2>
+  <ul>
+    <li>
+      <strong>Your company and license number</strong> — the license is not decoration; many owners and
+      property managers will not pay an unlicensed contractor, and their AP software asks for it.
+    </li>
+    <li>
+      <strong>Bill to and project / job</strong> — who owes the money and where the work happened. Keep
+      the job address even when it matches the billing address; commercial customers file by property.
+    </li>
+    <li>
+      <strong>Invoice number, issue date, due date, terms, PO / reference</strong> — the five things an
+      AP clerk needs to approve payment without calling you.
+    </li>
+    <li>
+      <strong>Amount due, boxed at the top</strong> — the customer is looking for one number. Put it where
+      they look.
+    </li>
+    <li>
+      <strong>Line items with a taxable flag</strong> — description, quantity, unit, unit price, amount.
+      Marking which lines are taxable is what lets the workbook tax materials and not labor.
+    </li>
+    <li>
+      <strong>Subtotal, taxable amount, sales tax, total</strong> — the tax base is shown so the customer
+      can check it.
+    </li>
+    <li>
+      <strong>Less retainage held, less payments received, balance due</strong> — deposits and holdbacks
+      are subtracted in the open, not buried in a lump sum.
+    </li>
+    <li>
+      <strong>How to pay, notes, payment terms</strong> — check and ACH instructions, the memo line, completion
+      date, warranty, when retainage is released, and the late charge.
+    </li>
+  </ul>
 
-    <FAQSection faqs={faqs} />
+  <h2>A worked example</h2>
+  <p>
+    The completed example is an owner-direct job: the developer who owns the medical office campus
+    where the sample subcontractor is already working asked them to add two ductless split systems
+    to a server room in the neighbouring building, outside the GC's contract. Four material lines
+    (two 2-ton systems at $2,840.00 each, line sets, condensate pumps, disconnects and pads) come to
+    $6,598.00 and are marked taxable; 24 hours of installation labor at $98.00, a subcontracted
+    electrical circuit at $1,180.00 and startup at $340.00 are not. The subtotal is $10,470.00.
+  </p>
+  <p>
+    Sales tax at Denver's 8.81% applies to the $6,598.00 of materials only — $581.28 — for a total
+    of $11,051.28. The owner's work authorization holds 5% retainage on the work, $523.50, released
+    on final acceptance, and a $3,000.00 deposit was received in August. The balance due, and the
+    number in the box at the top, is <strong>$7,527.78</strong>, due October 8 on Net 30 terms. The
+    notes say when the work was completed and when the retainage will be invoiced, so nobody has to
+    ask.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          Invoices that come from the job, not a blank file
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro generates invoices from your projects and pay applications and syncs them to
-          QuickBooks Online — numbering, records, and the books all agree.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/pay-applications/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See billing in BuildWorkPro
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>Progress invoices and retainage on invoices</h2>
+  <p>
+    On a larger direct-to-owner job you will invoice in stages: a deposit, one or more progress
+    invoices, and a final. Each progress invoice bills the value of the work since the last one,
+    subtracts payments received, and — if the owner holds retainage — subtracts the holdback on this
+    invoice's work. Carry a running total in the notes ("contract $48,000; billed to date $31,200
+    including this invoice; retainage held to date $1,560") so the customer sees the same numbers
+    you do. When the job is accepted, the retainage is invoiced on its own, usually alongside a
+    <a href="/templates/lien-waiver/">final lien waiver</a>. Our
+    <a href="/blog/retainage-construction-guide/">retainage guide</a> covers rates, release and what to
+    do when it is late.
+  </p>
+
+  <h2>Payment terms and late fees that actually work</h2>
+  <p>
+    Terms are a date, not a phrase. "Net 30" on an invoice issued September 8 means October 8 —
+    print the date. State a late charge (1.5% per month is common; check what your state allows),
+    say what it applies to, and apply it when the time comes; a term that is never enforced is not a
+    term. Give the customer every way to pay you: check with the address, ACH details on request,
+    and the invoice number on the memo line so the payment lands on the right job. Send the invoice
+    the day the work is done. The single biggest predictor of when you get paid is when you asked.
+  </p>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>
+      Invoicing a GC for progress work — they need a pay application against a schedule of values.
+    </li>
+    <li>Taxing labor in a state that does not tax it, or not taxing materials in one that does.</li>
+    <li>Netting the deposit into the line items instead of showing it as a payment received.</li>
+    <li>Omitting the retainage release terms, then arguing about them at closeout.</li>
+    <li>
+      A lump-sum line with no backup — attach the signed <a href="/templates/tm-ticket/"
+        >T&amp;M ticket</a
+      > or the accepted <a href="/templates/construction-quote/">quote</a>.
+    </li>
+    <li>Renumbering or reusing invoice numbers; issue a credit and a new invoice instead.</li>
+  </ul>
+  <p>
+    When invoices come from the job record instead of a blank file — the accepted quote, the
+    approved pay application, the logged T&amp;M — the numbers agree and the invoice goes out the
+    same day. That is what <a href="/features/pay-applications/">invoicing in BuildWorkPro</a> does.
+  </p>
+</TemplatePage>

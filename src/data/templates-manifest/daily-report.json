@@ -1,0 +1,39 @@
+{
+  "slug": "daily-report",
+  "name": "Construction Daily Report Template",
+  "basename": "daily-report-template",
+  "files": {
+    "pdf": {
+      "file": "daily-report-template.pdf",
+      "bytes": 97843,
+      "pages": 1
+    },
+    "example": {
+      "file": "daily-report-template-example.pdf",
+      "bytes": 45457,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "daily-report-template.xlsx",
+      "bytes": 16478,
+      "sheets": [
+        "Daily Report",
+        "Weekly Summary",
+        "How to Use"
+      ]
+    },
+    "docx": {
+      "file": "daily-report-template.docx",
+      "bytes": 13732
+    }
+  },
+  "previews": [
+    {
+      "file": "daily-report.png",
+      "webp": "daily-report.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

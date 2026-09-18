@@ -1,0 +1,30 @@
+{
+  "slug": "lien-waiver",
+  "name": "Lien Waiver Forms",
+  "basename": "lien-waiver-forms",
+  "files": {
+    "pdf": {
+      "file": "lien-waiver-forms.pdf",
+      "bytes": 155408,
+      "pages": 4
+    },
+    "example": {
+      "file": "lien-waiver-forms-example.pdf",
+      "bytes": 66971,
+      "pages": 4
+    },
+    "docx": {
+      "file": "lien-waiver-forms.docx",
+      "bytes": 17244
+    }
+  },
+  "previews": [
+    {
+      "file": "lien-waiver.png",
+      "webp": "lien-waiver.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

@@ -8,50 +8,49 @@ import {
   buildHtmlTable,
 } from '../../lib/email';
 import { checkRateLimit, type RateLimiter } from '../../lib/rate-limit';
+import { TEMPLATE_LIST, type TemplateEntry } from '../../data/templates';
 
 export const prerender = false;
 
 // The complete template pack (issue #145 / backlog #601). Files live in
 // public/templates-files/ and are open downloads by design — this email is a
-// convenience bundle, not a gate. Keep this list in sync with the `live` array
-// in src/pages/templates/index.astro. Daily-report lives on a blog post, not
-// the hub cards, but ships in the pack.
+// convenience bundle, not a gate. The list is derived from the template
+// registry (src/data/templates.ts) so it can never drift from the hub.
 const SITE = 'https://buildworkpro.com';
-const PACK: Array<{ title: string; file: string }> = [
-  { title: 'Construction RFI Template', file: 'rfi-template.docx' },
-  { title: 'Construction Submittal Log Template', file: 'submittal-log-template.xlsx' },
-  { title: 'Construction T&M Ticket Template', file: 'tm-ticket-template.xlsx' },
-  {
-    title: 'Pay Application Template (G702 & G703 style)',
-    file: 'pay-application-template-g702-g703-style.xlsx',
-  },
-  { title: 'Schedule of Values Template', file: 'schedule-of-values-template.xlsx' },
-  { title: 'Construction Change Order Template', file: 'change-order-template.docx' },
-  { title: 'Construction Invoice Template', file: 'construction-invoice-template.xlsx' },
-  { title: 'Construction Punch List Template', file: 'punch-list-template.xlsx' },
-  { title: 'Construction Schedule Template', file: 'construction-schedule-template.xlsx' },
-  { title: 'Daily Report Template', file: 'daily-report-template.docx' },
-  { title: 'Construction Bid Proposal Template', file: 'construction-bid-proposal-template.docx' },
-  { title: 'Construction Estimate Template', file: 'construction-estimate-template.xlsx' },
-  { title: 'Subcontractor Agreement Template', file: 'subcontractor-agreement-template.docx' },
-];
+
+const EXT: Record<TemplateEntry['formats'][number], string> = {
+  PDF: 'pdf',
+  Excel: 'xlsx',
+  Word: 'docx',
+};
+
+const PACK = TEMPLATE_LIST.map((t) => ({
+  title: t.title,
+  page: `${SITE}/templates/${t.slug}/`,
+  files: t.formats.map((f) => ({
+    label: f,
+    url: `${SITE}/templates-files/${t.basename}.${EXT[f]}`,
+  })),
+}));
 
 // Static content only — no user input is interpolated into the visitor email.
 function buildPackEmail(): string {
   const items = PACK.map(
     (t) =>
-      `<li style="margin:0 0 10px"><a href="${SITE}/templates-files/${t.file}" style="color:#2563eb;font-weight:600">${t.title}</a></li>`
+      `<li style="margin:0 0 12px"><a href="${t.page}" style="color:#2563eb;font-weight:600">${t.title}</a><br><span style="font-size:13px;color:#475569">${t.files
+        .map((f) => `<a href="${f.url}" style="color:#2563eb">${f.label}</a>`)
+        .join(' · ')}</span></li>`
   ).join('');
   return `
     <div style="font-family:sans-serif;font-size:15px;color:#0f172a;line-height:1.6;max-width:560px">
       <h2 style="font-size:20px">Your free construction templates</h2>
-      <p>Here's the complete BuildWorkPro template pack — every file is a direct download, ready to use. This is a one-time email, not a newsletter:</p>
+      <p>Here's the complete BuildWorkPro template pack — ${PACK.length} templates, every file a direct download, ready to use. This is a one-time email, not a newsletter:</p>
       <ul style="padding-left:20px">${items}</ul>
-      <p>Each template has a guide explaining how to fill it out at
+      <p>Each template page has a fill-out guide, a completed example and the FAQ at
         <a href="${SITE}/templates/" style="color:#2563eb">buildworkpro.com/templates</a>.</p>
       <p style="margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;color:#475569;font-size:13px">
-        Filling these out by hand every month? BuildWorkPro generates bids, pay applications, and
-        change orders from your project data — $79/month flat, unlimited users.
+        Filling these out by hand every month? BuildWorkPro generates bids, pay applications,
+        change orders, invoices and daily reports from your project data — $79/month flat, unlimited users.
         <a href="${SITE}/" style="color:#2563eb">Take a look</a>.
       </p>
     </div>

@@ -1,0 +1,35 @@
+{
+  "slug": "timesheet",
+  "name": "Construction Timesheet Template",
+  "basename": "construction-timesheet-template",
+  "files": {
+    "pdf": {
+      "file": "construction-timesheet-template.pdf",
+      "bytes": 144087,
+      "pages": 1
+    },
+    "example": {
+      "file": "construction-timesheet-template-example.pdf",
+      "bytes": 48654,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "construction-timesheet-template.xlsx",
+      "bytes": 16853,
+      "sheets": [
+        "Weekly Timesheet",
+        "Crew Summary",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "timesheet.png",
+      "webp": "timesheet.webp",
+      "width": 1200,
+      "height": 927,
+      "landscape": true
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+---
+// Scope of work cluster: "scope of work template" 2,400 · "construction scope
+// of work template" 390 · "scope of work template construction" 390 ·
+// "remodeling scope of work template" 30 · "subcontractor scope of work
+// template" 20 (DataForSEO, US, 2026-09). Ungated download per the Q5 decision.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What is a scope of work in construction?',
+    answer:
+      'A scope of work is the document that defines exactly what a contractor will do on a project: the work included by area or system, what is excluded, the assumptions the price rests on, what other parties must furnish, the key dates, and how completion will be judged. It is usually attached to the contract as an exhibit, so it becomes part of the agreement and controls what is — and is not — billable at the contract price.',
+  },
+  {
+    question: 'What should a construction scope of work include?',
+    answer:
+      'A short project overview naming the drawings, specifications and addenda it is based on; an included-work table with one row per area or system and a spec or drawing reference; an exclusions list; assumptions and clarifications; a work-by-others table with who provides each item and when; materials and submittals with the basis of design; schedule milestones; acceptance criteria; the attachments; and signatures. This template has a section for each, in that order.',
+  },
+  {
+    question: 'What is the difference between a scope of work and a statement of work?',
+    answer:
+      'In construction the two terms are used almost interchangeably. Where a distinction is drawn, the statement of work is the broader document — objectives, deliverables, schedule, price and terms — and the scope of work is the part that defines the physical work itself. This template is a scope of work in the construction sense: it describes the work and its boundaries and is meant to be attached to a proposal or contract that carries the price and terms.',
+  },
+  {
+    question: 'How detailed should a scope of work be?',
+    answer:
+      'Detailed enough that a stranger could tell whether a given task is inside or outside it. One row per system with a drawing or spec reference is usually right; listing every fitting is not. The test is the exclusions list: if an item that will obviously come up on the job — power wiring to your equipment, roofing at your penetrations, the permit fee — is neither included nor excluded, it will be argued about later.',
+  },
+  {
+    question: 'Who writes the scope of work — the general contractor or the subcontractor?',
+    answer:
+      "Both, at different moments. The GC or owner issues a scope in the bid package describing what they want priced; the subcontractor answers with its own scope of work in the proposal, stating what is included, excluded and assumed at that price. The sub's version is the one that matters when the GC's subcontract arrives, because it becomes Exhibit A. Write it as if it will be read in a dispute two years from now.",
+  },
+  {
+    question: 'How do exclusions protect a subcontractor?',
+    answer:
+      'Most subcontracts say the work includes everything reasonably inferable from the contract documents except what is expressly excluded — so an unstated exclusion is not an exclusion. A clear list turns later requests into priced change orders instead of free work. In the completed example the owner-furnished water heater is listed as furnished by others and installed by the sub, which is why deleting it later produced a clean credit rather than an argument.',
+  },
+  {
+    question: 'Is a scope of work legally binding?',
+    answer:
+      'By itself it is a description; attached to a signed contract as an exhibit it is part of the contract and binding. That is why the template carries an agreement reference and a signature block, and why the fine print tells you to attach it. Keep the revision number and date current when the scope changes during negotiation, so only one version is in force. This is a general-purpose form, not legal advice.',
+  },
+];
+---
+
+<TemplatePage
+  slug="scope-of-work"
+  title="Free Scope of Work Template for Construction (Word + PDF) | BuildWorkPro"
+  description="Free construction scope of work template in Word and fillable PDF: included work, exclusions, assumptions, work by others, milestones. No email required."
+  h1="Construction Scope of Work Template"
+  intro="Defines exactly what is included, excluded, assumed and owed by others before anyone signs — an included-work table by area or system, with materials, milestones and acceptance criteria. Editable Word document and a fillable two-page PDF, plus a completed example: the mechanical scope on a $486,200 medical office subcontract."
+  downloads={[
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'pdf', label: 'Download fillable PDF' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Project overview block with revision number, proposal reference, agreement reference and the documents the scope is based on',
+    'Included-work table: item, area or system, description of work, quantity or spec reference — one row per schedule-of-values line',
+    'Exclusions list with the rule that anything not excluded is included',
+    'Assumptions and clarifications: site access, working hours, sequencing, lead times, drawing dates',
+    'Work-by-others table with who furnishes each item and the date it is needed',
+    'Materials and submittals table with basis of design and submittal due dates',
+    'Schedule milestones with start and finish dates',
+    'Acceptance criteria: the tests, inspections and closeout documents that mean the work is done',
+    'Attachments checklist and prepared-by / accepted-by signature blocks',
+  ]}
+  howTo={[
+    [
+      'Reference the documents and the deal',
+      'Name the project, who the scope is for, the proposal number it prices and the agreement it will attach to. State the drawing date, spec sections and addenda in the overview — a scope based on "the plans" is a scope based on whichever plans the other side remembers.',
+    ],
+    [
+      'List the included work by area or system',
+      'One row per system with a drawing or spec reference, in the same order and grouping as your schedule of values. When scope and billing use the same lines, the pay application never needs a translation table.',
+    ],
+    [
+      'Write the exclusions and assumptions',
+      'Exclusions are everything adjacent to your trade that someone will assume you carry: power wiring to your equipment, roofing at your penetrations, pads, painting, permit fees, overtime. Assumptions are what the price rests on — access dates, hours, one mobilization, lead times.',
+    ],
+    [
+      'Fill in work by others and the milestones',
+      'For each dependency say who provides it and the date you need it, because a late curb or a missing pad is your delay until it is written down. Then list the milestones with start and finish dates that match the project schedule.',
+    ],
+    [
+      'Define acceptance, attach, and get it signed',
+      'Say what "done" means: tests passed, inspections signed, TAB within tolerance, manuals delivered, training complete. Tick the attachments, sign as prepared by, and have the owner or GC sign as accepted by — then attach it to the contract as Exhibit A.',
+    ],
+  ]}
+  faqs={faqs}
+  related={[
+    'construction-bid-proposal',
+    'subcontractor-agreement',
+    'construction-contract',
+    'change-order',
+  ]}
+  feature={{
+    href: '/features/construction-bidding/',
+    label: 'See bidding in BuildWorkPro',
+    heading: 'The scope you price is the scope you send',
+    body: 'In BuildWorkPro the estimate\'s line items become the proposal your customer e-signs, bid templates carry your standard inclusions, exclusions and conditions, and an accepted bid converts into a project whose line items seed the schedule of values. <a href="/features/construction-bidding/" class="font-semibold text-brand-700 hover:underline">Construction bidding software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Price it once, define it once, bill it from the same lines',
+    body: 'BuildWorkPro keeps the estimate, the proposal, the project schedule and the pay application on the same line items, so the scope you agreed to is the scope you get paid for.',
+  }}
+  disclaimer="Not legal advice. This template is a general-purpose starting point; attach the finished scope to your agreement as an exhibit and have a licensed attorney review the agreement it becomes part of."
+  updated="2026-09-17"
+>
+  <h2>What a scope of work is, and why it is the most valuable page in the contract</h2>
+  <p>
+    Every dispute about extra work is a dispute about scope. The drawings show what the building is;
+    the scope of work says which parts of it you are building, for the price you quoted, and which
+    parts you are not. It is the document a general contractor reads when your change order lands,
+    the document a project manager reads when a curb is late and the crane is booked, and the
+    document that becomes Exhibit A of the
+    <a href="/templates/subcontractor-agreement/">subcontractor agreement</a> or the
+    <a href="/templates/construction-contract/">construction contract</a>. A good one is short,
+    specific, and organized the same way you bill.
+  </p>
+  <p>
+    This template is built for the trade contractor writing its own scope — the version that goes
+    out with the <a href="/templates/construction-bid-proposal/">bid proposal</a> and comes back attached
+    to the contract. It also works as the scope an owner or GC issues to define a package for bidding,
+    and as the scope for a remodel where the "drawings" are a sketch and a conversation.
+  </p>
+
+  <h2>Included, excluded, assumed, by others: the four lists</h2>
+  <p>
+    The template is organized around four questions, each with its own section, because each settles
+    a different kind of argument:
+  </p>
+  <ul>
+    <li>
+      <strong>Included work</strong> settles "is this in your price?" One row per area or system, with
+      the drawing sheets or spec section it comes from. Mirror your
+      <a href="/templates/schedule-of-values/">schedule of values</a>: when the scope has twelve
+      lines and the schedule of values has the same twelve, the pay application needs no
+      interpretation.
+    </li>
+    <li>
+      <strong>Exclusions</strong> settle "who carries the adjacent work?" Most contracts say the work
+      includes everything reasonably inferable except what is expressly excluded, so an exclusion you
+      did not write down does not exist.
+    </li>
+    <li>
+      <strong>Assumptions and clarifications</strong> settle "what did the price depend on?" Access dates,
+      working hours, one mobilization, lead times, the drawing revision you priced. When an assumption
+      fails, this list is what turns the impact into a change order.
+    </li>
+    <li>
+      <strong>Work by others</strong> settles "whose delay is it?" Each dependency gets a provider and
+      a needed-by date. A missing pad or an unflashed curb is your problem until this table says otherwise.
+    </li>
+  </ul>
+  <p>
+    Materials and submittals, milestones and acceptance criteria then say what you will submit and
+    when, when the work happens, and what "done" means — so closeout is a checklist instead of a
+    negotiation. The <a href="/blog/construction-project-closeout-checklist/">closeout checklist</a>
+    is the other end of that thread.
+  </p>
+
+  <h2>A worked example</h2>
+  <p>
+    The completed example is Summit Mechanical's scope for the Harbor Point Medical Office, Building
+    B — the mechanical and plumbing subcontract used in every other sample on this site. Twelve
+    included-work rows, from mobilization to closeout, each with drawing sheets and spec sections,
+    in the same order as the $486,200 schedule of values. Ten exclusions, including power wiring to
+    equipment, fire sprinkler, roofing at the RTU curbs, and furnishing the owner-supplied water
+    heater. Six assumptions — underground released by June 8, a one-day crane set, RTU lead time of
+    10–12 weeks. Six items by others with dates: curb flashing and the structural supports at RTU-2
+    before the August 17 set, the water heater on site by July 15. Nine milestones from mobilization
+    on June 1, 2026 to closeout on November 18, and acceptance criteria that name the TAB tolerance,
+    the 48-hour controls trend and the inspections that must be signed.
+  </p>
+  <p>
+    Two of the job's change orders trace straight back to this document. Because the scope listed
+    the water heater as furnished by the owner and installed by Summit, deleting it in July was a
+    clean credit of the installation labor only (CO-002). Because the condensate drain from AHU-3
+    was not on the M-402 the scope was based on, adding it after the drawing revision was a change,
+    not an argument (CO-003). See the
+    <a href="/templates/change-order/">change order template</a> for that one.
+  </p>
+
+  <h2>Scope of work vs. proposal vs. schedule of values</h2>
+  <table>
+    <thead>
+      <tr><th>Document</th><th>What it defines</th><th>Where it lives</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Scope of work</td>
+        <td
+          >The boundaries of the work: included, excluded, assumed, by others, milestones,
+          acceptance</td
+        >
+        <td>Exhibit A to the contract</td>
+      </tr>
+      <tr>
+        <td><a href="/templates/construction-bid-proposal/">Bid proposal</a></td>
+        <td
+          >The offer: price, alternates, terms, validity — with the scope attached or summarized</td
+        >
+        <td>Sent before the contract; superseded by it</td>
+      </tr>
+      <tr>
+        <td><a href="/templates/schedule-of-values/">Schedule of values</a></td>
+        <td>The price broken into billable lines that sum to the contract amount</td>
+        <td>Exhibit B to the contract; the basis of every pay application</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Read the guide to <a href="/blog/how-to-create-construction-bid/">creating a construction bid</a
+    >
+    for how the three fit together from takeoff to award.
+  </p>
+
+  <h2>Common mistakes this template is built to prevent</h2>
+  <ul>
+    <li>
+      Describing the work by trade name only — "HVAC per plans" — instead of by system with sheet
+      and spec references.
+    </li>
+    <li>Skipping the exclusions because "everyone knows" who does the electrical.</li>
+    <li>
+      Assumptions that live in the estimator's head: the access date, the hours, the single
+      mobilization the price was built on.
+    </li>
+    <li>Work by others with no needed-by date, so the delay has no owner.</li>
+    <li>
+      A scope that does not match the schedule of values, so every pay application starts with a
+      reconciliation.
+    </li>
+    <li>
+      No revision number, so three versions circulate and the contract attaches the wrong one.
+    </li>
+  </ul>
+</TemplatePage>

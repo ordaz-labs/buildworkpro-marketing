@@ -1,21 +1,8 @@
 ---
-// T&M ticket — T&M ticket ~250/mo KD0 (issue #145 optional hub addition). Ungated per Q5.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/tm-ticket-template.xlsx';
-
-const whatsInside = [
-  'Project, ticket number, date, location, and the directive that triggered the work',
-  'Labor rows with hours × rate and overtime at time-and-a-half',
-  'Materials rows with qty × unit cost',
-  'Equipment rows with hours/days × rate',
-  'A ticket total that sums labor, OT, materials, and equipment',
-  'Dual signature blocks — unsigned extra work is not a change order',
-];
+// T&M ticket cluster: "time and materials template" 90 · "t&m ticket template"
+// 70 · "time and material ticket template" 30 (DataForSEO, US, 2026-09). GSC:
+// this page already ranks #7–11 — the H1 and the copy that ranks are kept.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
@@ -38,113 +25,187 @@ const faqs = [
     answer:
       "Use the rates in your subcontract if they exist; otherwise agree rates in writing before the extra work starts. The template computes hours × rate and overtime at 1.5× — do not leave the math to a later argument about what 'the usual rate' was.",
   },
+  {
+    question: 'What should a T&M ticket include?',
+    answer:
+      'The project, the date of the work, who directed it and how (written directive, verbal confirmed by email, or verbal only), a description of the extra work and why it is outside scope, labor by name and classification with straight-time and overtime hours and rates, materials with quantities and unit costs, equipment or rentals, the subtotal and markup, notes and photo references, and two signatures dated the same day.',
+  },
+  {
+    question: 'Who signs a T&M ticket, and when?',
+    answer:
+      'Your foreman or lead, and the GC superintendent or project manager who directed the work — on the day the work was done. A same-day signature acknowledges that the hours and materials were spent; it does not commit the GC to a price, which is settled in the change order. A ticket signed a week later by someone who did not see the work carries far less weight.',
+  },
+  {
+    question: 'Does markup go on the T&M ticket or the change order?',
+    answer:
+      'Both, if your contract allows it, but the ticket should show it separately so the cost lines stay clean. The ticket subtotal is the documented cost; overhead and profit at the contract rate sits on its own line under it. When you roll the ticket into a change order, the same markup rule applies and the numbers should match line for line.',
+  },
 ];
 ---
 
-<Layout
-  title="Free Construction T&M Ticket Template (Excel)"
-  description="Free construction T&M ticket: labor, materials, and equipment with computed totals and dual signatures. Excel workbook, no email required."
+<TemplatePage
+  slug="tm-ticket"
+  title="Free T&M Ticket Template — Time and Materials Form (Fillable PDF + Excel) | BuildWorkPro"
+  description="Free T&M ticket template: one-page fillable PDF and Excel workbook with labor, overtime, materials and equipment computed, plus a ticket log. No email required."
+  h1="Construction T&M Ticket Template"
+  intro="Record extra work the day it happens: labor, overtime, materials, and equipment with the math done for you — then attach it to the change order that actually adjusts the contract. A one-page fillable PDF for the field and an Excel workbook that computes every line and keeps a ticket log."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF ticket' },
+    { format: 'xlsx', label: 'Download Excel workbook with T&M log (.xlsx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Project, ticket number, date of work, location, and who directed the work',
+    'Authorization checkboxes: written directive, verbal confirmed by email, verbal not confirmed',
+    'Reference line for the RFI, drawing revision or directive, and the change order it will roll into',
+    'Description of the extra work and why it is outside the contract scope',
+    'Labor rows by name and classification with straight-time and overtime hours × rates',
+    'Materials rows with qty × unit cost, and equipment rows with hours or days × rate',
+    'Subtotal, overhead & profit, and a ticket total that sums labor, OT, materials and equipment',
+    'Notes, photo references and the daily report number for cross-checking',
+    'Dual signature blocks dated the same day — unsigned extra work is not a change order',
+    'Excel only: a T&M Log that counts tickets and value still waiting on a change order',
+  ]}
+  howTo={[
+    [
+      'Open the ticket the moment work is directed',
+      'Number it, date it, and write who directed the work and how. Tick written directive, verbal confirmed by email, or verbal not confirmed — and if it is verbal, send the confirming email before the crew starts.',
+    ],
+    [
+      'Describe the work and why it is extra',
+      'What, where, and the reason it is outside your scope — the drawing revision, the RFI answer, the condition found. Reference the document. This paragraph is what the change order will quote.',
+    ],
+    [
+      'Record labor as it happens',
+      'One line per person with classification, straight-time hours and rate, and overtime hours and rate. Use the rates in your subcontract or the agreed rate sheet. The Excel version computes ST, OT at 1.5× and the labor subtotal.',
+    ],
+    [
+      'Add materials and equipment, then total it',
+      'Quantities and unit costs for materials, hours or days and rates for equipment and rentals. Subtotal, apply overhead and profit at the contract rate, and write the ticket total before anyone signs.',
+    ],
+    [
+      'Get it signed the same day and log it',
+      'Your foreman signs; the GC superintendent signs before leaving site. Note photo references and the daily report number, log the ticket, and roll it into a change order that week.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['change-order', 'daily-report', 'work-order', 'timesheet']}
+  feature={{
+    href: '/features/time-tracking/',
+    label: 'See time tracking in BuildWorkPro',
+    heading: 'Hours on the record the day they happen',
+    body: 'In BuildWorkPro crews log hours against the project in quarter-hour steps, the labor rate you set per person turns them into cost automatically, and a manager reviews entries before they are finalized — so the cost of directed work is documented without a paper ticket. <a href="/features/time-tracking/" class="font-semibold text-brand-700 hover:underline">Construction time tracking software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Extra work that becomes a signed change order, not a forgotten ticket',
+    body: 'BuildWorkPro turns field extra work into a change order the customer approves online — then the new amount lands on the contract sum and the next pay application.',
+    linkLabel: 'See change orders in BuildWorkPro',
+  }}
+  disclaimer="Not legal advice — have your attorney review before relying on it. A T&M ticket documents cost; it is not a change order until both parties sign one."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Construction T&amp;M Ticket Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Record extra work the day it happens: labor, overtime, materials, and equipment with the
-          math done for you — then attach it to the change order that actually adjusts the contract.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="tm-ticket"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.xlsx)
-          </a>
-          <a
-            href="/templates/change-order/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            Next step: the change order template
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Works in Excel, Google Sheets &amp; Numbers
-        </p>
-      </div>
-    </section>
+  <h2>What a T&amp;M ticket is for</h2>
+  <p>
+    A time-and-materials ticket is the same-day record of extra work: the hours, the people, the
+    materials and the equipment that went into something the GC directed but the contract did not
+    include. It exists because memory is a bad witness. Three weeks later, when you price the change
+    order, nobody will agree on how many hours the relocation took &mdash; unless a ticket signed by
+    the superintendent that afternoon says so.
+  </p>
+  <p>
+    The ticket has one job: prove cost. It does not change the contract, it does not set the price,
+    and it does not authorize payment. Those happen on the
+    <a href="/templates/change-order/">change order</a>, which the ticket supports as backup.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What's in the template
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p
-        class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto"
-        set:html={`A signed ticket still has to become a <a href="/templates/change-order/" class="text-brand-600 underline underline-offset-2 font-medium">change order</a> before it bills on a <a href="/templates/aia-g702-g703/" class="text-brand-600 underline underline-offset-2 font-medium">pay application</a>.`}
-      />
-    </section>
+  <h2>Field-by-field notes</h2>
+  <ul>
+    <li>
+      <strong>Directed by and authorization.</strong> Name the person and tick how the direction came:
+      written directive, verbal confirmed by your email, or verbal not confirmed. The third box exists
+      so the ticket is honest about the weakest case &mdash; and so you send the email.
+    </li>
+    <li>
+      <strong>Reference and change order.</strong> Cite the drawing revision, RFI answer or directive
+      number that made the work extra, and the change order number it will roll into. Those two lines
+      are how the ticket, the change order and the
+      <a href="/templates/aia-g702-g703/">pay application</a> stay traceable.
+    </li>
+    <li>
+      <strong>Labor.</strong> One line per person: name, classification, straight-time hours and rate,
+      overtime hours and rate. Rates come from the subcontract or an agreed rate sheet. If someone worked
+      two hours at time-and-a-half, the OT columns show it.
+    </li>
+    <li>
+      <strong>Materials and equipment.</strong> Quantities and unit costs; hours or days and rates. Rentals
+      brought in for the extra work belong here, as does a foreman&rsquo;s time spent on layout and supervision.
+    </li>
+    <li>
+      <strong>Notes and photos.</strong> Start and finish times, what the super witnessed, conditions
+      found, and photo file references. The daily report number ties the ticket to the
+      <a href="/templates/daily-report/">daily report</a> for the same day, where the same crew and hours
+      should appear.
+    </li>
+    <li>
+      <strong>Signatures.</strong> Yours and the GC&rsquo;s, dated the day of the work. The acknowledgment
+      language says the hours and materials were expended &mdash; not that the GC has agreed a price.
+    </li>
+  </ul>
 
-    <FAQSection faqs={faqs} />
+  <h2>A worked example</h2>
+  <p>
+    The preview shows the completed example that ships with the download. On Friday, September 11,
+    2026, the GC&rsquo;s superintendent directs a mechanical subcontractor to relocate two supply
+    duct drops that conflict with a revised light fixture layout (E-201 Rev. 3). The drops were
+    installed to the mechanical drawings before the electrical revision came out, so the work is
+    extra. Ticket T&amp;M-007 records the verbal direction at 7:15 AM and the confirming email at
+    8:02 AM, then the labor: a sheet metal journeyman and an apprentice at eight straight-time hours
+    each plus two hours of overtime at 1.5&times;, and one hour of the foreman&rsquo;s time for
+    layout &mdash; $1,762.00. Three material lines add $276.00 and a day on a scissor lift $95.00,
+    for a $2,133.00 subtotal; 15% overhead and profit brings the ticket total to $2,452.95. Six
+    photos are referenced, the daily report number is noted, and both signatures are dated September
+    11. The reference line says it will be priced as CO-005 &mdash; the ticket is the backup, the
+    change order is the money.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          Extra work that becomes a signed change order, not a forgotten ticket
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro turns field extra work into a change order the customer approves online —
-          then the new amount lands on the contract sum and the next pay application.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/change-orders/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See change orders in BuildWorkPro
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-      <p class="mt-8 text-xs text-slate-400 max-w-2xl mx-auto">
-        Not legal advice — have your attorney review before relying on it. A T&amp;M ticket
-        documents cost; it is not a change order until both parties sign one.
-      </p>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>T&amp;M ticket vs. change order vs. work order</h2>
+  <p>
+    A <strong>T&amp;M ticket</strong> proves what directed extra work cost, signed the same day. A
+    <strong>change order</strong> is the signed agreement on scope, price and time &mdash; the only document
+    that changes what the contract pays. A
+    <a href="/templates/work-order/">work order</a> authorizes and records a specific job, usually outside
+    a contract: a service call, a warranty callback, a small standalone job. On a contract project, the
+    sequence is ticket &rarr; change order &rarr; pay application. Skip the middle step and the ticket
+    is just a well-documented loss.
+  </p>
+  <p>
+    A signed ticket still has to become a <a href="/templates/change-order/">change order</a>
+    before it bills on a <a href="/templates/aia-g702-g703/">pay application</a>.
+  </p>
+
+  <h2>Using the Excel workbook</h2>
+  <p>
+    The T&amp;M Ticket sheet keeps the computed structure this template has always had:
+    straight-time hours &times; rate, overtime hours &times; rate &times; the overtime multiplier
+    (1.5 by default, editable), materials at quantity &times; unit cost, equipment at hours or days
+    &times; rate, the section subtotals, overhead &amp; profit at the rate you enter, and the ticket
+    total. The T&amp;M Log sheet takes one row per ticket with a status &mdash; awaiting change
+    order, in a pending or approved change order, billed, disputed &mdash; and shows how many
+    tickets and how much value are still waiting to become contract value. Every formula has been
+    checked with real numbers.
+  </p>
+
+  <h2>Common mistakes this ticket is built to prevent</h2>
+  <ul>
+    <li>Starting on a verbal OK with no confirming email.</li>
+    <li>Writing the ticket at the end of the week from memory.</li>
+    <li>Leaving off the foreman&rsquo;s supervision time and the lift rental.</li>
+    <li>Using &ldquo;the usual rate&rdquo; instead of the contract rate.</li>
+    <li>Getting the signature from someone who was not there.</li>
+    <li>Filing the signed ticket and never converting it to a change order.</li>
+  </ul>
+  <p>
+    The <a href="/templates/timesheet/">weekly timesheet template</a> covers the same hours from the payroll
+    side; the ticket and the timesheet for the same person and day should agree.
+  </p>
+</TemplatePage>

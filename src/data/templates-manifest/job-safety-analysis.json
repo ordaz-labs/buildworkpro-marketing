@@ -1,0 +1,39 @@
+{
+  "slug": "job-safety-analysis",
+  "name": "Job Safety Analysis (JSA) Template",
+  "basename": "job-safety-analysis-template",
+  "files": {
+    "pdf": {
+      "file": "job-safety-analysis-template.pdf",
+      "bytes": 102931,
+      "pages": 1
+    },
+    "example": {
+      "file": "job-safety-analysis-template-example.pdf",
+      "bytes": 36936,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "job-safety-analysis-template.xlsx",
+      "bytes": 16279,
+      "sheets": [
+        "JSA",
+        "Hazard Library",
+        "How to Use"
+      ]
+    },
+    "docx": {
+      "file": "job-safety-analysis-template.docx",
+      "bytes": 12541
+    }
+  },
+  "previews": [
+    {
+      "file": "job-safety-analysis.png",
+      "webp": "job-safety-analysis.webp",
+      "width": 1200,
+      "height": 927,
+      "landscape": true
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FAQSection from '../../components/FAQSection.astro';
+import TemplateCallout from '../../components/templates/TemplateCallout.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import { config } from '../../config';
@@ -573,6 +574,16 @@ const faqs = [
       </p>
     </section>
 
+    <TemplateCallout
+      slugs={[
+        'change-order',
+        'tm-ticket',
+        'rfi',
+        'work-order',
+        'aia-g702-g703',
+        'schedule-of-values',
+      ]}
+    />
     <FAQSection faqs={faqs} />
 
     <!-- Bottom CTA -->

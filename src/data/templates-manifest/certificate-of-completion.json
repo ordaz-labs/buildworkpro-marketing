@@ -1,0 +1,30 @@
+{
+  "slug": "certificate-of-completion",
+  "name": "Certificate of Substantial Completion Template",
+  "basename": "certificate-of-completion-template",
+  "files": {
+    "pdf": {
+      "file": "certificate-of-completion-template.pdf",
+      "bytes": 74000,
+      "pages": 1
+    },
+    "example": {
+      "file": "certificate-of-completion-template-example.pdf",
+      "bytes": 37426,
+      "pages": 1
+    },
+    "docx": {
+      "file": "certificate-of-completion-template.docx",
+      "bytes": 12077
+    }
+  },
+  "previews": [
+    {
+      "file": "certificate-of-completion.png",
+      "webp": "certificate-of-completion.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "construction-estimate",
+  "name": "Construction Estimate Template",
+  "basename": "construction-estimate-template",
+  "files": {
+    "pdf": {
+      "file": "construction-estimate-template.pdf",
+      "bytes": 115904,
+      "pages": 1
+    },
+    "example": {
+      "file": "construction-estimate-template-example.pdf",
+      "bytes": 63568,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "construction-estimate-template.xlsx",
+      "bytes": 16559,
+      "sheets": [
+        "Estimate",
+        "Markup vs Margin",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "construction-estimate.png",
+      "webp": "construction-estimate.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

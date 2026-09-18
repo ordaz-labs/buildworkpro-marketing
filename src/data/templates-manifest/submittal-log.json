@@ -1,0 +1,42 @@
+{
+  "slug": "submittal-log",
+  "name": "Submittal Log Template",
+  "basename": "submittal-log-template",
+  "files": {
+    "pdf": {
+      "file": "submittal-log-template.pdf",
+      "bytes": 322747,
+      "pages": 2
+    },
+    "example": {
+      "file": "submittal-log-template-example.pdf",
+      "bytes": 77367,
+      "pages": 2
+    },
+    "xlsx": {
+      "file": "submittal-log-template.xlsx",
+      "bytes": 18796,
+      "sheets": [
+        "Submittal Log",
+        "Transmittal",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "submittal-log.png",
+      "webp": "submittal-log.webp",
+      "width": 1200,
+      "height": 927,
+      "landscape": true
+    },
+    {
+      "file": "submittal-log-2.png",
+      "webp": "submittal-log-2.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

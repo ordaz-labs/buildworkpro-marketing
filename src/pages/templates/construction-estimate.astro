@@ -1,165 +1,258 @@
 ---
-// Page 4 of the /templates/ hub (issue #134): the estimate-template cluster —
-// construction estimate template 1,300/mo KD0 + contractor estimate template
-// 1,000/mo KD0 + free variants, one canonical page. Ungated per Q5.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/construction-estimate-template.xlsx';
-
-const whatsInside = [
-  '25 line items with quantity, unit, and a material / labor split',
-  'Labor priced as hours × rate × quantity, computed per line',
-  'Overhead % applied before profit — overhead is a cost, not profit',
-  'Profit priced as true margin (% of price), not markup on cost',
-  'Estimate header with number, date, and a valid-until field',
-  'A Markup vs Margin sheet explaining the pricing math',
-];
+// Estimate cluster: "estimate template" 2,400 · "free estimate template" 1,900 ·
+// "construction estimate template" 1,000 · "contractor estimate template" 1,000 ·
+// "job estimate template" 880 · "construction estimate template excel" 390
+// (DataForSEO, US, 2026-09). One canonical page, ungated per Q5.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
     question: 'What should a construction estimate include?',
     answer:
-      'Line items with quantities and units, material cost and labor cost separated, a direct-cost subtotal, overhead, profit, and the terms of the offer — estimate number, date, and how long the pricing stays valid. Separating material and labor is what makes the estimate defensible when the client pushes back on price.',
+      'Line items with quantities and units, split into materials, labor, equipment and subcontractors so each section has its own subtotal; sales tax on materials; a contingency; overhead as a cost; profit as a margin; and the basis of the estimate — the drawing set, addenda, assumptions and exclusions the price relies on. Separating cost types is what makes the number defensible when a customer pushes back, and what lets you turn the estimate into a job cost budget once you win.',
   },
   {
-    question: 'What is the difference between an estimate, a quote, and a bid?',
+    question: 'What is the difference between an estimate, a quote and a bid?',
     answer:
-      'In practice the words blur, but roughly: an estimate is an approximation of cost, a quote is a fixed offer you commit to, and a bid is a formal offer in a competitive selection — usually to a GC, against drawings and specs. This template works for all three; what changes is how firm your numbers must be before you send it.',
+      'An estimate is your internal build-up of cost and price. A quote is a fixed-price offer to a customer for defined work — usually a smaller, direct job. A bid is a formal offer in a competitive selection, normally to a GC against drawings and specs, wrapped in a proposal with scope, inclusions, exclusions and terms. This template is the estimate; the number it produces goes onto the quote or the bid proposal.',
   },
   {
     question: 'Should I use markup or margin to price the job?',
     answer:
-      'Price by margin. Markup is a percentage added to cost; margin is a percentage of the selling price — and a 15% markup is only a 13% margin. Contractors who price by markup routinely keep less profit than they think. The template prices by true margin: price = (cost + overhead) ÷ (1 − margin), and the second sheet explains the math.',
+      'Price by margin. Markup is a percentage added to cost; margin is a percentage of the selling price — and a 15% markup is only a 13% margin. Contractors who price by markup routinely keep less profit than they think. The template prices by true margin: price = (cost + overhead) ÷ (1 − margin), and the Markup vs Margin sheet shows the conversion so you can see what your usual markup has really been earning.',
   },
   {
     question: 'How do I price labor in an estimate?',
     answer:
-      'Hours × a fully-loaded labor rate — the wage plus payroll taxes, workers’ comp, insurance, and benefits, not the bare wage. The template computes labor per line as quantity × hours × rate, so unit-based work (fixtures, drops, squares) prices consistently.',
+      'Hours × a fully loaded labor rate — the wage plus payroll taxes, workers’ comp, liability insurance and benefits, not the bare wage. On the template, labor lines use quantity for hours and unit cost for the loaded rate, one line per trade or crew, so a $34 wage that really costs you $68.50 an hour gets priced at $68.50.',
   },
   {
-    question: 'How do I turn an estimate into a professional proposal?',
+    question: 'How much contingency should a construction estimate carry?',
     answer:
-      'The spreadsheet is the math; the proposal is the presentation. BuildWorkPro builds estimates from your product catalog with labor rates and margin applied systematically, exports a client-ready PDF proposal, sends it for legally-binding e-signature, and converts the win into a project — all included at $79/month.',
+      'Enough to cover the unknowns in the documents you priced from, not the unknowns in your own takeoff. Two to five percent of direct cost is common on complete bid sets; more on early or incomplete drawings. The template applies contingency as a percentage of direct cost before overhead and profit, so it is priced as a cost, and the completed example carries 3%.',
+  },
+  {
+    question: 'What overhead percentage should I use?',
+    answer:
+      'Your real one. Add up a year of office rent, trucks, insurance, estimating time, software and admin salaries, and divide by that year’s direct job costs — most subcontractors land between 8% and 15%. Enter that rate in the overhead line. The point of applying overhead before profit is that a job which only covers overhead has made you nothing yet.',
+  },
+  {
+    question: 'Should I send the estimate itself to the customer?',
+    answer:
+      'Usually not. The estimate is the worksheet — it shows your unit costs, labor rates and margin, which invites line-item shopping. Send the customer-facing document instead: a quote for a small fixed-price job or a bid proposal for a competitive one, with a lump sum, alternates broken out, and the assumptions and exclusions from the basis-of-estimate box carried across.',
   },
 ];
 ---
 
-<Layout
-  title="Free Construction Estimate Template (Excel)"
-  description="Free construction estimate template: 25 line items with material/labor split, overhead, and true-margin pricing math — an Excel workbook, no email required."
+<TemplatePage
+  slug="construction-estimate"
+  title="Free Construction Estimate Template — Excel + PDF (Contractor & Job Estimates) | BuildWorkPro"
+  description="Free construction estimate template (Excel + fillable PDF): materials, labor, equipment and subs by section, overhead and true-margin math. No email required."
+  h1="Construction Estimate Template"
+  intro="The pricing worksheet behind every bid: materials, labor, equipment and subcontractors by section, sales tax and contingency on top, then overhead and profit priced as a true margin. An Excel workbook with the math built in, or a one-page fillable PDF."
+  downloads={[
+    { format: 'xlsx', label: 'Download Excel estimate workbook (.xlsx)' },
+    { format: 'pdf', label: 'Download fillable PDF form' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with your company, the project, who the estimate is for, and the bid documents and addenda you priced from',
+    'Four priced sections — materials, labor, equipment and subcontractors — each with its own subtotal',
+    'Line items with quantity, unit and unit cost; labor lines priced as hours × fully loaded rate',
+    'Sales tax on materials at your local rate, and contingency as a percentage of direct cost',
+    'Overhead applied as a cost before profit, not taken out of profit',
+    'Profit priced as a true margin on price, with the equivalent markup shown beside it',
+    'Basis-of-estimate box for the assumptions and exclusions that carry onto your proposal',
+    'Excel: a Markup vs Margin sheet with a live calculator and a conversion table',
+    'Excel: a How to Use sheet with steps and tips from the field',
+    'PDF: one page, fillable in Acrobat, Preview or Chrome — the completed example prices a real $486,200 mechanical subcontract',
+  ]}
+  howTo={[
+    [
+      'Set up the header',
+      'Enter your company, the project, the GC or owner the price is going to, and the exact bid documents you priced from — drawing set date, spec divisions, addenda acknowledged. Add a valid-through date and who prepared and reviewed the estimate.',
+    ],
+    [
+      'Price materials and equipment',
+      'One line per material package with quantity, unit and delivered unit cost before sales tax. Big-ticket equipment goes in as a lump sum from a written vendor quote; note the quote reference. Crane days, lift rentals and tool rental go under Equipment.',
+    ],
+    [
+      'Price labor as hours × loaded rate',
+      'Quantity is hours, unit cost is the fully loaded hourly rate — wage plus payroll taxes, workers’ comp, liability and benefits. Use one line per trade or crew so you can see where the hours are, and include supervision.',
+    ],
+    [
+      'Add subcontractor quotes, then run the ladder',
+      'Enter each sub quote as a lump sum. Set your sales-tax rate, contingency, overhead and profit margin: the Excel computes direct cost, tax, contingency, total cost, overhead and profit; the PDF gives you a line for each. The check rows show the equivalent markup and confirm the margin.',
+    ],
+    [
+      'Write the basis of estimate and carry the number forward',
+      'List what the price assumes and excludes — bonds, permits, tax treatment, owner-furnished items, drawings used. Then take the estimate total and those assumptions onto your quote or bid proposal. The estimate itself stays in your file as the cost budget for the job.',
+    ],
+  ]}
+  faqs={faqs}
+  related={[
+    'construction-quote',
+    'construction-bid-proposal',
+    'schedule-of-values',
+    'construction-budget',
+  ]}
+  feature={{
+    href: '/features/construction-bidding/',
+    label: 'See estimating in BuildWorkPro',
+    heading: 'Estimate from a catalog, not a blank spreadsheet',
+    body: 'In BuildWorkPro every bid is built from line items typed as material, labor or other cost, priced from a reusable product catalog, with margin, overhead and commission applied as rates on the Rates tab — then exported as a branded PDF proposal, sent for e-signature, and converted into a project the moment it is accepted. <a href="/features/construction-bidding/" class="font-semibold text-brand-700 hover:underline">Construction bidding software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Price it once, sell it everywhere',
+    body: 'BuildWorkPro pulls line items from your product catalog, applies your labor rates and margin systematically, exports the client-ready proposal, collects the e-signature and converts the win into a project — no retyping.',
+  }}
+  disclaimer="Internal pricing worksheet, not accounting or tax advice. Sales-tax treatment of construction materials varies by state and by contract — confirm yours before relying on the tax line."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <!-- Hero -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Construction Estimate Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          An Excel estimate that prices the way profitable subs price: material and labor split per
-          line, overhead counted as a cost, and profit set as a true margin — not a markup that
-          quietly shorts you.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="construction-estimate"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.xlsx)
-          </a>
-          <a
-            href="/blog/construction-markup-vs-margin/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            Markup vs margin, explained
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Works in Excel, Google Sheets &amp; Numbers
-        </p>
-      </div>
-    </section>
+  <h2>What a construction estimate is — and what it is not</h2>
+  <p>
+    A construction estimate is the internal build-up of what a job will cost you and what you need
+    to charge for it. It lists the materials you will buy, the hours you will spend, the equipment
+    you will rent and the subcontractors you will hire, adds the costs that ride on top (sales tax,
+    contingency, overhead), and finishes with the profit you intend to keep. It is a worksheet, and
+    its audience is you.
+  </p>
+  <p>
+    It is not the document the customer signs. That is a
+    <a href="/templates/construction-quote/">quote</a> for a small, direct, fixed-price job, or a
+    <a href="/templates/construction-bid-proposal/">bid proposal</a> for a competitive bid to a GC. Both
+    carry the number this worksheet produces; neither should show the unit costs and margin behind it.
+    And once the job is won, the estimate has a third life: its sections become the
+    <a href="/templates/construction-budget/">job cost budget</a> you track actual costs against, and
+    they map onto the <a href="/templates/schedule-of-values/">schedule of values</a> you bill from.
+  </p>
 
-    <!-- What's inside -->
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What's in the workbook
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto">
-        Won the job? The estimate becomes your
-        <a
-          href="/templates/schedule-of-values/"
-          class="text-brand-600 underline underline-offset-2 font-medium">schedule of values</a
-        >, and the SOV becomes your
-        <a
-          href="/templates/aia-g702-g703/"
-          class="text-brand-600 underline underline-offset-2 font-medium">monthly pay application</a
-        > — both free in the templates hub.
-      </p>
-    </section>
+  <h2>The pricing ladder, line by line</h2>
+  <p>
+    The four sections above the ladder are just quantity × unit cost. The ladder is where estimates
+    go wrong, so the template makes every step explicit:
+  </p>
+  <table>
+    <thead>
+      <tr><th>Line</th><th>What it is</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Direct cost subtotal</td><td>Materials + labor + equipment + subcontractors</td></tr>
+      <tr
+        ><td>Sales tax on materials</td><td
+          >Your local rate × the materials subtotal. Leave it at 0% if tax is already in your unit
+          costs or the project is exempt</td
+        ></tr
+      >
+      <tr
+        ><td>Contingency</td><td
+          >A percentage of direct cost for the unknowns in the documents — priced as a cost, before
+          overhead</td
+        ></tr
+      >
+      <tr
+        ><td>Total estimated cost</td><td
+          >Direct cost + tax + contingency. This is the number that becomes your job cost budget</td
+        ></tr
+      >
+      <tr
+        ><td>Overhead</td><td
+          >Office, trucks, insurance, estimating time — a real cost, applied before profit</td
+        ></tr
+      >
+      <tr
+        ><td>Profit</td><td
+          >Set as a margin on price: (cost + overhead) ÷ (1 − margin) − (cost + overhead)</td
+        ></tr
+      >
+      <tr
+        ><td>Estimate total</td><td
+          >Cost + overhead + profit — the lump sum that goes on the proposal</td
+        ></tr
+      >
+    </tbody>
+  </table>
+  <p>
+    Two check rows in the Excel version show the equivalent markup on cost + overhead and recompute
+    profit ÷ price, so the margin you entered is the margin you get.
+  </p>
 
-    <FAQSection faqs={faqs} />
+  <h2>Markup vs. margin — the mistake this template is built around</h2>
+  <p>
+    Markup is a percentage of cost. Margin is a percentage of price. A 15% markup on $10,000 of cost
+    gives an $11,500 price, but $1,500 ÷ $11,500 is only a 13% margin. To keep 15% of the price you
+    have to mark cost up 17.6%. Most estimating spreadsheets multiply cost by a markup and call it
+    the margin; over a year of bids the difference is real money that was never priced.
+  </p>
+  <p>
+    This template prices by margin. Overhead goes on first, as a cost, and profit is solved from the
+    price: price = (cost + overhead) ÷ (1 − margin). The workbook’s Markup vs Margin sheet has a
+    live calculator and a conversion table (10% markup = 9.1% margin, 25% = 20%, 50% = 33.3%), and
+    the full explanation is in our guide to
+    <a href="/blog/construction-markup-vs-margin/">markup vs. margin in construction</a>.
+  </p>
 
-    <!-- CTA -->
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          Estimate from a catalog, not a blank spreadsheet
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro pulls line items from your product and assembly catalog, applies your labor
-          rates and margin systematically, exports a client-ready PDF, and sends it for
-          legally-binding e-signature.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/construction-bidding/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See estimating in BuildWorkPro
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>A worked example: a $486,200 mechanical bid</h2>
+  <p>
+    The completed example is the estimate behind a mechanical subcontract on a medical office
+    building — the same job that appears on our change order, schedule of values and pay application
+    templates, so the numbers reconcile across the set. Materials come to $187,400 (rooftop units at
+    $74,800 from a vendor budget quote, copper, DWV pipe, fixtures, controls hardware), labor to
+    $106,770 across plumbers, pipefitters, sheet metal and a foreman at loaded rates of $66 to $84
+    an hour, equipment to $14,700 (two crane days for the RTU sets, lifts, tools), and four
+    subcontractor quotes to $52,732. Direct cost: $361,602.
+  </p>
+  <p>
+    Denver sales tax at 8.81% on the materials adds $16,509.94 and a 3% contingency adds $10,848.06,
+    for a total estimated cost of $388,960. Overhead at 10% is $38,896, and profit at a 12% margin
+    is $58,344 — an estimate total of $486,200.00, which was submitted as the lump-sum base bid and
+    became the contract sum. The same profit expressed as a markup is 13.6%: the number an estimator
+    who prices by markup would have needed to type, and usually did not.
+  </p>
+
+  <h2>Estimate vs. quote vs. bid proposal vs. schedule of values</h2>
+  <ul>
+    <li>
+      <strong>Estimate</strong> — internal; cost by section plus the ladder; the source of the number
+      and, later, the cost budget.
+    </li>
+    <li>
+      <strong>Quote</strong> — customer-facing, fixed price, one page, for small direct jobs; line items
+      at sell price, options, deposit, acceptance signature.
+      <a href="/templates/construction-quote/">Quote template</a>.
+    </li>
+    <li>
+      <strong>Bid proposal</strong> — customer-facing, for competitive work; scope, base bid with alternates,
+      inclusions and exclusions, terms.
+      <a href="/templates/construction-bid-proposal/">Bid proposal template</a>.
+    </li>
+    <li>
+      <strong>Schedule of values</strong> — after award; the contract sum broken into billable lines for
+      monthly pay applications.
+      <a href="/templates/schedule-of-values/">SOV template</a>.
+    </li>
+  </ul>
+  <p>
+    The relationship is one-way: the estimate feeds the others. If the proposal total and the
+    estimate total ever differ, the estimate is the one that explains why.
+  </p>
+
+  <h2>Common estimating mistakes this template is built to catch</h2>
+  <ul>
+    <li>Pricing labor at the wage instead of the loaded rate — the single biggest quiet loss.</li>
+    <li>Forgetting sales tax on materials, or applying it to labor and subs as well.</li>
+    <li>Multiplying by a markup and reporting it as a margin.</li>
+    <li>Taking overhead out of profit instead of pricing it as a cost.</li>
+    <li>Carrying no contingency on an incomplete drawing set, then eating the RFIs.</li>
+    <li>
+      Accepting the lowest sub quote without leveling scope — use the
+      <a href="/templates/bid-tabulation/">bid tabulation template</a> before you pick one.
+    </li>
+    <li>Leaving the basis of estimate blank, so the exclusions never make it onto the proposal.</li>
+  </ul>
+  <p>
+    For the full process from takeoff to submission, read
+    <a href="/blog/how-to-create-construction-bid/">how to create a construction bid</a>; for the
+    math, <a href="/blog/construction-markup-vs-margin/">markup vs. margin</a>.
+  </p>
+</TemplatePage>

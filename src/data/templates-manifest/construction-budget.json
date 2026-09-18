@@ -1,0 +1,35 @@
+{
+  "slug": "construction-budget",
+  "name": "Construction Budget Template",
+  "basename": "construction-budget-template",
+  "files": {
+    "pdf": {
+      "file": "construction-budget-template.pdf",
+      "bytes": 202469,
+      "pages": 1
+    },
+    "example": {
+      "file": "construction-budget-template-example.pdf",
+      "bytes": 63717,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "construction-budget-template.xlsx",
+      "bytes": 18405,
+      "sheets": [
+        "Budget",
+        "Cost Codes",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "construction-budget.png",
+      "webp": "construction-budget.webp",
+      "width": 1200,
+      "height": 927,
+      "landscape": true
+    }
+  ]
+}

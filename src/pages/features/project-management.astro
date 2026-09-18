@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FAQSection from '../../components/FAQSection.astro';
+import TemplateCallout from '../../components/templates/TemplateCallout.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import YouTubeEmbed from '../../components/YouTubeEmbed.astro';
@@ -388,6 +389,16 @@ const faqs = [
       </p>
     </section>
 
+    <TemplateCallout
+      slugs={[
+        'construction-schedule',
+        'punch-list',
+        'submittal-log',
+        'rfi',
+        'meeting-minutes',
+        'notice-to-proceed',
+      ]}
+    />
     <FAQSection faqs={faqs} />
 
     <!-- Bottom CTA -->

@@ -1,0 +1,30 @@
+{
+  "slug": "meeting-minutes",
+  "name": "Construction Meeting Minutes Template",
+  "basename": "construction-meeting-minutes-template",
+  "files": {
+    "pdf": {
+      "file": "construction-meeting-minutes-template.pdf",
+      "bytes": 195531,
+      "pages": 2
+    },
+    "example": {
+      "file": "construction-meeting-minutes-template-example.pdf",
+      "bytes": 67670,
+      "pages": 2
+    },
+    "docx": {
+      "file": "construction-meeting-minutes-template.docx",
+      "bytes": 13061
+    }
+  },
+  "previews": [
+    {
+      "file": "meeting-minutes.png",
+      "webp": "meeting-minutes.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

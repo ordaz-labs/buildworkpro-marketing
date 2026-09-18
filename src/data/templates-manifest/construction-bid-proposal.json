@@ -1,0 +1,30 @@
+{
+  "slug": "construction-bid-proposal",
+  "name": "Construction Bid Proposal Template",
+  "basename": "construction-bid-proposal-template",
+  "files": {
+    "pdf": {
+      "file": "construction-bid-proposal-template.pdf",
+      "bytes": 73825,
+      "pages": 2
+    },
+    "example": {
+      "file": "construction-bid-proposal-template-example.pdf",
+      "bytes": 73072,
+      "pages": 2
+    },
+    "docx": {
+      "file": "construction-bid-proposal-template.docx",
+      "bytes": 13391
+    }
+  },
+  "previews": [
+    {
+      "file": "construction-bid-proposal.png",
+      "webp": "construction-bid-proposal.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

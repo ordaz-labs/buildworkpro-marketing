@@ -1,21 +1,8 @@
 ---
-// RFI template — rfi template ~390/mo KD1 (issue #145 optional hub addition). Ungated per Q5.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/rfi-template.docx';
-
-const whatsInside = [
-  'Project, numbering, spec/drawing reference, and a response-required date',
-  'One-question field — the rule that keeps answers usable',
-  "Contractor's suggested interpretation so the reviewer can say yes or no",
-  'Cost / schedule / work-on-hold impact flags if the answer is late',
-  'Response block that is not a change order by itself',
-  'Dual signature lines (contractor + architect/engineer/GC)',
-];
+// RFI cluster: "rfi template" 880 · "construction rfi template" 480 · "rfi
+// template word" 320 · "rfi log template" 110 · "construction request for
+// information form" 70 (DataForSEO, US, 2026-09). Ungated per Q5.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
@@ -38,113 +25,191 @@ const faqs = [
     answer:
       'One. A bundled RFI gets a bundled, unusable answer, and you cannot close the items independently. If three details are unclear, send three RFIs so each can be numbered, answered, and — if needed — turned into its own change order.',
   },
+  {
+    question: 'How long should the architect or GC have to answer an RFI?',
+    answer:
+      'Whatever your contract says — seven to ten working days is common, and many subcontracts require the sub to allow the GC’s own review time on top of the architect’s. Put a specific response-required date on every RFI and log it. The RFI Log in the Excel version counts days open and turns the due date red once it passes with no answer, which is the list to bring to the next progress meeting.',
+  },
+  {
+    question: 'What is an RFI log and why keep one?',
+    answer:
+      'A register of every RFI on the project: number, subject, who it went to, when it was sent, when a response was due, when it came back, its status and whether it produced a change order. It is how you prove, months later, that a question was asked on a date and answered late — the timeline behind a delay claim. It also stops RFIs from silently dying in an inbox.',
+  },
+  {
+    question: 'Should I suggest an answer in my RFI?',
+    answer:
+      'Yes. A proposed reading — "we intend to route the drain along the north wall to FS-2 unless directed otherwise" — gets a faster yes or no than an open question, and it shows the reviewer you have already done the homework. The form has a dedicated box for it. If your suggestion is accepted, the response usually adopts your wording, which is what you priced.',
+  },
 ];
 ---
 
-<Layout
-  title="Free Construction RFI Template (Word)"
-  description="Free construction RFI template: one-question form with suggested solution, impact flags, and a response block. Editable Word doc, no email required."
+<TemplatePage
+  slug="rfi"
+  title="Free RFI Template — Construction Request for Information (Word, PDF + RFI Log) | BuildWorkPro"
+  description="Free construction RFI template: fillable PDF and Word form with suggested answer, impact flags and response block, plus an Excel RFI log. No email required."
+  h1="Construction RFI Template"
+  intro="A one-page Request for Information: the question, your suggested reading, the impact if it sits unanswered, and a response block that is not a change order. Fillable PDF, editable Word doc, and an Excel RFI log that counts days open and flags overdue answers."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF form' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'xlsx', label: 'Download Excel RFI log (.xlsx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Project, numbering, who it goes to, spec section and drawing reference, and a response-required date',
+    'One-question subject line — the rule that keeps answers usable',
+    'Information requested box sized for the question and the documents it cites',
+    "Contractor's suggested interpretation so the reviewer can say yes or no",
+    'Cost, schedule and work-on-hold impact flags if the answer is late',
+    'Response block for the architect, engineer or GC, with responder, date and distribution',
+    'Response-type checkboxes: clarification only, change by change order, or rejected',
+    'Dual signature lines (contractor + architect / engineer / GC)',
+    'Excel only: a 30-row RFI Log with status dropdowns, a days-open formula, overdue highlighting and live counts',
+  ]}
+  howTo={[
+    [
+      'Number it and set the response date',
+      'Use the next number in the project sequence and put a specific response-required date on it — the turnaround from your contract, counted from today. An RFI with no due date has no such thing as late.',
+    ],
+    [
+      'Ask one question and cite the documents',
+      'State the question in the first sentence, then the drawing, detail, spec paragraph or field condition that makes it unclear. If there are three questions, send three RFIs.',
+    ],
+    [
+      'Suggest an answer',
+      'Write the reading you intend to follow and what it would cost or change. A yes/no on a proposal comes back faster than an essay on an open question, and it puts your pricing assumptions on the record.',
+    ],
+    [
+      'Flag the impact and whether work is on hold',
+      'Cost: none, possible or likely. Schedule: the same. Work on hold: yes or no, and what exactly is waiting. This is what moves your RFI to the top of the reviewer’s pile and what a delay claim will cite later.',
+    ],
+    [
+      'Get the response in writing and log it',
+      'The reviewer answers in the response block, picks whether it is a clarification or a change, and signs. If it is a change, open a change order and put the RFI number on its reference line. Log the response date; the RFI is not closed until its change order is.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['change-order', 'submittal-log', 'tm-ticket', 'meeting-minutes']}
+  feature={{
+    href: '/features/project-management/',
+    label: 'See project management in BuildWorkPro',
+    heading: 'RFIs that live on the project, not in a pile of Word files',
+    body: 'In BuildWorkPro every project carries its documents, threaded comments, change orders, site logs and activity history on one record — so the RFI, the drawing revision it produced and the change order that priced it are all in one place, visible to the office and the field. <a href="/features/project-management/" class="font-semibold text-brand-700 hover:underline">Construction project management software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'RFIs that live on the project, not in a pile of Word files',
+    body: 'BuildWorkPro keeps questions, change orders, and daily reports on the project record — visible to the office and the field, instead of buried in email.',
+  }}
+  disclaimer="Not legal advice — have your attorney review before relying on it. An RFI documents a question; it does not change the contract."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Construction RFI Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          A one-page Request for Information: the question, your suggested reading, the impact if it
-          sits unanswered, and a response block that is not a change order.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="rfi"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.docx)
-          </a>
-          <a
-            href="/templates/change-order/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            Answer adds work? Use the change order
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Works in Word, Google Docs &amp; Pages
-        </p>
-      </div>
-    </section>
+  <h2>What an RFI is for</h2>
+  <p>
+    A request for information is how a contractor gets a gap in the documents resolved in writing.
+    The drawings show a unit but no drain. The spec calls for a product the submittal reviewer
+    rejected. A field condition does not match the plan. You could call the architect &mdash; and
+    for &ldquo;which way does this door swing&rdquo; you should &mdash; but when the answer could
+    change scope, price or schedule, the question and the answer both need dates and names on them.
+    The RFI is that record, and the RFI log is the index to it.
+  </p>
+  <p>
+    Do not proceed on an assumption. The cheapest RFI is the one sent the day the gap is noticed;
+    the most expensive is the one never sent, discovered at closeout.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What's in the template
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p
-        class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto"
-        set:html={`If the answer changes price or time, that is a <a href="/templates/change-order/" class="text-brand-600 underline underline-offset-2 font-medium">change order</a> — attach this RFI as backup, do not treat the reply as authorization.`}
-      />
-    </section>
+  <h2>Field-by-field notes</h2>
+  <ul>
+    <li>
+      <strong>To, and via.</strong> Most subcontracts route RFIs through the GC, who forwards them to
+      the architect or engineer. Name the design professional on the first line and the GC contact on
+      the &ldquo;via&rdquo; line so the log shows who has had it and for how long.
+    </li>
+    <li>
+      <strong>Spec section, drawing and detail.</strong> Be exact: sheet number, revision, detail number,
+      spec paragraph. The reviewer should be able to open the document and see the gap without a phone
+      call.
+    </li>
+    <li>
+      <strong>Response required by.</strong> A date, not &ldquo;ASAP&rdquo;. Count the turnaround in your
+      contract from the day you send it, and put the date the work is scheduled in the hold line if that
+      is sooner.
+    </li>
+    <li>
+      <strong>Information requested.</strong> The question first, then the evidence. One question. Numbered
+      sub-parts are fine if they are the same question (&ldquo;confirm (1) the point of discharge and
+      (2) the pipe material&rdquo;).
+    </li>
+    <li>
+      <strong>Suggested answer.</strong> What you intend to do and what it changes. This is the box most
+      RFI forms leave out and the one that shortens the loop the most.
+    </li>
+    <li>
+      <strong>Impact flags.</strong> Cost and schedule at none / possible / likely, plus work on hold.
+      If work is on hold, say what is waiting &mdash; &ldquo;AHU-3 set proceeds; final drain piping on
+      hold&rdquo; tells the reviewer exactly what their delay costs.
+    </li>
+    <li>
+      <strong>Response block.</strong> The answer, who gave it, the date, distribution, and what kind
+      of answer it is: a clarification with no change, a change to be priced on a change order, or a rejection.
+      That third checkbox row is what stops an RFI reply being treated as authorization.
+    </li>
+  </ul>
 
-    <FAQSection faqs={faqs} />
+  <h2>A worked example</h2>
+  <p>
+    The preview shows the completed example that ships with the download. On August 24, 2026 a
+    mechanical subcontractor sends RFI-014 to the architect of record, via the GC&rsquo;s project
+    manager: the Level 2 mechanical plan locates AHU-3 in a mechanical room but shows no condensate
+    drain or point of discharge, while the plumbing plan puts the nearest floor sink 32 feet away
+    and the spec requires a trapped connection to an approved receptor. The RFI cites the sheet, the
+    paragraph and the approved submittal, asks one two-part question, and suggests an answer: a
+    2&Prime; copper drain along the north wall, core-drilled through the slab to the floor sink,
+    priced as a change order if accepted. Cost impact is flagged likely, schedule possible, and the
+    hold line says the unit set proceeds while the final piping waits. The architect confirms the
+    routing on September 2, issues the revised sheet M-402 Rev. 2, ticks &ldquo;change &mdash; price
+    and time by change order&rdquo;, and signs. Two weeks later that answer becomes <a
+      href="/templates/change-order/">change order CO-003</a
+    > for $5,784.50 and three calendar days, with RFI-014 on its reference line. That is the loop working.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          RFIs that live on the project, not in a pile of Word files
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro keeps questions, change orders, and daily reports on the project record —
-          visible to the office and the field, instead of buried in email.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/project-management/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See project management in BuildWorkPro
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-      <p class="mt-8 text-xs text-slate-400 max-w-2xl mx-auto">
-        Not legal advice — have your attorney review before relying on it. An RFI documents a
-        question; it does not change the contract.
-      </p>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>RFI vs. change order vs. submittal</h2>
+  <p>
+    An <strong>RFI</strong> asks a question about the documents and gets an answer; it changes nothing
+    by itself. A <a href="/templates/change-order/">change order</a> is the signed agreement on the scope,
+    price and time of a change &mdash; the only one of the three that moves the contract sum. A <a
+      href="/templates/submittal-log/">submittal</a
+    > is the reverse direction: you send the reviewer what you propose to install (shop drawings, product
+    data, samples) and they approve, revise or reject it. A rejected submittal often triggers an RFI;
+    an RFI answer often triggers a change order. Keep the numbers cross-referenced so the chain can be
+    followed a year later.
+  </p>
+  <p>
+    If the answer changes price or time, that is a <a href="/templates/change-order/"
+      >change order</a
+    >
+    &mdash; attach this RFI as backup, do not treat the reply as authorization. If the GC directs the
+    work before the change order is signed, track the cost on a
+    <a href="/templates/tm-ticket/">T&amp;M ticket</a> the same day.
+  </p>
+
+  <h2>Using the RFI log</h2>
+  <p>
+    The Excel workbook is a 30-row RFI log with dropdowns for status (open, answered, closed, void)
+    and cost and schedule impact. Days open counts from the submitted date to the responded date, or
+    to today while the RFI is unanswered. The response-due cell turns red once it has passed with no
+    answer. The counts at the top &mdash; open, answered, overdue, with cost impact, and the average
+    days to answer &mdash; are the numbers to put on the agenda of the next
+    <a href="/templates/meeting-minutes/">progress meeting</a>. Every formula has been checked with
+    real dates.
+  </p>
+
+  <h2>Common mistakes this form is built to prevent</h2>
+  <ul>
+    <li>Bundling four questions into one RFI, then getting one vague answer.</li>
+    <li>Sending it with no response date, so it is never late.</li>
+    <li>Asking without suggesting, so the reviewer starts from zero.</li>
+    <li>Leaving the impact flags blank on an RFI that is holding up work.</li>
+    <li>Treating &ldquo;confirmed, proceed&rdquo; as authorization for extra cost.</li>
+    <li>Closing the RFI when the answer arrives instead of when the change order is signed.</li>
+  </ul>
+</TemplatePage>

@@ -1,0 +1,38 @@
+{
+  "slug": "construction-invoice",
+  "name": "Contractor Invoice Template",
+  "basename": "construction-invoice-template",
+  "files": {
+    "pdf": {
+      "file": "construction-invoice-template.pdf",
+      "bytes": 95095,
+      "pages": 1
+    },
+    "example": {
+      "file": "construction-invoice-template-example.pdf",
+      "bytes": 43941,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "construction-invoice-template.xlsx",
+      "bytes": 12870,
+      "sheets": [
+        "Invoice",
+        "How to Use"
+      ]
+    },
+    "docx": {
+      "file": "construction-invoice-template.docx",
+      "bytes": 12316
+    }
+  },
+  "previews": [
+    {
+      "file": "construction-invoice.png",
+      "webp": "construction-invoice.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}
