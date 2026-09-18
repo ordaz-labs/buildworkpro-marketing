@@ -5,17 +5,17 @@
   "files": {
     "pdf": {
       "file": "certificate-of-completion-template.pdf",
-      "bytes": 74525,
+      "bytes": 74094,
       "pages": 1
     },
     "example": {
       "file": "certificate-of-completion-template-example.pdf",
-      "bytes": 37425,
+      "bytes": 37426,
       "pages": 1
     },
     "docx": {
       "file": "certificate-of-completion-template.docx",
-      "bytes": 12169
+      "bytes": 12077
     }
   },
   "previews": [

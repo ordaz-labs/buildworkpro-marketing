@@ -1,0 +1,228 @@
+---
+// Quote cluster: "contractor quote template" 1,000 (KD31) · "construction quote
+// template" 590 · "construction quote template free" 70 · "quote forms for
+// contractors" 30 (DataForSEO, US, 2026-09). Ungated per Q5.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What should a contractor quote include?',
+    answer:
+      'Your company details and license, the customer, the job address, a quote number and date, a valid-until date, a short description of the work, line items with quantity, unit and price, any optional extras priced separately, the subtotal, sales tax where it applies, the total, the deposit due on acceptance, your terms (payment, schedule, exclusions, warranty) and a signature line for the customer. A quote missing the valid-until date or the exclusions is the one that costs you money.',
+  },
+  {
+    question: 'Is a construction quote legally binding?',
+    answer:
+      'Once the customer accepts it — by signing, or in many states by clearly agreeing in writing — a quote is an offer that has been accepted, and the price is binding for the work described. That is why the template states the price is firm through the valid-until date, lists exclusions, and says changes are priced by written change order. This is a general-purpose form, not legal advice; check how your state treats accepted quotes.',
+  },
+  {
+    question: 'What is the difference between a quote, an estimate and a bid proposal?',
+    answer:
+      'A quote is a fixed price for defined work, usually a smaller direct job. An estimate is your internal cost build-up, or an approximate figure you give when the scope is not yet fixed. A bid proposal is the formal offer in a competitive selection, with scope, alternates, inclusions, exclusions and terms. If you would be unhappy doing the work for exactly the number on the page, do not call it a quote.',
+  },
+  {
+    question: 'How long should a quote be valid?',
+    answer:
+      'Thirty days is the norm; fourteen when material prices are moving. Put the date on the quote, not just the period, so there is no argument about when the clock started. Follow up two days before it expires — expired quotes are the cheapest jobs to win back.',
+  },
+  {
+    question: 'Should I charge sales tax on a quote?',
+    answer:
+      'It depends on your state and on whether you are treated as a retailer or a contractor for the job. Many contractors pay tax on materials at purchase and quote a price that already includes it; others must itemize tax on materials or on the whole job. The template gives you a taxable flag per line and a rate cell so you can do either, and shows the taxable amount so the customer can see what was taxed.',
+  },
+  {
+    question: 'How much deposit should I ask for?',
+    answer:
+      'Enough to cover the material you have to order before the job starts, typically 25% to 50% on small jobs — more when equipment is special-order. Some states cap deposits on residential work, so check yours. Ask for the deposit with the signature: an accepted quote with no deposit is a maybe.',
+  },
+  {
+    question: 'What is the difference between a quote and an invoice?',
+    answer:
+      'A quote is the offer before the work; an invoice is the bill after it. Once the quote is accepted, the invoice should match it line for line, plus any signed change orders, less the deposit already paid. Our free contractor invoice template is built to follow this quote.',
+  },
+];
+---
+
+<TemplatePage
+  slug="construction-quote"
+  title="Free Construction Quote Template — Excel, Word & PDF | BuildWorkPro"
+  description="Free construction quote template (Excel, Word + fillable PDF): one-page quote with line items, options, tax, deposit and signature. No email required."
+  h1="Construction Quote Template"
+  intro="A one-page fixed-price quote for the jobs that don’t need a bid package: line items, optional extras, tax on the taxable lines, deposit and balance, your terms, and a signature that turns it into a go. Excel with the math and a quote log, Word to edit, or a fillable PDF."
+  downloads={[
+    { format: 'xlsx', label: 'Download Excel quote workbook (.xlsx)' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'pdf', label: 'Download fillable PDF form' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with your company and license, quote number and date',
+    'Prepared-for and job-address blocks, valid-until date, estimated start and who prepared it',
+    'Description of work: what you will do, where, and what done looks like',
+    'Line items with quantity, unit, unit price and computed amounts',
+    'Optional items table — priced separately, not in the total, so upsells never inflate the quote',
+    'Subtotal, sales tax on the taxable lines, quote total, deposit due on acceptance and balance due',
+    'Terms box for deposit, payment, schedule, exclusions and warranty',
+    'Acceptance signature block for the customer and for you',
+    'Excel: taxable Y/N per line, tax rate and deposit % cells, plus a Quote Log with status, days left, quoted and accepted totals and win rate',
+    'Completed example: a $6,376.71 rooftop exhaust fan replacement with two priced options',
+  ]}
+  howTo={[
+    [
+      'Number it and set the valid-until date',
+      'Use your quote sequence, date it, and put the expiry date on the page. Fill in the customer, the job address (not the billing address) and your estimated start so the customer knows what accepting means.',
+    ],
+    [
+      'Describe the work in plain words',
+      'Two or three sentences: what you will remove, furnish and install, where, and what the customer gets when you leave. This is the scope; the line items are the price.',
+    ],
+    [
+      'Price the lines at sell price',
+      'Quantity × unit price per line — equipment, materials, labor as crew hours × rate, rentals, permits. These are customer-facing prices with your margin in them, not the costs from your estimate. Mark the taxable lines and enter your tax rate; leave it at 0% if tax is already in your prices.',
+    ],
+    [
+      'Add options, deposit and terms',
+      'Put upsells and alternatives in the optional items table so they are visible but outside the total. Set the deposit percentage. Write the terms: deposit and balance, schedule and lead time, exclusions, warranty.',
+    ],
+    [
+      'Send it, get it signed, log it',
+      'Send the PDF, get the acceptance signature and the deposit together, then log the quote with its status. Update the log when it is accepted or declined — your win rate and days-left-to-expiry compute on the Quote Log sheet.',
+    ],
+  ]}
+  faqs={faqs}
+  related={[
+    'construction-estimate',
+    'construction-bid-proposal',
+    'construction-invoice',
+    'work-order',
+  ]}
+  feature={{
+    href: '/features/construction-bidding/',
+    label: 'See quoting in BuildWorkPro',
+    heading: 'Quote from your catalog, sign from a link',
+    body: 'In BuildWorkPro a quote is a bid: line items priced from your product catalog with margin applied as a rate, exported as a branded PDF, sent for legally binding e-signature, tracked from sent to accepted, and converted into a project in one click. <a href="/features/construction-bidding/" class="font-semibold text-brand-700 hover:underline">Construction bidding software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Stop losing quotes in the truck',
+    body: 'BuildWorkPro numbers every quote, prices it from your catalog, sends it for e-signature, chases the reminder, and shows you what you quoted, what you won and your conversion rate.',
+  }}
+  disclaimer="General-purpose form, not legal advice. Deposit limits, sales-tax treatment and cancellation rights for residential work vary by state — confirm yours before relying on the terms."
+  updated="2026-09-17"
+>
+  <h2>Quote vs. estimate vs. bid proposal</h2>
+  <p>
+    A quote is a fixed price for defined work. When the customer signs it, that is the number — not
+    a starting point, not a ballpark. That makes it the right document for the small, direct jobs a
+    subcontractor does outside its GC contracts: a fan replacement, a water heater, a tenant’s extra
+    drops, the service call that turned into a repair. It is the wrong document when the scope is
+    not settled, because then you are quoting a guess.
+  </p>
+  <p>
+    An <a href="/templates/construction-estimate/">estimate</a> is the internal worksheet where you build
+    up cost by section and set your margin; you can also give a customer an "estimate" when the scope
+    is still open, but say so. A
+    <a href="/templates/construction-bid-proposal/">bid proposal</a> is the formal offer in a competitive
+    selection — a GC, a bid package, drawings and specs, alternates, inclusions and exclusions over two
+    pages. The quote is the one-page version for work you are asked for directly, and it should read like
+    one: what, where, how much, by when, sign here.
+  </p>
+
+  <h2>What goes on a one-page quote</h2>
+  <ul>
+    <li>
+      <strong>Quote number, date, valid-until.</strong> The expiry date protects your price; the number
+      lets you find it when the customer calls in six weeks.
+    </li>
+    <li>
+      <strong>Prepared for and job address.</strong> Separate blocks — the bill goes to one, the crew
+      goes to the other.
+    </li>
+    <li>
+      <strong>Description of work.</strong> Two or three sentences of scope, including what done looks
+      like ("return it to service the same day").
+    </li>
+    <li>
+      <strong>Line items.</strong> Quantity, unit, unit price, amount, at sell price. Include removal
+      and disposal, equipment, materials, labor, rentals and permits as their own lines so nothing rides
+      for free.
+    </li>
+    <li>
+      <strong>Optional items.</strong> Priced adds the customer can initial, kept out of the total.
+    </li>
+    <li>
+      <strong>Subtotal, tax, total, deposit, balance.</strong> Tax only on the taxable lines, and a deposit
+      figure the customer can pay with the signature.
+    </li>
+    <li>
+      <strong>Terms.</strong> Deposit and balance, schedule and lead time, exclusions, warranty, and that
+      the price is firm through the valid-until date.
+    </li>
+    <li>
+      <strong>Acceptance.</strong> Customer signature, printed name, date — and yours.
+    </li>
+  </ul>
+
+  <h2>A worked example: a $6,376.71 exhaust fan replacement</h2>
+  <p>
+    The completed example is a mechanical contractor quoting the owner of a medical office campus —
+    the same owner whose new building appears on our other templates — for a failed rooftop exhaust
+    fan on the existing building next door. Six lines: remove and dispose of the old fan ($380), a
+    new 1,800 CFM direct-drive upblast fan ($2,640), a curb adapter ($410), the electrician’s
+    disconnect and reconnect ($685), eight crew hours at $196 ($1,568) and a day of boom lift
+    ($425). Subtotal $6,108.00. Only the fan and the curb adapter are taxable, so Denver’s 8.81%
+    applies to $3,050.00 and adds $268.71, for a total of $6,376.71.
+  </p>
+  <p>
+    A 30% deposit of $1,913.01 is due on acceptance and the $4,463.70 balance on completion. Two
+    options sit outside the total — replacing the neighboring fan during the same visit ($2,890) and
+    a vibration-isolation curb with extended motor warranty ($520) — priced so the customer can say
+    yes without a second quote. The terms give a 2–3 week lead time, one day on site, and exclude
+    roofing repairs beyond the curb seal, permit fees and after-hours work. The quote is dated
+    September 10 and valid until October 10, 2026.
+  </p>
+
+  <h2>Deposits, tax and validity — the three lines that protect you</h2>
+  <p>
+    <strong>Deposit.</strong> Special-order equipment is money out the door before you have been paid
+    anything. Set the deposit to cover it, ask for it with the signature, and check your state’s limits
+    on residential deposits. <strong>Tax.</strong> Whether you collect sales tax depends on your state
+    and on how the job is classified; the per-line taxable flag lets you tax materials only, everything,
+    or nothing, and the taxable amount prints so the customer sees the basis. <strong
+      >Validity.</strong
+    > A quote with no expiry is a price you have to honor whenever the customer gets around to it. Put
+    the date on the page and follow up before it passes.
+  </p>
+
+  <h2>Tracking quotes: the log and your win rate</h2>
+  <p>
+    The Excel workbook includes a Quote Log: one row per quote with customer, job, date,
+    valid-until, amount and a status of Sent, Accepted, Declined or Expired. It totals what you have
+    quoted and what you have won, computes days left on every quote still marked Sent, and
+    calculates your win rate from the decided ones. Fifty quotes at a 40% win rate tells you more
+    about next quarter than any single job does — and a quote that has been "Sent" for 45 days is
+    either a follow-up call or an Expired.
+  </p>
+
+  <h2>Common quoting mistakes</h2>
+  <ul>
+    <li>
+      Quoting from the estimate’s cost lines instead of sell prices, and giving away the margin.
+    </li>
+    <li>No valid-until date, so last spring’s price is this fall’s contract.</li>
+    <li>
+      Leaving out removal, disposal, lift rental or permits — the lines that are always "extra."
+    </li>
+    <li>Folding options into the total, so the quote looks high and the upsell never happens.</li>
+    <li>No exclusions, so the roof repair you found under the curb becomes your problem.</li>
+    <li>Starting work on a phone call with no signature and no deposit.</li>
+  </ul>
+  <p>
+    Once the quote is accepted, the work order and the invoice follow from it: use the
+    <a href="/templates/work-order/">work order template</a> to dispatch the crew and the
+    <a href="/templates/construction-invoice/">contractor invoice template</a> to bill it, less the deposit.
+    For competitive work with drawings and specs, move up to the
+    <a href="/templates/construction-bid-proposal/">bid proposal template</a>, and for the process
+    behind the number read
+    <a href="/blog/how-to-create-construction-bid/">how to create a construction bid</a>.
+  </p>
+</TemplatePage>

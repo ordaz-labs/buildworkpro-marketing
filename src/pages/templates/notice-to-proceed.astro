@@ -1,0 +1,198 @@
+---
+// Notice to proceed cluster: "notice to proceed construction" 170 · "notice to
+// proceed template" 110 (DataForSEO, US, 2026-09). Ungated download per the Q5
+// decision.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What is a notice to proceed in construction?',
+    answer:
+      'A notice to proceed (NTP) is the written instruction from the owner or general contractor telling the contractor to start the work under a signed agreement. It fixes the commencement date — the day the contract time begins — and usually restates the contract time and the completion date it produces. It is a one-page letter, but it is the date every schedule, delay claim and liquidated-damages calculation is measured from.',
+  },
+  {
+    question: 'Who issues the notice to proceed?',
+    answer:
+      'The party paying for the work: the owner on a direct contract, or the general contractor to each subcontractor under a subcontract. Some owners issue an NTP to the GC and the GC then issues its own NTPs to trades as their phases come up. The recipient signs an acknowledgment so there is no later argument about when the clock started.',
+  },
+  {
+    question: 'Is a notice to proceed legally binding?',
+    answer:
+      'It is not a contract by itself — the signed agreement is — but it exercises the agreement. Once issued and acknowledged, the commencement date in it controls the contract time, and the conditions it lists (insurance received, bonds, permits) are the record that the conditions precedent were met. Many contracts say the contract time runs from the NTP date rather than the signing date, which is why the two dates should never be confused. This template is a general-purpose form, not legal advice.',
+  },
+  {
+    question: 'What is the difference between the contract date and the notice to proceed date?',
+    answer:
+      'The contract date is when the agreement was signed. The NTP date is when the work was authorized to start, and the commencement date stated in the NTP is when the contract time begins running. In the completed example the subcontract was signed May 18, 2026, the notice was issued May 28, and the contract time begins June 1 — 170 calendar days to substantial completion on November 18.',
+  },
+  {
+    question: 'Should the contract time be in calendar days or working days?',
+    answer:
+      'Use whatever your agreement says, and say which on the notice. Calendar days are the norm because they are unambiguous: 170 calendar days from June 1 is November 18, weekends and holidays included. Working days require an agreed definition of holidays and weather days. The template labels the field "calendar days" — change it if your contract counts differently.',
+  },
+  {
+    question: 'Can work start before the notice to proceed is issued?',
+    answer:
+      'Only if both parties agree in writing, and it is usually a bad idea for the contractor: work done before the NTP may be outside the insurance and bonding that the NTP confirms, and time spent before the commencement date is not counted against the contract time. If the owner wants long-lead equipment released early, say so in the outstanding-items box — the example does exactly that for the rooftop units.',
+  },
+  {
+    question: 'What conditions must be met before a notice to proceed is issued?',
+    answer:
+      'Whatever your agreement lists as conditions precedent — commonly the signed agreement itself, certificates of insurance with the required endorsements, payment and performance bonds where required, an approved schedule of values, a baseline schedule, a site-specific safety plan, and the permits for the work. The template has a checkbox for each, and a box for anything still outstanding that must arrive before the related work begins.',
+  },
+];
+---
+
+<TemplatePage
+  slug="notice-to-proceed"
+  title="Free Notice to Proceed Template (Word + Fillable PDF) | BuildWorkPro"
+  description="Free notice to proceed template for construction: commencement date, contract time, conditions and acknowledgment. Fillable PDF and Word. No email required."
+  h1="Notice to Proceed Template"
+  intro="The one-page letter that starts the contract clock: commencement date, contract time in calendar days, substantial completion date, the conditions received or still outstanding, site coordination, and an acknowledgment signature. Fillable PDF and editable Word document, with a completed example that starts a 170-day mechanical subcontract."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Letterhead block for the issuing owner or GC with the notice number and date',
+    'To / Project / Agreement reference block with the agreement number, date, contract sum and scope',
+    'Notice language that fixes the commencement date and states that the contract time begins on it',
+    'Commencement date, contract time in calendar days, substantial completion date and optional final completion date',
+    'Conditions checklist: signed agreement, insurance certificates, bonds, schedule of values, baseline schedule, safety plan, permits, preliminary submittals',
+    'Outstanding-items box for conditions still to be met and any early release of long-lead equipment',
+    'Site coordination: preconstruction meeting, superintendent contact, working hours, access and laydown',
+    'Special instructions, then issued-by and acknowledged-by signature blocks',
+  ]}
+  howTo={[
+    [
+      'Reference the agreement',
+      'Enter who the notice goes to, the project, and the agreement number, date, contract sum and scope it authorizes. The notice exercises the agreement; it must point to it unambiguously.',
+    ],
+    [
+      'Set the dates',
+      'Write the commencement date — the day the contract time begins — then the contract time in calendar days and the substantial completion date it produces. Count the days on a calendar; the example runs 170 days from June 1 to November 18. Add a final completion date if the agreement states one.',
+    ],
+    [
+      'Check the conditions and list what is outstanding',
+      'Tick each condition precedent you have received: agreement, insurance, bonds, schedule of values, schedule, safety plan, permits, submittals. Anything unticked goes in the outstanding-items box with a deadline, along with any early release of long-lead items.',
+    ],
+    [
+      'Add site coordination and instructions',
+      "Preconstruction meeting date and place, the superintendent's name and phone, working hours, gate and laydown. Use the instructions box for what the crew needs on day one: released areas, inspection notice, the first billing date.",
+    ],
+    [
+      'Sign, get the acknowledgment, file it with the contract',
+      'The issuer signs; the recipient signs the acknowledgment and returns a copy. File both with the agreement and enter the commencement date in the project schedule — it is the date every extension and delay will be measured from.',
+    ],
+  ]}
+  faqs={faqs}
+  related={[
+    'construction-contract',
+    'subcontractor-agreement',
+    'construction-schedule',
+    'certificate-of-completion',
+  ]}
+  feature={{
+    href: '/features/project-management/',
+    label: 'See project scheduling in BuildWorkPro',
+    heading: 'Enter the commencement date once, and the schedule follows',
+    body: 'In BuildWorkPro every project is broken into phases and tasks with start dates and workday-based durations on a Gantt chart you can drag to reschedule, so the date on this notice becomes the first bar on the timeline — with change orders, site logs and pay applications on the same page. <a href="/features/project-management/" class="font-semibold text-brand-700 hover:underline">Construction project management software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'The clock starts here. Keep the schedule where the job is.',
+    body: 'BuildWorkPro puts the schedule, the change orders and the daily site logs on the same project, so when a delay claim needs the commencement date and the record of what happened after it, both are one click away.',
+  }}
+  disclaimer="Not legal advice. This template is a general-purpose starting point; what a notice to proceed must contain, and what conditions precede it, depend on your agreement and on public-contracting rules where they apply. Have a licensed attorney review before use."
+  updated="2026-09-17"
+>
+  <h2>What a notice to proceed does</h2>
+  <p>
+    A signed contract says what will be built and for how much. It rarely says when the clock
+    starts, because at signing nobody knows exactly when the site, the permit and the insurance
+    certificates will all be in hand. The notice to proceed closes that gap: it is the written
+    instruction to start, it names the commencement date, and from that date the contract time runs.
+    On a subcontract the general contractor issues it to each trade; on a direct job the owner
+    issues it to the contractor. Public owners almost always require one; private owners should,
+    because without it the start date lives in a phone call.
+  </p>
+
+  <h2>Why the commencement date matters more than the signing date</h2>
+  <p>
+    Three things are measured from it. The <strong>contract time</strong> — 170 calendar days in the completed
+    example — runs from the commencement date, so the substantial completion date is a calculation, not
+    a negotiation. <strong>Liquidated damages</strong>, where a contract has them, are assessed
+    against that completion date. And every <strong>time extension</strong> you request for weather, owner
+    changes or late work by others is added to a baseline that starts here. The template puts the commencement
+    date, the contract time and the completion date on one line so all three are visible together, and
+    asks the recipient to acknowledge the notice so the start date is agreed rather than asserted. Enter
+    the same date as the first bar in your
+    <a href="/templates/construction-schedule/">construction schedule</a>.
+  </p>
+
+  <h2>Conditions precedent: what should be in hand before you issue it</h2>
+  <p>
+    Most agreements list things the contractor must deliver before starting — and the notice to
+    proceed is where the issuer records that they arrived. The checklist covers the usual set: the
+    signed agreement, certificates of insurance with additional-insured endorsements, payment and
+    performance bonds where required, the approved schedule of values, the baseline schedule, a
+    site-specific safety plan, the permits for the work, and preliminary submittals. Anything not
+    yet received goes in the outstanding-items box with a deadline. That box is also the right place
+    to release long-lead equipment early: "release of rooftop units authorized on receipt of this
+    notice" lets procurement start without pretending the whole job has. The
+    <a href="/templates/subcontractor-agreement/">subcontractor agreement</a> and
+    <a href="/templates/construction-contract/">construction contract</a> templates define these conditions
+    in their insurance and schedule sections; the notice is where you tick them off.
+  </p>
+
+  <h2>A worked example</h2>
+  <p>
+    The completed example is NTP-001 from Brightline Builders to Summit Mechanical Contractors under
+    subcontract SC-2026-118 for the Harbor Point Medical Office, Building B — the $486,200
+    mechanical subcontract used across these templates. Issued May 28, 2026; commencement June 1;
+    contract time 170 calendar days; substantial completion November 18, 2026; final completion
+    December 4. Seven of eight conditions are ticked. Bonds are unticked because the agreement does
+    not require them, and preliminary submittals are unticked because they are due June 8 — both
+    explained in the outstanding-items box, which also releases the rooftop units. The
+    preconstruction meeting is May 29 at the site trailer, the superintendent is named with his
+    phone number, hours are 7:00 to 3:30, access is Gate B. The instructions say when the slab pour
+    is, how much notice below-slab inspections need, and that the first application for payment is
+    due June 25. Marcus Reed signs for Brightline on May 28; Dana Whitfield acknowledges for Summit
+    on May 29.
+  </p>
+
+  <h2>Notice to proceed vs. contract vs. mobilization</h2>
+  <ul>
+    <li>
+      <strong>Contract date</strong> — when the agreement was signed. It fixes the terms, not the start.
+    </li>
+    <li>
+      <strong>Notice to proceed</strong> — when the work is authorized and the contract time begins. Issued
+      after the conditions precedent are met.
+    </li>
+    <li>
+      <strong>Mobilization</strong> — when crews and equipment physically arrive. It follows the commencement
+      date, and the example instructs the sub not to mobilize before it.
+    </li>
+    <li>
+      <strong>Certificate of substantial completion</strong> — the other end of the contract time. The
+      <a href="/templates/certificate-of-completion/">certificate template</a> closes what this notice
+      opens.
+    </li>
+  </ul>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>Starting on a verbal go-ahead, then arguing later about when the clock began.</li>
+    <li>
+      Issuing the notice before insurance certificates are in hand, so the first week is uncovered.
+    </li>
+    <li>Stating a completion date that does not equal commencement plus contract time.</li>
+    <li>Counting working days when the contract says calendar days, or the reverse.</li>
+    <li>Not getting the acknowledgment signed and returned.</li>
+    <li>
+      Filing the notice with the correspondence instead of with the contract and the schedule.
+      Record the first day on site in the <a href="/templates/daily-report/">daily report</a> too.
+    </li>
+  </ul>
+</TemplatePage>

@@ -5,7 +5,7 @@
   "files": {
     "pdf": {
       "file": "rfi-template.pdf",
-      "bytes": 63041,
+      "bytes": 62658,
       "pages": 1
     },
     "example": {
@@ -23,7 +23,7 @@
     },
     "docx": {
       "file": "rfi-template.docx",
-      "bytes": 12082
+      "bytes": 12081
     }
   },
   "previews": [

@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "construction-contract-template.pdf",
-      "bytes": 134863,
+      "bytes": 134263,
       "pages": 4
     },
     "example": {
       "file": "construction-contract-template-example.pdf",
-      "bytes": 103884,
+      "bytes": 103889,
       "pages": 4
     },
     "docx": {

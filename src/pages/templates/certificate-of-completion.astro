@@ -1,0 +1,210 @@
+---
+// Certificate of completion cluster: "substantial completion certificate" 390 ·
+// "certificate of completion construction" 320 · "certificate of completion for
+// contractor" 170 · "construction certificate of completion template" 110 ·
+// "letter of completion construction" 90 · "certificate of substantial
+// completion template" 50 (DataForSEO, US, 2026-09). Ungated download per the
+// Q5 decision.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What is a certificate of substantial completion?',
+    answer:
+      'A signed document that fixes the date on which the work — or a defined portion of it — became sufficiently complete for the owner to occupy or use it for its intended purpose, even though minor punch list items remain. It attaches the punch list with a completion date, usually starts the warranty period, states how retainage is handled, and records which responsibilities (utilities, security, insurance) pass to the owner as of that date.',
+  },
+  {
+    question: 'Who issues the certificate — the architect, the owner or the contractor?',
+    answer:
+      'On architect-administered projects the architect inspects and issues it, and the owner and contractor sign to accept it. On most subcontracts and small direct jobs there is no architect involved, so the contractor prepares it and the owner or general contractor signs to accept the work. This template works both ways: the contractor certifies, the owner or GC accepts, and the architect or engineer block is optional.',
+  },
+  {
+    question: 'What is the difference between substantial completion and final completion?',
+    answer:
+      'Substantial completion means the work can be used for its purpose with only minor items outstanding; the punch list is the record of those items. Final completion means every punch item is corrected, the closeout documents are accepted and the contract is fully performed, at which point final payment and any remaining retainage are due. The certificate states expressly that it is not final completion and does not waive the right to have the listed items corrected.',
+  },
+  {
+    question: 'Does substantial completion release retainage?',
+    answer:
+      'It depends on the contract. Many hold all retainage to final completion; many release most of it at substantial completion while withholding a multiple of the punch-list value — 150% is a common convention — until the list is done; and some states set the rule by statute. The template has three fields (held to date, released with this certificate, withheld until final completion) and a line for the basis, so the arithmetic is on the page whichever rule applies. See the <a href="/blog/retainage-construction-guide/">retainage guide</a>.',
+  },
+  {
+    question: 'How is this different from a certificate of occupancy?',
+    answer:
+      "A certificate of occupancy is issued by the building authority after final inspections and says the building may legally be occupied. A certificate of substantial completion is a contract document between the parties and says the contractor's work has reached the stage the contract calls substantial completion. One does not imply the other: a job can be substantially complete under the contract while the authority is still waiting on another trade's inspection, and vice versa.",
+  },
+  {
+    question: 'Does the warranty start at substantial completion?',
+    answer:
+      "Under most contracts, yes — the warranty period and manufacturers' warranties run from the date of substantial completion, not from installation and not from final payment. That is why the certificate has warranty-begins and warranty-ends fields next to the completion date: a one-year warranty that starts November 18, 2026 ends November 18, 2027, and both parties see it in writing. Check your agreement; some warranties run from a different trigger.",
+  },
+  {
+    question: 'Is this the AIA G704?',
+    answer:
+      'No. The G704 is a copyrighted form published by the American Institute of Architects for architect-administered projects; this is a general-purpose certificate that serves the same purpose and carries the same essential contents, for jobs where the AIA form is not required or an architect is not involved. If your contract requires the G704, use it and transfer the same information. AIA is a trademark of the American Institute of Architects; BuildWorkPro is not affiliated with it.',
+  },
+];
+---
+
+<TemplatePage
+  slug="certificate-of-completion"
+  title="Free Certificate of Substantial Completion Template (Word + Fillable PDF) | BuildWorkPro"
+  description="Free certificate of substantial completion template: completion date, punch list, warranty start, retainage release. Fillable PDF and Word. No email required."
+  h1="Certificate of Substantial Completion"
+  intro="One signed page that fixes the date of substantial completion, attaches the punch list with a completion date, starts the warranty, states how much retainage is released and how much is held, and records which responsibilities pass to the owner. Fillable PDF and editable Word document, with a completed example that closes out a $497,354.50 mechanical subcontract."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Letterhead block with the certificate number and date',
+    'Project, owner or GC, and agreement block with the contract sum as adjusted by change orders',
+    'A definition of substantial completion that says what it is not: not final completion, and no waiver of corrections',
+    'Date of substantial completion, the work or portion certified, and warranty begins and ends dates',
+    'Punch list line: attached, number of items, value of remaining items, completion date — with the rule that a missed date does not move the completion date',
+    'Retainage held to date, released with this certificate, withheld until final completion, and the basis for the amount withheld',
+    'Responsibilities transferred to the owner as of the date (utilities, security, maintenance, heating and cooling, insurance, damage) with an exceptions line',
+    'Closeout documents delivered checklist: record drawings, O&M manuals, warranties, training, permit finals, attic stock',
+    'Three signature blocks: contractor certifies, owner or GC accepts, architect or engineer confirms (optional)',
+  ]}
+  howTo={[
+    [
+      'Reference the agreement and the adjusted contract sum',
+      'Enter the project, the owner or general contractor, the agreement number and date, and the contract sum as adjusted by every approved change order — the number your retainage is a percentage of. List the change orders included so nobody reconciles from memory.',
+    ],
+    [
+      'Fix the date and what it covers',
+      'The date of substantial completion is the date the work could be used for its purpose, usually the day of the walk-through. State whether the certificate covers the entire work or a portion, then write the warranty start (normally the same date) and the warranty end.',
+    ],
+    [
+      'Attach the punch list',
+      'Tick that the list is attached, enter the number of items, a fair value for the remaining work, and the date by which the items will be done. The free punch list template is built to be that attachment.',
+    ],
+    [
+      'Do the retainage arithmetic and tick the transfers',
+      'Retainage held to date, the amount released with this certificate, and the amount withheld until final completion, with its basis — for example 150% of the punch list value where the contract allows it. Then tick the responsibilities that pass to the owner and note any the contractor keeps, and tick the closeout documents already delivered.',
+    ],
+    [
+      'Sign, distribute, and bill',
+      'The contractor signs to certify, the owner or GC signs to accept, and the architect or engineer signs if one is engaged. Give everyone a copy, file it with the agreement, then submit the pay application that bills the released retainage together with the lien waiver the contract requires.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['punch-list', 'lien-waiver', 'aia-g702-g703', 'notice-to-proceed']}
+  feature={{
+    href: '/features/project-management/',
+    label: 'See project closeout in BuildWorkPro',
+    heading: 'Closeout as a phase, not a pile',
+    body: 'In BuildWorkPro closeout is a phase inside the project: punch list items, closeout documents, lien waivers and the final pay application are tasks with owners and due dates on the Gantt chart, and the signed certificate lives on the project\'s Documents tab next to the pay application that bills the retainage. <a href="/features/project-management/" class="font-semibold text-brand-700 hover:underline">Construction project management software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Certify it, then collect the retainage',
+    body: 'BuildWorkPro tracks the closeout phase task by task and bills the final pay application — retainage included — from the same schedule of values, so the money follows the paperwork instead of waiting on it.',
+  }}
+  disclaimer="Not legal advice. This template is a general-purpose starting point; what substantial completion triggers — warranty, retainage release, lien deadlines, liquidated damages — depends on your agreement and your state. Have a licensed attorney review before use. AIA and G704 are trademarks of the American Institute of Architects; BuildWorkPro is not affiliated with the AIA."
+  updated="2026-09-17"
+>
+  <h2>What substantial completion is, and what it is not</h2>
+  <p>
+    Substantial completion is the contractual point at which the work is sufficiently complete, in
+    accordance with the contract documents, that the owner can occupy or use it for its intended
+    purpose. It is not the last day on site. Minor items remain — the punch list — and the
+    certificate says so on its face: it is not final completion, and signing it does not waive the
+    owner's right to have the listed items corrected or later defects fixed under the warranty.
+    Final completion comes when the punch list is done and the closeout package is accepted, and
+    final payment follows that. The
+    <a href="/blog/construction-project-closeout-checklist/">closeout checklist</a> walks through the
+    whole sequence for a subcontractor.
+  </p>
+
+  <h2>Why one date carries so much</h2>
+  <p>
+    Four clocks usually start or stop on the date of substantial completion. The
+    <strong>warranty period</strong> begins, so a twelve-month warranty is measured from here rather than
+    from installation. <strong>Retainage</strong> release is triggered, in whole or in part, depending
+    on the contract. <strong>Liquidated damages</strong>, where a contract has them, stop accruing.
+    And <strong>responsibility for the work</strong> — utilities, security, heating and cooling, insurance,
+    damage — passes to the owner, which is why the certificate has a checklist for exactly that transfer
+    and a line for the responsibilities the contractor keeps (the punch list, and damage its own crews
+    cause while finishing it). In some states the date also starts lien and bond claim deadlines. A certificate
+    that both parties sign turns a date that would otherwise be argued about into a fact.
+  </p>
+
+  <h2>The punch list and the money</h2>
+  <p>
+    The certificate carries three numbers about the punch list: how many items, what the remaining
+    work is worth, and when it will be done — and one rule: missing that date does not move the date
+    of substantial completion. The retainage section then shows the arithmetic in the open:
+    retainage held to date, the amount released with this certificate, the amount withheld until
+    final completion, and the basis for the withholding. Many contracts let the owner or GC hold a
+    multiple of the punch list value, commonly 150%, and release the rest; others hold everything to
+    final completion; several states set the rule by statute. Whatever your agreement says, the
+    three fields should foot, and the withheld amount should be traceable to the list. Attach the
+    list itself — the <a href="/templates/punch-list/">punch list template</a> is built for it — and bill
+    the released amount on the next <a href="/templates/aia-g702-g703/">pay application</a>
+    with the <a href="/templates/lien-waiver/">lien waiver</a> the contract requires.
+  </p>
+
+  <h2>A worked example</h2>
+  <p>
+    The completed example is CSC-001 from Summit Mechanical Contractors, certifying the mechanical
+    and plumbing scope of the Harbor Point Medical Office, Building B, substantially complete on
+    November 18, 2026 — the completion date in the subcontract and the notice to proceed. The
+    contract sum as adjusted is $497,354.50: the original $486,200.00 plus CO-001 (+$7,350.00),
+    CO-002 (−$1,980.00) and CO-003 (+$5,784.50). Retainage held at 10% is $49,735.45. The punch list
+    has 14 items worth $4,200.00, due December 4; 150% of that value, $6,300.00, is withheld until
+    final completion and $43,435.45 is released with the certificate. The warranty runs to November
+    18, 2027. Utilities, security, maintenance, heating and cooling, insurance and damage pass to
+    the owner as of the date, with the contractor keeping the punch list and damage caused by its
+    own crews. Record drawings, O&amp;M manuals, warranties, training and permit finals are
+    delivered; attic stock is not. Summit certifies on November 18, Brightline Builders accepts on
+    November 19, and Kestrel Design Group confirms the inspection.
+  </p>
+
+  <h2>
+    Certificate of substantial completion vs. certificate of occupancy vs. letter of completion
+  </h2>
+  <ul>
+    <li>
+      <strong>Certificate of substantial completion</strong> — a contract document between the parties:
+      the work has reached the stage the contract defines, with these items remaining.
+    </li>
+    <li>
+      <strong>Certificate of occupancy</strong> — issued by the building authority after final inspections;
+      says the building may be legally occupied. Neither implies the other.
+    </li>
+    <li>
+      <strong>Letter of completion</strong> — a contractor's one-sided statement that the work is done,
+      often used on small jobs. Useful as notice; weaker than a certificate both parties sign, because
+      nothing in it is accepted.
+    </li>
+    <li>
+      <strong>Final completion / closeout</strong> — punch list corrected, documents accepted, final payment
+      made. The <a href="/templates/notice-to-proceed/">notice to proceed</a> opened the contract time;
+      final completion closes the contract.
+    </li>
+  </ul>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>Letting the owner occupy the space without a certificate, then arguing about the date.</li>
+    <li>
+      Signing a certificate with no punch list attached, so the "minor items" have no boundary.
+    </li>
+    <li>
+      Leaving the retainage fields blank and finding out at the final pay application that the two
+      sides had different numbers in mind.
+    </li>
+    <li>
+      Forgetting the warranty end date, so callbacks a year later start with a calendar argument.
+    </li>
+    <li>
+      Not recording which responsibilities transferred — the heating bill and the broken window in
+      week two both become disputes.
+    </li>
+    <li>
+      Signing a final unconditional lien waiver at this milestone instead of with final payment.
+    </li>
+  </ul>
+</TemplatePage>

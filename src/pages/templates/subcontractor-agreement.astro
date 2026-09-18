@@ -1,31 +1,16 @@
 ---
-// Page 2 of the /templates/ hub (issue #134): the subcontractor-agreement
-// cluster — ~5,600 searches/mo across 30+ variants, KD 0, a SERP of
-// institutional PDFs (nyc.gov, sec.gov, university uploads) with no AI
-// Overview. Ungated download per the Q5 decision.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/subcontractor-agreement-template.docx';
-
-const whatsInside = [
-  'Scope of work with express exclusions',
-  'Contract documents & order of precedence',
-  'Progress payments, retainage, and G702-style billing terms',
-  'Written-change-order clause that protects your margin',
-  'Insurance, licenses, warranty, and indemnification',
-  'Lien waiver exchange, termination, and disputes',
-  'Signature blocks plus exhibits for drawings and the schedule of values',
-];
+// Subcontractor agreement cluster: "subcontractor agreement" 1,600 ·
+// "subcontractor agreement template" 1,600 · "subcontractor contract template"
+// 1,600 (DataForSEO, US, 2026-09). GSC also shows "free standard form of
+// agreement between contractor and subcontractor" and "subcontract agreement
+// format in word". Ungated download per the Q5 decision.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
     question: 'What should a subcontractor agreement include?',
     answer:
-      'At minimum: the scope of work with exclusions, the subcontract price, payment terms including retainage and a billing schedule, a written change-order requirement, the project schedule, insurance requirements, warranty terms, indemnification, lien waiver procedure, and how disputes are resolved. This template covers all fourteen standard sections with bracketed fill-ins.',
+      'At minimum: the scope of work with exclusions, the subcontract price, payment terms including retainage and a billing schedule, a written change-order requirement, the project schedule, insurance requirements, warranty terms, indemnification, lien waiver procedure, and how disputes are resolved. This template covers all fifteen standard sections, and every deal-specific value — price, retainage, billing day, payment period, insurance limits, warranty, cure period, governing law — sits on a one-page Agreement Summary the clauses refer to.',
   },
   {
     question: 'Is a subcontractor agreement legally binding?',
@@ -35,7 +20,17 @@ const faqs = [
   {
     question: 'Who provides the agreement — the GC or the sub?',
     answer:
-      'On commercial work the general contractor usually issues their subcontract form, and you negotiate from it. This template is for the other cases: direct-to-owner jobs, smaller GCs without paper, and your own sub-tier subcontractors. Reading a standard form also makes you a sharper negotiator of a GC-issued one.',
+      'On commercial work the general contractor usually issues their subcontract form, and you negotiate from it. This template is for the other cases: direct-to-owner jobs, smaller GCs without paper, and your own sub-tier subcontractors. Reading a standard form also makes you a sharper negotiator of a GC-issued one — you will know which clauses are missing and which have been tilted.',
+  },
+  {
+    question: 'What is the difference between pay-when-paid and pay-if-paid?',
+    answer:
+      "A pay-when-paid clause makes the owner's payment the timing for yours: the GC must still pay within a reasonable time even if the owner never does. A pay-if-paid clause makes the owner's payment a condition of yours, shifting the owner's credit risk to you; several states refuse to enforce it or require very explicit language. This template uses neither — payment is due a fixed number of days after the application — so if a GC-issued form contains one, you will recognize it as a change from the baseline.",
+  },
+  {
+    question: 'How much retainage can a general contractor hold on a subcontract?',
+    answer:
+      'Ten percent is the traditional figure and five percent is common on larger or public work; many states cap retainage or require it to step down or be released within a set time after completion. The template has a Retainage Percentage field on the Agreement Summary and states that where a statute limits the rate or the holding period, the statute controls — so the number you write in is the ceiling, not a way around the law.',
   },
   {
     question: 'What is the difference between a subcontractor agreement and a purchase order?',
@@ -45,128 +40,216 @@ const faqs = [
   {
     question: 'Can I sign it electronically?',
     answer:
-      'Yes — properly executed e-signatures are legally binding in the United States under the federal ESIGN Act. BuildWorkPro includes built-in legally-binding e-signatures: send a bid or change order and your customer signs from an emailed link, with the certified signed PDF filed back on the record automatically.',
+      'Yes — properly executed e-signatures are legally binding in the United States under the federal ESIGN Act, and the General Provisions section of this template says so expressly. BuildWorkPro includes built-in legally binding e-signatures: send a bid or change order and your customer signs from an emailed link, with the certified signed PDF filed back on the record automatically.',
   },
 ];
 ---
 
-<Layout
-  title="Free Subcontractor Agreement Template (Word)"
-  description="Free subcontractor agreement template for construction: 14 standard sections — scope, retainage, change orders, lien waivers — as an editable Word doc. No email required."
+<TemplatePage
+  slug="subcontractor-agreement"
+  title="Free Subcontractor Agreement Template (Word + PDF) | BuildWorkPro"
+  description="Free subcontractor agreement template: 15-section subcontract in Word and fillable PDF — scope, retainage, change orders, lien waivers. No email required."
+  h1="Subcontractor Agreement Template"
+  intro="A 15-section standard form of agreement between a contractor and a subcontractor, with every deal term — price, retainage, billing day, insurance limits, warranty, dispute forum — on a one-page Agreement Summary the clauses refer to. Editable Word document and a fillable PDF, plus a completed example showing a $486,200 mechanical subcontract."
+  downloads={[
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'pdf', label: 'Download fillable PDF' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'One-page Agreement Summary: subcontract price, retainage, billing day, payment period, change order markup, warranty, insurance limits, cure period, governing law and dispute forum',
+    'Parties and project blocks with license numbers, representatives, owner, prime contract date and architect',
+    'Scope of Work with an inferable-work rule, and exclusions carried in Exhibit A',
+    'Contract Documents with a clear order of precedence and a flow-down rule: no prime-contract term binds you unless you were given it',
+    'Progress payments, retainage and final payment, with a seven-day written-dispute rule and the closeout documents that trigger final payment',
+    'Written-change-order section: notice deadline, three pricing methods, T&M tickets for directed work, and no pay without a signed writing',
+    'Schedule with extensions, compensable owner or contractor delay, recovery, and a liquidated-damages guardrail',
+    'Insurance, licenses and permits, and a Safety section covering the competent person, JSAs and incident reporting',
+    'Warranty, mutual comparative-fault indemnity, lien waiver exchange, termination for cause, suspension for nonpayment and termination for convenience',
+    'Negotiation-first dispute resolution with an arbitration or litigation selector, signature tables, and an Exhibits A–D checklist',
+  ]}
+  howTo={[
+    [
+      'Fill in the parties and the project',
+      'Legal names as they appear on licenses and insurance, addresses for notices, license numbers, and the representative on each side who can answer a question or sign a change order. Add the owner, the prime contract date and the architect so the flow-down clause has something to point to.',
+    ],
+    [
+      'Summarize the Work and build Exhibit A',
+      'Write two or three sentences on page 1 — trade, systems, spec sections — and put the full scope, the drawing list and the exclusions in Exhibit A. Work not listed as excluded is included, so the exclusions list is where your margin lives. The free scope of work template is built to be that exhibit.',
+    ],
+    [
+      'Set the money terms on the Agreement Summary',
+      'Subcontract price, retainage percentage, the day of the month applications are due, how many days after the application payment is due, and the markup allowed on change orders. The clauses refer to these values by name, so you never hunt through the text for a blank.',
+    ],
+    [
+      'Set the time, insurance and risk terms',
+      'Commencement and completion dates, the warranty period in months, general liability per-occurrence and aggregate limits, auto and umbrella limits, the cure period for a breach, the governing state and venue, and whether disputes go to mediation-then-arbitration or to court.',
+    ],
+    [
+      'Attach the exhibits, review, sign',
+      'Exhibit B is the schedule of values every pay application will bill against; C is the project schedule; D is the insurance certificates. Have an attorney check the form against your state, then sign — on paper or electronically, both parties, dated. Initial each attached exhibit on the last page.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['scope-of-work', 'construction-contract', 'change-order', 'lien-waiver']}
+  feature={{
+    href: '/features/project-management/',
+    label: 'See project management in BuildWorkPro',
+    heading: 'From signed subcontract to a running job',
+    body: 'In BuildWorkPro a won bid converts straight into a project, the signed subcontract lives on its Documents tab, the estimate seeds the schedule of values for pay applications, and change orders are priced against the contract and e-signed from an emailed link. <a href="/features/project-management/" class="font-semibold text-brand-700 hover:underline">Construction project management software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'The contract is step one. Getting paid against it is the job.',
+    body: 'BuildWorkPro runs the rest of the loop this agreement describes: bids with legally binding e-signatures, written change orders your customer approves online, and pay applications with retainage handled.',
+  }}
+  disclaimer="Not legal advice. This template is a general-purpose starting point; construction contract requirements — retainage limits, prompt-payment rules, lien waiver forms, indemnity and pay-if-paid restrictions, licensing — vary by state. Have a licensed attorney review before use."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <!-- Hero -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Subcontractor Agreement Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          A 14-section standard-form subcontract as an editable Word document — scope, retainage,
-          written change orders, lien waivers, and the payment terms that get subs paid on time.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="subcontractor-agreement"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.docx)
-          </a>
-          <a
-            href="/templates/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            See all free templates
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Opens in Word &amp; Google Docs
-        </p>
-      </div>
-    </section>
+  <h2>What a subcontractor agreement is, and who issues it</h2>
+  <p>
+    A subcontractor agreement (subcontract) is the contract between a general contractor and a trade
+    contractor for a defined piece of a larger project. It sits under the prime contract between the
+    GC and the owner and flows the relevant parts of that contract down to you: the drawings and
+    specifications, the schedule, the insurance requirements, and usually the payment rhythm. What
+    it adds is the deal between the two of you — price, retainage, how changes are priced, what
+    happens when someone is late, and who carries which risk.
+  </p>
+  <p>
+    On most commercial work the GC hands you their form. You will use this template in three
+    situations: a direct-to-owner job where you are the prime contractor and need a subcontract for
+    your own sub-tier trades; a smaller GC who has no paper of their own; and as the baseline you
+    read a GC's form against, so you can see which clauses were removed and which were tilted. A
+    subcontract is a different animal from a
+    <a href="/templates/construction-contract/">construction contract</a> between an owner and a contractor,
+    and from a purchase order — see the comparison below.
+  </p>
 
-    <!-- What's inside -->
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What the agreement covers
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto">
-        The two clauses that earn their keep: <strong class="text-slate-700"
-          >written change orders only</strong
-        > (a verbal OK is not a change order) and <strong class="text-slate-700"
-          >G702-style progress billing with retainage</strong
-        > — the billing rhythm this template shares with our
-        <a
-          href="/templates/aia-g702-g703/"
-          class="text-brand-600 underline underline-offset-2 font-medium"
-          >free pay application template</a
-        >.
-      </p>
-    </section>
+  <h2>How this template is organized: the Agreement Summary</h2>
+  <p>
+    Most free subcontract forms scatter blanks through the clauses — <em
+      >retainage of ___% released upon ___</em
+    > — and you fill them by reading every page. This one puts every deal-specific value on page 1 in
+    an Agreement Summary: parties, project, a short summary of the Work, and a grid of named terms. The
+    fifteen numbered sections then refer to those terms by name: "the Retainage Percentage stated in the
+    Agreement Summary," "the Cure Period," "the Venue." Two things follow. Nobody has to hunt for a blank,
+    and the clause text never needs editing to close a deal — you negotiate the Summary, attach the exhibits,
+    and sign.
+  </p>
 
-    <FAQSection faqs={faqs} />
+  <h2>The fifteen sections, and the ones that decide whether you get paid</h2>
+  <p>
+    Scope of Work; Contract Documents; Subcontract Price; Progress Payments and Retainage; Changes
+    in the Work; Schedule; Insurance; Licenses, Permits and Compliance; Safety; Warranty;
+    Indemnification; Liens and Waivers; Termination and Suspension; Disputes and Governing Law; and
+    General Provisions. Four of them do most of the work for a subcontractor:
+  </p>
+  <ul>
+    <li>
+      <strong>Section 4 — Progress Payments and Retainage.</strong> Applications are due on the Billing
+      Day, payment is due a fixed number of days later, and the contractor must dispute in writing within
+      seven days and pay the undisputed balance. Final payment is tied to a checklist you control: punch
+      list done, closeout documents delivered, final lien waiver furnished.
+    </li>
+    <li>
+      <strong>Section 5 — Changes in the Work.</strong> No changed work without a signed change order;
+      a seven-day notice window; three pricing methods including cost plus the Change Order Markup from
+      the Summary; and a rule that directed work is tracked on daily T&amp;M tickets until the change
+      order is issued. Pair it with the
+      <a href="/templates/change-order/">change order template</a>.
+    </li>
+    <li>
+      <strong>Section 6 — Schedule.</strong> Extensions for owner, contractor, weather and other-trade
+      delay with a notice deadline; compensable delay when the contractor or owner causes it; and liquidated
+      damages only if a rate is stated in Exhibit A.
+    </li>
+    <li>
+      <strong>Section 12 — Liens and Waivers.</strong> A conditional waiver with each application and
+      an unconditional waiver for the previous payment, in the form your state requires, and an express
+      statement that nothing waives lien or bond rights in advance of payment. The
+      <a href="/templates/lien-waiver/">lien waiver forms</a> follow the same exchange.
+    </li>
+  </ul>
+  <p>
+    Section 9, Safety, is new in this edition: a competent person on site whenever your crews are,
+    JSAs on request, same-day incident reporting, and the contractor's right to stop work for an
+    imminent hazard — the terms GC safety officers now expect to see in writing.
+  </p>
 
-    <!-- CTA -->
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          The contract is step one. Getting paid against it is the job.
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro runs the rest of the loop this agreement describes: bids with legally-binding
-          e-signatures, written change orders your customer approves online, and G702-style pay
-          applications with retainage handled.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/construction-bidding/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See bids &amp; e-signatures
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-      <p class="mt-8 text-xs text-slate-400 max-w-2xl mx-auto">
-        Not legal advice. This template is a general-purpose starting point; construction contract
-        requirements — retainage limits, prompt-payment rules, lien waiver forms, indemnity
-        restrictions — vary by state. Have a licensed attorney review before use.
-      </p>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>A worked example</h2>
+  <p>
+    The completed example is the subcontract behind every other sample on this site: Brightline
+    Builders engages Summit Mechanical Contractors for the mechanical and plumbing scope of the
+    Harbor Point Medical Office, Building B. Subcontract price $486,200.00; retainage 10%;
+    applications due by the 25th, paid within 30 days; 15% markup on change orders; commencement
+    June 1, 2026 and completion November 18, 2026; general liability $1,000,000 per occurrence and
+    $2,000,000 aggregate, $1,000,000 auto, $2,000,000 umbrella; a 12-month warranty; a 10-day cure
+    period; Colorado law, Denver County venue, mediation then binding arbitration. The change order
+    (CO-003), the pay application for August, and the lien waiver examples all bill against that
+    same $486,200 contract with the same 10% retainage, so you can follow one job from signature to
+    final payment.
+  </p>
+
+  <h2>Subcontractor agreement vs. construction contract vs. purchase order</h2>
+  <table>
+    <thead>
+      <tr><th>Document</th><th>Parties</th><th>Use it when</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Subcontractor agreement</td>
+        <td>General contractor ↔ trade contractor</td>
+        <td>
+          Your work is part of a larger project, billed monthly against a schedule of values, with
+          retainage, and governed partly by a prime contract you did not sign.
+        </td>
+      </tr>
+      <tr>
+        <td><a href="/templates/construction-contract/">Construction contract</a></td>
+        <td>Owner ↔ contractor</td>
+        <td>
+          You contract directly with the property owner: a payment schedule tied to milestones,
+          permits, warranty and the consumer notices some states require.
+        </td>
+      </tr>
+      <tr>
+        <td>Purchase order</td>
+        <td>Buyer ↔ supplier</td>
+        <td>
+          You are buying materials or a fixed deliverable — equipment, fabricated items, a delivery
+          — with no ongoing labor on site.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Clauses to watch for in a GC-issued subcontract</h2>
+  <ul>
+    <li>
+      <strong>Pay-if-paid.</strong> "Payment by the Owner is a condition precedent to payment to the Subcontractor"
+      shifts the owner's credit risk to you. Ask for pay-when-paid with an outside date, and read the
+      <a href="/blog/retainage-construction-guide/">retainage guide</a> for how release timing interacts
+      with it.
+    </li>
+    <li>
+      <strong>No damages for delay.</strong> Your only remedy for a GC-caused delay is more time, never
+      money. This template makes contractor- and owner-caused delay compensable.
+    </li>
+    <li>
+      <strong>Broad-form indemnity.</strong> You indemnify the GC even for the GC's own negligence. Many
+      states void it; this template is mutual and comparative.
+    </li>
+    <li>
+      <strong>Notice windows measured in hours.</strong> A 48-hour claim notice is designed to be missed.
+      The template uses seven calendar days and lets a shorter prime-contract period apply only if you
+      were given it.
+    </li>
+    <li>
+      <strong>Advance lien waivers.</strong> Language waiving lien rights on signing, rather than on payment.
+      See <a href="/blog/construction-lien-waivers-explained/">lien waivers explained</a>.
+    </li>
+    <li>
+      <strong>Retainage above your state's cap, or with no release trigger.</strong> Write the percentage
+      and the release event into the Summary and make the statute control.
+    </li>
+  </ul>
+</TemplatePage>

@@ -117,17 +117,24 @@ export async function renderSection({
     const doc = await PDFDocument.load(pdf);
     const pages = doc.getPageCount();
     const pageH = size.height;
-    // Map each field to a page. Fixed pages: y / pageH. Flow: page 1 only.
+    // Map each field to a page. Fixed pages: y / pageH. Flow: page 1 only —
+    // in print media the .flow padding is gone and @page margins take over, so
+    // the measured box shifts by the margins and page 1 holds only the content
+    // box (page height minus top and bottom margins).
     const mapped = [];
     for (const f of fields) {
-      const idx = mode === 'pages' ? Math.floor((f.y + f.h / 2) / pageH) : 0;
-      const yInPage = f.y - idx * pageH;
-      if (mode === 'flow' && f.y + f.h > pageH) {
-        console.warn(`  ⚠ field ${f.name} is past page 1 of a flow document — skipped`);
+      if (mode === 'flow') {
+        const contentH = size.height - size.marginTop - size.marginBottom;
+        if (f.y + f.h > contentH) {
+          console.warn(`  ⚠ field ${f.name} is past page 1 of a flow document — skipped`);
+          continue;
+        }
+        mapped.push({ ...f, page: 0, x: f.x + size.marginSide, y: f.y + size.marginTop });
         continue;
       }
+      const idx = Math.floor((f.y + f.h / 2) / pageH);
       if (idx >= pages) continue;
-      mapped.push({ ...f, page: idx, y: yInPage });
+      mapped.push({ ...f, page: idx, y: f.y - idx * pageH });
     }
     return { pdf, fields: mapped, pages, size };
   } finally {
@@ -162,6 +169,9 @@ async function addFields(doc, sections) {
           width: w,
           height: h,
           borderWidth: 0,
+          // pdf-lib defaults a MISSING borderColor to black and draws it as a hairline even at
+          // width 0 (macOS Preview shows it); an explicit undefined keeps the widget borderless.
+          borderColor: undefined,
           backgroundColor: undefined,
         });
       } else {
@@ -173,6 +183,9 @@ async function addFields(doc, sections) {
           width: w,
           height: h,
           borderWidth: 0,
+          // pdf-lib defaults a MISSING borderColor to black and draws it as a hairline even at
+          // width 0 (macOS Preview shows it); an explicit undefined keeps the widget borderless.
+          borderColor: undefined,
           backgroundColor: undefined,
           font: helv,
           textColor: rgb(0.106, 0.122, 0.141),

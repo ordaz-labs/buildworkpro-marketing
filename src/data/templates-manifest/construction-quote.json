@@ -5,7 +5,7 @@
   "files": {
     "pdf": {
       "file": "construction-quote-template.pdf",
-      "bytes": 88654,
+      "bytes": 87704,
       "pages": 1
     },
     "example": {
@@ -24,7 +24,7 @@
     },
     "docx": {
       "file": "construction-quote-template.docx",
-      "bytes": 12959
+      "bytes": 12958
     }
   },
   "previews": [

@@ -5,7 +5,7 @@
   "files": {
     "pdf": {
       "file": "construction-meeting-minutes-template.pdf",
-      "bytes": 198354,
+      "bytes": 195609,
       "pages": 2
     },
     "example": {
@@ -15,7 +15,7 @@
     },
     "docx": {
       "file": "construction-meeting-minutes-template.docx",
-      "bytes": 13061
+      "bytes": 13060
     }
   },
   "previews": [

@@ -1,0 +1,217 @@
+---
+// Construction contract cluster: "construction contract template" 1,900 ·
+// "contractor agreement template" 1,300 · "basic construction contract
+// template" 110 · "construction contract agreement template" 90 · "residential
+// construction contract template" 70 (DataForSEO, US, 2026-09). Ungated
+// download per the Q5 decision.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What should a construction contract include?',
+    answer:
+      'The parties and the property; a description of the work with the plans it is built from and the exclusions; the price and whether it is fixed or cost-plus; a payment schedule with a deposit, milestones and final payment; a written change-order rule; start and completion dates with the delays that extend them; who pulls permits; insurance on both sides; a warranty; what happens at substantial and final completion; termination rights; how disputes are resolved; and any notices your state requires for residential work. This template has a section for each, with the deal-specific values on a one-page Contract Summary.',
+  },
+  {
+    question:
+      'What is the difference between a construction contract and a subcontractor agreement?',
+    answer:
+      'A construction contract is between the property owner and the contractor doing the work. A subcontractor agreement is between a general contractor and a trade contractor working under the GC\'s contract with the owner, so it carries retainage, monthly applications against a schedule of values, and prime-contract flow-down terms that a direct owner contract does not need. If you invoice the owner, use this template; if you bill a GC, use the <a href="/templates/subcontractor-agreement/">subcontractor agreement template</a>.',
+  },
+  {
+    question: 'Should I use a fixed price or a cost-plus contract?',
+    answer:
+      'Fixed price when the scope is well defined and you can price it with confidence: the owner gets certainty and you keep the savings from efficient work. Cost plus a fee when the scope is open — remodels of unknown existing conditions, work that starts before design is finished — and add a guaranteed maximum price if the owner wants a ceiling. The template has a selector for both, defines the Cost of the Work, and requires cost documentation with every cost-plus invoice.',
+  },
+  {
+    question: 'How much deposit can a contractor ask for?',
+    answer:
+      'Enough to cover the materials and mobilization you commit to before the first milestone is billable — commonly 10% to a third of the price on small jobs, and often the cost of long-lead equipment. Several states cap deposits on home-improvement contracts by percentage or dollar amount, and some require deposits above a threshold to be held in escrow, so check your state before writing the number in. The template treats any legal limit as controlling.',
+  },
+  {
+    question: 'Do I need a written contract for a small job?',
+    answer:
+      'Yes. Many states require home-improvement work above a modest dollar threshold to be in writing with specific terms, some tie your right to enforce the contract or file a lien to having one, and every dispute is easier to resolve from a signed page than from memory. A one-page summary of the work, the price, the payment schedule and a warranty is enough for a small job; this template gives you that on page 1 with the full terms behind it.',
+  },
+  {
+    question: 'What is the right to cancel, and does it apply to my contract?',
+    answer:
+      "Federal and state consumer laws give a homeowner a short window — commonly three business days — to cancel a contract signed at their home or somewhere other than the contractor's place of business, and require the contractor to provide a notice of cancellation form. Rules and exceptions vary by state and by the kind of work. The template's Right to Cancel section says that where the right applies the required notice must be given and work does not start until the period passes; attach your state's notice as Exhibit C.",
+  },
+  {
+    question: 'Can a construction contract be signed electronically?',
+    answer:
+      'Yes — e-signatures are legally binding in the United States under the federal ESIGN Act, and the General Provisions section of this template allows counterparts and electronic signatures. In BuildWorkPro the proposal your customer accepts is e-signed from an emailed link and the certified signed PDF is filed on the record; change orders against the contract are approved the same way.',
+  },
+];
+---
+
+<TemplatePage
+  slug="construction-contract"
+  title="Free Construction Contract Template — Owner-Contractor Agreement (Word + PDF) | BuildWorkPro"
+  description="Free construction contract template: owner–contractor agreement in Word and fillable PDF — price, payment schedule, changes, warranty. No email required."
+  h1="Construction Contract Template"
+  intro="A 16-section owner–contractor agreement for direct work — residential and light commercial — with the price basis, deposit, milestone payment schedule, warranty, insurance and dispute forum on a one-page Contract Summary. Editable Word document and a fillable PDF, plus a completed example for a $58,750 rooftop-unit replacement."
+  downloads={[
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'pdf', label: 'Download fillable PDF' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'One-page Contract Summary: price basis (fixed price, or cost plus fee with an optional guaranteed maximum), allowances, deposit, dates, payment period, change order markup, warranty, cure period, late interest and governing law',
+    'Milestone payment schedule table that must foot to the contract price, with a fillable total',
+    'Parties and project blocks with the license number, representatives, the plans and specifications reference, and who pulls the building permit',
+    'Contract Price section with fixed-price, cost-plus, allowance and tax-and-permit rules',
+    'Payment section: deposit, progress invoices, a seven-day written-dispute rule, the final-payment trigger, late interest and suspension for nonpayment, and no retainage unless the schedule says so',
+    'Changes and concealed conditions: written change orders, three pricing methods, stop-work rules for hidden conditions and hazardous materials, and email confirmation for no-cost changes',
+    "Schedule and delays, permits, codes and inspections, and paired lists of the owner's and the contractor's responsibilities",
+    'Insurance and indemnification, a warranty measured from substantial completion, substantial and final completion with a punch-list rule, and lien waivers',
+    'Termination for cause and for convenience, negotiation-first disputes with an arbitration or litigation selector, a right-to-cancel and consumer-notices section, signature tables, and an Exhibits A–C checklist',
+  ]}
+  howTo={[
+    [
+      'Fill in the owner, the contractor and the project',
+      'Legal names as they appear on the deed and on your license, the owner of record if the person signing is a tenant or agent, addresses for notices, and a representative on each side. Reference the plans and specifications by title and date, and tick who obtains the building permit.',
+    ],
+    [
+      'Choose the price basis and summarize the Work',
+      'Tick Fixed price or Cost of the Work plus fee; for cost-plus, enter the fee percentage and, if the owner wants a ceiling, a guaranteed maximum. List allowance amounts for items not yet selected. Write the Work in two or three sentences on page 1 and put the full scope and exclusions in Exhibit A.',
+    ],
+    [
+      'Build the payment schedule',
+      "Deposit on signing, then milestones tied to events both parties can see — equipment delivered, rough-in inspected, substantial completion — and a final payment at final completion. The amounts must total the contract price. Check your state's deposit limits for residential work before entering the deposit.",
+    ],
+    [
+      'Set the time, warranty, insurance and dispute terms',
+      "Commencement and substantial completion dates, how many days the owner has to pay an invoice, the markup allowed on change orders, the warranty period in months, the cure period for a breach, the liability limits, who carries builder's risk, and whether disputes go to mediation-then-arbitration or to court.",
+    ],
+    [
+      'Attach the exhibits, review, sign',
+      'Exhibit A is the scope and plans list; B is allowances, selections and the schedule; C is the notices your state requires for home-improvement contracts, including any notice of cancellation. Have an attorney check the form for your state, then both parties sign and date — on paper or electronically.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['subcontractor-agreement', 'scope-of-work', 'construction-quote', 'change-order']}
+  feature={{
+    href: '/features/construction-bidding/',
+    label: 'See bidding in BuildWorkPro',
+    heading: 'From accepted proposal to contract to running job',
+    body: 'In BuildWorkPro the line-item estimate becomes a branded PDF proposal your customer e-signs from an emailed link; the accepted bid converts into a project with the contract value carried in, and change orders are priced against it and approved online. <a href="/features/construction-bidding/" class="font-semibold text-brand-700 hover:underline">Construction bidding software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Sign the contract, then run the job from it',
+    body: 'BuildWorkPro turns the accepted proposal into a project, prices change orders against the contract, and bills the milestones from the same numbers — no retyping between the contract, the schedule and the invoices.',
+  }}
+  disclaimer="Not legal advice. This template is a general-purpose starting point; home-improvement and construction contract requirements — required notices, right-to-cancel periods, deposit limits, licensing disclosures, lien laws — vary by state and by the type of property. Have a licensed attorney review before use."
+  updated="2026-09-17"
+>
+  <h2>What a construction contract is, and when to use this one</h2>
+  <p>
+    A construction contract is the agreement between a property owner and the contractor who will do
+    the work. It answers the questions every job raises before the first invoice: what exactly is
+    being built, for how much, paid when, what happens when something changes or is found behind the
+    wall, who pulls the permit, what is warranted and for how long, and how the two of you part ways
+    if it goes wrong. Use this template when you contract directly with the owner — a homeowner, a
+    landlord, a facility manager, a small commercial tenant — for residential or light commercial
+    work. If you are working for a general contractor under their contract with the owner, you want
+    the <a href="/templates/subcontractor-agreement/">subcontractor agreement</a> instead: it carries
+    retainage, monthly applications and prime-contract flow-down that a direct owner contract does not
+    need.
+  </p>
+  <p>
+    The clauses are written to be fair to both sides and general enough to use in any state, with
+    the deal-specific values collected on a one-page Contract Summary that the numbered sections
+    refer to by name — "the Payment Period," "the Cure Period," "the Change Order Markup." Negotiate
+    the summary, attach the exhibits, and the clause text never needs editing.
+  </p>
+
+  <h2>Fixed price or cost plus?</h2>
+  <p>
+    The Contract Summary has a selector. <strong>Fixed price</strong> means the owner pays the stated
+    price for the described work, adjusted only by change order; you carry the risk of your own estimate
+    and keep the reward for efficient work. <strong>Cost of the Work plus fee</strong> means the owner
+    pays your documented costs — labor, materials, equipment, subcontracts, permits, insurance and taxes
+    directly attributable to the job, not your general overhead — plus a fee percentage. Add a <strong
+      >guaranteed maximum price</strong
+    > if the owner wants a ceiling; costs above it are yours unless a change order caused them. Cost-plus
+    fits remodels with unknown existing conditions and jobs that start before design is finished; fixed
+    price fits everything you can price with confidence from the plans.
+  </p>
+  <p>
+    Either way, <strong>allowances</strong> handle the items nobody has chosen yet — fixtures, tile, the
+    exact equipment model. The allowance amount is in the price; when the real cost is known the difference
+    is adjusted by change order without markup, so neither side games the selection.
+  </p>
+
+  <h2>The payment schedule: tie money to events you can prove</h2>
+  <p>
+    The most useful part of this form is a small table on page 1. Each row is a milestone, an amount
+    and a due trigger, and the total must equal the contract price. Good milestones are events both
+    parties can see without arguing: contract signed (deposit), equipment delivered to the site,
+    rough-in inspection passed, substantial completion certified, final completion and closeout
+    delivered. Bad milestones are percentages of progress that need a judgment call every time.
+    Section 3 then does the rest: invoices are due within the Payment Period, disputes must be in
+    writing within seven days with the undisputed balance paid, unpaid invoices bear the stated
+    interest, and after seven days of nonpayment you may suspend on notice. Retainage is off unless
+    the schedule turns it on — owners of small jobs rarely need it, and a contractor should not be
+    surprised by it.
+  </p>
+
+  <h2>A worked example</h2>
+  <p>
+    The completed example is a direct job for the owner of the Harbor Point campus: Harbor Point
+    Development LLC hires Summit Mechanical Contractors to replace two rooftop units on Building A.
+    Fixed price $58,750.00 including a $2,400.00 allowance for curb adapters; deposit $5,875.00 on
+    signing; then $23,500.00 when the units are delivered to the site, $23,500.00 at substantial
+    completion, and $5,875.00 at final completion — a 10/40/40/10 split that totals the price.
+    Commencement September 14, 2026 and substantial completion October 9, 2026; invoices paid within
+    15 days; 15% markup on change orders; 12-month warranty; 10-day cure period; general liability
+    $1,000,000 per occurrence and $2,000,000 aggregate; builder's risk carried by the owner;
+    Colorado law with disputes in Denver County courts. The same contractor's larger job on Building
+    B — the $486,200 subcontract, its change orders and pay applications — appears across the other
+    templates, so you can compare a direct owner contract with a GC subcontract side by side.
+  </p>
+
+  <h2>Residential jobs: right to cancel and required notices</h2>
+  <p>
+    Home-improvement contracts are the most regulated contracts a contractor signs. Depending on the
+    state and how the contract was signed, the owner may have a short right to cancel, the
+    contractor may have to include license and registration information, a mechanics lien notice,
+    and limits on deposits, and some terms may have to appear in a prescribed form or type size.
+    Section 15 of the template acknowledges those rules, makes them control over any inconsistent
+    term, and gives them a home: Exhibit C. Get the notices your state requires from your licensing
+    board or your attorney and attach them there. The <a
+      href="/blog/construction-lien-waivers-explained/">lien waiver guide</a
+    >
+    covers the notice and waiver exchange the Liens section of this contract describes.
+  </p>
+
+  <h2>Construction contract vs. quote vs. proposal vs. change order</h2>
+  <ul>
+    <li>
+      <strong><a href="/templates/construction-quote/">Quote</a></strong> — a one-page fixed price with
+      line items and a validity date. When the owner signs it, you have an agreement, but a thin one:
+      no payment schedule, no warranty terms, no dispute clause.
+    </li>
+    <li>
+      <strong><a href="/templates/construction-bid-proposal/">Bid proposal</a></strong> — the fuller offer:
+      scope, price with alternates, inclusions and exclusions, terms. This contract's General Provisions
+      supersede the proposal except to the extent Exhibit A incorporates it, so contradictions are resolved
+      in the contract's favor.
+    </li>
+    <li>
+      <strong>Construction contract</strong> — the agreement itself, signed by both parties, with the
+      proposal's scope attached as Exhibit A.
+    </li>
+    <li>
+      <strong><a href="/templates/change-order/">Change order</a></strong> — the signed amendment that
+      adjusts the price and the completion date once work is under way. Section 4 requires one, in writing,
+      before changed work begins.
+    </li>
+  </ul>
+  <p>
+    In BuildWorkPro that chain is one workflow: the estimate becomes the proposal, the accepted
+    proposal becomes the project, and <a href="/features/change-orders/">change orders</a> are priced
+    against the contract value and e-signed from an emailed link.
+  </p>
+</TemplatePage>

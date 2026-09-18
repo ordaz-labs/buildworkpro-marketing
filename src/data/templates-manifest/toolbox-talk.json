@@ -5,7 +5,7 @@
   "files": {
     "pdf": {
       "file": "toolbox-talk-template.pdf",
-      "bytes": 86162,
+      "bytes": 85195,
       "pages": 1
     },
     "example": {
@@ -15,7 +15,7 @@
     },
     "docx": {
       "file": "toolbox-talk-template.docx",
-      "bytes": 12216
+      "bytes": 12217
     }
   },
   "previews": [

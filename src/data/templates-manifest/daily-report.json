@@ -5,7 +5,7 @@
   "files": {
     "pdf": {
       "file": "daily-report-template.pdf",
-      "bytes": 99055,
+      "bytes": 97933,
       "pages": 1
     },
     "example": {
@@ -24,7 +24,7 @@
     },
     "docx": {
       "file": "daily-report-template.docx",
-      "bytes": 13733
+      "bytes": 13732
     }
   },
   "previews": [

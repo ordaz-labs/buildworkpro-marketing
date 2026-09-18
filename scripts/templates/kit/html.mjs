@@ -204,7 +204,14 @@ export function document({
  * browser breaks pages; `.avoid` keeps blocks intact. No per-page preview footer.
  */
 export function flowDocument({ title, body, landscape = false, css = '' }) {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(title)}</title><style>${BASE_CSS}${landscape ? '@page{size:Letter landscape}' : ''}${css}</style></head><body class="${landscape ? 'landscape' : ''}"><div class="flow">${body}</div></body></html>`;
+  // On screen (previews) the .flow padding supplies the page margins; in print
+  // the @page margins do, on every page, and the render footer template sits in
+  // the bottom margin. In print media the .flow box is exactly the page content
+  // width so field boxes measured under print emulation map 1:1 onto the page
+  // once the margins are added back (render.mjs).
+  const g = landscape ? PAGE_LANDSCAPE : PAGE;
+  const pageRule = `@page{size:Letter${landscape ? ' landscape' : ''};margin:${g.marginTop}px ${g.marginSide}px ${g.marginBottom}px}@media print{.flow{padding:0;width:${g.width - 2 * g.marginSide}px}}`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(title)}</title><style>${BASE_CSS}${pageRule}${css}</style></head><body class="${landscape ? 'landscape' : ''}"><div class="flow">${body}</div></body></html>`;
 }
 
 export function previewFooter({ left, center }, n, total) {

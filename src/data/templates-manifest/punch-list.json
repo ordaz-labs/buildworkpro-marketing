@@ -5,7 +5,7 @@
   "files": {
     "pdf": {
       "file": "punch-list-template.pdf",
-      "bytes": 167690,
+      "bytes": 165590,
       "pages": 1
     },
     "example": {
@@ -23,7 +23,7 @@
     },
     "docx": {
       "file": "punch-list-template.docx",
-      "bytes": 12491
+      "bytes": 12490
     }
   },
   "previews": [

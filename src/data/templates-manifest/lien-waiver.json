@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "lien-waiver-forms.pdf",
-      "bytes": 156907,
+      "bytes": 155408,
       "pages": 4
     },
     "example": {
       "file": "lien-waiver-forms-example.pdf",
-      "bytes": 66970,
+      "bytes": 66971,
       "pages": 4
     },
     "docx": {
