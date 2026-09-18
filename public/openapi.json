@@ -9117,7 +9117,7 @@
     "/bids/{id}/send": {
       "post": {
         "summary": "Send a bid to the customer",
-        "description": "Transitions a draft bid to sent and emails the customer.",
+        "description": "Transitions a draft bid to sent and emails the customer. A `validUntil` already in the past is moved to today plus the organization's default bid validity, so the bid is not re-expired the night it is sent.",
         "security": [
           {
             "bearerAuth": [
