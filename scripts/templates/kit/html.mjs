@@ -46,9 +46,9 @@ ${fontFace('IBM Plex Mono', 'IBMPlexMono-Medium.ttf', 500)}
 html,body{margin:0;padding:0;background:#fff}
 body{font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:10px;line-height:1.4;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;font-variant-numeric:tabular-nums}
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
-.page{position:relative;width:${PAGE.width}px;min-height:${PAGE.height}px;padding:${PAGE.marginTop}px ${PAGE.marginSide}px ${PAGE.marginBottom}px;page-break-after:always;break-after:page}
+.page{position:relative;width:${PAGE.width}px;height:${PAGE.height}px;overflow:visible;padding:${PAGE.marginTop}px ${PAGE.marginSide}px ${PAGE.marginBottom}px;page-break-after:always;break-after:page}
 .page:last-child{page-break-after:auto;break-after:auto}
-.landscape .page{width:${PAGE_LANDSCAPE.width}px;min-height:${PAGE_LANDSCAPE.height}px;padding:${PAGE_LANDSCAPE.marginTop}px ${PAGE_LANDSCAPE.marginSide}px ${PAGE_LANDSCAPE.marginBottom}px}
+.landscape .page{width:${PAGE_LANDSCAPE.width}px;height:${PAGE_LANDSCAPE.height}px;padding:${PAGE_LANDSCAPE.marginTop}px ${PAGE_LANDSCAPE.marginSide}px ${PAGE_LANDSCAPE.marginBottom}px}
 .flow{padding:${PAGE.marginTop}px ${PAGE.marginSide}px ${PAGE.marginBottom}px;width:${PAGE.width}px}
 .landscape .flow{padding:${PAGE_LANDSCAPE.marginTop}px ${PAGE_LANDSCAPE.marginSide}px ${PAGE_LANDSCAPE.marginBottom}px;width:${PAGE_LANDSCAPE.width}px}
 .avoid{break-inside:avoid;page-break-inside:avoid}
@@ -94,13 +94,13 @@ p{margin:0}
 .textarea .label{margin-bottom:3px}
 .textarea .box{border:1px solid var(--rule);border-radius:2px;padding:5px 6px;font-size:9.5px;line-height:1.45;color:var(--ink);white-space:pre-wrap}
 .textarea .box .ph{color:var(--ink3);font-style:italic;font-size:8.5px}
-.check{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;color:var(--ink2);margin-right:10px}
-.check .bx{width:9px;height:9px;border:1px solid var(--ink);flex-shrink:0;display:inline-block;background:#fff}
-.check .bx.on{background:var(--ink)}
+span.check{display:inline-flex;align-items:center;gap:4px;font-size:8.5px;color:var(--ink2);margin-right:10px}
+span.check .bx{width:9px;height:9px;border:1px solid var(--ink);flex-shrink:0;display:inline-block;background:#fff}
+span.check .bx.on{background:var(--ink)}
 /* sections */
-.section{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:16px;padding-bottom:4px;border-bottom:1px solid var(--ink)}
-.section h2{font-size:8px;letter-spacing:.9px;text-transform:uppercase;font-weight:700;color:var(--ink);margin:0}
-.section .hint{font-size:7.5px;color:var(--ink3)}
+div.section{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:16px;padding-bottom:4px;border-bottom:1px solid var(--ink)}
+div.section h2{font-size:8px;letter-spacing:.9px;text-transform:uppercase;font-weight:700;color:var(--ink);margin:0}
+div.section .hint{font-size:7.5px;color:var(--ink3)}
 .prose{font-size:9.5px;line-height:1.5;color:var(--ink);margin-top:6px}
 .prose.ink2{color:var(--ink2)}
 .prose p+p{margin-top:5px}
@@ -168,20 +168,32 @@ table.t.tight th,table.t.tight td{padding:3px 5px;font-size:8px}
 /* callouts */
 .note{border-left:2px solid var(--accent);background:var(--band);padding:6px 9px;font-size:8.5px;color:var(--ink2);line-height:1.45;margin-top:10px}
 .stamp{display:inline-block;font-size:7px;letter-spacing:1px;text-transform:uppercase;font-weight:700;padding:3px 7px;border:1.5px solid var(--ink);border-radius:3px}
-/* preview-only footer (hidden in print; the PDF footer comes from render.mjs) */
+/* page footer: printed in pages mode (fixed pages know their count); flow mode uses render.mjs's footer template */
 .pfoot{position:absolute;left:${PAGE.marginSide}px;right:${PAGE.marginSide}px;bottom:0;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--rule);padding:8px 0 22px;font-size:7.5px;color:var(--ink3)}
 .landscape .pfoot{left:${PAGE_LANDSCAPE.marginSide}px;right:${PAGE_LANDSCAPE.marginSide}px}
-@media print{.pfoot{display:none}}
 @page{size:Letter;margin:0}
 .landscape-page{size:Letter landscape}
 `;
 
-/** Wrap page content into a complete HTML document. */
-export function document({ title, pages, landscape = false, css = '', footer }) {
+/**
+ * Wrap page content into a complete HTML document of fixed-height pages.
+ * Multi-section documents (portrait + landscape) pass `pageStart` / `pageTotal`
+ * so the footer numbering runs across sections.
+ */
+export function document({
+  title,
+  pages,
+  landscape = false,
+  css = '',
+  footer,
+  pageStart = 1,
+  pageTotal,
+}) {
+  const total = pageTotal ?? pageStart - 1 + pages.length;
   const body = pages
     .map(
       (p, i) =>
-        `<div class="page">${p}${footer ? previewFooter(footer, i + 1, pages.length) : ''}</div>`
+        `<div class="page">${p}${footer ? previewFooter(footer, pageStart + i, total) : ''}</div>`
     )
     .join('\n');
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(title)}</title><style>${BASE_CSS}${landscape ? '@page{size:Letter landscape}' : ''}${css}</style></head><body class="${landscape ? 'landscape' : ''}">${body}</body></html>`;

@@ -1,0 +1,202 @@
+---
+// Meeting minutes cluster: "construction meeting minutes template" 140 ·
+// "pre construction meeting template" 30 (DataForSEO, US, 2026-09).
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What should construction meeting minutes include?',
+    answer:
+      'Who was there (and who was not), what was discussed, what was decided, and who has to do what by when. The action-item columns — action, owner, due date, status — are the part that matters a week later. Add the meeting number and date, the next meeting, and a corrections-due date so the minutes become the record if nobody objects in writing.',
+  },
+  {
+    question: 'Should a subcontractor keep their own minutes if the GC issues theirs?',
+    answer:
+      'Yes, for any meeting where your scope, schedule or money is discussed. The GC’s minutes record what the GC heard. If the GC’s minutes say something different from what you remember, your own record, issued the same day, is what supports a correction — and if the GC issues none, yours are the only record. Send them to the GC with a corrections-due date so silence becomes agreement.',
+  },
+  {
+    question: 'Can meeting minutes change the contract?',
+    answer:
+      'Not on their own. A decision recorded in minutes is evidence of what was agreed, but scope, price and time changes still need a signed change order, and a question about the documents still needs an RFI. Use the minutes to record that the change order or RFI is coming, with an owner and a date, and follow up with the document itself. This template is a general form, not legal advice.',
+  },
+  {
+    question: 'How should agenda items be numbered?',
+    answer:
+      'Meeting number, then item number: 14.01 is the first item raised at meeting 14. An item carried to the next meeting keeps its original number (12.03 stays 12.03 at meeting 14) so anyone can trace when it was first raised and how long it has been open. New items at each meeting continue the sequence.',
+  },
+  {
+    question: 'How soon should minutes be distributed?',
+    answer:
+      'Within a day, and before the next meeting at the latest. State a corrections-due date — two business days is common — after which the minutes stand as issued. Minutes distributed a week later are a memory test, not a record, and corrections become arguments.',
+  },
+  {
+    question:
+      'What is the difference between a preconstruction meeting, a progress meeting and an OAC meeting?',
+    answer:
+      'A preconstruction meeting happens once, before mobilization, to cover submittals, schedule, site logistics, safety and communication rules. Progress (or coordination) meetings run weekly through the job and are where this template earns its keep. OAC — owner, architect, contractor — meetings are the GC’s formal progress meetings with the owner’s team; subs usually attend for their portion. One template covers all three; pick the type in the header.',
+  },
+  {
+    question: 'How much detail belongs in the discussion column?',
+    answer:
+      'Decisions and facts, not a transcript. “Controls rough-in starts Sep 14 and depends on submittal 23 09 23 Rev 1 being returned by Sep 7” is a useful entry; a paragraph of who said what is not. If a topic needs more than three or four lines, it probably needs its own document — an RFI, a change order, a revised schedule — and the minutes should say which.',
+  },
+];
+---
+
+<TemplatePage
+  slug="meeting-minutes"
+  title="Free Construction Meeting Minutes Template (Word + Fillable PDF) | BuildWorkPro"
+  description="Free construction meeting minutes template with attendees, discussion and action items with owners and due dates. Word + 2-page fillable PDF. No email required."
+  h1="Construction Meeting Minutes Template"
+  intro="A two-page record for progress, coordination, preconstruction and OAC meetings: attendees, a numbered agenda with discussion and decisions, and an action-item table with owner, due date and status. Built so the same sheet can be handed out at the meeting and filed as the record afterwards."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF (2 pages)' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with project, meeting title, date, time, location, who called it and who is taking minutes',
+    'Record block: meeting type, minutes issued, corrections due and next meeting',
+    'Attendee table with company, role, present mark and contact — 10 rows on the PDF',
+    'Numbered agenda / discussion / action table with owner, due date and status — 21 rows across two pages',
+    'Numbering convention built in: meeting.item (14.01), carried items keep their original number',
+    'Old business and new business boxes, next meeting and distribution line',
+    'Signature block for the minutes taker and the chair, with corrections-window language',
+    'Editable Word version with the same tables, 8 attendee rows and 12 action rows',
+    'Completed example: a real weekly mechanical coordination meeting with eight attendees and ten items',
+  ]}
+  howTo={[
+    [
+      'Set up the header before the meeting',
+      'Fill in the project, meeting title and number, date, time and location, and pre-load the agenda with the items carried from last week under their original numbers. A pre-filled sheet is the agenda; the same sheet with the discussion filled in is the minutes.',
+    ],
+    [
+      'Take attendance',
+      'Name, company and role, with a present mark — and list the people who were expected and did not come. Absence matters when an action item is assigned to them.',
+    ],
+    [
+      'Record decisions, not conversation',
+      'For each item: what was reported, what was decided and what it depends on. Two to four lines. If it needs more, the topic needs its own document — say which (RFI, change order, revised schedule) and record that as the action.',
+    ],
+    [
+      'Give every action an owner and a date',
+      'One name, one date, one status. “Brightline to look into it” is not an action; “T. Okafor to schedule the city inspection for Sep 8 — due Sep 4” is. Mark carried items Open and closed items Closed so the next meeting starts from the open list.',
+    ],
+    [
+      'Issue the same day with a corrections date',
+      'Sign, distribute to every attendee and the project file, and state the date by which written corrections are due. After that date the minutes stand as the record. Bring the open items forward to next week’s sheet.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['rfi', 'submittal-log', 'punch-list', 'construction-schedule']}
+  feature={{
+    href: '/features/project-management/',
+    label: 'See project management in BuildWorkPro',
+    heading: 'The discussion lives on the project',
+    body: 'Every BuildWorkPro project carries a Comments tab — a threaded discussion where mentioning a teammate notifies them — and an Activity history of every change, next to the schedule, change orders, site logs and pay applications for the same job. <a href="/features/project-management/" class="font-semibold text-brand-700 hover:underline">Construction project management software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Run every job from one page',
+    body: 'BuildWorkPro puts the schedule, the paperwork and the conversation for each job on one project record, so the action item from Wednesday’s meeting is next to the change order it turns into.',
+  }}
+  disclaimer="General-purpose form, not legal advice. Minutes record decisions and actions; they do not amend the contract by themselves — scope, price or time changes still need a signed change order."
+  updated="2026-09-17"
+>
+  <h2>Why a subcontractor should write minutes</h2>
+  <p>
+    The GC runs the meeting, so it is tempting to let the GC keep the record. The problem is that
+    the GC’s minutes record what the GC heard, and on the items that cost you money — a delayed
+    submittal review, an inspection that slipped, a directive to proceed before a change order is
+    signed — what the GC heard and what you said are not always the same. Minutes you issue the same
+    day, with a corrections-due date, put your version on the record first. If nobody objects, it
+    stands. If they do, you find out in two days instead of two months.
+  </p>
+  <p>
+    They also make your own week run. A sheet with ten action items, each with an owner and a date,
+    is the foreman’s and the project manager’s to-do list until the next meeting, and the open items
+    carry forward under their original numbers until someone closes them.
+  </p>
+
+  <h2>Field by field</h2>
+  <ul>
+    <li>
+      <strong>Meeting number and date</strong> — sequential per project (MTG-014). The number is the first
+      half of every item number.
+    </li>
+    <li>
+      <strong>Attendees</strong> — name, company and role, with a present mark. List the expected absentees
+      too; an action assigned to someone who was not there needs a phone call.
+    </li>
+    <li>
+      <strong>Item</strong> — meeting.item: 14.01, 14.02. A carried item keeps its number (12.03), so
+      its age is visible.
+    </li>
+    <li>
+      <strong>Topic / discussion</strong> — the subject in a few words, then the facts and the decision
+      in two to four lines.
+    </li>
+    <li>
+      <strong>Action, owner, due, status</strong> — the columns people actually read next week. One owner,
+      one date. Status is Open or Closed.
+    </li>
+    <li>
+      <strong>Corrections due</strong> — the date after which the minutes stand as issued.
+    </li>
+  </ul>
+
+  <h2>A worked example</h2>
+  <p>
+    The completed example is the fourteenth weekly coordination meeting on a medical office job,
+    September 2, 2026, taken by the mechanical subcontractor’s project manager with eight people
+    listed — the GC’s project manager and superintendent, the architect and her MEP engineer (by
+    phone), the electrical foreman, and one absentee. Ten items, and every one is something the rest
+    of the job’s paperwork can be traced to.
+  </p>
+  <p>
+    Item 14.01 records the schedule status — Level 2 ductwork at 65%, hydronic piping at 55% — and
+    the action is to issue schedule revision 2 the next day. Item 12.03, carried from meeting 12, is
+    RFI-014 on the AHU-3 condensate drain: the revised drawing was issued August 28, so the action
+    is to price it as change order CO-003 by September 14. Item 14.02 is the BMS controls submittal
+    on its second revision, in review nine days, with the engineer’s return date tied to the
+    September 14 controls start. Items 14.03 to 14.05 assign the RTU disconnects to the electrician,
+    the Level 1 above-ceiling inspection to the superintendent, and pay application #3 to the sub —
+    each with a name and a date. Page two closes the crane-day safety debrief and the
+    owner-furnished water heater credit (CO-002), and leaves two items open. Old business and new
+    business summarize what carried and what was raised but not yet assigned.
+  </p>
+  <p>
+    Read that page and you know the state of the mechanical scope on September 2 without having been
+    in the trailer. That is the test of good minutes.
+  </p>
+
+  <h2>Minutes, RFIs and change orders</h2>
+  <p>
+    Minutes record that a decision was made; they do not make it contractual. When an item in the
+    discussion column changes what you are building, price it and get it signed as a
+    <a href="/templates/change-order/">change order</a>. When the item is a question about the
+    documents, write the <a href="/templates/rfi/">RFI</a> and put its number in the minutes. When the
+    item is a submittal, its dates belong on the <a href="/templates/submittal-log/"
+      >submittal log</a
+    >
+    and the minutes just say where it stands. The minutes are the index; the other documents are the record.
+    The same goes for the schedule — the minutes report the status, the
+    <a href="/templates/construction-schedule/">construction schedule</a> carries the dates — and for
+    the <a href="/templates/punch-list/">punch list</a> in the final weeks, when the open count is a standing
+    agenda item.
+  </p>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>Distributing minutes a week later, when nobody remembers enough to correct them.</li>
+    <li>Actions without an owner, or with two owners — which means none.</li>
+    <li>Renumbering carried items, so nobody can tell an item has been open for a month.</li>
+    <li>Recording a directive to proceed in the minutes and treating that as the change order.</li>
+    <li>
+      Writing a transcript. If the discussion column is longer than the action column, cut it.
+    </li>
+    <li>
+      Skipping the meeting-day <a href="/templates/daily-report/">daily report</a> entry — the minutes
+      record what was said; the daily report records what happened on site that day.
+    </li>
+  </ul>
+</TemplatePage>

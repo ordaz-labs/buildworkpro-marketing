@@ -36,7 +36,10 @@ export async function docx() { return docx.Document }      // optional
   continuation sheet).
   - `mode: 'pages'` — built with `H.document({ pages: [...] })`. Fixed-height
     pages, in-document footer, fillable fields on every page. The build warns
-    when a page overflows — fix the layout, never ship an overflow.
+    when a page overflows — fix the layout, never ship an overflow. Multi-section
+    documents pass `pageStart` / `pageTotal` so "Page n of N" runs across
+    sections (pay application: portrait `pageStart: 1, pageTotal: 2`, landscape
+    `pageStart: 2, pageTotal: 2`).
   - `mode: 'flow'` — built with `H.flowDocument({ body })`. The browser breaks
     pages (contracts, long forms). Pass `footer: H.footerText(...)`. Fillable
     fields work on page 1 only, so keep the party/date fields near the top.

@@ -1,0 +1,30 @@
+{
+  "slug": "construction-contract",
+  "name": "Construction Contract Template",
+  "basename": "construction-contract-template",
+  "files": {
+    "pdf": {
+      "file": "construction-contract-template.pdf",
+      "bytes": 134863,
+      "pages": 4
+    },
+    "example": {
+      "file": "construction-contract-template-example.pdf",
+      "bytes": 103884,
+      "pages": 4
+    },
+    "docx": {
+      "file": "construction-contract-template.docx",
+      "bytes": 20207
+    }
+  },
+  "previews": [
+    {
+      "file": "construction-contract.png",
+      "webp": "construction-contract.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

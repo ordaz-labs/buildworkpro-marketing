@@ -1,0 +1,30 @@
+{
+  "slug": "notice-to-proceed",
+  "name": "Notice to Proceed Template",
+  "basename": "notice-to-proceed-template",
+  "files": {
+    "pdf": {
+      "file": "notice-to-proceed-template.pdf",
+      "bytes": 61489,
+      "pages": 1
+    },
+    "example": {
+      "file": "notice-to-proceed-template-example.pdf",
+      "bytes": 35229,
+      "pages": 1
+    },
+    "docx": {
+      "file": "notice-to-proceed-template.docx",
+      "bytes": 12079
+    }
+  },
+  "previews": [
+    {
+      "file": "notice-to-proceed.png",
+      "webp": "notice-to-proceed.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

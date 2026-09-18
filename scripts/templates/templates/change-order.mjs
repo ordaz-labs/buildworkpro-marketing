@@ -18,7 +18,7 @@ const SAMPLE = {
   number: 'CO-003',
   date: 'September 14, 2026',
   to: SAMPLE_GC,
-  contract: { original: 486200, prior: 12450, this: 8640 },
+  contract: { original: 486200, prior: 5370 }, // CO-001 + CO-002 from STORY
   description:
     'Add a dedicated 2" condensate drain line from AHU-3 to the mechanical room floor sink, per revised drawing M-402 Rev. 2 (RFI-014). Includes core drilling through the second-floor slab, hangers, insulation, and tie-in.',
   reasons: ['Design change'],

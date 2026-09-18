@@ -1,0 +1,30 @@
+{
+  "slug": "subcontractor-agreement",
+  "name": "Subcontractor Agreement Template",
+  "basename": "subcontractor-agreement-template",
+  "files": {
+    "pdf": {
+      "file": "subcontractor-agreement-template.pdf",
+      "bytes": 112497,
+      "pages": 4
+    },
+    "example": {
+      "file": "subcontractor-agreement-template-example.pdf",
+      "bytes": 88141,
+      "pages": 4
+    },
+    "docx": {
+      "file": "subcontractor-agreement-template.docx",
+      "bytes": 19171
+    }
+  },
+  "previews": [
+    {
+      "file": "subcontractor-agreement.png",
+      "webp": "subcontractor-agreement.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

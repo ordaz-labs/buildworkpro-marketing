@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "work-order-template.pdf",
-      "bytes": 95189,
+      "bytes": 95675,
       "pages": 1
     },
     "example": {
       "file": "work-order-template-example.pdf",
-      "bytes": 45404,
+      "bytes": 45644,
       "pages": 1
     },
     "xlsx": {

@@ -1,0 +1,39 @@
+{
+  "slug": "construction-quote",
+  "name": "Construction Quote Template",
+  "basename": "construction-quote-template",
+  "files": {
+    "pdf": {
+      "file": "construction-quote-template.pdf",
+      "bytes": 88654,
+      "pages": 1
+    },
+    "example": {
+      "file": "construction-quote-template-example.pdf",
+      "bytes": 45090,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "construction-quote-template.xlsx",
+      "bytes": 16347,
+      "sheets": [
+        "Quote",
+        "Quote Log",
+        "How to Use"
+      ]
+    },
+    "docx": {
+      "file": "construction-quote-template.docx",
+      "bytes": 12959
+    }
+  },
+  "previews": [
+    {
+      "file": "construction-quote.png",
+      "webp": "construction-quote.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

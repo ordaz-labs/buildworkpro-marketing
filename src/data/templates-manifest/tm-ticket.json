@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "tm-ticket-template.pdf",
-      "bytes": 96681,
+      "bytes": 97145,
       "pages": 1
     },
     "example": {
       "file": "tm-ticket-template-example.pdf",
-      "bytes": 45739,
+      "bytes": 45977,
       "pages": 1
     },
     "xlsx": {

@@ -1,0 +1,35 @@
+{
+  "slug": "schedule-of-values",
+  "name": "Schedule of Values Template",
+  "basename": "schedule-of-values-template",
+  "files": {
+    "pdf": {
+      "file": "schedule-of-values-template.pdf",
+      "bytes": 155730,
+      "pages": 1
+    },
+    "example": {
+      "file": "schedule-of-values-template-example.pdf",
+      "bytes": 68051,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "schedule-of-values-template.xlsx",
+      "bytes": 17611,
+      "sheets": [
+        "Schedule of Values",
+        "Billing Tracker",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "schedule-of-values.png",
+      "webp": "schedule-of-values.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

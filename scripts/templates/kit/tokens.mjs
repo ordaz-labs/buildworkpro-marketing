@@ -89,7 +89,7 @@ export const STORY = {
     estimator: 'Priya Natarajan', // Summit estimator — estimates, quotes, bids
     gcPm: 'Marcus Reed', // Brightline PM — approves COs, receives RFIs
     gcSuper: 'Tom Okafor', // Brightline superintendent — signs T&M tickets, daily reports
-    architect: 'Kestrel Design Group · Alison Park, AIA',
+    architect: 'Kestrel Design Group · Alison Park, Architect', // no 'AIA' token inside documents
   },
   // Schedule of values for the mechanical subcontract (sums to contractSum).
   sov: [

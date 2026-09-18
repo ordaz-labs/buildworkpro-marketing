@@ -1,0 +1,30 @@
+{
+  "slug": "scope-of-work",
+  "name": "Construction Scope of Work Template",
+  "basename": "scope-of-work-template",
+  "files": {
+    "pdf": {
+      "file": "scope-of-work-template.pdf",
+      "bytes": 131791,
+      "pages": 2
+    },
+    "example": {
+      "file": "scope-of-work-template-example.pdf",
+      "bytes": 58677,
+      "pages": 3
+    },
+    "docx": {
+      "file": "scope-of-work-template.docx",
+      "bytes": 13682
+    }
+  },
+  "previews": [
+    {
+      "file": "scope-of-work.png",
+      "webp": "scope-of-work.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

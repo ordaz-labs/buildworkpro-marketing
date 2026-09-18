@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "construction-timesheet-template.pdf",
-      "bytes": 145535,
+      "bytes": 145929,
       "pages": 1
     },
     "example": {
       "file": "construction-timesheet-template-example.pdf",
-      "bytes": 48415,
+      "bytes": 48654,
       "pages": 1
     },
     "xlsx": {

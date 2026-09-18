@@ -25,7 +25,7 @@ const SAMPLE = {
   date: 'August 24, 2026',
   responseBy: 'August 31, 2026',
   to: {
-    name: 'Kestrel Design Group · Alison Park, AIA',
+    name: 'Kestrel Design Group · Alison Park, Architect',
     line1: 'Architect of record',
     line2: `via Brightline Builders — ${STORY.people.gcPm}, Project Manager`,
   },
@@ -44,7 +44,7 @@ const SAMPLE = {
   holdNote: 'AHU-3 set proceeds; final drain piping on hold',
   response:
     'Confirmed. Route per the contractor’s suggested routing. Revised M-402 Rev. 2 issued 9/2/2026 adds the 2" condensate drain and slab penetration detail 6/M-402. Contractor to submit pricing as a change order; no adjustment to contract time is accepted by this response.',
-  respondedBy: 'Alison Park, AIA — Kestrel Design Group',
+  respondedBy: 'Alison Park, Architect — Kestrel Design Group',
   respondedDate: 'September 2, 2026',
   responseType: 'Change — price and time by change order',
   distribution: 'Brightline (M. Reed) · Summit (D. Whitfield) · project file',
@@ -159,7 +159,7 @@ ${H.signatures({
         {
           label: 'Printed name and title',
           name: 'sig.responder_name',
-          value: s ? 'Alison Park, AIA, Principal' : '',
+          value: s ? 'Alison Park, Principal Architect' : '',
         },
         { label: 'Date', name: 'sig.responder_date', value: s ? '09/02/2026' : '' },
       ],

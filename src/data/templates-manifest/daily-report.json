@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "daily-report-template.pdf",
-      "bytes": 98561,
+      "bytes": 99055,
       "pages": 1
     },
     "example": {
       "file": "daily-report-template-example.pdf",
-      "bytes": 45232,
+      "bytes": 45457,
       "pages": 1
     },
     "xlsx": {

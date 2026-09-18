@@ -1,162 +1,226 @@
 ---
-// Page 3 of the /templates/ hub (issue #134). Canonical-map note: this page
-// targets "schedule of values template" (480/mo KD0, navigational); the head
-// term "schedule of values" (1,900/mo KD0, informational) stays canonical on
-// /blog/schedule-of-values-guide/, which now links here for the download.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/schedule-of-values-template.xlsx';
-
-const whatsInside = [
-  '30-row schedule with item number, description, value, and notes',
-  '% of Contract column computed against your contract sum',
-  'A check row that must hit 0.00 — the SOV always ties to the contract',
-  'Six sample rows showing a real trade breakdown (overwrite them)',
-  'Tips sheet: phasing, defensible values, front-loading, closeout lines',
-  'Feeds straight into a G702/G703-style pay application',
-];
+// Canonical-map note: this page targets "schedule of values template" (390/mo),
+// "sov template" (70) and "sov template excel" (90); the head term "schedule of
+// values" (1,900/mo, informational) stays canonical on
+// /blog/schedule-of-values-guide/, which links here for the download.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
     question: 'What is a schedule of values?',
     answer:
-      'A schedule of values (SOV) breaks a construction contract sum into line items — mobilization, rough-in, trim, closeout — each with a dollar value. It is the backbone of progress billing: every month you bill a percentage of each line, and the SOV keeps score across the life of the job.',
+      'A schedule of values (SOV) breaks a construction contract sum into line items — mobilization, rough-in, equipment, trim, closeout — each with a dollar value. It is the backbone of progress billing: every month you bill a percentage of each line, and the SOV keeps score across the life of the job. The lines add up to the contract sum, and every approved change order becomes a new line.',
   },
   {
     question: 'How many line items should a schedule of values have?',
     answer:
-      'Enough that every line is independently verifiable on a walkthrough, and no more. For a typical trade subcontract that lands between 6 and 25 lines. Match the lines to how the work actually phases — a line you cannot demonstrate progress on is a line the GC will argue about.',
+      'Enough that every line is independently verifiable on a walkthrough, and no more. For a typical trade subcontract that lands between 8 and 25 lines; the completed example uses 12 for a $486,200 mechanical scope. Match the lines to how the work actually phases — a line you cannot demonstrate progress on is a line the GC will argue about.',
   },
   {
     question: 'Should I split labor and material in the SOV?',
     answer:
-      'When the GC allows it, yes — separate labor and material lines let you bill stored materials before installation and make each line easier to defend. The sample rows in the template show the pattern.',
+      'When the GC allows it, yes — separate labor and material lines let you bill stored materials before installation and make each line easier to defend. Big-ticket equipment lines benefit most: the example notes that the rooftop-unit line is 72% equipment and 28% rigging and set, so the GC knows what a stored-material billing on that line means.',
   },
   {
     question: 'Can I front-load a schedule of values?',
     answer:
-      'Weighting early activities like mobilization and general conditions is common and generally accepted in moderation — but an obviously inflated early line invites a rejected application and sours the GC relationship. The rule: every value should survive you walking the GC through the site.',
+      'Weighting early activities like mobilization and general conditions is common and generally accepted in moderation — but an obviously inflated early line invites a rejected application and sours the GC relationship. The rule: every value should survive you walking the GC through the site. Keep closeout lines large enough to be worth billing, too, or retainage release stalls.',
+  },
+  {
+    question: 'What is the difference between a schedule of values and an estimate?',
+    answer:
+      'The estimate is how you priced the job — internal, by cost type, with markup. The schedule of values is how you bill it — external, by phase or system, summing to the contract sum. They usually share a structure, but the SOV never shows cost or margin, and its lines are chosen for how progress will be measured, not for how the price was built. Start from the estimate, regroup it into billable phases, and check that it ties.',
+  },
+  {
+    question: 'How do change orders affect the schedule of values?',
+    answer:
+      'Each approved change order is added as its own line, with the CO number as the item number and the approved amount (positive or negative) as the scheduled value, and the contract sum to date moves by the same amount. That is why the template has a change order section and a tie-out check: if the total scheduled value and the contract sum to date disagree, a change order was approved but never added.',
   },
   {
     question: 'How does the SOV relate to my pay applications?',
     answer:
-      'Every pay application bills against the SOV line by line: work completed this period, materials stored, total to date, retainage. Pair this template with our free G702/G703-style pay application template — or let BuildWorkPro build the SOV from your accepted bid and carry it forward every billing period automatically.',
+      'Every pay application bills against the SOV line by line: work completed this period, materials stored, total to date, retainage. The Billing Tracker sheet in the workbook does that math for every line, and the free G702/G703-style pay application template carries the same lines through every billing period — or let BuildWorkPro build the SOV from your accepted bid and carry it forward automatically.',
   },
 ];
 ---
 
-<Layout
-  title="Free Schedule of Values Template (Excel)"
-  description="Free schedule of values template for construction: 30-row Excel worksheet with % of contract math, a tie-out check, and sample trade line items. No email required."
+<TemplatePage
+  slug="schedule-of-values"
+  title="Free Schedule of Values Template (Excel + PDF) | BuildWorkPro"
+  description="Free schedule of values template: Excel SOV with % of contract math, tie-out check and billing tracker, plus a fillable PDF form. No email required."
+  h1="Schedule of Values Template"
+  intro="Break the contract sum into the lines you will bill against every period, and prove it ties out before your GC checks. The Excel workbook computes % of contract, flags any gap to the contract sum, and tracks previous, this-period and stored billing per line; the fillable PDF is the one-page schedule you submit with your first pay application."
+  downloads={[
+    { format: 'xlsx', label: 'Download Excel workbook (.xlsx)' },
+    { format: 'pdf', label: 'Download fillable PDF form' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Project and contract header: original contract sum, net approved change orders, contract sum to date',
+    '22 numbered lines with description, scheduled value, % of contract and a notes / basis column',
+    'A change order section so approved COs are added as lines with the CO number as the item number',
+    'Subtotals for the original schedule and net change orders, and a total that must equal the contract sum',
+    'Excel: % of contract computed per line and a tie-out cell that turns red until the schedule ties',
+    'Excel: a Billing Tracker sheet with previous, this period, stored, total, %, balance to finish and retainage per line',
+    'Excel: a this-period summary — work completed and stored, retainage on it, and the amount to bill',
+    'Prepared-by and accepted-by signature lines for the contractor and the owner or GC',
+    'A completed example: a 12-line mechanical schedule of values plus two change orders, tying to $491,570',
+  ]}
+  howTo={[
+    [
+      'Enter the contract sum',
+      'Fill in the project, who you submit to, the contract date and the original contract sum. If change orders have already been approved, enter their net; the contract sum to date is the number every line is measured against.',
+    ],
+    [
+      'Break the work into billable lines',
+      'One line per phase or system, in the order the work happens: mobilization and submittals, underground, rough-in by system, equipment, distribution, controls, insulation, fixtures, testing and balancing, closeout. Give each a value from your estimate, regrouped by how progress will be measured rather than by cost type.',
+    ],
+    [
+      'Make every value defensible',
+      'A line should be something you can point at on a walkthrough. Split labor and material on big equipment lines when the GC allows it, note the basis in the notes column (equipment versus rigging, billed by floor, billed on report acceptance), and keep closeout lines large enough to be worth billing.',
+    ],
+    [
+      'Tie it out',
+      'The percentages must add to 100% and the total scheduled value must equal the contract sum to date. In the workbook the tie-out cell turns red until the difference is 0.00; on the PDF, check the total row against the contract block by hand before it leaves your office.',
+    ],
+    [
+      'Revise when change orders are approved',
+      'Add each approved change order as a new line with its CO number, update the net approved change orders, and re-issue the schedule with the next pay application. Then bill against it every period on the Billing Tracker sheet or the pay application template.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['aia-g702-g703', 'construction-estimate', 'change-order', 'construction-budget']}
+  feature={{
+    href: '/features/pay-applications/',
+    label: 'See pay applications in BuildWorkPro',
+    heading: 'Your bid already knows the schedule of values',
+    body: 'BuildWorkPro seeds the schedule of values from your accepted bid, keeps it tied to the contract sum plus approved change orders, and bills against it every period on a <a href="/features/pay-applications/" class="font-semibold text-brand-700 hover:underline">G702/G703-style pay application</a> — no spreadsheet reconciliation. $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Build it once, bill it every month',
+    body: 'BuildWorkPro turns your accepted bid into the schedule of values, adds approved change orders as lines automatically, and carries every value forward into the next pay application.',
+  }}
+  disclaimer="General-purpose form, not legal or accounting advice. Your contract may specify the form and level of detail for the schedule of values — follow it first. Not an AIA document."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <!-- Hero -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Schedule of Values Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          A clean Excel SOV that always ties out: line items, % of contract computed for you, and a
-          check row that catches the math before your GC does.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="schedule-of-values"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.xlsx)
-          </a>
-          <a
-            href="/blog/schedule-of-values-guide/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            Read the how-to guide
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Works in Excel, Google Sheets &amp; Numbers
-        </p>
-      </div>
-    </section>
+  <h2>What a schedule of values is, and who reads it</h2>
+  <p>
+    A schedule of values is the contract sum broken into line items that can each be measured for
+    progress. It is usually submitted with, or before, the first pay application, and once the GC or
+    owner accepts it, every application for the rest of the job bills against those lines. Three
+    people read it closely: the GC's project manager, who checks that it adds up and that no line is
+    padded; the owner's lender or architect, who certifies percentages against what they see on
+    site; and your own bookkeeper, who has to reconcile what you billed to what you earned. Write it
+    for all three.
+  </p>
+  <p>
+    On the form, a contract block carries the original contract sum, the net of approved change
+    orders and the contract sum to date. The table lists the lines with a scheduled value, the
+    percent of contract each represents and a notes column for the basis of the value. A change
+    order section, subtotals and a single total row make the tie-out visible on paper. The
+    <a href="/blog/schedule-of-values-guide/">schedule of values guide</a> walks through the reasoning
+    line by line.
+  </p>
 
-    <!-- What's inside -->
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What's in the worksheet
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto">
-        Building the SOV is step one — billing against it every month is the grind. Pair this with
-        the
-        <a
-          href="/templates/aia-g702-g703/"
-          class="text-brand-600 underline underline-offset-2 font-medium"
-          >free G702/G703-style pay application template</a
-        >, which carries these line items through every billing period.
-      </p>
-    </section>
+  <h2>How to break the contract into lines</h2>
+  <p>
+    Follow the sequence of the work. For a mechanical subcontract that means mobilization and
+    submittals first, then underground, then rough-in by system, then equipment, distribution and
+    controls, and finally fixtures, testing and closeout. Each line should meet three tests:
+  </p>
+  <ul>
+    <li>
+      <strong>Measurable</strong> — you can state a percent complete for it after a site walk without
+      argument. "Ductwork &amp; distribution" is measurable by floor; "HVAC" is not.
+    </li>
+    <li>
+      <strong>Billable in reasonable increments</strong> — a $200 line is not worth the row; a $150,000
+      line will be 40% complete for three months and invite scrutiny. Split it.
+    </li>
+    <li>
+      <strong>Traceable to the estimate</strong> — the sum of the lines equals the contract sum, and you
+      can show how each value was derived if asked. The workbook's percent column makes a padded line
+      obvious at a glance.
+    </li>
+  </ul>
+  <p>
+    Use the notes column to pre-empt questions: which portion of an equipment line is the equipment
+    itself (so stored-material billing is understood), which lines are billed by area, and which are
+    billed on a deliverable like the balancing report.
+  </p>
 
-    <FAQSection faqs={faqs} />
+  <h2>A worked example</h2>
+  <p>
+    The completed example is the schedule for a $486,200.00 mechanical subcontract on a medical
+    office building, revised in September to add two approved change orders. Twelve lines cover the
+    original scope, from $14,600.00 for mobilization and submittals (2.97% of the contract) through
+    the two largest lines — $96,500.00 for four rooftop units (19.63%) and $88,700.00 for ductwork
+    and distribution (18.04%) — down to $5,700.00 for closeout, manuals and training. The change
+    order section adds CO-001 at +$7,350.00 for a relocated rooftop-unit curb and CO-002 at
+    −$1,980.00 for a deleted water heater installation, for a net of $5,370.00.
+  </p>
+  <p>
+    The original schedule subtotals to $486,200.00 (98.91%), the change orders to $5,370.00 (1.09%),
+    and the total scheduled value is $491,570.00 — exactly the contract sum to date in the header.
+    The same lines, in the same order, appear on page 2 of the
+    <a href="/templates/aia-g702-g703/">pay application template</a>'s completed example, where
+    application no. 3 bills them for August.
+  </p>
 
-    <!-- CTA -->
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          Your bid already knows the schedule of values
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro seeds the SOV from your accepted bid, keeps it tied to the contract sum plus
-          approved change orders, and bills against it every period — no spreadsheet reconciliation.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/pay-applications/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See pay applications in BuildWorkPro
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>Schedule of values vs. estimate vs. pay application</h2>
+  <ul>
+    <li>
+      <strong>Estimate</strong> — internal pricing by cost type (material, labor, equipment, subs) with
+      overhead and margin. <a href="/templates/construction-estimate/"
+        >Construction estimate template</a
+      >.
+    </li>
+    <li>
+      <strong>Schedule of values</strong> — external, the contract sum by billable phase, no cost or margin
+      shown. Built from the estimate, accepted by the GC, revised by change orders.
+    </li>
+    <li>
+      <strong>Pay application</strong> — the monthly bill against the schedule: previous, this period,
+      stored, total, retainage. The Billing Tracker sheet in this workbook does that math per line; the
+      pay application template adds the certificate page.
+    </li>
+    <li>
+      <strong>Budget / job cost</strong> — the same lines tracked against actual cost, which is a different
+      question from what you have billed. <a href="/templates/construction-budget/"
+        >Construction budget template</a
+      >.
+    </li>
+  </ul>
+
+  <h2>Front-loading and the other mistakes GCs look for</h2>
+  <ul>
+    <li>
+      <strong>Front-loading</strong> — weighting mobilization or early rough-in above its cost to improve
+      cash flow. A little is customary; a mobilization line above 5% of the contract gets questioned on
+      most jobs.
+    </li>
+    <li>
+      <strong>Lines that do not tie</strong> — a schedule that totals $486,200.00 against a contract that
+      is now $491,570.00 after change orders. The tie-out cell exists for this.
+    </li>
+    <li>
+      <strong>Closeout too small to bill</strong> — a $1,000 closeout line on a half-million contract
+      means the last 10% of the job earns nothing while retainage sits.
+    </li>
+    <li>
+      <strong>Lumping systems together</strong> — one "plumbing" line for underground, rough-in and trim,
+      which will be argued at 30%, 60% and 90% complete.
+    </li>
+    <li>
+      <strong>Forgetting to re-issue</strong> — billing a change order on the pay application without
+      ever adding it to the accepted schedule.
+    </li>
+  </ul>
+  <p>
+    When change orders arrive, price them on the
+    <a href="/templates/change-order/">change order template</a>, add the approved amount here as a
+    line, and bill it on the next application. If you are running more than a job or two,
+    <a href="/features/pay-applications/">BuildWorkPro's pay applications</a> seed the schedule from your
+    accepted bid and keep it tied to the contract sum for you.
+  </p>
+</TemplatePage>

@@ -1,0 +1,38 @@
+{
+  "slug": "punch-list",
+  "name": "Construction Punch List Template",
+  "basename": "punch-list-template",
+  "files": {
+    "pdf": {
+      "file": "punch-list-template.pdf",
+      "bytes": 167690,
+      "pages": 1
+    },
+    "example": {
+      "file": "punch-list-template-example.pdf",
+      "bytes": 37063,
+      "pages": 1
+    },
+    "xlsx": {
+      "file": "punch-list-template.xlsx",
+      "bytes": 14685,
+      "sheets": [
+        "Punch List",
+        "How to Use"
+      ]
+    },
+    "docx": {
+      "file": "punch-list-template.docx",
+      "bytes": 12491
+    }
+  },
+  "previews": [
+    {
+      "file": "punch-list.png",
+      "webp": "punch-list.webp",
+      "width": 1200,
+      "height": 927,
+      "landscape": true
+    }
+  ]
+}

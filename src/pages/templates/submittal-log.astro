@@ -1,146 +1,213 @@
 ---
-// Submittal log — submittal log ~170/mo KD0 (issue #145 optional hub addition). Ungated per Q5.
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FAQSection from '../../components/FAQSection.astro';
-import { config } from '../../config';
-
-const FILE = '/templates-files/submittal-log-template.xlsx';
-
-const whatsInside = [
-  '40 rows: spec section, description, type, revision, dates, status, reviewer',
-  'Live counts of Not Submitted / Submitted / Approved / Revise-Rejected',
-  'Dropdowns for type (product data, shop drawings, samples, mock-up) and status',
-  'Lead-time and action-required-by columns so nothing sits in limbo',
-  'Sample storefront rows showing the level of detail reviewers expect',
-  'Landscape print layout that still fits a tabloid sheet',
-];
+// Submittal cluster: "submittal log template" 170 · "construction submittal
+// log template" 170 · "construction submittal template" 210 · "submittal cover
+// sheet template" 110 · "submittal template" 70 · "construction submittals
+// examples" 320 (DataForSEO, US, 2026-09). GSC shows "submittal example" and
+// "construction submittal template" impressions — hence the cover sheet and
+// the worked example.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
 
 const faqs = [
   {
     question: 'What is a submittal log?',
     answer:
-      'The running register of every product data sheet, shop drawing, sample, and mock-up you owe the architect or GC — numbered, dated, and statused so you can see what is still outstanding before it delays fabrication or installation.',
+      'The running register of every product data sheet, shop drawing, sample and mock-up you owe the architect or GC — numbered, dated and statused so you can see what is still outstanding before it delays fabrication or installation. This template adds the two dates the register usually lacks: when the item is needed on site, and, working backwards through lead time and review time, when you have to submit it.',
   },
   {
     question: 'What belongs on a construction submittal?',
     answer:
-      'Whatever the spec section requires: product data, shop drawings, samples, mock-ups, calculations. Each item gets its own row (and a new row for each revision). Mixing three products onto one line is how "approved as noted" becomes an argument about which note applied to which item.',
+      'Whatever the spec section requires: product data, shop drawings, samples, mock-ups, calculations, certificates. Each item gets its own row, and a new row for each revision. Mixing three products onto one line is how “approved as noted” becomes an argument about which note applied to which item. The package itself goes out under a cover sheet — the transmittal — that identifies the submittal number, spec section, revision, what is enclosed and what action you are asking for.',
+  },
+  {
+    question: 'What is a submittal cover sheet, and do I need one?',
+    answer:
+      'A transmittal that travels with the package. It records the submittal number, spec section and revision, lists the items enclosed, states the action requested (review and approval, resubmittal, for record), carries your contractor-review statement, and gets a received-by signature or a portal timestamp. You need one because the review clock starts when the reviewer received it, and the transmittal is your proof of when that was.',
   },
   {
     question: 'When should I submit?',
     answer:
-      "Early enough that review time plus fabrication lead time still hits the install date. The template's lead-time column exists so you work backwards from the need-by date instead of discovering a 6-week glass lead after the opening is framed.",
+      'Early enough that review time plus fabrication lead time still hits the install date. The template’s submit-by column does that math: need-on-site date minus lead time minus the review period. A six-week lead item with a two-week review needs to be submitted eight weeks before install — plus another cycle if it comes back “revise and resubmit.”',
   },
   {
     question: 'What do the status values mean?',
     answer:
-      'Not Submitted (still in your court), Submitted (with the reviewer), Approved, Approved as Noted (install to the markups), Revise and Resubmit, Rejected. Counts at the top only work if you use those exact phrases — they are in the dropdown.',
+      'Not Submitted (still in your court), Submitted (with the reviewer), Approved, Approved as Noted (install to the markups), Revise and Resubmit, Rejected. Counts at the top only work if you use those exact phrases — they are in the dropdown. Approved and Approved as Noted are counted together as approved, since both release the item for fabrication.',
+  },
+  {
+    question: 'What does “approved as noted” actually mean?',
+    answer:
+      'Build to the reviewer’s markups. Read every note before you order: a note that changes a size, a finish or a quantity is a change in what you are supplying, and if it changes your cost or scope it needs an RFI or a change order, not a quiet absorption. Log a resubmittal if the notes are substantial enough that a clean copy should be on record.',
+  },
+  {
+    question: 'How should submittals be numbered?',
+    answer:
+      'By spec section, then a sequence, then the revision: 23 37 13-01 Rev 0 is the first submittal under section 23 37 13, and its resubmittal is Rev 1 on a new log row. Division 01 of the specification often prescribes the exact format — follow it if it does, because the architect’s log and the GC’s portal will be keyed to it.',
   },
 ];
 ---
 
-<Layout
-  title="Free Construction Submittal Log Template (Excel)"
-  description="Free construction submittal log: 40-row Excel tracker with status counts, type dropdowns, lead time, and reviewer columns. No email required."
+<TemplatePage
+  slug="submittal-log"
+  title="Free Submittal Log Template + Submittal Cover Sheet (Excel + PDF) | BuildWorkPro"
+  description="Free submittal log template with live status counts, days-in-review and submit-by dates, plus a submittal cover sheet. Excel + fillable PDF. No email required."
+  h1="Construction Submittal Log Template"
+  intro="A register of every shop drawing, product data sheet and sample you owe — with status counts, a days-in-review clock and a submit-by date computed backwards from the day each item is needed on site. The workbook adds a transmittal sheet; the PDF pairs a landscape log with a fillable submittal cover sheet."
+  downloads={[
+    { format: 'xlsx', label: 'Download Excel log + transmittal (.xlsx)' },
+    { format: 'pdf', label: 'Download fillable PDF (log + cover sheet)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    '40-row log: spec section, description, type, revision, dates submitted and returned, status, reviewer, need-on-site date, lead time, submit-by date, notes',
+    'Live counts of Not Submitted, Submitted (in review), Approved + as noted and Revise / Rejected, plus overdue-with-reviewer and late-to-submit',
+    'Submit-by date computed as need-on-site minus lead time minus your Division 01 review period',
+    'Days-in-review clock that runs to the returned date, or to the status date while the reviewer has it',
+    'Red flags: a review past the review period, and a submit-by date that has passed without a submission',
+    'Type and status dropdowns with colour coding, frozen headers and a landscape one-page-wide print layout',
+    'Transmittal sheet: to / from, submittal number and revision, items enclosed, action requested, contractor review statement and a return-by date computed from the review period',
+    'Fillable PDF: landscape log page plus a portrait submittal cover sheet with checkboxes for action requested and what is enclosed',
+    'Completed example: 13 mechanical submittals and the cover sheet for a diffuser package, on a real job timeline',
+  ]}
+  howTo={[
+    [
+      'Set the review period and status date',
+      'Enter the project, the reviewer and the review period your Division 01 specification allows — 14 days is common, some contracts say 10 or 21. The status date drives the days-in-review clock; leave it blank to count to today.',
+    ],
+    [
+      'Log everything the spec requires, one row each',
+      'Go through the specification sections in your scope and list every required submittal, numbered by section and sequence. Pick the type from the dropdown. When an item comes back Revise and Resubmit, add a new row for the next revision rather than overwriting.',
+    ],
+    [
+      'Enter need-on-site dates and lead times',
+      'For each item, the date it has to be on site (from your schedule) and the vendor’s lead time in days. The submit-by column calculates backwards through the review period. That is the date you must send it — and the column to sort by when you plan the month.',
+    ],
+    [
+      'Send each package under a transmittal',
+      'Fill in the Transmittal sheet or the PDF cover sheet: submittal number, spec section, revision, items enclosed, action requested and your contractor-review checkboxes. It computes the return-by date. Record the submitted date on the log the same day.',
+    ],
+    [
+      'Work the red cells every week',
+      'A red days-in-review means the reviewer is past the review period — send a reminder citing the spec and the transmittal date. A red submit-by means you are late and fabrication is at risk — submit it or re-sequence the schedule. Update statuses as items return.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['rfi', 'construction-schedule', 'meeting-minutes', 'scope-of-work']}
+  feature={{
+    href: '/features/project-management/',
+    label: 'See project management in BuildWorkPro',
+    heading: 'Submittals that sit on the project, not a hidden spreadsheet',
+    body: 'In BuildWorkPro every project carries a Documents tab for drawings, product data and returned submittals, next to the schedule, RFIs, change orders and pay applications for the same job — so the shop drawing the reviewer marked up is attached to the task it affects. <a href="/features/project-management/" class="font-semibold text-brand-700 hover:underline">Construction project management software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'One project, every document',
+    body: 'BuildWorkPro keeps drawings, submittals, RFIs, change orders, site logs and pay applications on the same project record, visible to the office and the field, for every GC you work for.',
+  }}
+  disclaimer="General-purpose template, not a contract document or legal advice. Your specification’s Division 01 sets the numbering, review period, resubmittal rules and what a reviewer stamp does and does not approve — follow it first."
+  updated="2026-09-17"
 >
-  <Header />
-  <main class="pt-32 pb-20">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-      <div class="text-center">
-        <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
-          Free template
-        </p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
-          Construction Submittal Log Template
-        </h1>
-        <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          A 40-row register of every shop drawing, product data sheet, and sample you owe — with
-          status counts so outstanding reviews are visible before they delay the job.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={FILE}
-            download
-            data-template="submittal-log"
-            class="template-download inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Download the free template (.xlsx)
-          </a>
-          <a
-            href="/templates/"
-            class="inline-flex w-full sm:w-auto items-center justify-center px-7 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:border-brand-300 hover:text-brand-700 transition-colors"
-          >
-            See all free templates
-          </a>
-        </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          No email required · Works in Excel, Google Sheets &amp; Numbers
-        </p>
-      </div>
-    </section>
+  <h2>What a construction submittal is</h2>
+  <p>
+    A submittal is the package you send the architect or engineer, through the GC, to prove that
+    what you intend to install matches the specification before you order or fabricate it. Product
+    data shows the manufacturer’s published performance; shop drawings show how you will fabricate
+    and fit the work; samples and mock-ups show finish and quality. The reviewer returns the package
+    with a stamp — approved, approved as noted, revise and resubmit, rejected — and only an approved
+    (or approved-as-noted) submittal releases the item for purchase.
+  </p>
+  <p>
+    That makes the submittal log a schedule document as much as a paperwork one. Every item on it
+    has a lead time, and every lead time starts the day the reviewer’s stamp comes back. A log that
+    only records what went out and when is a history; one that computes when each item must go out
+    is a plan.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-10">
-        What's in the template
-      </h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {
-          whatsInside.map((item) => (
-            <div class="flex items-start gap-3">
-              <svg
-                class="w-5 h-5 text-brand-600 mt-0.5 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-slate-600">{item}</span>
-            </div>
-          ))
-        }
-      </div>
-      <p
-        class="mt-8 text-sm text-slate-500 text-center max-w-2xl mx-auto"
-        set:html={`Unclear drawings usually surface here first — write them up with the <a href="/templates/rfi/" class="text-brand-600 underline underline-offset-2 font-medium">RFI template</a> instead of stalling the submittal.`}
-      />
-    </section>
+  <h2>The log, field by field</h2>
+  <ul>
+    <li>
+      <strong>Spec section and number</strong> — the six-digit section and a sequence, revision on its
+      own row: 23 37 13-01 Rev 0, then Rev 1.
+    </li>
+    <li>
+      <strong>Type</strong> — product data, shop drawings, samples, mock-up, calculations, certificates,
+      O&amp;M / closeout. The type tells the reviewer what to expect and tells you what to assemble.
+    </li>
+    <li>
+      <strong>Submitted / returned / days in review</strong> — the review clock. Days in review runs to
+      the returned date, or to the status date while the reviewer still has it. When it exceeds the review
+      period the cell turns red, and the top of the sheet counts how many items are overdue with the reviewer.
+    </li>
+    <li>
+      <strong>Need on site, lead time, submit by</strong> — the plan. Submit by = need on site − lead
+      time − review period. A diffuser package needed September 21 with a 28-day lead and a 14-day review
+      has to be submitted by August 10. Sort the log by this column at the start of each month.
+    </li>
+    <li>
+      <strong>Status</strong> — six values from the dropdown; the counts and the colour coding depend
+      on the exact words.
+    </li>
+  </ul>
 
-    <FAQSection faqs={faqs} />
+  <h2>A worked submittal example</h2>
+  <p>
+    The completed example is a mechanical subcontractor’s log on a medical office building, thirteen
+    rows as of September 3, 2026, with a 14-day review period. Rooftop units, the air handler, both
+    insulation packages and the plumbing fixture schedule are approved or approved as noted. The
+    Level 1 ductwork shop drawings came back revise-and-resubmit on June 24, went back as Rev 1 on
+    June 29 and were approved July 8 — two rows, one item, a nine-day turnaround the second time.
+    The BMS controls package is on its second revision and has been with the engineer ten days. Two
+    items — the TAB agency qualifications and the commissioning plan — are not yet submitted, with
+    submit-by dates in October and November computed from their need dates. The header counts read 2
+    not submitted, 3 in review, 6 approved, 2 revise/rejected.
+  </p>
+  <p>
+    The cover sheet in the example is transmittal T-011 for the diffuser package, submittal 23 37
+    13-01 Rev 0, sent August 21: three items enclosed (ceiling diffusers, return and exhaust
+    grilles, the finish schedule), action requested “for review and approval,” contractor review
+    checked for conformance and coordination with the reflected ceiling plans, and a remark that
+    says why the date matters — a four-week lead and a September 21 install, so please return by
+    September 4. Look at the log row for that item: the submit-by date was August 10. It went out
+    eleven days late, and the remark on the transmittal is the subcontractor managing that risk in
+    writing. That is what a submittal example should show — not a perfect log, but a log that makes
+    the problem visible in time to do something about it.
+  </p>
 
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-      <div class="rounded-2xl bg-slate-900 px-8 py-14 sm:px-14">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-balance">
-          Submittals that sit on the project, not a hidden spreadsheet
-        </h2>
-        <p class="mt-4 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro keeps project documents, tasks, and closeout in one place so shop drawings
-          and product data are not a side spreadsheet nobody opens.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={config.signupUrl}
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Start free trial
-          </a>
-          <a
-            href="/features/project-management/"
-            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors"
-          >
-            See project management in BuildWorkPro
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-slate-500">
-          <a href="/pricing/" class="text-slate-300 underline hover:text-white">$79/month flat</a> · 14-day
-          free trial · No credit card required
-        </p>
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  <h2>What goes on a submittal cover sheet</h2>
+  <p>
+    The cover sheet, or transmittal, does five jobs. It identifies the package (submittal number,
+    spec section, revision, transmittal number and date). It lists what is enclosed, with copies and
+    type per item, so nothing is lost between your office and the reviewer’s desk. It states the
+    action you are asking for. It carries your contractor-review statement — that you checked the
+    package against the contract documents and coordinated it with the field — which most
+    specifications require before the architect will look at it. And it records receipt, by
+    signature or portal timestamp, which is when the review clock starts. Deviations from the
+    specification go in the remarks, called out explicitly; a deviation the reviewer did not notice
+    is not approved.
+  </p>
+
+  <h2>Submittal, RFI or change order?</h2>
+  <ul>
+    <li>
+      <strong>Submittal</strong> — “here is what I intend to install; confirm it meets the spec.” It changes
+      nothing about the contract.
+    </li>
+    <li>
+      <strong><a href="/templates/rfi/">RFI</a></strong> — “the documents are unclear or conflict; tell
+      me which is right.” Unclear drawings usually surface here first, while you are assembling the shop
+      drawings.
+    </li>
+    <li>
+      <strong><a href="/templates/change-order/">Change order</a></strong> — “this changes scope, price
+      or time; agree it in writing.” If a reviewer’s note on a submittal adds cost, it becomes one of
+      these.
+    </li>
+  </ul>
+  <p>
+    The need-on-site dates on the log come from your
+    <a href="/templates/construction-schedule/">construction schedule</a>; put the overdue and
+    late-to-submit counts on the agenda in your <a href="/templates/meeting-minutes/"
+      >meeting minutes</a
+    > each week, and check the list of required submittals against the
+    <a href="/templates/scope-of-work/">scope of work</a> before you sign so nothing in the spec surprises
+    you after mobilization.
+  </p>
+</TemplatePage>

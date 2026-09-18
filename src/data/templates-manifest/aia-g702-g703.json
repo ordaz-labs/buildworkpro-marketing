@@ -1,0 +1,42 @@
+{
+  "slug": "aia-g702-g703",
+  "name": "Pay Application Template",
+  "basename": "pay-application-template-g702-g703-style",
+  "files": {
+    "pdf": {
+      "file": "pay-application-template-g702-g703-style.pdf",
+      "bytes": 336973,
+      "pages": 2
+    },
+    "example": {
+      "file": "pay-application-template-g702-g703-style-example.pdf",
+      "bytes": 155599,
+      "pages": 2
+    },
+    "xlsx": {
+      "file": "pay-application-template-g702-g703-style.xlsx",
+      "bytes": 17573,
+      "sheets": [
+        "Pay Application",
+        "Continuation Sheet",
+        "How to Use"
+      ]
+    }
+  },
+  "previews": [
+    {
+      "file": "aia-g702-g703.png",
+      "webp": "aia-g702-g703.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    },
+    {
+      "file": "aia-g702-g703-2.png",
+      "webp": "aia-g702-g703-2.webp",
+      "width": 1200,
+      "height": 927,
+      "landscape": true
+    }
+  ]
+}

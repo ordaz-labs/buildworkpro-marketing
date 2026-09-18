@@ -1,0 +1,210 @@
+---
+// JSA cluster: "job safety analysis template" 880 · "jsa template" 880 · "job
+// hazard analysis template" 480 (DataForSEO, US, 2026-09).
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What is a job safety analysis?',
+    answer:
+      'A JSA breaks one task into its steps, names the hazard at each step — what can hurt someone — and states the control that eliminates or reduces it. It is written before the work starts, reviewed with the crew doing the work, and signed by them. One JSA covers one task: a crane pick, a confined-space entry, a hot-work job, a trench.',
+  },
+  {
+    question: 'What is the difference between a JSA, a JHA and a toolbox talk?',
+    answer:
+      'JSA (job safety analysis) and JHA (job hazard analysis) are the same document under two names; some GCs and insurers prefer one term. A toolbox talk is a short crew safety meeting on a topic — ladders, heat, housekeeping — with a sign-in sheet, and is not tied to one task. On a high-risk day you do both: the toolbox talk covers the theme, the JSA covers the specific steps.',
+  },
+  {
+    question: 'Does OSHA require a JSA?',
+    answer:
+      'OSHA’s construction standards require employers to identify hazards, provide the protection and training the hazards call for, and in some cases (fall protection plans, confined space, crane lifts) keep specific written plans — but they do not prescribe a form called a JSA. What makes the JSA effectively mandatory is the GC’s site-specific safety plan and your insurer: most require one for high-hazard tasks and ask for it after any incident. This is general information, not legal advice.',
+  },
+  {
+    question: 'How many steps should a JSA have?',
+    answer:
+      'Six to ten. Fewer and the hazards hide inside steps that are too broad (“set the unit” covers rigging, lifting, landing and securing, each with different hazards). More than about twelve and the task is really two tasks — split it. The template has seven rows on the printed page and ten on the spreadsheet.',
+  },
+  {
+    question: 'Who should fill out the JSA?',
+    answer:
+      'The person who knows the work and will be there — usually the foreman or the competent person for the task — with the crew’s input, then reviewed by a supervisor or the GC’s safety representative. A JSA written in the office by someone who will not be on the roof misses the hazard that matters, and a crew that did not help write it will not read it.',
+  },
+  {
+    question: 'When does a JSA need to be revised?',
+    answer:
+      'Whenever the task, the crew, the location or the conditions change: a different lift path, a new crew member, wind picking up, a permit expiring, an unexpected utility. Note the revision date and reason on the form and re-review it with the crew. A JSA from last month is a template, not a plan.',
+  },
+  {
+    question: 'How long should I keep signed JSAs?',
+    answer:
+      'At least for the life of the project plus whatever your safety program, your insurer and your contract require; many contractors keep them for several years. The signed JSA with the daily report for that day is what you produce after an incident, an OSHA visit or a claim — it shows the hazards were identified, controlled and communicated before the work started.',
+  },
+];
+---
+
+<TemplatePage
+  slug="job-safety-analysis"
+  title="Free Job Safety Analysis (JSA) Template — Fillable PDF, Word & Excel | BuildWorkPro"
+  description="Free JSA template (job safety analysis / JHA): task steps, hazards, controls, PPE and crew sign-off on one landscape page. Fillable PDF, Word and Excel. No email required."
+  h1="Job Safety Analysis (JSA) Template"
+  intro="One landscape page per task: what is done step by step, what can hurt someone at each step, how it is controlled, and who is responsible — with PPE and permit checkboxes and a crew sign-off. The Excel version adds a hazard-and-control reference sheet and flags any step without a control."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF (landscape)' },
+    { format: 'docx', label: 'Download Word template (.docx)' },
+    { format: 'xlsx', label: 'Download Excel workbook with hazard library (.xlsx)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Header with the task, location, date and time, project, JSA number, who prepared and reviewed it and the crew size',
+    'Required PPE checkboxes: hard hat, safety glasses, gloves, hi-vis, steel-toe boots, hearing protection, fall-arrest harness, face shield, respirator',
+    'Permit and pre-task checks: hot work, confined space, lockout / tagout, crane lift plan, utility locate, weather, rescue plan, emergency numbers',
+    'Step / potential hazard / control / responsible table — seven rows on the page, ten in the spreadsheet',
+    'Crew sign-off table with the acknowledgment wording, eight signatures on the page',
+    'Prepared-by and reviewed-by signature lines with a revision line for when conditions change',
+    'Excel: a hazard library of 14 common construction hazard categories with where they show up and typical controls, in hierarchy-of-controls order',
+    'Excel: a totals row that flags any step without a written control',
+    'Completed example: a crane lift setting four rooftop units, seven steps, with a seven-person crew signed in',
+  ]}
+  howTo={[
+    [
+      'Identify the task and the people',
+      'One JSA per task, not per project. Fill in what the task is, where and when, the project, who is preparing it (usually the foreman or competent person), who reviews it and the crew size. Number it so it can be referenced from the daily report and the toolbox talk.',
+    ],
+    [
+      'Tick the PPE and the permits',
+      'PPE is the last line of defense, but it is the one the GC’s safety walk checks first. Permits and pre-task checks — hot work, confined space, lift plan, utility locate, weather — are gates: if one is required and not in hand, the work does not start.',
+    ],
+    [
+      'List the steps in the order the work happens',
+      'Six to ten steps. Walk the task in your head from setup to cleanup — “rig the unit,” “lift and swing,” “land on the curb” — and write each as its own row. Steps that are too broad hide hazards.',
+    ],
+    [
+      'Name the hazard and the control for every step',
+      'Write the hazard as what happens to a person: “fall from the roof edge,” “pinch at the curb,” “struck by the swinging load.” Then the control that answers it, most effective first: eliminate, substitute, engineer (guardrails, mats), administrative (exclusion zone, signal person), PPE. The Excel hazard library gives you wording to make specific.',
+    ],
+    [
+      'Review it with the crew and sign',
+      'Read it at the task location, not in the truck. Each crew member signs the acknowledgment; the preparer and reviewer sign at the bottom. Revise and re-sign if the crew, the conditions or the plan change, and file the signed copy with that day’s daily report.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['toolbox-talk', 'daily-report', 'work-order', 'timesheet']}
+  feature={{
+    href: '/features/site-logs/',
+    label: 'See site logs in BuildWorkPro',
+    heading: 'Safety records that live with the day’s work',
+    body: 'BuildWorkPro site logs are tagged — Progress, Issue, Delay, Safety, Delivery, Inspection — and carry photos, so the JSA review, the near miss and the toolbox talk are logged with the day they happened and can be filtered out in seconds when the GC or your insurer asks. <a href="/features/site-logs/" class="font-semibold text-brand-700 hover:underline">Construction daily log software</a> for $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Get the day on record before everyone forgets it',
+    body: 'BuildWorkPro site logs record personnel, work performed, issues and safety events for every day on site, with photos and a reviewed status — a project history you can walk back through when a question comes up months later.',
+  }}
+  disclaimer="General-purpose form, not legal or safety-engineering advice. A JSA supports, and does not replace, the hazard assessment, training and written programs your jurisdiction, your insurer and your contract require."
+  updated="2026-09-17"
+>
+  <h2>What a JSA is for</h2>
+  <p>
+    A job safety analysis is the document that makes a crew stop and think about one task before
+    they start it. It is deliberately narrow: not the company safety program, not the site safety
+    plan, but this lift, this trench, this hot-work job, today, with these people. Its value is in
+    the sequence — step, hazard, control — because it forces the question “what can hurt someone
+    here?” at each point in the work rather than once in general.
+  </p>
+  <p>
+    General contractors ask for a JSA on high-hazard tasks because their site safety plan and their
+    insurer require it, and because after an incident it is the first document anyone reads. A
+    signed JSA shows the hazard was identified, a control was chosen, and the crew was told. No JSA,
+    or a generic one, shows the opposite.
+  </p>
+
+  <h2>Field by field</h2>
+  <ul>
+    <li>
+      <strong>Task step</strong> — what is physically done, in order. A step is a unit of work with its
+      own hazards: “rig the unit” and “lift and swing” are different steps because the hazards change.
+    </li>
+    <li>
+      <strong>Potential hazards</strong> — what can hurt someone, written as the event: a fall from the
+      edge, a pinch at the curb, a struck-by from the swinging load, heat stress. “Roof” is a location,
+      not a hazard.
+    </li>
+    <li>
+      <strong>Controls / safe practices</strong> — how each hazard is eliminated or reduced, in the order
+      of the hierarchy of controls: eliminate it, substitute a safer method, engineer it out, then administrative
+      controls (exclusion zones, permits, a named signal person), then PPE. A control must answer its
+      hazard; a hard hat does nothing for a fall.
+    </li>
+    <li>
+      <strong>Responsible</strong> — the person who makes sure the control is in place for that step.
+      Not “everyone.”
+    </li>
+    <li>
+      <strong>PPE and permits</strong> — the checkboxes at the top. Permits are gates; PPE is the last
+      line.
+    </li>
+    <li>
+      <strong>Crew sign-off</strong> — the acknowledgment that each person took part in the review, understands
+      the hazards and controls, and will stop work if conditions change. That last clause is the important
+      one.
+    </li>
+  </ul>
+
+  <h2>A worked example: a crane day</h2>
+  <p>
+    The completed example is JSA-014 from a mechanical subcontractor’s crane day on a medical office
+    building — setting four rooftop units from a crane pad in the parking lot on August 3, 2026. The
+    foreman prepared it as the competent person, the GC’s superintendent reviewed it, and the seven
+    steps run from the pre-lift meeting to demobilizing the crane.
+  </p>
+  <p>
+    Read step 4, the lift and swing. The hazards are the suspended load, wind gusts and struck-by.
+    The controls are specific and checkable: nobody under the load, stop work above 20 mph or the
+    operator’s limit, radio contact between the operator and a named signal person, exclusion zones
+    on the ground and on the roof. Step 2 handles roof access — harness tied off to certified
+    anchors within six feet of the edge, a warning line at fifteen feet, curb openings covered until
+    the unit lands. The PPE row has fall-arrest harness ticked; the permits row has the crane lift
+    plan, the overhead-line check, the weather check, a rescue plan and posted emergency numbers.
+    Seven crew members signed, including the crane operator from the rigging subcontractor. The
+    toolbox talk from the same morning covers the same day at the crew level, and both are filed
+    with the daily report.
+  </p>
+
+  <h2>JSA, JHA, toolbox talk and safety plan</h2>
+  <ul>
+    <li>
+      <strong>JSA / JHA</strong> — this document. One task, step by step, signed by the crew doing it.
+    </li>
+    <li>
+      <strong><a href="/templates/toolbox-talk/">Toolbox talk</a></strong> — a short crew meeting on a
+      topic with a sign-in sheet, held regularly regardless of the task. On a high-risk day, the talk
+      sets the theme and the JSA carries the detail.
+    </li>
+    <li>
+      <strong>Site-specific safety plan</strong> — the GC’s document for the whole project: emergency
+      procedures, site rules, who is the competent person for what. The JSA sits under it.
+    </li>
+    <li>
+      <strong><a href="/templates/daily-report/">Daily report</a></strong> — where the JSA number, the
+      safety meeting and any incident or near miss are recorded for the day. File the signed JSA with
+      it.
+    </li>
+  </ul>
+
+  <h2>Common mistakes this form is built to catch</h2>
+  <ul>
+    <li>A hazard column full of locations and equipment instead of events that hurt people.</li>
+    <li>Controls that do not answer the hazard — PPE listed against a struck-by hazard.</li>
+    <li>“Everyone” in the responsible column.</li>
+    <li>
+      A JSA copied from the last job with the date changed. The Excel version flags a step without a
+      control; it cannot flag a control that does not fit the site — only a crew review does.
+    </li>
+    <li>
+      Filling it out in the truck and filing it unsigned. The three-minute review is the point.
+    </li>
+    <li>
+      Not revising it when the crew or conditions change — the revision line at the bottom is there
+      to be used.
+    </li>
+  </ul>
+</TemplatePage>
