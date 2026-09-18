@@ -62,6 +62,7 @@
           "invoices:read",
           "invoices:write",
           "invoices:delete",
+          "projects:reassign",
           "bids:send",
           "bids:accept_reject",
           "pay_apps:approve",
@@ -90,6 +91,8 @@
           "audit:read",
           "settings:read",
           "settings:write",
+          "dispatch:read",
+          "dispatch:write",
           "offline_access",
           "platform_admin:read"
         ],
@@ -896,6 +899,74 @@
           }
         }
       },
+      "MoveResult": {
+        "type": "object",
+        "properties": {
+          "fromProjectId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "toProjectId": {
+            "type": "integer"
+          },
+          "cleared": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "fromProjectId",
+          "toProjectId",
+          "cleared"
+        ]
+      },
+      "SweepResult": {
+        "type": "object",
+        "properties": {
+          "moved": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          },
+          "dropped": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          }
+        },
+        "required": [
+          "moved",
+          "dropped"
+        ]
+      },
+      "AttachedRecords": {
+        "type": "object",
+        "properties": {
+          "counts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          },
+          "total": {
+            "type": "integer"
+          },
+          "invoiceTotal": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "counts",
+          "total",
+          "invoiceTotal"
+        ]
+      },
       "Project": {
         "type": "object",
         "properties": {
@@ -1014,6 +1085,24 @@
             ]
           },
           "siteZipCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "architectName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "architectProjectNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "contractFor": {
             "type": [
               "string",
               "null"
@@ -1209,6 +1298,30 @@
             ],
             "maxLength": 20
           },
+          "architectName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "description": "Architect or engineer of record; printed in the pay application's \"Via architect / engineer\" cell."
+          },
+          "architectProjectNumber": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 100,
+            "description": "The architect's own project number, printed on the pay application and its continuation sheet."
+          },
+          "contractFor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "description": "Scope line printed in the pay application's \"Contract for\" cell (e.g. \"Structural steel — Phase 2\")."
+          },
           "assignedTo": {
             "type": [
               "integer",
@@ -1359,6 +1472,30 @@
               "null"
             ],
             "maxLength": 20
+          },
+          "architectName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "description": "Architect or engineer of record; printed in the pay application's \"Via architect / engineer\" cell."
+          },
+          "architectProjectNumber": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 100,
+            "description": "The architect's own project number, printed on the pay application and its continuation sheet."
+          },
+          "contractFor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "description": "Scope line printed in the pay application's \"Contract for\" cell (e.g. \"Structural steel — Phase 2\")."
           },
           "assignedTo": {
             "type": [
@@ -1747,6 +1884,16 @@
               "string",
               "null"
             ]
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "includeNotary": {
+            "type": "boolean",
+            "description": "Print the notary acknowledgment block on the pay application PDF. Defaults to true."
           },
           "createdAt": {
             "anyOf": [
@@ -3645,6 +3792,102 @@
           "sentAt",
           "signedAt",
           "signedDocumentId"
+        ]
+      },
+      "CrewAssignment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "projectId": {
+            "type": "integer"
+          },
+          "userId": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdBy": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "updatedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "projectName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "projectNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "userFirstName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "userLastName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "projectId",
+          "userId",
+          "date",
+          "startTime",
+          "note",
+          "createdBy",
+          "createdAt",
+          "updatedAt",
+          "projectName",
+          "projectNumber",
+          "userFirstName",
+          "userLastName"
         ]
       },
       "OauthClientRegistration": {
@@ -6292,6 +6535,642 @@
         "x-rate-limit-cost": 100
       }
     },
+    "/invoices/{id}/move": {
+      "post": {
+        "summary": "Move a invoice to another project",
+        "description": "Re-points the invoice at `targetProjectId`, which must belong to your organization and must not be deleted. Needs `projects:reassign` rather than this resource's own write scope. QuickBooks is deliberately NOT rewritten: the QBO invoice keeps the customer it was pushed with, so BuildWorkPro and QuickBooks disagree about the owning job until someone reconciles them by hand. The invoice's `qboId` is left intact, and any payment-term installment link is cleared.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MoveResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postInvoicesByIdMove",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/change-orders/{id}/move": {
+      "post": {
+        "summary": "Move a change order to another project",
+        "description": "Re-points the change order at `targetProjectId`, which must belong to your organization and must not be deleted. Needs `projects:reassign` rather than this resource's own write scope.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "ChangeOrders"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MoveResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postChangeOrdersByIdMove",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/site-logs/{id}/move": {
+      "post": {
+        "summary": "Move a site log to another project",
+        "description": "Re-points the site log at `targetProjectId`, which must belong to your organization and must not be deleted. Needs `projects:reassign` rather than this resource's own write scope.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "SiteLogs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MoveResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postSiteLogsByIdMove",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/time-entries/{id}/move": {
+      "post": {
+        "summary": "Move a time entry to another project",
+        "description": "Re-points the time entry at `targetProjectId`, which must belong to your organization and must not be deleted. Needs `projects:reassign` rather than this resource's own write scope. Its task and phase links are cleared, because those belong to the old project.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "TimeEntries"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Moved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MoveResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postTimeEntriesByIdMove",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/projects/{id}/attached-records": {
+      "get": {
+        "summary": "Count the records still attached to a project",
+        "description": "What a sweep would touch, broken down by record type, with the total invoiced value. Answers with an empty summary rather than 404 when nothing is attached. Needs only `projects:read`: this is the count that warns a caller before deleting a project, and deleting does not require the reassignment scope.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Counts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/AttachedRecords"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getProjectsByIdAttachedRecords",
+        "x-rate-limit-cost": 1
+      }
+    },
+    "/projects/{id}/archived": {
+      "get": {
+        "summary": "Read a soft-deleted project",
+        "description": "The ordinary project endpoints hide deleted rows. This one returns a deleted project read-only, so records stranded on it can be identified before they are moved.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Archived project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getProjectsByIdArchived",
+        "x-rate-limit-cost": 1
+      }
+    },
+    "/projects/{id}/reassign-records": {
+      "post": {
+        "summary": "Move every record off a project",
+        "description": "Sweeps all reassignable records from this project onto `targetProjectId` in one operation — the tool for a project deleted by mistake. `dropped` counts records the policy could not carry across (pay apps stay put: their certificates are a cumulative per-project chain). QuickBooks is never rewritten.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:reassign"
+            ]
+          }
+        ],
+        "tags": [
+          "Projects"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "targetProjectId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "targetProjectId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Swept",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/SweepResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postProjectsByIdReassignRecords",
+        "x-rate-limit-cost": 5
+      }
+    },
     "/projects/count": {
       "get": {
         "summary": "Count projects",
@@ -8238,7 +9117,7 @@
     "/bids/{id}/send": {
       "post": {
         "summary": "Send a bid to the customer",
-        "description": "Transitions a draft bid to sent and emails the customer.",
+        "description": "Transitions a draft bid to sent and emails the customer. A `validUntil` already in the past is moved to today plus the organization's default bid validity, so the bid is not re-expired the night it is sent.",
         "security": [
           {
             "bearerAuth": [
@@ -10541,6 +11420,9 @@
                       "null"
                     ]
                   },
+                  "includeNotary": {
+                    "type": "boolean"
+                  },
                   "changeOrders": {
                     "anyOf": [
                       {
@@ -10782,6 +11664,9 @@
                       "string",
                       "null"
                     ]
+                  },
+                  "includeNotary": {
+                    "type": "boolean"
                   },
                   "changeOrders": {
                     "anyOf": [
@@ -12159,11 +13044,6 @@
                   "invoiceNumber": {
                     "type": "string"
                   },
-                  "projectId": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
                   "contactId": {
                     "type": "integer",
                     "minimum": -2147483648,
@@ -12824,6 +13704,107 @@
           }
         },
         "operationId": "postInvoicesByIdMarkSent",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/invoices/{id}/send-via-quickbooks": {
+      "post": {
+        "summary": "Send an invoice from QuickBooks Online",
+        "description": "Pushes the draft invoice to QuickBooks Online, then asks QuickBooks to email it (with a Pay Now link when the organization uses QuickBooks Payments). A send failure after a successful push leaves the invoice as a draft so a retry can update and re-send.",
+        "security": [
+          {
+            "bearerAuth": [
+              "invoices:send"
+            ]
+          }
+        ],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sendTo": {
+                    "type": "string",
+                    "maxLength": 254,
+                    "format": "email"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Invoice"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postInvoicesByIdSendViaQuickbooks",
         "x-rate-limit-cost": 5
       }
     },
@@ -16051,6 +17032,57 @@
         },
         "operationId": "deleteSiteLogsById",
         "x-rate-limit-cost": 5
+      }
+    },
+    "/site-logs/{id}/report.pdf": {
+      "get": {
+        "summary": "Download a site log as a daily report PDF",
+        "description": "Renders the site log as an `application/pdf` daily report: tenant branding, project and address, date and weather, tags, personnel, notes, work performed / materials / visitors / issues, photo thumbnails, and a filed-by / reviewed-by footer. Same renderer and branding as the session `GET /api/site-logs/:id/report.pdf` route.",
+        "operationId": "getSiteLogsByIdReportPdf",
+        "security": [
+          {
+            "bearerAuth": [
+              "site_logs:read"
+            ]
+          }
+        ],
+        "tags": [
+          "SiteLogs"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daily report PDF",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-rate-limit-cost": 50
       }
     },
     "/site-logs/exports": {
@@ -23138,6 +24170,410 @@
         "x-rate-limit-cost": 5
       }
     },
+    "/crew-assignments": {
+      "get": {
+        "summary": "List crew assignments",
+        "description": "Returns crew assignments in a date range (inclusive, max 31 days). Callers without dispatch:write only receive their own rows. Paginated via limit/offset.",
+        "security": [
+          {
+            "bearerAuth": [
+              "dispatch:read"
+            ]
+          }
+        ],
+        "tags": [
+          "CrewAssignments"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "required": true,
+            "name": "from",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "required": true,
+            "name": "to",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0
+            },
+            "required": false,
+            "name": "userId",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "required": false,
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "required": false,
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Crew assignments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CrewAssignment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getCrewAssignments",
+        "x-rate-limit-cost": 1
+      }
+    },
+    "/crew-assignments/{id}": {
+      "get": {
+        "summary": "Get a crew assignment",
+        "security": [
+          {
+            "bearerAuth": [
+              "dispatch:read"
+            ]
+          }
+        ],
+        "tags": [
+          "CrewAssignments"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Crew assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/CrewAssignment"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getCrewAssignmentsById",
+        "x-rate-limit-cost": 1
+      },
+      "delete": {
+        "summary": "Delete a crew assignment",
+        "description": "Soft-deletes a crew assignment.",
+        "security": [
+          {
+            "bearerAuth": [
+              "dispatch:write"
+            ]
+          }
+        ],
+        "tags": [
+          "CrewAssignments"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "deleted": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "deleted"
+                      ]
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteCrewAssignmentsById",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/crew-assignments/{date}/{projectId}": {
+      "put": {
+        "summary": "Replace a job-day's crew",
+        "description": "Sets the crew assigned to a project on a calendar day. Inserts missing users, soft-deletes removed ones, and optionally updates startTime/note for the job-day.",
+        "security": [
+          {
+            "bearerAuth": [
+              "dispatch:write"
+            ]
+          }
+        ],
+        "tags": [
+          "CrewAssignments"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "required": true,
+            "name": "date",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "projectId",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0
+                    },
+                    "maxItems": 200
+                  },
+                  "startTime": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d)?$"
+                  },
+                  "note": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "maxLength": 2000
+                  }
+                },
+                "required": [
+                  "userIds"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Replaced crew",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CrewAssignment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putCrewAssignmentsByDateByProjectId",
+        "x-rate-limit-cost": 5
+      }
+    },
     "/oauth/authorize": {
       "get": {
         "summary": "OAuth 2.1 authorization endpoint (consent screen)",
@@ -23528,6 +24964,10 @@
     {
       "name": "TimeEntries",
       "description": "Labor hours logged against projects, with review and cost roll-up."
+    },
+    {
+      "name": "CrewAssignments",
+      "description": "Daily crew assignments of tenant users to jobs (the dispatch board)."
     },
     {
       "name": "Products",
