@@ -12,17 +12,67 @@ import ComparisonTable from '../../components/ComparisonTable.astro';
 import { config } from '../../config';
 
 const comparisonRows = [
-  { label: 'Built for', bwp: 'Trade subcontractors who bid to GCs', other: 'Builders and GCs — subs are one of ten segments', bwpWins: true },
-  { label: 'Pricing', bwp: '$79/month flat, published', other: '$199/month base + $20 per user (annual ~$159 + $16)*', bwpWins: true },
-  { label: 'Cost for a 5-person crew', bwp: '$79/month', other: '~$279/month (~$223 billed annually)', bwpWins: true },
-  { label: 'Free trial', bwp: '14 days, every feature, no credit card', other: 'None — you pay first, then onboarding begins', bwpWins: true },
-  { label: 'Users', bwp: 'Unlimited, included', other: 'Per-user pricing beyond the first seat', bwpWins: true },
-  { label: 'AIA-style pay applications (SOV, retainage)', bwp: 'Core, first-class workflow', other: 'Not the focus — financials center on builder budgets', bwpWins: true },
-  { label: 'How you buy', bwp: 'Self-serve signup, running the same day', other: 'Sign up, then an assigned success manager onboards you', bwpWins: true },
-  { label: 'Work by chatting with Claude or ChatGPT', bwp: 'Included — the assistant builds bids & projects in your account', other: 'Not offered', bwpWins: true },
+  {
+    label: 'Built for',
+    bwp: 'Trade subcontractors who bid to GCs',
+    other: 'Builders and GCs — subs are one of ten segments',
+    bwpWins: true,
+  },
+  {
+    label: 'Pricing',
+    bwp: '$79/month flat, published',
+    other: '$199/month base + $20 per user (annual ~$159 + $16)*',
+    bwpWins: true,
+  },
+  {
+    label: 'Cost for a 5-person crew',
+    bwp: '$79/month',
+    other: '~$279/month (~$223 billed annually)',
+    bwpWins: true,
+  },
+  {
+    label: 'Free trial',
+    bwp: '14 days, every feature, no credit card',
+    other: 'None — you pay first, then onboarding begins',
+    bwpWins: true,
+  },
+  {
+    label: 'Users',
+    bwp: 'Unlimited, included',
+    other: 'Per-user pricing beyond the first seat',
+    bwpWins: true,
+  },
+  {
+    label: 'AIA-style pay applications (SOV, retainage)',
+    bwp: 'Core, first-class workflow',
+    other: 'Not the focus — financials center on builder budgets',
+    bwpWins: true,
+  },
+  {
+    label: 'How you buy',
+    bwp: 'Self-serve signup, running the same day',
+    other: 'Sign up, then an assigned success manager onboards you',
+    bwpWins: true,
+  },
+  {
+    label: 'Work by chatting with Claude or ChatGPT',
+    bwp: 'Included — the assistant builds bids & projects in your account',
+    other: 'Not offered',
+    bwpWins: true,
+  },
   { label: 'E-signatures', bwp: 'Built in, included', other: 'Included', bwpWins: false },
-  { label: 'QuickBooks Online sync', bwp: 'Included — connect from Settings', other: 'Included', bwpWins: false },
-  { label: 'Community, training & events', bwp: 'Docs and guides', other: 'Genuinely strong — bootcamps, certifications, an annual conference', bwpWins: false },
+  {
+    label: 'QuickBooks Online sync',
+    bwp: 'Included — connect from Settings',
+    other: 'Included',
+    bwpWins: false,
+  },
+  {
+    label: 'Community, training & events',
+    bwp: 'Docs and guides',
+    other: 'Genuinely strong — bootcamps, certifications, an annual conference',
+    bwpWins: false,
+  },
 ];
 
 const faqs = [
@@ -71,7 +121,9 @@ const faqs = [
           contract. If you're the sub billing against it — SOV, retainage, monthly pay apps — you
           shouldn't need a $199 base plan, per-user fees, or sales-led onboarding. BuildWorkPro runs
           the sub's loop for
-          <a href="/pricing/" class="underline underline-offset-2 hover:text-brand-600">$79/month flat</a>.
+          <a href="/pricing/" class="underline underline-offset-2 hover:text-brand-600"
+            >$79/month flat</a
+          >.
         </p>
         <div class="mt-8"><CompareCta /></div>
       </div>
@@ -83,8 +135,8 @@ const faqs = [
         <p class="text-slate-600 leading-relaxed text-sm">
           <strong>Choose JobTread</strong> if you're a builder/GC who wants budget-centric financials,
           guided onboarding, and the category's best community — and per-user pricing fits.
-          <strong>Choose BuildWorkPro</strong> if you're a specialty sub who bids to GCs, bills with
-          retainage, and wants every feature, unlimited users, and a self-serve trial at $79 flat.
+          <strong>Choose BuildWorkPro</strong> if you're a specialty sub who bids to GCs, bills with retainage,
+          and wants every feature, unlimited users, and a self-serve trial at $79 flat.
         </p>
       </div>
     </section>
@@ -107,7 +159,9 @@ const faqs = [
         <h2>Who each product is actually for</h2>
         <p>
           Most “best JobTread alternative” lists compare other builder platforms — right if you hold
-          the prime contract, wrong if you are a trade sub billing a GC. <strong>JobTread fits</strong>
+          the prime contract, wrong if you are a trade sub billing a GC. <strong
+            >JobTread fits</strong
+          >
           builders and GCs with budget-centric financials and a strong education ecosystem.
           <strong>BuildWorkPro fits</strong> specialty subs: estimate → win → monthly
           <a href="/features/pay-applications/">pay application</a> with retainage → closeout.
@@ -117,9 +171,8 @@ const faqs = [
           AIA-style <a href="/features/pay-applications/">pay applications</a>,
           <a href="/features/construction-bidding/">construction bidding</a> for GCs,
           <a href="/features/change-orders/">change orders</a> into the next pay app, and
-          <a href="/features/construction-crm/">construction CRM</a> for GC/vendor contacts are
-          first-class in BuildWorkPro. JobTread centers on builder budgets; its community remains
-          the category’s strongest.
+          <a href="/features/construction-crm/">construction CRM</a> for GC/vendor contacts are first-class
+          in BuildWorkPro. JobTread centers on builder budgets; its community remains the category’s strongest.
         </p>
         <h2>Where JobTread genuinely wins</h2>
         <p>
@@ -130,8 +183,8 @@ const faqs = [
         </p>
         <h2>Pricing posture</h2>
         <p>
-          JobTread as of August 2026: $199/month base + $20/user (2–10); ~$279/month for five people.
-          Verify with JobTread — figures are as-of. BuildWorkPro:
+          JobTread as of August 2026: $199/month base + $20/user (2–10); ~$279/month for five
+          people. Verify with JobTread — figures are as-of. BuildWorkPro:
           <a href="/pricing/">$79/month</a> (or $790/year), unlimited users, 14-day trial, no card.
         </p>
       </div>
@@ -166,26 +219,45 @@ const faqs = [
       </h2>
       <ul class="space-y-3 text-slate-600">
         <li>
-          <a href="/compare/buildertrend-alternative/" class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Buildertrend</a>
+          <a
+            href="/compare/buildertrend-alternative/"
+            class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Buildertrend</a
+          >
           — homeowner/builder stack vs the sub’s billing loop.
         </li>
         <li>
-          <a href="/compare/knowify-alternative/" class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Knowify</a>
+          <a href="/compare/knowify-alternative/" class="text-brand-600 hover:underline font-medium"
+            >BuildWorkPro vs Knowify</a
+          >
           — trade-focused with per-user and tier gating.
         </li>
         <li>
-          <a href="/compare/contractor-foreman-alternative/" class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Contractor Foreman</a>
+          <a
+            href="/compare/contractor-foreman-alternative/"
+            class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Contractor Foreman</a
+          >
           — five tiers vs one flat sub plan.
         </li>
         <li>
-          <a href="/compare/procore-alternative/" class="text-brand-600 hover:underline font-medium">BuildWorkPro vs Procore</a>
+          <a href="/compare/procore-alternative/" class="text-brand-600 hover:underline font-medium"
+            >BuildWorkPro vs Procore</a
+          >
           — GC/owner platform vs the sub’s system of record.
         </li>
         <li>
-          <a href="/features/pay-applications/" class="text-brand-600 hover:underline font-medium">Pay applications</a>,
-          <a href="/features/construction-bidding/" class="text-brand-600 hover:underline font-medium">bidding</a>,
-          <a href="/features/change-orders/" class="text-brand-600 hover:underline font-medium">change orders</a>,
-          <a href="/features/construction-crm/" class="text-brand-600 hover:underline font-medium">CRM</a>
+          <a href="/features/pay-applications/" class="text-brand-600 hover:underline font-medium"
+            >Pay applications</a
+          >,
+          <a
+            href="/features/construction-bidding/"
+            class="text-brand-600 hover:underline font-medium">bidding</a
+          >,
+          <a href="/features/change-orders/" class="text-brand-600 hover:underline font-medium"
+            >change orders</a
+          >,
+          <a href="/features/construction-crm/" class="text-brand-600 hover:underline font-medium"
+            >CRM</a
+          >
           — workflows this comparison turns on.
         </li>
       </ul>
@@ -200,15 +272,33 @@ const faqs = [
           $79/month flat — every feature, unlimited users, trial without a conversation first.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href={config.signupUrl} class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm">Start free trial</a>
-          <a href="/contact/" class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20">Talk to us</a>
+          <a
+            href={config.signupUrl}
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm"
+            >Start free trial</a
+          >
+          <a
+            href="/contact/"
+            class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20"
+            >Talk to us</a
+          >
         </div>
         <p class="mt-6 text-sm text-slate-500">
-          Also see
-          <a href="/compare/knowify-alternative/" class="text-slate-300 underline hover:text-white">vs Knowify</a>,
-          <a href="/compare/buildertrend-alternative/" class="text-slate-300 underline hover:text-white">vs Buildertrend</a>,
-          <a href="/compare/contractor-foreman-alternative/" class="text-slate-300 underline hover:text-white">vs Contractor Foreman</a>,
-          <a href="/compare/procore-alternative/" class="text-slate-300 underline hover:text-white">vs Procore</a>.
+          Also evaluating trade-focused platforms? See
+          <a href="/compare/knowify-alternative/" class="text-slate-300 underline hover:text-white"
+            >BuildWorkPro vs Knowify</a
+          >. Shopping a Buildertrend alternative instead?
+          <a
+            href="/compare/buildertrend-alternative/"
+            class="text-slate-300 underline hover:text-white">BuildWorkPro vs Buildertrend</a
+          >. Also worth comparing:
+          <a
+            href="/compare/contractor-foreman-alternative/"
+            class="text-slate-300 underline hover:text-white">BuildWorkPro vs Contractor Foreman</a
+          > and
+          <a href="/compare/procore-alternative/" class="text-slate-300 underline hover:text-white"
+            >BuildWorkPro vs Procore</a
+          >.
         </p>
       </div>
     </section>
