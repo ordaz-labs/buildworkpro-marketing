@@ -86,7 +86,7 @@ buildworkpro.com/templates · <document> · Page n of N`.
 - Dropdowns (`X.dropdown`) and status colours (`X.statusColors`) on any
   status/type column. Freeze panes below the header row on logs.
 - Verify formulas by opening the file in LibreOffice (`soffice --headless
-  --convert-to pdf`) or Excel; never ship an unverified formula.
+--convert-to pdf`) or Excel; never ship an unverified formula.
 
 ### Word (`kit/docx.mjs`)
 

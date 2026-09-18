@@ -15,6 +15,7 @@ Existing slugs keep their historical `basename` (indexed download URLs).
 ## Billing & payment
 
 ### aia-g702-g703 — basename `pay-application-template-g702-g703-style`
+
 Cluster: g703 3,600 · aia g702 1,600 · aia pay application 880 · g702 form 390 ·
 aia g702 g703 forms 320 · pay application template 70 · aia g703 excel 40. GSC
 queries hitting the page: "aia g702 g703 excel download free", "free aia g702
@@ -22,19 +23,21 @@ g703 fillable form pdf", "g702 application for payment".
 Title: `Free G702 & G703 Style Pay Application Template — Excel + Fillable PDF`.
 Formats: **xlsx** (primary; 3 sheets: Pay Application, Continuation Sheet, How to
 Use), **pdf** (2 sections: portrait application page built with `H.compactHeader`
-+ `H.formCells` + a two-column G702-style lines block + certification/notary +
-certificate; landscape continuation sheet with the A–I column table), example.
-Rules: never print AIA/G702/G703 inside the documents; footer center text
-"Formatted to standard progress-billing conventions. Not an AIA document."
-Sample: pay app #3, `STORY.sov` lines with previous/this-period/stored values
-that foot; retainage 10%; CO-001/002 as CO lines.
-Preserve the existing page's FAQs (trademark answer) and add: how to calculate
-retainage, what goes in column F, how many applications, what "certificate"
-means, can I use Excel instead of the AIA form. Related: schedule-of-values,
-change-order, lien-waiver, construction-invoice. Feature: /features/pay-applications/
-(AIA billing software). Blog interlink: /blog/aia-pay-application-guide/.
+
+- `H.formCells` + a two-column G702-style lines block + certification/notary +
+  certificate; landscape continuation sheet with the A–I column table), example.
+  Rules: never print AIA/G702/G703 inside the documents; footer center text
+  "Formatted to standard progress-billing conventions. Not an AIA document."
+  Sample: pay app #3, `STORY.sov` lines with previous/this-period/stored values
+  that foot; retainage 10%; CO-001/002 as CO lines.
+  Preserve the existing page's FAQs (trademark answer) and add: how to calculate
+  retainage, what goes in column F, how many applications, what "certificate"
+  means, can I use Excel instead of the AIA form. Related: schedule-of-values,
+  change-order, lien-waiver, construction-invoice. Feature: /features/pay-applications/
+  (AIA billing software). Blog interlink: /blog/aia-pay-application-guide/.
 
 ### schedule-of-values — basename `schedule-of-values-template`
+
 Cluster: schedule of values template 390 · sov template 70 · sov template excel 90
 (+ head "schedule of values" 1,900 stays on the blog guide, link to it).
 Title: `Free Schedule of Values Template (Excel + PDF)`.
@@ -47,6 +50,7 @@ Related: aia-g702-g703, construction-estimate, change-order, construction-budget
 Feature: /features/pay-applications/. Blog: /blog/schedule-of-values-guide/.
 
 ### construction-invoice — basename `construction-invoice-template`
+
 Cluster: contractor invoice template 1,900 · construction invoice template 1,000
 · construction invoice template word 1,000 · free construction invoice template
 170 · subcontractor invoice template 110 · progress invoice template 30.
@@ -61,6 +65,7 @@ late fees. Related: aia-g702-g703, construction-quote, lien-waiver, tm-ticket.
 Feature: /features/pay-applications/ (invoicing lives there). Blog: /blog/retainage-construction-guide/.
 
 ### lien-waiver — basename `lien-waiver-forms` (NEW)
+
 Cluster: lien waiver form 2,900 · lien waiver template 320 · conditional lien
 waiver template 170 · construction lien waiver template 140 · final lien waiver
 template 110 · unconditional lien waiver template 110 · partial lien waiver
@@ -82,6 +87,7 @@ a callout in that post linking to the template).
 ## Estimates, bids & proposals
 
 ### construction-estimate — basename `construction-estimate-template`
+
 Cluster: estimate template 2,400 · free estimate template 1,900 · construction
 estimate template 1,000 · contractor estimate template 1,000 · job estimate
 template 880 · construction estimate template excel 390 · free construction
@@ -98,6 +104,7 @@ construction-budget. Feature: /features/construction-bidding/. Blog:
 /blog/construction-markup-vs-margin/ (keep the existing link from the post).
 
 ### construction-bid-proposal — basename `construction-bid-proposal-template`
+
 Cluster: construction proposal template 1,300 · construction proposal template
 word 1,300 · bid proposal template 880 · construction bid template 590 ·
 contractor proposal template 320 · construction bid proposal template 210 ·
@@ -110,6 +117,7 @@ construction-estimate, construction-quote, scope-of-work, subcontractor-agreemen
 Feature: /features/construction-bidding/. Blog: /blog/how-to-create-construction-bid/.
 
 ### construction-quote — basename `construction-quote-template` (NEW)
+
 Cluster: contractor quote template 1,000 (KD31) · construction quote template
 590 · construction quote template free 70 · quote forms for contractors 30.
 Title: `Free Construction Quote Template — Excel, Word & PDF`. One-page
@@ -121,6 +129,7 @@ construction-estimate, construction-bid-proposal, construction-invoice,
 work-order. Feature: /features/construction-bidding/.
 
 ### bid-tabulation — basename `bid-tabulation-template` (NEW)
+
 Cluster: bid tabulation template 90 · bid tab template 90 · bid comparison
 template 70 ("free bid leveling template" shows in GSC).
 Title: `Free Bid Tabulation Template — Compare & Level Sub and Supplier Bids (Excel)`.
@@ -133,6 +142,7 @@ scope-of-work. Feature: /features/construction-bidding/.
 ## Contracts & scope
 
 ### subcontractor-agreement — basename `subcontractor-agreement-template`
+
 Cluster: subcontractor agreement 1,600 · subcontractor agreement template
 1,600 · subcontractor contract template 1,600 · master subcontractor agreement
 template 20 · GSC: "free standard form of agreement between contractor and
@@ -144,6 +154,7 @@ page 1). Keep the existing FAQs. Related: scope-of-work, construction-contract,
 change-order, lien-waiver. Feature: /features/project-management/.
 
 ### construction-contract — basename `construction-contract-template` (NEW)
+
 Cluster: construction contract template 1,900 · contractor agreement template
 1,300 · basic construction contract template 110 · construction contract
 agreement template 90 · residential construction contract template 70 · home
@@ -158,6 +169,7 @@ example. Related: subcontractor-agreement, scope-of-work, construction-quote,
 change-order. Feature: /features/construction-bidding/.
 
 ### scope-of-work — basename `scope-of-work-template` (NEW)
+
 Cluster: scope of work template 2,400 · construction scope of work template
 390 · scope of work template construction 390 · remodeling scope of work
 template 30 · subcontractor scope of work template 20.
@@ -170,6 +182,7 @@ subcontractor-agreement, construction-contract, change-order. Feature:
 /features/construction-bidding/.
 
 ### notice-to-proceed — basename `notice-to-proceed-template` (NEW)
+
 Cluster: notice to proceed template 110 · notice to proceed construction 170.
 Title: `Free Notice to Proceed Template (Word + Fillable PDF)`. One page letter-
 form: to/from, project, contract ref, NTP date, contract time starts on, days /
@@ -179,6 +192,7 @@ Related: construction-contract, subcontractor-agreement, construction-schedule,
 certificate-of-completion. Feature: /features/project-management/.
 
 ### certificate-of-completion — basename `certificate-of-completion-template` (NEW)
+
 Cluster: substantial completion certificate 390 · certificate of completion
 construction 320 · certificate of completion for contractor 170 · construction
 certificate of completion template 110 · certificate of substantial completion
@@ -195,6 +209,7 @@ aia-g702-g703, notice-to-proceed. Feature: /features/project-management/. Blog:
 ## Field & daily paperwork
 
 ### daily-report — basename `daily-report-template` (NEW page; file existed on the blog)
+
 Cluster: construction daily report template 720 · daily construction report
 template 720 · daily report template 720 · daily log template 390 · construction
 daily log template 210 · daily log template construction 210 · construction
@@ -213,6 +228,7 @@ changes its download callout to link to /templates/daily-report/ (keep the
 direct file links too) and /blog/construction-site-log-best-practices/.
 
 ### work-order — basename `work-order-template` (NEW)
+
 Cluster: work order template 2,900 · work order form 1,000 · construction work
 order template 110 · construction work order form 110 (GSC on change-order page:
 "construction work order template", "construction work order format in word").
@@ -225,6 +241,7 @@ vs change order vs T&M ticket vs purchase order. Related: change-order,
 tm-ticket, construction-quote, construction-invoice. Feature: /features/project-management/.
 
 ### tm-ticket — basename `tm-ticket-template`
+
 Cluster: time and materials template 90 · t&m ticket template 70 · time and
 material ticket template 30 (GSC: ranks #7–11 already — keep the H1 "T&M Ticket
 Template" and the copy that ranks). Title: `Free T&M Ticket Template — Time and
@@ -235,6 +252,7 @@ restyled), example. Related: change-order, daily-report, work-order, timesheet.
 Feature: /features/time-tracking/.
 
 ### rfi — basename `rfi-template`
+
 Cluster: rfi template 880 · construction rfi template 480 · rfi template word
 320 · rfi log template 110 · construction request for information form 70.
 Title: `Free RFI Template — Construction Request for Information (Word, PDF + RFI Log)`.
@@ -246,6 +264,7 @@ existing FAQs. Related: change-order, submittal-log, tm-ticket, meeting-minutes.
 Feature: /features/project-management/.
 
 ### timesheet — basename `construction-timesheet-template` (NEW)
+
 Cluster: time card template 1,000 · weekly timesheet template 480 · construction
 timesheet template 90 · timesheet template for construction 90.
 Title: `Free Construction Timesheet Template — Weekly Time Card (Excel + PDF)`.
@@ -259,6 +278,7 @@ daily-report, tm-ticket, work-order, construction-budget. Feature: /features/tim
 ## Project controls & logs
 
 ### construction-schedule — basename `construction-schedule-template`
+
 Cluster: construction schedule template 880 · construction project schedule
 template 880 · construction schedule template excel 320 · construction timeline
 template 170 · construction project timeline template 170 · gantt chart template
@@ -272,6 +292,7 @@ notice-to-proceed, daily-report, punch-list, construction-budget. Feature:
 /features/project-management/.
 
 ### punch-list — basename `punch-list-template`
+
 Cluster: punch list template 880 · punch list template word 880 · construction
 punch list template 590 · punch list template excel 210 · punch list form 40.
 Title: `Free Punch List Template — Excel, Word & PDF`. Formats: **xlsx** (40
@@ -282,6 +303,7 @@ certificate-of-completion, daily-report, meeting-minutes, construction-schedule.
 Feature: /features/project-management/. Blog: /blog/punch-list-management-for-subcontractors/.
 
 ### submittal-log — basename `submittal-log-template`
+
 Cluster: submittal log template 170 · construction submittal log template 170 ·
 construction submittal template 210 · submittal cover sheet template 110 ·
 submittal template 70 · construction submittals examples 320 (GSC shows the page
@@ -294,6 +316,7 @@ dropdowns, days-in-review formula; a Transmittal / Cover Sheet sheet), **pdf**
 construction-schedule, meeting-minutes, scope-of-work. Feature: /features/project-management/.
 
 ### construction-budget — basename `construction-budget-template` (NEW)
+
 Cluster: construction budget template 480 · construction budget template excel
 210 · home construction budget template 170 · job cost template 70 · job
 costing template excel 70 · construction cost breakdown template 140.
@@ -305,6 +328,7 @@ spent; summary block; Cost Codes sheet with a CSI-style starter list), **pdf**
 change-order, timesheet. Feature: /features/reports/. Blog: /blog/job-costing-for-subcontractors/.
 
 ### meeting-minutes — basename `construction-meeting-minutes-template` (NEW)
+
 Cluster: construction meeting minutes template 140 · pre construction meeting
 template 30. Title: `Free Construction Meeting Minutes Template (Word + Fillable PDF)`.
 Formats: **pdf** (2 pages: meeting info, attendees table, agenda/discussion
@@ -315,6 +339,7 @@ punch-list, construction-schedule. Feature: /features/project-management/.
 ## Safety
 
 ### job-safety-analysis — basename `job-safety-analysis-template` (NEW)
+
 Cluster: job safety analysis template 880 · jsa template 880 · job hazard
 analysis template 480. Title: `Free Job Safety Analysis (JSA) Template — Fillable PDF, Word & Excel`.
 H1 "Job Safety Analysis (JSA) Template". One page landscape: job/task, location,
@@ -326,6 +351,7 @@ toolbox talk; OSHA context (not legal advice). Related: toolbox-talk,
 daily-report, work-order, timesheet. Feature: /features/site-logs/.
 
 ### toolbox-talk — basename `toolbox-talk-template` (NEW)
+
 Cluster: toolbox talk template 170 · safety meeting template 110 · toolbox talk
 form 70 · tailgate meeting template 20. Title: `Free Toolbox Talk Template —
 Safety Meeting Sign-In Sheet (PDF + Word)`. One page: topic, date, presenter,

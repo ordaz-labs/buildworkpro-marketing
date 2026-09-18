@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "notice-to-proceed-template.pdf",
-      "bytes": 61009,
+      "bytes": 60932,
       "pages": 1
     },
     "example": {
       "file": "notice-to-proceed-template-example.pdf",
-      "bytes": 35130,
+      "bytes": 35131,
       "pages": 1
     },
     "docx": {

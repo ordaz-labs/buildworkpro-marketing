@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "change-order-template.pdf",
-      "bytes": 88855,
+      "bytes": 88772,
       "pages": 1
     },
     "example": {
       "file": "change-order-template-example.pdf",
-      "bytes": 58455,
+      "bytes": 58454,
       "pages": 1
     },
     "xlsx": {

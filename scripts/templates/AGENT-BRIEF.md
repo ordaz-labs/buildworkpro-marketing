@@ -45,7 +45,7 @@ parallel, so only touch the files assigned to you.
      `xlsx-1.png`…). Check: nothing truncated, labels aligned, one page for
      forms, band heads and rules render, footer present.
    - For Excel formulas: `node scripts/templates/verify.mjs <slug> --fill
-     "Sheet!C5=100" "Sheet!D5=4" …` then read the printed text and confirm
+"Sheet!C5=100" "Sheet!D5=4" …` then read the printed text and confirm
      totals compute. Never ship an unverified formula.
    - Fillable fields: `python3 -c "from pypdf import PdfReader; r=PdfReader('public/templates-files/<basename>.pdf'); print(len(r.get_fields() or {}))"`
      should be > 0 for every form.

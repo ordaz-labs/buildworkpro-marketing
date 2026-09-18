@@ -5,12 +5,12 @@
   "files": {
     "pdf": {
       "file": "construction-schedule-template.pdf",
-      "bytes": 202807,
+      "bytes": 202674,
       "pages": 1
     },
     "example": {
       "file": "construction-schedule-template-example.pdf",
-      "bytes": 58100,
+      "bytes": 58099,
       "pages": 1
     },
     "xlsx": {

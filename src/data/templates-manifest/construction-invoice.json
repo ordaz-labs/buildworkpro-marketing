@@ -5,7 +5,7 @@
   "files": {
     "pdf": {
       "file": "construction-invoice-template.pdf",
-      "bytes": 95174,
+      "bytes": 95095,
       "pages": 1
     },
     "example": {
@@ -23,7 +23,7 @@
     },
     "docx": {
       "file": "construction-invoice-template.docx",
-      "bytes": 12315
+      "bytes": 12316
     }
   },
   "previews": [

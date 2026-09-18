@@ -247,9 +247,14 @@ export function header({ company, title, number, date, meta, fillable = false })
     <span class="line">${esc(company.line1)}</span>
     <span class="line">${esc(company.line2)}</span>
   </div>`;
-  const num = number
-    ? `<b${fillable && /_{2,}/.test(number) ? ' data-field="doc.number" style="min-width:70px;text-align:right"' : ''}>${esc(number)}</b>`
-    : '';
+  // Blank mode: a number like "CO-____" becomes a printed prefix plus a fillable
+  // blank, so typed text never overprints the underscores.
+  const m = number && fillable ? number.match(/^(.*?)(_{2,})$/) : null;
+  const num = m
+    ? `<b>${esc(m[1])}</b><span data-field="doc.number" style="display:inline-block;min-width:64px;border-bottom:1px solid var(--ink);height:12px"></span>`
+    : number
+      ? `<b>${esc(number)}</b>`
+      : '';
   return `<div class="hdr">
   ${left}
   <div class="hdr-doc">
