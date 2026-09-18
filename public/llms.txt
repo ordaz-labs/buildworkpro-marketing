@@ -52,17 +52,33 @@ Unlike platforms built for general contractors (Procore) or residential home bui
 
 ## Free templates
 
-- [Templates hub](https://buildworkpro.com/templates/): Free downloadable construction templates, no email required
-- [Pay application template (G702/G703 style)](https://buildworkpro.com/templates/aia-g702-g703/): Excel workbook with schedule of values, retainage math, and carry-forward
-- [Subcontractor agreement template](https://buildworkpro.com/templates/subcontractor-agreement/): 14-section standard-form subcontract as an editable Word doc
-- [Schedule of values template](https://buildworkpro.com/templates/schedule-of-values/): 30-row Excel SOV with % of contract math and a tie-out check
-- [Construction estimate template](https://buildworkpro.com/templates/construction-estimate/): 25-line estimate with material/labor split and true-margin pricing
-- [Construction bid proposal template](https://buildworkpro.com/templates/construction-bid-proposal/): scope, price with alternates, inclusions/exclusions, terms, acceptance block
-- [Change order template](https://buildworkpro.com/templates/change-order/): contract-sum adjustment table, time extension, dual signatures
-- [Punch list template](https://buildworkpro.com/templates/punch-list/): 40-row tracker with live status counts and verification column
-- [Construction invoice template](https://buildworkpro.com/templates/construction-invoice/): line items with computed amounts, tax, and payment terms
-- [Construction schedule template](https://buildworkpro.com/templates/construction-schedule/): 35 tasks by phase with computed durations and predecessor notes
-- [Daily report template](https://buildworkpro.com/blog/construction-daily-report-template/): printable daily construction report with the guide that explains each section
+- [Templates hub](https://buildworkpro.com/templates/): 26 free construction templates for subcontractors as fillable PDF, Excel and Word, each with a completed example — no email required
+- [Pay application template (G702/G703 style)](https://buildworkpro.com/templates/aia-g702-g703/): application and certificate for payment + continuation sheet with retainage math and carry-forward (Excel, fillable PDF)
+- [Schedule of values template](https://buildworkpro.com/templates/schedule-of-values/): SOV with % of contract math, tie-out check and a billing tracker (Excel, PDF)
+- [Contractor invoice template](https://buildworkpro.com/templates/construction-invoice/): line items, tax, retainage and balance due (Excel, Word, fillable PDF)
+- [Lien waiver forms](https://buildworkpro.com/templates/lien-waiver/): conditional and unconditional waivers for progress and final payment (Word, fillable PDF)
+- [Construction estimate template](https://buildworkpro.com/templates/construction-estimate/): material/labor/equipment/sub sections with overhead and true-margin pricing (Excel, PDF)
+- [Construction bid proposal template](https://buildworkpro.com/templates/construction-bid-proposal/): scope, price with alternates, inclusions/exclusions, terms, acceptance block (Word, PDF)
+- [Construction quote template](https://buildworkpro.com/templates/construction-quote/): one-page fixed-price quote with options and acceptance (Excel, Word, PDF)
+- [Bid tabulation template](https://buildworkpro.com/templates/bid-tabulation/): level sub and supplier bids side by side (Excel, PDF)
+- [Subcontractor agreement template](https://buildworkpro.com/templates/subcontractor-agreement/): 15-section standard-form subcontract (Word, PDF)
+- [Construction contract template](https://buildworkpro.com/templates/construction-contract/): owner–contractor agreement for direct work (Word, PDF)
+- [Scope of work template](https://buildworkpro.com/templates/scope-of-work/): included work, exclusions, assumptions, by others, acceptance (Word, PDF)
+- [Change order template](https://buildworkpro.com/templates/change-order/): line-item pricing, contract-sum ladder, time extension, dual signatures, plus a change order log (fillable PDF, Word, Excel)
+- [Notice to proceed template](https://buildworkpro.com/templates/notice-to-proceed/): start authorization with the contract time clock (Word, fillable PDF)
+- [Certificate of substantial completion template](https://buildworkpro.com/templates/certificate-of-completion/): completion date, punch list, warranty start, retainage release (Word, fillable PDF)
+- [Construction daily report template](https://buildworkpro.com/templates/daily-report/): crew, weather, work performed, deliveries, delays, safety, photos (fillable PDF, Word, Excel)
+- [Work order template](https://buildworkpro.com/templates/work-order/): requested work, labor and materials, completion sign-off, with a work order log (fillable PDF, Word, Excel)
+- [T&M ticket template](https://buildworkpro.com/templates/tm-ticket/): time and materials ticket with ST/OT labor, materials, equipment, same-day signature (fillable PDF, Excel)
+- [RFI template](https://buildworkpro.com/templates/rfi/): one-question request for information with impact flags, response block and an RFI log (fillable PDF, Word, Excel)
+- [Construction timesheet template](https://buildworkpro.com/templates/timesheet/): weekly time card by job and cost code with regular/overtime totals (Excel, PDF)
+- [Construction schedule template](https://buildworkpro.com/templates/construction-schedule/): tasks by phase with durations, predecessors and a formula-driven Gantt (Excel, PDF)
+- [Punch list template](https://buildworkpro.com/templates/punch-list/): item, location, trade, priority, status, verification with live counts (Excel, Word, PDF)
+- [Submittal log template](https://buildworkpro.com/templates/submittal-log/): submittal register with status, dates and lead times, plus a transmittal cover sheet (Excel, PDF)
+- [Construction budget template](https://buildworkpro.com/templates/construction-budget/): budget vs. committed vs. actual by cost code with variance and cost-to-complete (Excel, PDF)
+- [Construction meeting minutes template](https://buildworkpro.com/templates/meeting-minutes/): attendees, agenda, decisions and action items (Word, fillable PDF)
+- [Job safety analysis (JSA) template](https://buildworkpro.com/templates/job-safety-analysis/): task steps, hazards, controls, PPE and crew sign-off (fillable PDF, Word, Excel)
+- [Toolbox talk template](https://buildworkpro.com/templates/toolbox-talk/): safety meeting record with a crew sign-in sheet (fillable PDF, Word)
 
 ## Integrations
 

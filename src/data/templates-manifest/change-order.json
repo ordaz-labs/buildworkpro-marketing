@@ -24,8 +24,16 @@
     },
     "docx": {
       "file": "change-order-template.docx",
-      "bytes": 12964
+      "bytes": 12963
     }
   },
-  "previews": []
+  "previews": [
+    {
+      "file": "change-order.png",
+      "webp": "change-order.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
 }

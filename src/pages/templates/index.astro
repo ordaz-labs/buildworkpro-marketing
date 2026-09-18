@@ -1,150 +1,183 @@
 ---
-// The /templates/ hub (issue #134, follow-ups in #145). Live templates get
-// cards with downloads. Build order and keyword data: gameplan artifact +
-// .growth-review/sweep-2026-08-10/.
+// The /templates/ hub. Cards come from src/data/templates.ts (registry) and
+// previews/file counts from the per-slug manifests written by
+// scripts/templates/build.mjs. Keyword data and build order: scripts/templates/PLAN.md.
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import FAQSection from '../../components/FAQSection.astro';
 import { config } from '../../config';
+import { byCategory, TEMPLATE_LIST } from '../../data/templates';
+import { manifest } from '../../data/templates-manifest';
 
-const live = [
+const groups = byCategory();
+const fileCount = Object.values(manifest).reduce(
+  (n, m) => n + Object.keys(m.files).filter((k) => k !== 'example').length,
+  0
+);
+const templateCount = TEMPLATE_LIST.length;
+
+const faqs = [
   {
-    title: 'Construction RFI Template',
-    description:
-      'One-question Request for Information: suggested interpretation, cost/schedule impact flags, and a response block that is not a change order.',
-    href: '/templates/rfi/',
-    format: 'Word (.docx)',
+    question: 'Are these construction templates really free?',
+    answer:
+      'Yes. Every template on this page is a direct download — no email, no account, no watermark. Use them on as many jobs as you like and share them with your crew or your GC. The only thing we ask is that you do not resell them as your own product.',
   },
   {
-    title: 'Construction Submittal Log Template',
-    description:
-      '40-row register of shop drawings, product data, and samples with live status counts, type dropdowns, and lead-time columns.',
-    href: '/templates/submittal-log/',
-    format: 'Excel (.xlsx)',
+    question: 'Which file formats do the templates come in?',
+    answer:
+      'Every template ships as a fillable PDF you can type into in Acrobat, Preview or Chrome (or print and fill by hand). Forms that involve math — pay applications, estimates, invoices, schedules, logs — also come as Excel workbooks with the formulas built in. Contracts, agreements and letter-style forms also come as editable Word documents. Each page shows exactly which formats it offers, plus a completed example PDF.',
   },
   {
-    title: 'Construction T&M Ticket Template',
-    description:
-      'Labor, overtime, materials, and equipment with computed totals and dual signatures — the backup behind the change order.',
-    href: '/templates/tm-ticket/',
-    format: 'Excel (.xlsx)',
+    question: 'Do the Excel and Word files work in Google Sheets and Google Docs?',
+    answer:
+      'Yes. Upload the .xlsx to Google Drive and open it in Sheets, or the .docx and open it in Docs — formatting, formulas and dropdowns carry over. They also open in Apple Numbers and Pages and in LibreOffice.',
   },
   {
-    title: 'Construction Change Order Template',
-    description:
-      'One-page change order: description, contract-sum adjustment table, time extension, and dual signatures before the work starts.',
-    href: '/templates/change-order/',
-    format: 'Word (.docx)',
+    question: 'Are the pay application forms official AIA documents?',
+    answer:
+      'No. AIA, G702 and G703 are trademarks of The American Institute of Architects, and the official forms are licensed through AIA Contract Documents. Our pay application template follows the same information architecture — application summary, continuation sheet, retainage — in our own format, which is what many general contractors accept. Confirm with your GC whether they require the licensed AIA form.',
   },
   {
-    title: 'Construction Invoice Template',
-    description:
-      'Line items with computed amounts, adjustable sales tax, total due, and payment terms — for work billed directly, not through a GC.',
-    href: '/templates/construction-invoice/',
-    format: 'Excel (.xlsx)',
+    question: 'Are the contract and lien waiver templates legal advice?',
+    answer:
+      'No. They are general-purpose starting points written for U.S. subcontractors. Contract terms, lien law and prompt-payment rules vary by state, and several states require statutory lien waiver forms. Have a construction attorney review any agreement before you rely on it.',
   },
   {
-    title: 'Construction Punch List Template',
-    description:
-      '40-row tracker with live open/complete counts, priority, responsible trade, and a verified-by column.',
-    href: '/templates/punch-list/',
-    format: 'Excel (.xlsx)',
-  },
-  {
-    title: 'Construction Schedule Template',
-    description:
-      '35 tasks by phase with computed durations, % complete, and predecessor notes — the schedule that survives the job.',
-    href: '/templates/construction-schedule/',
-    format: 'Excel (.xlsx)',
-  },
-  {
-    title: 'Daily Report Template',
-    description:
-      'Print-ready daily construction report: crew, weather, work performed, deliveries, delays, and safety — with the guide that explains each section.',
-    href: '/blog/construction-daily-report-template/',
-    format: 'Word (.docx)',
-  },
-  {
-    title: 'Construction Bid Proposal Template',
-    description:
-      'Scope, price with alternates, inclusions/exclusions, terms, and an acceptance signature block — the wrapper around your number.',
-    href: '/templates/construction-bid-proposal/',
-    format: 'Word (.docx)',
-  },
-  {
-    title: 'Construction Estimate Template',
-    description:
-      '25-line estimate with material/labor split, overhead, and true-margin pricing — the markup-vs-margin math done right.',
-    href: '/templates/construction-estimate/',
-    format: 'Excel (.xlsx)',
-  },
-  {
-    title: 'Schedule of Values Template',
-    description:
-      '30-row Excel SOV with % of contract math, a tie-out check against the contract sum, and sample trade line items.',
-    href: '/templates/schedule-of-values/',
-    format: 'Excel (.xlsx)',
-  },
-  {
-    title: 'Subcontractor Agreement Template',
-    description:
-      '14-section standard-form subcontract — scope, retainage, written change orders, lien waivers — as an editable Word document.',
-    href: '/templates/subcontractor-agreement/',
-    format: 'Word (.docx)',
-  },
-  {
-    title: 'Pay Application Template (G702 & G703 style)',
-    description:
-      'Excel workbook with a G702-style summary, G703-style continuation sheet, retainage math, and carry-forward between billing periods.',
-    href: '/templates/aia-g702-g703/',
-    format: 'Excel (.xlsx)',
+    question: 'How were these templates made?',
+    answer:
+      'They are generated from the same document design BuildWorkPro uses for the bids, change orders, invoices, pay applications and daily reports it produces for subcontractors, and they are checked on real jobs run by our founder’s own glazing company. Every template is rebuilt from source, so when we improve one, every format updates together.',
   },
 ];
 ---
 
 <Layout
-  title="Free Construction Templates for Subcontractors | BuildWorkPro"
-  description="Free downloadable construction templates: G702/G703-style pay application, schedule of values, change orders, and more. No email required."
+  title="Free Construction Templates — Fillable PDF, Excel & Word | BuildWorkPro"
+  description={`${templateCount} free construction templates for subcontractors: G702/G703-style pay application, schedule of values, change order, daily report, lien waivers, estimates and more. Fillable PDF, Excel and Word. No email required.`}
 >
   <Header />
   <main class="pt-32 pb-20">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
       <div class="text-center">
         <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Templates</p>
         <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
           Free construction templates for subcontractors
         </h1>
         <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          The paperwork GCs expect — pay applications, schedules of values, change orders — as
-          working spreadsheets and documents. Free, no email required.
+          The paperwork GCs, owners and inspectors expect — pay applications, schedules of values,
+          change orders, daily reports, lien waivers, contracts — as fillable PDFs, Excel workbooks
+          with the formulas built in, and editable Word documents. Free, no email required.
         </p>
+        <dl class="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-slate-500">
+          <div class="flex items-baseline gap-1.5">
+            <dt class="sr-only">Templates</dt>
+            <dd><span class="text-xl font-bold text-slate-900">{templateCount}</span> templates</dd>
+          </div>
+          <div class="flex items-baseline gap-1.5">
+            <dt class="sr-only">Files</dt>
+            <dd>
+              <span class="text-xl font-bold text-slate-900">{fileCount}</span> downloadable files
+            </dd>
+          </div>
+          <div class="flex items-baseline gap-1.5">
+            <dt class="sr-only">Formats</dt>
+            <dd>
+              <span class="text-xl font-bold text-slate-900">3</span> formats: PDF · Excel · Word
+            </dd>
+          </div>
+        </dl>
+        <nav class="mt-8 flex flex-wrap justify-center gap-2" aria-label="Template categories">
+          {
+            groups.map((g) => (
+              <a
+                href={`#${g.key}`}
+                class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-sm font-medium text-slate-600 hover:border-brand-300 hover:text-brand-700 transition-colors"
+              >
+                {g.title}
+              </a>
+            ))
+          }
+        </nav>
       </div>
     </section>
 
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-      <div class="grid sm:grid-cols-2 gap-6">
-        {
-          live.map((t) => (
-            <a
-              href={t.href}
-              class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md hover:border-brand-200 transition-all"
-            >
-              <div class="flex items-center justify-between mb-3">
-                <span class="inline-flex text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">
-                  Free download
-                </span>
-                <span class="text-xs text-slate-400">{t.format}</span>
-              </div>
-              <h2 class="text-lg font-bold text-slate-900 group-hover:text-brand-700 transition-colors">
-                {t.title}
-              </h2>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">{t.description}</p>
-              <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600">
-                Get the template <span aria-hidden="true">→</span>
-              </span>
-            </a>
-          ))
-        }
+    {
+      groups.map((g) => (
+        <section id={g.key} class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 scroll-mt-28">
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">{g.title}</h2>
+            <p class="mt-1 text-slate-500">{g.blurb}</p>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {g.items.map((t) => {
+              const m = manifest[t.slug];
+              const pv = m?.previews?.[0];
+              const live = !!m;
+              return (
+                <a
+                  href={`/templates/${t.slug}/`}
+                  class="group flex flex-col rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-md hover:border-brand-200 transition-all"
+                >
+                  <div class="bg-slate-50 border-b border-slate-100 p-3">
+                    {pv ? (
+                      <picture>
+                        <source srcset={`/templates-previews/${pv.webp}`} type="image/webp" />
+                        <img
+                          src={`/templates-previews/${pv.file}`}
+                          alt={`${t.title} — preview`}
+                          width={pv.width}
+                          height={pv.height}
+                          loading="lazy"
+                          decoding="async"
+                          class="w-full h-40 object-cover object-top rounded-lg border border-slate-200 bg-white"
+                        />
+                      </picture>
+                    ) : (
+                      <div class="h-40 rounded-lg border border-dashed border-slate-200 bg-white flex items-center justify-center text-xs text-slate-400">
+                        Preview coming soon
+                      </div>
+                    )}
+                  </div>
+                  <div class="flex flex-col flex-1 p-5">
+                    <div class="flex items-center justify-between gap-3 mb-2">
+                      <span class="inline-flex text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">
+                        {live ? 'Free download' : 'Coming soon'}
+                      </span>
+                      <span class="text-[11px] font-semibold tracking-wide text-slate-400">
+                        {t.formats.join(' · ')}
+                      </span>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900 group-hover:text-brand-700 transition-colors">
+                      {t.title}
+                    </h3>
+                    <p class="mt-1.5 text-sm text-slate-500 leading-relaxed flex-1">{t.short}</p>
+                    <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600">
+                      Get the template <span aria-hidden="true">→</span>
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div class="rounded-2xl border border-slate-200 bg-white px-8 py-10 sm:px-12">
+        <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight text-balance">
+          Built like the documents BuildWorkPro produces
+        </h2>
+        <p class="mt-3 text-slate-500 leading-relaxed">
+          Every template here is generated from the same document design our software uses for the
+          bids, change orders, invoices, pay applications and daily reports it sends on behalf of
+          subcontractors — the same type, the same table grammar, the same signature blocks. Each
+          one comes with a completed example on a realistic job so you can see what a finished
+          document looks like before you fill in your own. They are checked on real work at <a
+            href="/customers/national-glass/"
+            class="font-semibold text-brand-600 hover:underline">our founder's glazing company</a
+          >, and when we improve a template every format is rebuilt together.
+        </p>
       </div>
     </section>
 
@@ -196,14 +229,16 @@ const live = [
       </div>
     </section>
 
+    <FAQSection faqs={faqs} heading="Questions about the templates" />
+
     <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="rounded-2xl bg-slate-900 px-8 py-12 sm:px-14">
         <h2 class="text-2xl font-extrabold text-white tracking-tight text-balance">
           Or stop filling out templates altogether
         </h2>
         <p class="mt-3 text-slate-400 max-w-xl mx-auto">
-          BuildWorkPro generates bids, pay applications, and change orders from your project data —
-          $79/month flat, unlimited users.
+          BuildWorkPro generates bids, pay applications, change orders, invoices and daily reports
+          from your project data — $79/month flat, unlimited users.
         </p>
         <a
           href={config.signupUrl}

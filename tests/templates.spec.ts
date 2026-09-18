@@ -1,25 +1,27 @@
 import { test, expect } from '@playwright/test';
+import { TEMPLATE_LIST } from '../src/data/templates';
 
-// The /templates/ hub and its first page (issue #134). The download must stay
-// ungated — the file being freely fetchable is the whole link-magnet strategy
-// (Q5 decision: open file, optional email only for the future bundle).
+// The /templates/ hub and every template page (issues #134, #145; rebuilt in
+// the templates v2 pass). The downloads must stay ungated — the file being
+// freely fetchable is the whole link-magnet strategy (Q5 decision: open file,
+// optional email only for the bundle).
+
+const MAGIC: Record<string, string> = { pdf: '%PDF', xlsx: 'PK', docx: 'PK' };
 
 test.describe('templates hub', () => {
-  test('the hub lists the pay application template', async ({ page }) => {
+  test('lists every registered template with a link to its page', async ({ page }) => {
     await page.goto('/templates/');
     await expect(page.locator('main h1')).toHaveText(/Free construction templates/i);
-    await expect(
-      page.getByRole('link', { name: /Pay Application Template/i }).first()
-    ).toBeVisible();
-    await expect(
-      page.getByRole('link', { name: /Construction RFI Template/i }).first()
-    ).toBeVisible();
-    await expect(
-      page.getByRole('link', { name: /Construction Submittal Log Template/i }).first()
-    ).toBeVisible();
-    await expect(
-      page.getByRole('link', { name: /Construction T&M Ticket Template/i }).first()
-    ).toBeVisible();
+    for (const t of TEMPLATE_LIST) {
+      await expect(page.locator(`main a[href="/templates/${t.slug}/"]`).first()).toBeVisible();
+    }
+  });
+
+  test('groups templates by category with anchor navigation', async ({ page }) => {
+    await page.goto('/templates/');
+    await expect(page.locator('main section#billing h2')).toHaveText(/Billing & payment/);
+    await expect(page.locator('main section#safety h2')).toHaveText(/Safety/);
+    await expect(page.locator('main nav[aria-label="Template categories"] a')).toHaveCount(6);
   });
 
   test('the complete-pack email form renders without gating the downloads', async ({ page }) => {
@@ -33,9 +35,7 @@ test.describe('templates hub', () => {
     await expect(page.getByText(/not\s+a newsletter/i)).toBeVisible();
     // The individual downloads above the form must remain ungated links, not
     // form-triggered — the open-file strategy is the whole point (Q5).
-    await expect(
-      page.getByRole('link', { name: /Pay Application Template/i }).first()
-    ).toBeVisible();
+    await expect(page.locator('main a[href="/templates/aia-g702-g703/"]').first()).toBeVisible();
   });
 
   test('the complete-pack form requires Turnstile before posting', async ({ page }) => {
@@ -65,149 +65,113 @@ test.describe('templates hub', () => {
     await expect(page.locator('#template-pack-status')).toContainText(/verification/i);
     expect(posts).toHaveLength(0);
   });
+
+  test('carries FAQPage structured data', async ({ page }) => {
+    await page.goto('/templates/');
+    const json = await page.locator('script[type="application/ld+json"]').allTextContents();
+    expect(json.some((j) => j.includes('"FAQPage"'))).toBe(true);
+  });
 });
 
-// Shared page template — loop-verify render + real-file download.
-for (const [slug, h1] of [
-  ['change-order', /Construction Change Order Template/i],
-  ['punch-list', /Construction Punch List Template/i],
-  ['construction-invoice', /Construction Invoice Template/i],
-  ['construction-schedule', /Construction Schedule Template/i],
-  ['rfi', /Construction RFI Template/i],
-  ['submittal-log', /Construction Submittal Log Template/i],
-  ['tm-ticket', /Construction T&M Ticket Template/i],
-] as const) {
-  test(`/templates/${slug}/ renders and its file downloads`, async ({ page, request }) => {
-    await page.goto(`/templates/${slug}/`);
-    await expect(page.locator('main h1')).toHaveText(h1);
-    const href = await page.locator('a.template-download').first().getAttribute('href');
-    const res = await request.get(href!);
-    expect(res.status()).toBe(200);
-    expect((await res.body()).subarray(0, 2).toString()).toBe('PK');
+// Every registered template page: renders, every advertised format downloads
+// as a real file of that type (magic bytes), the completed example exists, the
+// preview image resolves, FAQ schema is present, and it cross-links the hub.
+for (const t of TEMPLATE_LIST) {
+  test.describe(`/templates/${t.slug}/`, () => {
+    test('renders with the H1, downloads and preview', async ({ page, request }) => {
+      await page.goto(`/templates/${t.slug}/`);
+      await expect(page.locator('main h1')).toBeVisible();
+      await expect(page.locator('title')).toHaveText(/Free/i);
+
+      const links = page.locator('main a.template-download');
+      const count = await links.count();
+      expect(count).toBeGreaterThanOrEqual(t.formats.length + 1); // formats + completed example
+
+      const seen = new Set<string>();
+      for (let i = 0; i < count; i++) {
+        const href = (await links.nth(i).getAttribute('href'))!;
+        expect(href.startsWith('/templates-files/')).toBe(true);
+        const ext = href.split('.').pop()!;
+        seen.add(ext);
+        const res = await request.get(href);
+        expect(res.status(), href).toBe(200);
+        const body = await res.body();
+        expect(body.length, href).toBeGreaterThan(3000);
+        expect(body.subarray(0, MAGIC[ext].length).toString(), href).toBe(MAGIC[ext]);
+        expect(href.endsWith('-example.pdf') || href.includes(t.basename), href).toBe(true);
+      }
+      for (const f of t.formats) {
+        const ext = { PDF: 'pdf', Excel: 'xlsx', Word: 'docx' }[f];
+        expect(seen.has(ext), `${t.slug} should offer ${f}`).toBe(true);
+      }
+
+      // Completed-example preview image (page 1 of the sample render).
+      const img = page.locator('main figure img').first();
+      await expect(img).toBeVisible();
+      const src = (await img.getAttribute('src'))!;
+      expect(src.startsWith('/templates-previews/')).toBe(true);
+      const imgRes = await request.get(src);
+      expect(imgRes.status()).toBe(200);
+    });
+
+    test('has FAQ schema, related templates and the hub link', async ({ page }) => {
+      await page.goto(`/templates/${t.slug}/`);
+      const json = await page.locator('script[type="application/ld+json"]').allTextContents();
+      expect(json.some((j) => j.includes('"FAQPage"'))).toBe(true);
+      expect(json.some((j) => j.includes('"DigitalDocument"'))).toBe(true);
+      await expect(page.locator('main a[href="/templates/"]').first()).toBeVisible();
+      const related = page.locator('main a[href^="/templates/"]:not([href="/templates/"])');
+      expect(await related.count()).toBeGreaterThanOrEqual(3);
+    });
   });
 }
 
-test('the daily-report post finally delivers its promised download', async ({ page, request }) => {
-  await page.goto('/blog/construction-daily-report-template/');
-  const link = page.locator('main a.template-download').first();
-  await expect(link).toBeVisible();
-  const res = await request.get((await link.getAttribute('href'))!);
-  expect(res.status()).toBe(200);
-  expect((await res.body()).subarray(0, 2).toString()).toBe('PK');
-});
-
-test.describe('/templates/construction-bid-proposal/', () => {
-  test('renders and the document downloads as a real docx', async ({ page, request }) => {
-    await page.goto('/templates/construction-bid-proposal/');
-    await expect(page.locator('main h1')).toHaveText(/Construction Bid Proposal Template/i);
-    const href = await page.locator('a.template-download').first().getAttribute('href');
-    const res = await request.get(href!);
+test.describe('cross-links from guides', () => {
+  test('the daily-report post links to the template page and still downloads the file', async ({
+    page,
+    request,
+  }) => {
+    await page.goto('/blog/construction-daily-report-template/');
+    await expect(page.locator('main a[href="/templates/daily-report/"]').first()).toBeVisible();
+    const link = page.locator('main a.template-download').first();
+    await expect(link).toBeVisible();
+    const res = await request.get((await link.getAttribute('href'))!);
     expect(res.status()).toBe(200);
     expect((await res.body()).subarray(0, 2).toString()).toBe('PK');
   });
 
-  test('the bidding guide links to the template', async ({ page }) => {
-    await page.goto('/blog/how-to-create-construction-bid/');
-    await expect(
-      page.locator('main a[href="/templates/construction-bid-proposal/"]').first()
-    ).toBeVisible();
-  });
+  for (const [post, slug] of [
+    ['/blog/how-to-create-construction-bid/', 'construction-bid-proposal'],
+    ['/blog/construction-markup-vs-margin/', 'construction-estimate'],
+    ['/blog/schedule-of-values-guide/', 'schedule-of-values'],
+    ['/blog/aia-pay-application-guide/', 'aia-g702-g703'],
+    ['/blog/construction-change-order-management/', 'change-order'],
+    ['/blog/construction-lien-waivers-explained/', 'lien-waiver'],
+    ['/blog/construction-project-closeout-checklist/', 'certificate-of-completion'],
+    ['/blog/punch-list-management-for-subcontractors/', 'punch-list'],
+  ] as const) {
+    test(`${post} links to /templates/${slug}/`, async ({ page }) => {
+      await page.goto(post);
+      await expect(page.locator(`main a[href="/templates/${slug}/"]`).first()).toBeVisible();
+    });
+  }
 });
 
-test.describe('/templates/construction-estimate/', () => {
-  test('renders and the workbook downloads as a real xlsx', async ({ page, request }) => {
-    await page.goto('/templates/construction-estimate/');
-    await expect(page.locator('main h1')).toHaveText(/Construction Estimate Template/i);
-    const href = await page.locator('a.template-download').first().getAttribute('href');
-    const res = await request.get(href!);
-    expect(res.status()).toBe(200);
-    expect((await res.body()).subarray(0, 2).toString()).toBe('PK');
-  });
-
-  test('the markup-vs-margin post links to the template', async ({ page }) => {
-    await page.goto('/blog/construction-markup-vs-margin/');
-    await expect(
-      page.locator('main a[href="/templates/construction-estimate/"]').first()
-    ).toBeVisible();
-  });
-});
-
-test.describe('/templates/schedule-of-values/', () => {
-  test('renders and the workbook downloads as a real xlsx', async ({ page, request }) => {
-    await page.goto('/templates/schedule-of-values/');
-    await expect(page.locator('main h1')).toHaveText(/Schedule of Values Template/i);
-    const href = await page.locator('a.template-download').first().getAttribute('href');
-    const res = await request.get(href!);
-    expect(res.status()).toBe(200);
-    expect((await res.body()).subarray(0, 2).toString()).toBe('PK');
-  });
-
-  test('the SOV guide post links to the template download', async ({ page }) => {
-    await page.goto('/blog/schedule-of-values-guide/');
-    await expect(
-      page.locator('main a[href="/templates/schedule-of-values/"]').first()
-    ).toBeVisible();
-  });
-});
-
-test.describe('/templates/subcontractor-agreement/', () => {
-  test('renders with the download CTA and the not-legal-advice disclaimer', async ({ page }) => {
-    await page.goto('/templates/subcontractor-agreement/');
-    await expect(page.locator('main h1')).toHaveText(/Subcontractor Agreement Template/i);
-    await expect(page.locator('a.template-download').first()).toBeVisible();
-    await expect(page.getByText(/Not legal advice/i).first()).toBeVisible();
-  });
-
-  test('the document downloads ungated and is a real docx', async ({ page, request }) => {
-    await page.goto('/templates/subcontractor-agreement/');
-    const href = await page.locator('a.template-download').first().getAttribute('href');
-    const res = await request.get(href!);
-    expect(res.status()).toBe(200);
-    const body = await res.body();
-    expect(body.length).toBeGreaterThan(5000);
-    expect(body.subarray(0, 2).toString()).toBe('PK');
-  });
-
-  test('cross-links to the pay application template', async ({ page }) => {
-    await page.goto('/templates/subcontractor-agreement/');
-    await expect(page.locator('main a[href="/templates/aia-g702-g703/"]').first()).toBeVisible();
-  });
-});
-
-test.describe('/templates/aia-g702-g703/', () => {
-  test('renders with the download CTA and the trademark disclaimer', async ({ page }) => {
+test.describe('disclaimers', () => {
+  test('the pay application page carries the AIA trademark disclaimer', async ({ page }) => {
     await page.goto('/templates/aia-g702-g703/');
-    await expect(page.locator('main h1')).toHaveText(/Pay Application Template/i);
-    await expect(page.locator('a.template-download').first()).toBeVisible();
     await expect(page.getByText(/Not an official AIA document/i).first()).toBeVisible();
   });
 
-  test('the workbook downloads ungated and is a real xlsx', async ({ page, request }) => {
-    await page.goto('/templates/aia-g702-g703/');
-    const href = await page.locator('a.template-download').first().getAttribute('href');
-    expect(href).toBeTruthy();
-
-    const res = await request.get(href!);
-    expect(res.status()).toBe(200);
-    // xlsx files are zip containers — the PK magic bytes are the cheapest
-    // "this is actually a spreadsheet, not an error page" assertion.
-    const body = await res.body();
-    expect(body.length).toBeGreaterThan(5000);
-    expect(body.subarray(0, 2).toString()).toBe('PK');
+  test('the subcontractor agreement page carries the not-legal-advice disclaimer', async ({
+    page,
+  }) => {
+    await page.goto('/templates/subcontractor-agreement/');
+    await expect(page.getByText(/not legal advice/i).first()).toBeVisible();
   });
 
-  test('carries FAQPage structured data', async ({ page }) => {
-    await page.goto('/templates/aia-g702-g703/');
-    const jsonld = await page.locator('script[type="application/ld+json"]').allTextContents();
-    expect(jsonld.some((s) => s.includes('FAQPage'))).toBe(true);
-  });
-
-  test('links down the funnel to AIA billing software', async ({ page }) => {
-    await page.goto('/templates/aia-g702-g703/');
-    // Scoped to main: the header Features dropdown contains the same href in a
-    // hidden menu item, which .first() would otherwise match.
-    const featureLink = page.locator('main a[href="/features/pay-applications/"]').first();
-    await expect(featureLink).toBeVisible();
-    await expect(featureLink).toHaveText(/AIA billing software/i);
+  test('the lien waiver page names the statutory-form states', async ({ page }) => {
+    await page.goto('/templates/lien-waiver/');
+    await expect(page.getByText(/statutory/i).first()).toBeVisible();
   });
 });
