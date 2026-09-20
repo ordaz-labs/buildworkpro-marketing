@@ -1,0 +1,534 @@
+---
+// /tools/pay-app/ — the first "return visit" tool: a pay application the
+// visitor builds in the browser, saved in localStorage, rolled forward each
+// billing period, and printed by filling the same fillable PDF the templates
+// page ships. Decision + mockups: session 2026-09-20 (Pay App Builder on the
+// bones of the paperwork workspace, lien waivers next). Math and PDF mapping
+// live in src/lib/pay-app/; this file is markup only.
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import FAQSection from '../../../components/FAQSection.astro';
+import { config } from '../../../config';
+import { manifest } from '../../../data/templates-manifest';
+
+const preview = manifest['aia-g702-g703']?.previews?.[0];
+const previewSrc = preview ? `/templates-previews/${preview.file}` : null;
+
+const input =
+  'w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent';
+const label = 'block text-xs font-medium text-slate-600 mb-1';
+
+const faqs = [
+  {
+    question: 'Is my pay application data sent to BuildWorkPro?',
+    answer:
+      'No. Everything you type stays in your browser’s local storage on this device. The only network request the tool makes is to fetch the blank PDF template from this site; the filled PDF is generated on your computer. Clear it any time with “Start blank” or by clearing site data in your browser.',
+  },
+  {
+    question: 'How does the roll-forward work?',
+    answer:
+      'When an application is approved, press “Start next application”. This period’s amounts move into the “from previous applications” column, this period clears, stored materials stay for you to update, the application number increments, the billing period advances a month, and line 7 (less previous certificates) becomes the total earned less retainage from the application you just closed. That is the reconciliation most subs do by hand each month.',
+  },
+  {
+    question: 'How is retainage calculated?',
+    answer:
+      'On the cumulative total, not on this period alone. Line 5a is the rate times work completed to date (columns D plus E) and line 5b is the rate times materials presently stored (column F). Total retainage comes off line 4 to give line 6, total earned less retainage. Because it is figured on the cumulative total, each period only releases the net difference.',
+  },
+  {
+    question: 'Where do change orders go?',
+    answer:
+      'Add each approved change order as its own line with “Add change order line”. Use the CO number as the item number and enter a negative scheduled value for a deductive change. The tool sums them into line 2 (net change by change orders) and line 3 (contract sum to date), and prints them on the continuation sheet with a CO tag, which is how most general contractors want to trace them.',
+  },
+  {
+    question: 'Is the PDF an official AIA G702 or G703?',
+    answer:
+      'No. AIA, G702 and G703 are trademarks of The American Institute of Architects, and the official forms are licensed through AIA Contract Documents. This tool fills an independent template formatted in the same general style, with the same numbered lines and A to I continuation columns, which many GCs accept. Confirm with your GC whether they require the licensed form.',
+  },
+  {
+    question: 'What happens when I have more than 22 lines?',
+    answer:
+      'The tool keeps computing correctly, but the PDF continuation sheet has room for 22 lines and the tool tells you how many will not print. Combine small lines, or bill the rest on a second continuation sheet. If you bill jobs with long schedules of values every month, BuildWorkPro prints as many pages as the job needs.',
+  },
+];
+---
+
+<Layout
+  title="Free Pay Application Builder — G702 & G703 Style, Online | BuildWorkPro"
+  description="Build a G702/G703-style pay application in your browser: schedule of values, retainage math, roll-forward each month, and a filled PDF. Saves in your browser, no email required."
+>
+  <Header />
+  <main class="pt-28 pb-20">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
+      <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
+        Free online tool
+      </p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-balance">
+        Pay Application Builder
+      </h1>
+      <p class="mt-5 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+        Type your schedule of values once. Each month, enter this period’s work, get the certificate
+        math, and download a filled G702/G703-style PDF. It saves in your browser and rolls forward
+        when the application is approved.
+      </p>
+      <ul class="mt-6 flex flex-wrap justify-center gap-2 text-xs font-medium text-slate-600">
+        <li class="rounded-full border border-slate-200 bg-white px-3 py-1">
+          Saves in this browser
+        </li>
+        <li class="rounded-full border border-slate-200 bg-white px-3 py-1">
+          Fills the free PDF template
+        </li>
+        <li class="rounded-full border border-slate-200 bg-white px-3 py-1">
+          Carries forward each period
+        </li>
+        <li class="rounded-full border border-slate-200 bg-white px-3 py-1">No email required</li>
+      </ul>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20" aria-labelledby="tool-heading">
+      <h2 id="tool-heading" class="sr-only">Pay application builder</h2>
+      <div data-payapp class="space-y-5">
+        <!-- Toolbar -->
+        <div
+          class="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm lg:flex-row lg:items-center lg:justify-between"
+        >
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <span
+                data-status
+                class="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700"
+              >
+                Loading
+              </span>
+              <span data-out="lines" class="text-xs text-slate-500"></span>
+            </div>
+            <p data-out="title" class="mt-1.5 truncate text-lg font-semibold text-slate-900"></p>
+            <p data-out="period" class="text-sm text-slate-500"></p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button
+              type="button"
+              data-action="download-pdf"
+              class="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:opacity-60"
+            >
+              Download filled PDF
+            </button>
+            <button
+              type="button"
+              data-action="roll-forward"
+              class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:border-brand-300 hover:text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            >
+              Start next application
+            </button>
+            <button
+              type="button"
+              data-action="load-sample"
+              class="inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            >
+              Load example
+            </button>
+            <button
+              type="button"
+              data-action="clear"
+              class="inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            >
+              Start blank
+            </button>
+          </div>
+        </div>
+        <p data-note class="text-sm text-slate-500 px-1" aria-live="polite"></p>
+
+        <div class="grid gap-6 lg:grid-cols-12 items-start">
+          <!-- Left: project + SOV -->
+          <div class="min-w-0 space-y-6 lg:col-span-8">
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h3 class="text-base font-semibold text-slate-900">Project and application</h3>
+              <p class="mt-1 text-sm text-slate-500">
+                These fill the header of the application page and the continuation sheet.
+              </p>
+              <div class="mt-4 grid gap-4 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                  <label class={label} for="pa-company">Your company (contractor)</label>
+                  <input
+                    id="pa-company"
+                    data-field="company.name"
+                    class={input}
+                    autocomplete="organization"
+                  />
+                </div>
+                <div>
+                  <label class={label} for="pa-company-line1">Address</label>
+                  <input id="pa-company-line1" data-field="company.line1" class={input} />
+                </div>
+                <div>
+                  <label class={label} for="pa-company-line2">Phone, email, license</label>
+                  <input id="pa-company-line2" data-field="company.line2" class={input} />
+                </div>
+                <div>
+                  <label class={label} for="pa-signer">Submitted by (signer)</label>
+                  <input
+                    id="pa-signer"
+                    data-field="company.signer"
+                    class={input}
+                    autocomplete="name"
+                  />
+                </div>
+                <div>
+                  <label class={label} for="pa-to">To (owner or general contractor)</label>
+                  <input id="pa-to" data-field="job.to" class={input} />
+                </div>
+                <div class="sm:col-span-2">
+                  <label class={label} for="pa-to-address">Their address</label>
+                  <input id="pa-to-address" data-field="job.toAddress" class={input} />
+                </div>
+                <div>
+                  <label class={label} for="pa-project">Project</label>
+                  <input id="pa-project" data-field="job.project" class={input} />
+                </div>
+                <div>
+                  <label class={label} for="pa-project-number">Project number</label>
+                  <input id="pa-project-number" data-field="job.projectNumber" class={input} />
+                </div>
+                <div class="sm:col-span-2">
+                  <label class={label} for="pa-project-address">Project address</label>
+                  <input id="pa-project-address" data-field="job.projectAddress" class={input} />
+                </div>
+                <div>
+                  <label class={label} for="pa-contract-date">Contract date</label>
+                  <input
+                    id="pa-contract-date"
+                    type="date"
+                    data-field="job.contractDate"
+                    class={input}
+                  />
+                </div>
+                <div>
+                  <label class={label} for="pa-contract-for">Contract for</label>
+                  <input
+                    id="pa-contract-for"
+                    data-field="job.contractFor"
+                    class={input}
+                    placeholder="Mechanical subcontract"
+                  />
+                </div>
+              </div>
+              <div class="mt-5 grid gap-4 sm:grid-cols-3">
+                <div>
+                  <label class={label} for="pa-number">Application no.</label>
+                  <input
+                    id="pa-number"
+                    type="number"
+                    min="1"
+                    step="1"
+                    data-field="app.number"
+                    class={input}
+                  />
+                </div>
+                <div>
+                  <label class={label} for="pa-period-from">Period from</label>
+                  <input
+                    id="pa-period-from"
+                    type="date"
+                    data-field="app.periodFrom"
+                    class={input}
+                  />
+                </div>
+                <div>
+                  <label class={label} for="pa-period-to">Period to</label>
+                  <input id="pa-period-to" type="date" data-field="app.periodTo" class={input} />
+                </div>
+                <div>
+                  <label class={label} for="pa-date">Application date</label>
+                  <input id="pa-date" type="date" data-field="app.date" class={input} />
+                </div>
+                <div>
+                  <label class={label} for="pa-rate">Retainage rate %</label>
+                  <input
+                    id="pa-rate"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.5"
+                    data-field="app.ratePct"
+                    class={input}
+                  />
+                </div>
+                <div>
+                  <label class={label} for="pa-prev">Line 7 · less previous certificates</label>
+                  <input
+                    id="pa-prev"
+                    inputmode="decimal"
+                    data-field="app.prevCertified"
+                    class={input}
+                    placeholder="auto from column D"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div class="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h3 class="text-base font-semibold text-slate-900">
+                    Schedule of values (continuation sheet)
+                  </h3>
+                  <p class="mt-1 text-sm text-slate-500">
+                    Enter scheduled value, previous, this period and stored. Columns G to I and
+                    retainage calculate. The highlighted column is the only one you touch each
+                    month.
+                  </p>
+                </div>
+                <div class="flex gap-2">
+                  <button
+                    type="button"
+                    data-action="add-row"
+                    class="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-800 hover:border-brand-300 hover:text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  >
+                    Add line
+                  </button>
+                  <button
+                    type="button"
+                    data-action="add-co"
+                    class="rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-800 hover:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  >
+                    Add change order line
+                  </button>
+                </div>
+              </div>
+              <p
+                data-capacity
+                hidden
+                class="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800"
+              >
+              </p>
+              <div data-sov-scroll class="relative mt-4 -mx-5 overflow-x-auto px-5 pb-1">
+                <table class="w-full min-w-[1080px] text-sm">
+                  <thead>
+                    <tr
+                      class="border-b border-slate-200 text-[11px] uppercase tracking-wide text-slate-500"
+                    >
+                      <th class="px-2 py-2 text-left font-medium">A · Item</th>
+                      <th class="px-2 py-2 text-left font-medium">B · Description of work</th>
+                      <th class="px-2 py-2 text-right font-medium">C · Scheduled value</th>
+                      <th class="px-2 py-2 text-right font-medium">D · From previous</th>
+                      <th class="px-2 py-2 text-right font-medium text-brand-700 bg-brand-50/60"
+                        >E · This period</th
+                      >
+                      <th class="px-2 py-2 text-right font-medium">F · Stored</th>
+                      <th class="px-3 py-2 text-right font-medium">G · Completed &amp; stored</th>
+                      <th class="px-3 py-2 text-right font-medium">%</th>
+                      <th class="px-3 py-2 text-right font-medium">I · Balance</th>
+                      <th class="px-3 py-2 text-right font-medium">Retainage</th>
+                      <th class="px-1 py-2"><span class="sr-only">Remove</span></th>
+                    </tr>
+                  </thead>
+                  <tbody data-sov-body></tbody>
+                  <tfoot>
+                    <tr
+                      class="border-t-2 border-slate-300 font-semibold text-slate-900 tabular-nums"
+                    >
+                      <td class="px-2 py-2" colspan="2">Grand total</td>
+                      <td class="px-3 py-2 text-right" data-out="tc"></td>
+                      <td class="px-3 py-2 text-right" data-out="td"></td>
+                      <td class="px-3 py-2 text-right bg-brand-50/60" data-out="te"></td>
+                      <td class="px-3 py-2 text-right" data-out="tf"></td>
+                      <td class="px-3 py-2 text-right" data-out="tg"></td>
+                      <td class="px-3 py-2 text-right" data-out="pct"></td>
+                      <td class="px-3 py-2 text-right" data-out="ti"></td>
+                      <td class="px-3 py-2 text-right" data-out="tr"></td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: summary -->
+          <aside class="min-w-0 space-y-6 lg:col-span-4 lg:sticky lg:top-28">
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h3 class="text-base font-semibold text-slate-900">Application for payment</h3>
+              <p class="mt-1 text-sm text-slate-500">
+                Lines 1 to 9, as printed on the application page.
+              </p>
+              <dl class="mt-4 divide-y divide-slate-100 text-sm tabular-nums">
+                <div class="flex items-baseline justify-between gap-3 py-2">
+                  <dt class="text-slate-600">1 · Original contract sum</dt>
+                  <dd data-out="base" class="font-medium text-slate-900"></dd>
+                </div>
+                <div class="flex items-baseline justify-between gap-3 py-2">
+                  <dt class="text-slate-600">2 · Net change by change orders</dt>
+                  <dd data-out="net" class="font-medium text-slate-900"></dd>
+                </div>
+                <div class="flex items-baseline justify-between gap-3 py-2">
+                  <dt class="text-slate-600">3 · Contract sum to date</dt>
+                  <dd data-out="revised" class="font-medium text-slate-900"></dd>
+                </div>
+                <div class="flex items-baseline justify-between gap-3 py-2">
+                  <dt class="text-slate-600">4 · Total completed &amp; stored to date</dt>
+                  <dd data-out="g" class="font-medium text-slate-900"></dd>
+                </div>
+                <div class="py-2">
+                  <div class="flex items-baseline justify-between gap-3">
+                    <dt class="text-slate-600">5 · Retainage (<span data-out="rate"></span>)</dt>
+                    <dd data-out="retainage" class="font-medium text-slate-900"></dd>
+                  </div>
+                  <div
+                    class="mt-1 flex items-baseline justify-between gap-3 pl-4 text-xs text-slate-500"
+                  >
+                    <span>5a · of completed work</span><span data-out="5a"></span>
+                  </div>
+                  <div
+                    class="flex items-baseline justify-between gap-3 pl-4 text-xs text-slate-500"
+                  >
+                    <span>5b · of stored material</span><span data-out="5b"></span>
+                  </div>
+                </div>
+                <div class="flex items-baseline justify-between gap-3 py-2">
+                  <dt class="text-slate-600">6 · Total earned less retainage</dt>
+                  <dd data-out="earned" class="font-medium text-slate-900"></dd>
+                </div>
+                <div class="py-2">
+                  <div class="flex items-baseline justify-between gap-3">
+                    <dt class="text-slate-600">7 · Less previous certificates</dt>
+                    <dd data-out="prev" class="font-medium text-slate-900"></dd>
+                  </div>
+                  <p data-out="prevNote" class="mt-0.5 text-xs text-slate-400"></p>
+                </div>
+                <div class="rounded-xl bg-brand-50 px-3 py-3 mt-2 -mx-1">
+                  <div class="flex items-baseline justify-between gap-3">
+                    <dt class="font-semibold text-brand-900">8 · Current payment due</dt>
+                    <dd data-out="due" class="text-xl font-bold text-brand-700"></dd>
+                  </div>
+                </div>
+                <div class="flex items-baseline justify-between gap-3 py-2">
+                  <dt class="text-slate-600">9 · Balance to finish, incl. retainage</dt>
+                  <dd data-out="balance" class="font-medium text-slate-900"></dd>
+                </div>
+              </dl>
+              <button
+                type="button"
+                data-action="download-pdf"
+                class="mt-4 w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:opacity-60"
+              >
+                Download filled PDF
+              </button>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <h3 class="text-sm font-semibold text-slate-900">
+                Previous applications on this job
+              </h3>
+              <ul data-history class="mt-3 space-y-2"></ul>
+            </div>
+
+            <div class="rounded-2xl border border-brand-200 bg-white p-5">
+              <p class="text-sm font-semibold text-slate-900">Billing more than one job?</p>
+              <p class="mt-1 text-sm text-slate-600">
+                BuildWorkPro keeps every pay application, change order and lien waiver on the
+                project it belongs to, locks approved applications, and prints as many continuation
+                pages as the job needs.
+              </p>
+              <a
+                href={config.signupUrl}
+                class="mt-3 inline-flex items-center rounded-lg border border-brand-600 px-3 py-1.5 text-sm font-semibold text-brand-700 hover:bg-brand-50"
+              >
+                Start free trial
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <h2 class="text-2xl font-bold text-slate-900 text-center">How it works</h2>
+      <ol class="mt-8 grid gap-6 sm:grid-cols-3">
+        <li class="rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="text-xs font-semibold uppercase tracking-wider text-brand-600"
+            >Month one</span
+          >
+          <p class="mt-2 font-semibold text-slate-900">Set up the job</p>
+          <p class="mt-1 text-sm text-slate-600">
+            Enter the project, your schedule of values and the retainage rate from the contract. If
+            you are mid-job, put what you have already billed in the “from previous” column.
+          </p>
+        </li>
+        <li class="rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="text-xs font-semibold uppercase tracking-wider text-brand-600"
+            >Every period</span
+          >
+          <p class="mt-2 font-semibold text-slate-900">Enter this period, download the PDF</p>
+          <p class="mt-1 text-sm text-slate-600">
+            Type this period’s work and any stored material. Lines 1 to 9 and every continuation
+            column compute, then the PDF is filled on your computer, ready to sign and send.
+          </p>
+        </li>
+        <li class="rounded-2xl border border-slate-200 bg-white p-5">
+          <span class="text-xs font-semibold uppercase tracking-wider text-brand-600"
+            >When approved</span
+          >
+          <p class="mt-2 font-semibold text-slate-900">Roll it forward</p>
+          <p class="mt-1 text-sm text-slate-600">
+            One click closes the application, carries the totals into “from previous”, sets line 7,
+            and starts the next number. The second application takes two minutes.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <div
+        class="grid gap-8 lg:grid-cols-2 items-center rounded-2xl border border-slate-200 bg-white p-6 sm:p-8"
+      >
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">The PDF you get</h2>
+          <p class="mt-3 text-slate-600">
+            A two-page, G702/G703-style application and continuation sheet, the same fillable
+            template on our free templates page, with every field filled and still editable. It
+            never prints the AIA marks; the disclaimer on the templates page applies here too.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a
+              href="/templates/aia-g702-g703/"
+              class="text-sm font-semibold text-brand-700 hover:underline"
+            >
+              Blank template and Excel workbook
+            </a>
+            <a
+              href="/features/pay-applications/"
+              class="text-sm font-semibold text-brand-700 hover:underline"
+            >
+              Pay applications in BuildWorkPro
+            </a>
+          </div>
+        </div>
+        {
+          previewSrc && (
+            <a href="/templates/aia-g702-g703/" class="block">
+              <img
+                src={previewSrc}
+                alt="Preview of the G702/G703-style pay application PDF"
+                width={preview?.width}
+                height={preview?.height}
+                loading="lazy"
+                class="w-full rounded-xl border border-slate-200 shadow-sm"
+              />
+            </a>
+          )
+        }
+      </div>
+    </section>
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <FAQSection faqs={faqs} />
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import { mount } from '../../../lib/pay-app/app';
+  const root = document.querySelector<HTMLElement>('[data-payapp]');
+  if (root) mount(root);
+</script>

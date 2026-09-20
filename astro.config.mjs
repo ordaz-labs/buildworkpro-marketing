@@ -129,6 +129,10 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    // pdf-lib is imported on demand by /tools/pay-app/. Pre-bundling it keeps
+    // Vite from discovering it mid-session and force-reloading the page (which
+    // is what the Playwright warmup step guards against for the base graph).
+    optimizeDeps: { include: ['pdf-lib'] },
     ssr: {
       resolve: {
         conditions: ['workerd', 'worker', 'node'],

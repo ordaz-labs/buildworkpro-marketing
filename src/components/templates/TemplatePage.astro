@@ -36,6 +36,8 @@ interface Props {
   updated: string;
   /** Optional alt text override for the preview image. */
   previewAlt?: string;
+  /** Online tool that replaces the download for this document (e.g. /tools/pay-app/). */
+  tool?: { href: string; label: string; note: string };
 }
 
 const {
@@ -55,6 +57,7 @@ const {
   disclaimer,
   updated,
   previewAlt,
+  tool,
 } = Astro.props;
 
 const entry = manifest[slug];
@@ -190,6 +193,23 @@ const schema = {
           <p class="mt-5 text-lg text-slate-500 leading-relaxed">{intro}</p>
 
           <div class="mt-7 flex flex-col gap-3">
+            {
+              tool && (
+                <a
+                  href={tool.href}
+                  data-template-tool={slug}
+                  class="group flex items-center gap-4 rounded-xl border-2 border-dashed border-brand-300 bg-brand-50 px-4 py-3 text-brand-900 transition-colors hover:border-brand-400 hover:bg-brand-100"
+                >
+                  <span class="shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-white text-[11px] font-bold tracking-wider text-brand-700">
+                    WEB
+                  </span>
+                  <span class="min-w-0">
+                    <span class="block font-semibold text-sm">{tool.label}</span>
+                    <span class="block text-xs mt-0.5 text-brand-800/80">{tool.note}</span>
+                  </span>
+                </a>
+              )
+            }
             {
               dl.map((d) => (
                 <a
