@@ -1,1 +1,45 @@
-@/workspace/seo-ship/CONTENT_FOR_MCP.txt
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { config } from '../../config';
+---
+
+<Layout
+  title="Contractor Bidding Software for Subs | BuildWorkPro"
+  description="Contractor bidding software for subcontractors: line-item estimates, margin & overhead, PDF proposals. Also construction bidding. $79/mo flat, 14-day free trial."
+>
+  <Header />
+  <main class="pt-32 pb-20">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+      <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Features</p>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+        Contractor Bidding Software for Subcontractors
+      </h1>
+      <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+        Looking for contractor bidding software? BuildWorkPro is contractor bidding software
+        (construction bidding for specialty trades): line-item estimates, margin and overhead as
+        rates, branded PDF proposals, and a won bid that converts into a project.
+      </p>
+      <p class="mt-4 text-sm text-slate-400">
+        Full feature page copy is being restored on this branch; docs remain at
+        <a class="text-brand-600 hover:underline" href="/docs/bids/creating-a-bid/">Creating a bid</a>.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href={config.signupUrl}
+          class="inline-flex items-center px-8 py-3.5 text-base font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl"
+        >
+          Start free trial
+        </a>
+        <a
+          href="/features/"
+          class="inline-flex items-center px-8 py-3.5 text-base font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl"
+        >
+          All features
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
