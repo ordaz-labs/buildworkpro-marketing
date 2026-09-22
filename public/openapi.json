@@ -9843,12 +9843,6 @@
                     "minimum": -2147483648,
                     "maximum": 2147483647
                   },
-                  "deletedAt": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
                   "unitPrice": {
                     "type": "string"
                   }
@@ -10050,12 +10044,6 @@
                     ],
                     "minimum": -2147483648,
                     "maximum": 2147483647
-                  },
-                  "deletedAt": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
                   },
                   "unitPrice": {
                     "type": "string"
@@ -18654,32 +18642,6 @@
                     ]
                   },
                   "sellTaxPercent": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "qboId": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "maxLength": 64
-                  },
-                  "qboSyncToken": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "maxLength": 32
-                  },
-                  "qboLastSyncedAt": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "deletedAt": {
                     "type": [
                       "string",
                       "null"
