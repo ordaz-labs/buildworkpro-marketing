@@ -16684,35 +16684,12 @@
                     ],
                     "minimum": -180,
                     "maximum": 180
-                  },
-                  "isReviewed": {
-                    "type": "boolean"
-                  },
-                  "reviewedBy": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "reviewedAt": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
-                  },
-                  "createdBy": {
-                    "type": "integer",
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
                   }
                 },
                 "required": [
                   "projectId",
                   "logDate",
-                  "notes",
-                  "createdBy"
+                  "notes"
                 ]
               }
             }
@@ -16920,23 +16897,6 @@
                     ],
                     "minimum": -180,
                     "maximum": 180
-                  },
-                  "isReviewed": {
-                    "type": "boolean"
-                  },
-                  "reviewedBy": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "reviewedAt": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
                   }
                 }
               }
@@ -17173,7 +17133,7 @@
     "/site-logs/imports": {
       "post": {
         "summary": "Start CSV import of site logs",
-        "description": "Enqueues a CSV import job. sourcePath must be an opaque upload path returned by POST /jobs/uploads. Required CSV columns: projectId, logDate (ISO), notes. Optional: id (triggers update-in-place when updateInPlace=true), title, workPerformed, issues, isReviewed.",
+        "description": "Enqueues a CSV import job. sourcePath must be an opaque upload path returned by POST /jobs/uploads. Required CSV columns: projectId, logDate (ISO), notes. Optional: id (triggers update-in-place when updateInPlace=true), title, workPerformed, issues. Review status is not importable — use the review endpoints, which require site_logs:review.",
         "security": [
           {
             "bearerAuth": [
@@ -17651,23 +17611,6 @@
                     ],
                     "minimum": 0,
                     "maximum": 100000
-                  },
-                  "isReviewed": {
-                    "type": "boolean"
-                  },
-                  "reviewedBy": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "reviewedAt": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
                   }
                 },
                 "required": [
@@ -17856,23 +17799,6 @@
                     ],
                     "minimum": 0,
                     "maximum": 100000
-                  },
-                  "isReviewed": {
-                    "type": "boolean"
-                  },
-                  "reviewedBy": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "reviewedAt": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
                   }
                 }
               }
@@ -18068,7 +17994,7 @@
     "/time-entries/imports": {
       "post": {
         "summary": "Start CSV import of time entries",
-        "description": "Enqueues a CSV import job. sourcePath must be an opaque upload path returned by POST /jobs/uploads. Required CSV columns: projectId, userId, date (ISO), hours. Optional: id (triggers update-in-place when updateInPlace=true), taskId, phaseId, notes, isReviewed. Reviewed time entries are immutable — update-by-id will reject them. hourlyRate and totalCost are recomputed server-side from labor rates.",
+        "description": "Enqueues a CSV import job. sourcePath must be an opaque upload path returned by POST /jobs/uploads. Required CSV columns: projectId, userId, date (ISO), hours. Optional: id (triggers update-in-place when updateInPlace=true), taskId, phaseId, notes. Review status is not importable — use the review endpoints, which require time_tracking:review. Reviewed time entries are immutable — update-by-id will reject them. hourlyRate and totalCost are recomputed server-side from labor rates.",
         "security": [
           {
             "bearerAuth": [
