@@ -1502,6 +1502,14 @@
               "integer",
               "null"
             ]
+          },
+          "bidId": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "exclusiveMinimum": 0,
+            "description": "Link an existing bid to this project (both sides), or `null` to unlink. Requires the `bids:write` scope too. Refused with 409 when the bid already belongs to another live project or this project already has a different bid — unlink first. Linking an accepted bid fills the original contract (pre-tax) and site address only if the project has none."
           }
         }
       },
@@ -4022,6 +4030,172 @@
           "scopes"
         ]
       },
+      "ProjectBillingFigures": {
+        "type": "object",
+        "properties": {
+          "invoiced": {
+            "type": "number"
+          },
+          "invoicedPreTax": {
+            "type": "number"
+          },
+          "paid": {
+            "type": "number"
+          },
+          "outstanding": {
+            "type": "number"
+          },
+          "invoiceCount": {
+            "type": "integer"
+          },
+          "payAppBilled": {
+            "type": "number"
+          },
+          "billedTotal": {
+            "type": "number"
+          },
+          "billedCash": {
+            "type": "number"
+          },
+          "outstandingCash": {
+            "type": "number"
+          },
+          "retainageHeld": {
+            "type": "number"
+          },
+          "remaining": {
+            "type": "number"
+          },
+          "hasBilling": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "invoiced",
+          "invoicedPreTax",
+          "paid",
+          "outstanding",
+          "invoiceCount",
+          "payAppBilled",
+          "billedTotal",
+          "billedCash",
+          "outstandingCash",
+          "retainageHeld",
+          "remaining",
+          "hasBilling"
+        ]
+      },
+      "InvoiceBillingSourceResult": {
+        "type": "object",
+        "properties": {
+          "invoice": {
+            "$ref": "#/components/schemas/Invoice"
+          },
+          "before": {
+            "type": "object",
+            "properties": {
+              "sourcePayAppId": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "paymentTermInstallmentId": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "sourceBidId": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "sourceType": {
+                "type": "string",
+                "enum": [
+                  "bid",
+                  "pay_app",
+                  "ad_hoc"
+                ]
+              }
+            },
+            "required": [
+              "sourcePayAppId",
+              "paymentTermInstallmentId",
+              "sourceBidId",
+              "sourceType"
+            ]
+          },
+          "after": {
+            "type": "object",
+            "properties": {
+              "sourcePayAppId": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "paymentTermInstallmentId": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "sourceBidId": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "sourceType": {
+                "type": "string",
+                "enum": [
+                  "bid",
+                  "pay_app",
+                  "ad_hoc"
+                ]
+              }
+            },
+            "required": [
+              "sourcePayAppId",
+              "paymentTermInstallmentId",
+              "sourceBidId",
+              "sourceType"
+            ]
+          },
+          "changed": {
+            "type": "boolean"
+          },
+          "dryRun": {
+            "type": "boolean"
+          },
+          "billing": {
+            "type": "object",
+            "properties": {
+              "before": {
+                "$ref": "#/components/schemas/ProjectBillingFigures"
+              },
+              "after": {
+                "$ref": "#/components/schemas/ProjectBillingFigures"
+              }
+            },
+            "required": [
+              "before",
+              "after"
+            ]
+          }
+        },
+        "required": [
+          "invoice",
+          "before",
+          "after",
+          "changed",
+          "dryRun",
+          "billing"
+        ]
+      },
       "OauthTokenError": {
         "type": "object",
         "properties": {
@@ -5919,7 +6093,7 @@
     "/leads/{id}/convert": {
       "post": {
         "summary": "Convert lead to project",
-        "description": "Promotes a lead to a project. Rejects with 409 if the lead is already in the Won stage.",
+        "description": "Promotes a lead to a project and moves the lead to the Won stage. When the lead has an accepted bid, the project is linked to that bid and its original contract is the bid's pre-tax total; if that bid already has a project, that project is returned (200) instead of creating a duplicate. Rejects with 409 if the lead is already in the Won stage.",
         "security": [
           {
             "bearerAuth": [
@@ -5945,6 +6119,25 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The lead's accepted bid already had a project; that project is returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
           "201": {
             "description": "Project created",
             "content": {
@@ -7842,7 +8035,7 @@
       },
       "patch": {
         "summary": "Update project",
-        "description": "Partially updates a project.",
+        "description": "Partially updates a project. Passing `bidId` links (or, with `null`, unlinks) an existing bid — see the field.",
         "security": [
           {
             "bearerAuth": [
@@ -7898,8 +8091,28 @@
               }
             }
           },
+          "403": {
+            "description": "Scope insufficient, or no access to the project or bid",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The bid is linked to another live project, or this project already has a different bid",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -8480,14 +8693,6 @@
                     "minimum": -2147483648,
                     "maximum": 2147483647
                   },
-                  "projectId": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
                   "dueDate": {
                     "type": [
                       "string",
@@ -8799,14 +9004,6 @@
                     "maximum": 2147483647
                   },
                   "contactId": {
-                    "type": [
-                      "integer",
-                      "null"
-                    ],
-                    "minimum": -2147483648,
-                    "maximum": 2147483647
-                  },
-                  "projectId": {
                     "type": [
                       "integer",
                       "null"
@@ -13978,6 +14175,131 @@
           }
         },
         "operationId": "postInvoicesByIdVoid",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/invoices/{id}/billing-source": {
+      "post": {
+        "summary": "Link or unlink what an invoice bills",
+        "description": "Attach an existing invoice to the pay application, payment-schedule installment and/or bid it bills, or detach it (send `null`). Allowed in every status except `voided`, so an imported, manual or already-paid invoice can be linked after the fact; only the link columns and the derived `sourceType` change — never lines, totals or status — and nothing is pushed to QuickBooks. The pay app must be on the invoice's own project, live (submitted, sent, approved or paid) and not already claimed by another live invoice; the installment must be on the project's bid's payment term and not billed by another live invoice. An invoice bills a pay app or an installment, not both. The response carries the project's billed figures before and after; `dryRun: true` returns them without saving.",
+        "security": [
+          {
+            "bearerAuth": [
+              "invoices:write"
+            ]
+          }
+        ],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourcePayAppId": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "exclusiveMinimum": 0,
+                    "description": "Pay application this invoice bills (same project, submitted/sent/approved/paid, not claimed by another live invoice). null unlinks."
+                  },
+                  "paymentTermInstallmentId": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "exclusiveMinimum": 0,
+                    "description": "Payment-schedule installment this invoice bills (on the project's bid's payment term, not billed by another live invoice). null unlinks."
+                  },
+                  "sourceBidId": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "exclusiveMinimum": 0,
+                    "description": "The project's bid, printed on the invoice PDF. null unlinks."
+                  },
+                  "dryRun": {
+                    "type": "boolean",
+                    "description": "Validate and return the billed-figure preview without saving."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Linked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/InvoiceBillingSourceResult"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postInvoicesByIdBillingSource",
         "x-rate-limit-cost": 5
       }
     },
