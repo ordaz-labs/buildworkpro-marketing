@@ -16,6 +16,18 @@ export const NEXT_STEPS: Record<TemplateSlug, string> = {
     'BuildWorkPro generates invoices from your projects and approved pay applications, numbers them automatically, emails the PDF and syncs them to QuickBooks Online.',
   'lien-waiver':
     'BuildWorkPro keeps the record every waiver draws from: the pay application’s schedule of values, retainage and previous payments for each period.',
+  'conditional-lien-waiver':
+    'BuildWorkPro keeps the pay application each waiver travels with: its through date, amount and retainage, with the signed waiver attached to that pay app.',
+  'unconditional-lien-waiver':
+    'In BuildWorkPro each unconditional waiver files on the pay application whose payment it releases, so the amount and through date come from the billing record.',
+  'notice-to-owner':
+    'BuildWorkPro tracks the schedule of values, retainage and approval history on every pay application, with each served notice attached to the project it protects.',
+  'notice-of-commencement':
+    'In BuildWorkPro the recorded notice, the permit and the bond live on the project’s Documents tab, so the addresses for notices and waivers stay with the job.',
+  'equipment-rental-agreement':
+    'In BuildWorkPro a rented lift or other job-wide cost goes on the bid’s Project Costs tab and is spread into your line-item sell prices before the bid goes out.',
+  'letter-of-intent':
+    'In BuildWorkPro you mark the bid accepted when the award comes in and convert it into a project, with its line items mapped to phases or tasks.',
   'construction-estimate':
     'BuildWorkPro builds the estimate from your product catalog with margin and overhead applied as rates, then sends it as a branded PDF proposal for e-signature.',
   'construction-bid-proposal':
