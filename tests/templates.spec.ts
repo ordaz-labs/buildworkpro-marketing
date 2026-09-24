@@ -174,4 +174,45 @@ test.describe('disclaimers', () => {
     await page.goto('/templates/lien-waiver/');
     await expect(page.getByText(/statutory/i).first()).toBeVisible();
   });
+
+  for (const slug of ['conditional-lien-waiver', 'unconditional-lien-waiver'] as const) {
+    test(`/templates/${slug}/ names the statutory-form states and Florida's statute`, async ({
+      page,
+    }) => {
+      await page.goto(`/templates/${slug}/`);
+      await expect(page.getByText(/not legal advice/i).first()).toBeVisible();
+      await expect(page.getByText(/§ 713\.20/).first()).toBeVisible();
+    });
+  }
+
+  for (const [slug, statute] of [
+    ['notice-of-commencement', '§ 713.13'],
+    ['notice-to-owner', '§ 713.06'],
+  ] as const) {
+    test(`/templates/${slug}/ is labelled as a Florida form under ${statute}`, async ({ page }) => {
+      await page.goto(`/templates/${slug}/`);
+      await expect(page.locator('main h1')).toContainText(/Florida/);
+      await expect(page.getByText(statute).first()).toBeVisible();
+      await expect(page.getByText(/not legal advice/i).first()).toBeVisible();
+    });
+  }
+
+  for (const slug of ['equipment-rental-agreement', 'letter-of-intent'] as const) {
+    test(`/templates/${slug}/ carries the not-legal-advice disclaimer`, async ({ page }) => {
+      await page.goto(`/templates/${slug}/`);
+      await expect(page.getByText(/not legal advice/i).first()).toBeVisible();
+    });
+  }
+});
+
+test.describe('lien waiver pages cross-link', () => {
+  const pages = ['lien-waiver', 'conditional-lien-waiver', 'unconditional-lien-waiver'];
+  for (const from of pages) {
+    test(`/templates/${from}/ links to the other two waiver pages`, async ({ page }) => {
+      await page.goto(`/templates/${from}/`);
+      for (const to of pages.filter((p) => p !== from)) {
+        await expect(page.locator(`main a[href="/templates/${to}/"]`).first()).toBeAttached();
+      }
+    });
+  }
 });

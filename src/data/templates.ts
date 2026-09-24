@@ -90,6 +90,36 @@ const list: TemplateEntry[] = [
     basename: 'lien-waiver-forms',
     volume: 3800,
   },
+  {
+    slug: 'conditional-lien-waiver',
+    title: 'Conditional Lien Waiver Form',
+    short:
+      'Conditional waiver and release on progress and on final payment — effective only once the payment clears.',
+    category: 'billing',
+    formats: ['Word', 'PDF'],
+    basename: 'conditional-lien-waiver-form',
+    volume: 1000,
+  },
+  {
+    slug: 'unconditional-lien-waiver',
+    title: 'Unconditional Lien Waiver Form',
+    short:
+      'Unconditional waiver and release on progress and on final payment, for signing after the money clears.',
+    category: 'billing',
+    formats: ['Word', 'PDF'],
+    basename: 'unconditional-lien-waiver-form',
+    volume: 1000,
+  },
+  {
+    slug: 'notice-to-owner',
+    title: 'Notice to Owner (Florida)',
+    short:
+      'The Florida preliminary notice under § 713.06 with the statutory warnings, copies-to list and a 45-day service record.',
+    category: 'billing',
+    formats: ['Word', 'PDF'],
+    basename: 'notice-to-owner-florida',
+    volume: 1000,
+  },
   // ---- Estimates, bids & proposals ----
   {
     slug: 'construction-estimate',
@@ -180,6 +210,36 @@ const list: TemplateEntry[] = [
     formats: ['Word', 'PDF'],
     basename: 'notice-to-proceed-template',
     volume: 280,
+  },
+  {
+    slug: 'notice-of-commencement',
+    title: 'Notice of Commencement (Florida)',
+    short:
+      'The recorded Florida form under § 713.13: property, owner, contractor, surety, lender, designees and the owner warning.',
+    category: 'contracts',
+    formats: ['Word', 'PDF'],
+    basename: 'notice-of-commencement-florida',
+    volume: 2900,
+  },
+  {
+    slug: 'equipment-rental-agreement',
+    title: 'Equipment Rental Agreement',
+    short:
+      'Bare or operated rental with an equipment schedule, hourly to monthly rates, fuel, damage, insurance and return condition.',
+    category: 'contracts',
+    formats: ['Word', 'PDF'],
+    basename: 'equipment-rental-agreement-template',
+    volume: 1000,
+  },
+  {
+    slug: 'letter-of-intent',
+    title: 'Construction Letter of Intent',
+    short:
+      'Award a subcontract scope and price pending the formal subcontract, with a capped early-work authorization.',
+    category: 'contracts',
+    formats: ['Word', 'PDF'],
+    basename: 'construction-letter-of-intent-template',
+    volume: 210,
   },
   {
     slug: 'certificate-of-completion',

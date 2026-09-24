@@ -149,7 +149,7 @@ function notary(p) {
 <div class="sigrow" style="margin-top:8px">${sigLine({ label: 'Notary public — signature', name: `${p}.notary.sig` })}${sigLine({ label: 'Printed name', name: `${p}.notary.name` })}${sigLine({ label: 'Commission expires', name: `${p}.notary.expires`, width: 110 })}</div></div>`;
 }
 
-function formPage(form, sample) {
+function formPage(form, sample, { n = form.n, total = FORMS.length } = {}) {
   const p = form.key;
   const s = sample ? (form.kind === 'progress' ? PROGRESS_SAMPLE : FINAL_SAMPLE) : null;
   const fillable = !sample;
@@ -253,7 +253,7 @@ function formPage(form, sample) {
 
   const [para1, para2] = waiverText(form);
   return `
-${H.compactHeader({ company, title: form.title, subtitle: `Form ${form.n} of 4 · ${form.effect}`, fillable })}
+${H.compactHeader({ company, title: form.title, subtitle: `Form ${n} of ${total} · ${form.effect}`, fillable })}
 ${hd('Parties and project', 'the customer is whoever contracted with the claimant')}
 ${meta}
 ${hd('Payment', form.kind === 'progress' ? 'the progress payment this waiver covers' : 'the final payment, retention included')}
@@ -294,7 +294,7 @@ export function html({ sample }) {
 // ---------------------------------------------------------------------------
 // Word
 // ---------------------------------------------------------------------------
-function docxForm(form) {
+function docxForm(form, { n = form.n, total = FORMS.length } = {}) {
   const W = D.CONTENT_W;
   const q = Math.round(W / 4);
   const [para1, para2] = waiverText(form);
@@ -322,7 +322,7 @@ function docxForm(form) {
       [
         D.run(form.title, { size: 15, bold: true }),
         new D.TextRun({ children: [new D.Tab()], font: D.FONT }),
-        D.run(`Form ${form.n} of 4`, { size: 10, color: D.C.ink2 }),
+        D.run(`Form ${n} of ${total}`, { size: 10, color: D.C.ink2 }),
       ],
       { tabStops: [{ type: D.TabStopType.RIGHT, position: W }], after: 30 }
     ),
@@ -425,4 +425,43 @@ export async function docx() {
     children.push(...docxForm(form));
   });
   return D.document({ title: meta.name, children, footerCenter: 'Lien waiver forms' });
+}
+
+/**
+ * The conditional-only or unconditional-only pair (progress + final) as its own
+ * two-form document, for the dedicated conditional / unconditional pages.
+ */
+export function waiverSet({ meta: m, conditional }) {
+  const set = FORMS.filter((f) => f.conditional === conditional);
+  const label = conditional ? 'Conditional' : 'Unconditional';
+  return {
+    html({ sample }) {
+      const pages = set.map((f, i) => formPage(f, sample, { n: i + 1, total: set.length }));
+      return {
+        sections: [
+          {
+            html: H.document({
+              title: m.name,
+              pages,
+              css: CSS,
+              footer: H.footerText(
+                `${label} lien waiver · general form, not a statutory form · not legal advice`
+              ),
+            }),
+            mode: 'pages',
+            landscape: false,
+          },
+        ],
+        previews: [{ section: 0, page: 0 }],
+      };
+    },
+    async docx() {
+      const children = [];
+      set.forEach((form, i) => {
+        if (i > 0) children.push(D.pageBreak());
+        children.push(...docxForm(form, { n: i + 1, total: set.length }));
+      });
+      return D.document({ title: m.name, children, footerCenter: m.docName });
+    },
+  };
 }

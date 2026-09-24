@@ -1,0 +1,193 @@
+---
+// Notice to owner cluster: "notice to owner" 1,000/mo, KD 0 (US, DataForSEO,
+// 2026-09). Florida preliminary notice under Fla. Stat. § 713.06(2). The
+// statutory warning text in the generated form was copied from The 2026 Florida
+// Statutes as published at leg.state.fl.us. Not legal advice.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What is a notice to owner in Florida?',
+    answer:
+      'A preliminary notice that a subcontractor, sub-subcontractor or supplier serves on the property owner under Fla. Stat. § 713.06(2) to preserve the right to record a construction lien later. It tells the owner who you are, what you are furnishing, for which property and under whose order, and it carries the statutory warning that the owner may pay twice if you are not paid. Serving it is a prerequisite to perfecting a lien.',
+  },
+  {
+    question: 'What is the deadline to send a notice to owner?',
+    answer:
+      'Before you start, or no later than 45 days after you first furnish labor, services or materials to the job — and in any event before the owner makes final payment after the contractor has given its final contractor’s affidavit. The statute requires strict compliance with that timing. Put the 45th day on your calendar the day you first deliver or mobilize.',
+  },
+  {
+    question: 'Who has to send a notice to owner?',
+    answer:
+      'Lienors who do not have a contract directly with the owner: subcontractors, sub-subcontractors and material suppliers. Laborers are exempt, and a contractor with a direct contract does not need one. A sub-subcontractor or a supplier to a subcontractor must also serve a copy on the contractor, and a supplier to a sub-subcontractor must serve the subcontractor if it knows the name and address.',
+  },
+  {
+    question: 'How do I serve a notice to owner — does it have to be certified mail?',
+    answer:
+      'Section 713.18 allows hand delivery; common carrier; or registered, Global Express Guaranteed or certified mail with evidence of delivery; and posting on the site only if those fail. Certified mail is the usual choice: if you mail it within 40 days of first furnishing to the address in the notice of commencement and keep a mail log or USPS tracking record, service is effective on the date of mailing. Keep the receipts with your copy.',
+  },
+  {
+    question: 'What happens if I miss the 45-day deadline?',
+    answer:
+      'Under § 713.06(2)(a), failing to serve the notice, or to serve it on time, is a complete defense to enforcement of your lien. You can still collect under your contract, and you may have payment bond rights on a bonded job under their own notice rules, but the lien against the property is effectively gone. Some lienors serve a notice on every job on day one for that reason.',
+  },
+  {
+    question: 'Does a notice to owner mean I am filing a lien?',
+    answer:
+      'No. The statute says the notice is not a lien, a cloud or an encumbrance on the property. It is routine — owners, lenders and general contractors receive them on every Florida job and use them to know whom to collect lien waivers from. A lien is a separate claim of lien, recorded later only if you are not paid.',
+  },
+  {
+    question: 'Where do I find the owner’s name and address?',
+    answer:
+      'On the recorded notice of commencement for the job, which lists the owner, contractor, surety, lender and the persons designated to receive notices. If no notice of commencement has been recorded, the statute lets you rely on the information in the building permit application.',
+  },
+];
+---
+
+<TemplatePage
+  slug="notice-to-owner"
+  title="Notice to Owner Form (Florida) – Free PDF & Word Template"
+  description="Free Florida notice to owner form under Fla. Stat. § 713.06 with the statutory warning, copies-to list and a 45-day service record. Fillable PDF and Word."
+  h1="Notice to Owner (Florida)"
+  intro="The preliminary notice Florida subcontractors and suppliers serve on the owner to preserve their lien rights, with the warning and the “important information for your protection” text from § 713.06(2)(c) printed word for word. The form adds a copies-to list with certified mail numbers and a service record that tracks your 45-day deadline."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF' },
+    { format: 'docx', label: 'Download Word template' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'The statutory WARNING block about liens and paying twice, verbatim, at the top of the page',
+    'Owner’s name and address, taken from the notice of commencement',
+    'General description of the services or materials you furnish',
+    'Property description and the party whose order you are working under',
+    'Reference to the recorded notice of commencement (date and county)',
+    'The statutory “Important information for your protection” text, verbatim',
+    'Lienor’s signature, name and address, and the date',
+    'Copies-to table for the contractor, the owner’s designee and the lender, with a certified mail number for each',
+    'Service record: first furnishing date, 45-day deadline, date mailed and the owner’s certified mail number',
+    'A completed example from a mechanical subcontractor on a Tampa medical office job',
+  ]}
+  howTo={[
+    [
+      'Pull the notice of commencement',
+      'Get the recorded notice of commencement from the county clerk’s records (or the permit application if none is recorded). It gives you the owner’s name and address, the contractor, the lender and anyone designated to receive notices.',
+    ],
+    [
+      'Write down your first furnishing date',
+      'The day you first delivered materials or started work on site starts the 45-day clock. Enter it and the 45th day in the service record, and serve well before that — ideally within 40 days so the mailing presumption applies.',
+    ],
+    [
+      'Describe what you furnish and for whom',
+      'A plain general description of your labor, services or materials, the property, and the party who hired you (the “order given by”) — the GC, or the subcontractor if you are a sub-sub or supplier.',
+    ],
+    [
+      'List every copy recipient',
+      'The contractor if you do not have a contract with the contractor, the owner’s designee named in the notice of commencement, the lender and, for a supplier to a sub-subcontractor, the subcontractor. Record the certified mail number for each.',
+    ],
+    [
+      'Sign, serve and keep the proof',
+      'Sign and send by certified or registered mail with evidence of delivery, or by hand or common carrier. Keep the mail log or USPS tracking record with your copy — it is your proof of timely service if a lien is ever needed.',
+    ],
+  ]}
+  faqs={faqs}
+  related={[
+    'notice-of-commencement',
+    'conditional-lien-waiver',
+    'unconditional-lien-waiver',
+    'lien-waiver',
+  ]}
+  feature={{
+    href: '/features/pay-applications/',
+    label: 'See pay applications in BuildWorkPro',
+    heading: 'Protect the payment, then bill it',
+    body: 'The notice keeps your lien rights; the billing record is what you collect against. <a href="/features/pay-applications/" class="font-semibold text-brand-700 hover:underline">BuildWorkPro’s pay applications</a> track the schedule of values, retainage and approval history for each period, and every signed notice and waiver can be attached to the project or the pay app it belongs to. $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Know what you are owed on every Florida job',
+    body: 'BuildWorkPro keeps each project’s pay applications, change orders and documents together, so the notice you served, the amounts billed and the retainage held are in one place when payment is late.',
+  }}
+  disclaimer="Florida form, not legal advice. The warnings follow Fla. Stat. § 713.06(2)(c) as published for 2026; deadlines are strict and statutes change. Public projects and bonded jobs have their own notice rules (§ 255.05, § 713.23). Have a Florida construction attorney review your notice process."
+  updated="2026-09-24"
+>
+  <h2>Why Florida subcontractors send a notice to owner</h2>
+  <p>
+    If you work for a general contractor, you have no contract with the property owner — yet Florida
+    law gives you a lien on the owner’s property if you are not paid. The price of that right is
+    notice. Section 713.06(2) makes a notice to owner a prerequisite to perfecting a lien for every
+    lienor who is not in privity with the owner, except laborers, and makes late or missing notice a
+    complete defense. The notice also protects the owner: once served, the owner knows to collect
+    <a href="/templates/conditional-lien-waiver/">lien waivers</a> from you before paying the GC, which
+    is exactly the leverage you want.
+  </p>
+
+  <h2>The 45-day deadline and how to serve</h2>
+  <p>
+    Serve the notice before you start, or within 45 days after you first furnish labor, services or
+    materials — and before the owner’s final payment once the contractor has given its final
+    affidavit. The first furnishing date is the first delivery or the first day on site, not the
+    contract date. For service, § 713.18 allows hand delivery, a common carrier, or registered,
+    Global Express Guaranteed or certified mail with evidence of delivery. If you mail it within 40
+    days of first furnishing to the address in the notice of commencement and keep a mail log or
+    USPS tracking record, service is effective on the date of mailing even if the owner never signs
+    for it. The service record at the bottom of the form exists so those dates are written down on
+    your copy.
+  </p>
+
+  <h2>The form, field by field</h2>
+  <ul>
+    <li>
+      <strong>Warning.</strong> The capitalized warning must be on the notice; it is printed verbatim
+      in a box at the top.
+    </li>
+    <li>
+      <strong>To.</strong> The owner’s name and address, exactly as on the recorded
+      <a href="/templates/notice-of-commencement/">notice of commencement</a>.
+    </li>
+    <li>
+      <strong>Services or materials.</strong> A general description — “HVAC equipment, ductwork and piping
+      labor and materials” is enough. You do not need to state a price.
+    </li>
+    <li>
+      <strong>Property and order given by.</strong> The property description and the party that hired
+      you.
+    </li>
+    <li>
+      <strong>Important information for your protection.</strong> The statutory explanation to the owner,
+      verbatim.
+    </li>
+    <li>
+      <strong>Lienor, copies to, service record.</strong> Your signature, name and address; each copy
+      recipient with its mail number; and your first furnishing, deadline and mailing dates.
+    </li>
+  </ul>
+
+  <h2>A worked example</h2>
+  <p>
+    The completed example is from Summit Mechanical’s Tampa office, the mechanical subcontractor to
+    Brightline Builders on Harbor Point Development’s Tampa medical office — the job in the
+    <a href="/templates/notice-of-commencement/">notice of commencement example</a>, recorded
+    September 8, 2026. Summit first delivered materials on September 21, so its 45th day is November
+    5. It mailed the notice on October 5 — inside the 40-day window — by certified mail to the owner
+    at the address in the notice of commencement, with copies to Brightline and to the bank’s
+    construction loan administration, which the owner designated in item 8 to receive notices to
+    owner. Summit has a direct contract with Brightline, so the copy to the contractor is a
+    courtesy; a supplier to Summit would be required to send one.
+  </p>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>
+      Counting 45 days from the subcontract date instead of the first delivery or day on site.
+    </li>
+    <li>Mailing to an old address instead of the one in the notice of commencement.</li>
+    <li>Leaving out the lender or the owner’s designee when item 8 names one.</li>
+    <li>Rewording or shrinking the statutory warnings.</li>
+    <li>Not keeping the mail log, tracking record or receipts.</li>
+    <li>Assuming a bonded or public job works the same way — it has its own notice rules.</li>
+  </ul>
+  <p>
+    Outside Florida, most states have their own preliminary notice with different names, contents
+    and deadlines; this form is for Florida only. For the waivers you will exchange once payments
+    start, see the <a href="/templates/lien-waiver/">lien waiver forms</a>.
+  </p>
+</TemplatePage>
