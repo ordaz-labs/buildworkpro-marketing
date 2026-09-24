@@ -391,7 +391,8 @@ const geoDefaultEnabled = import.meta.env.PROD;
 
          Not consent-gated: this is first-party attribution on our own signup
          link. It sets no cookie, loads no tracker, carries no identifier of its
-         own, and stores nothing at all unless an ad actually sent someone here. -->
+         own, and stores nothing unless an ad, a search engine or another site
+         sent someone here (a direct visit stays completely clean). -->
     <script is:inline define:vars={{ signupUrl: config.signupUrl }}>
       (function () {
         // The keys the app reads, capped to its column widths so a crafted
@@ -426,6 +427,53 @@ const geoDefaultEnabled = import.meta.env.PROD;
           if (!any) return null;
           found.landing_page = location.pathname.slice(0, FIELDS.landing_page);
           return found;
+        }
+
+        // Search engines and AI assistants send visitors with no query params,
+        // so without this an organic signup lands on the tenant with every
+        // attribution column null and cannot be told apart from direct traffic.
+        // Label them the way GA4 does. The referrer is only the origin (browsers
+        // strip the path cross-origin), so the search query itself never leaves.
+        const ORGANIC_HOSTS = {
+          google: 'organic',
+          bing: 'organic',
+          duckduckgo: 'organic',
+          yahoo: 'organic',
+          ecosia: 'organic',
+          brave: 'organic',
+          chatgpt: 'ai-assistant',
+          openai: 'ai-assistant',
+          perplexity: 'ai-assistant',
+          claude: 'ai-assistant',
+          copilot: 'ai-assistant',
+          gemini: 'ai-assistant',
+        };
+
+        function fromReferrer() {
+          let host;
+          try {
+            host = new URL(document.referrer).hostname.replace(/^www\./, '');
+          } catch {
+            return null; // no referrer (direct) or an unparseable one
+          }
+          if (!host || host === location.hostname || host.endsWith('buildworkpro.com')) {
+            return null; // internal navigation or the app itself
+          }
+          const labels = host.split('.');
+          let medium = 'referral';
+          let source = host;
+          for (const name in ORGANIC_HOSTS) {
+            if (labels.indexOf(name) !== -1) {
+              medium = ORGANIC_HOSTS[name];
+              source = name === 'openai' ? 'chatgpt' : name;
+              break;
+            }
+          }
+          return {
+            utm_source: source.slice(0, FIELDS.utm_source),
+            utm_medium: medium,
+            landing_page: location.pathname.slice(0, FIELDS.landing_page),
+          };
         }
 
         // sessionStorage can throw (private mode, blocked storage). Attribution
@@ -470,8 +518,22 @@ const geoDefaultEnabled = import.meta.env.PROD;
         function run() {
           // Last touch wins: a fresh ad click supersedes an earlier one.
           const arriving = fromUrl();
-          if (arriving) remember(arriving);
-          decorate(arriving || recall());
+          if (arriving) {
+            remember(arriving);
+            decorate(arriving);
+            return;
+          }
+          // An organic arrival only fills an empty slot — it never overwrites
+          // an ad touch from earlier in the visit, which is what paid budget
+          // decisions are made on.
+          const stored = recall();
+          if (stored) {
+            decorate(stored);
+            return;
+          }
+          const organic = fromReferrer();
+          if (organic) remember(organic);
+          decorate(organic);
         }
 
         run();
