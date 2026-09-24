@@ -581,7 +581,37 @@ const geoDefaultEnabled = import.meta.env.PROD;
               params: { template: template },
             });
           if (window.fbq) window.fbq('trackCustom', 'TemplateDownload', { template: template });
+          revealNextStep(template);
         }
+
+        // Post-download next step (template pages). The download itself is
+        // never gated; this panel only appears once the file is on its way,
+        // and only once per page view.
+        function revealNextStep(template) {
+          const panel = document.getElementById('template-next-step');
+          if (!panel || !panel.hidden) return;
+          panel.hidden = false;
+          if (window.bwpTrack)
+            window.bwpTrack(null, {
+              name: 'template_next_step_view',
+              params: { template: template },
+            });
+        }
+
+        function onNextStepActivate(e) {
+          const a = e.target && e.target.closest && e.target.closest('[data-next-step]');
+          const panel = a && a.closest('#template-next-step');
+          if (!panel || !window.bwpTrack) return;
+          window.bwpTrack(null, {
+            name: 'template_next_step_click',
+            params: {
+              template: panel.getAttribute('data-template') || '',
+              target: a.getAttribute('data-next-step') || '',
+            },
+          });
+        }
+        document.addEventListener('click', onNextStepActivate);
+        document.addEventListener('auxclick', onNextStepActivate);
         document.addEventListener('click', onTemplateDownload);
         document.addEventListener('auxclick', onTemplateDownload);
 
