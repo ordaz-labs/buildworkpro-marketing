@@ -1,0 +1,188 @@
+---
+// Equipment rental agreement: "equipment rental agreement" 1,000/mo, KD 0 (US,
+// DataForSEO, 2026-09). Rental-house-to-contractor or contractor-to-contractor,
+// bare or operated. Not legal advice.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What should an equipment rental agreement include?',
+    answer:
+      'The parties, the jobsite and rental period, a schedule of each item with its unit or serial number, rate and rate basis (hour, day, week or month), whether it is a bare or operated rental, delivery and pickup, fuel, usage limits, damage and loss responsibility, insurance, payment terms, and a condition record at delivery and return. This template puts all of that on page 1 and the legal terms after it.',
+  },
+  {
+    question: 'What is the difference between a bare rental and an operated rental?',
+    answer:
+      'In a bare (or “dry”) rental you rent only the machine and supply your own qualified operator, so you are responsible for how it is run. In an operated (or “wet”) rental the owner supplies the machine with its operator — common for cranes — and you direct the work while the operator stays the owner’s employee. The schedule marks each item as one or the other, and section 3 of the terms sets out who is responsible for what.',
+  },
+  {
+    question: 'How do daily, weekly and monthly rental rates work?',
+    answer:
+      'Each item is priced on a rate basis: per hour, day, week or month, with a week usually costing far less than five days and a month less than four weeks. Most rental houses also cap the engine hours included — commonly 8 per day, 40 per week and 160 per month — and charge extra hours pro rata. The template records the rate basis per item and the hour allowances once, so overtime is not a surprise.',
+  },
+  {
+    question: 'Who is responsible if rented equipment is damaged or stolen?',
+    answer:
+      'Under most rental agreements, including this one, the renter is responsible from delivery until pickup for loss, theft and damage other than ordinary wear and tear or the owner’s own negligence. A damage waiver sold by the rental company can limit that for accidental damage, but it rarely covers theft, misuse or unqualified operators. If you decline the waiver, your own insurance should cover rented equipment for its full replacement value.',
+  },
+  {
+    question: 'What insurance does a contractor need to rent equipment?',
+    answer:
+      'Typically commercial general liability with the rental company as additional insured, property coverage for rented or leased equipment with the rental company as loss payee, auto liability if you haul or drive the equipment on public roads, and workers’ compensation. The Rental Summary records the limits the lessor requires; send the certificates before delivery.',
+  },
+  {
+    question: 'Can one contractor rent equipment to another with this template?',
+    answer:
+      'Yes. The agreement works for a rental company renting to a contractor or for a contractor renting a machine to another contractor. Contractor-to-contractor rentals are where terms most often go unwritten, so fill in the damage, fuel and insurance sections even if the parties know each other well.',
+  },
+];
+---
+
+<TemplatePage
+  slug="equipment-rental-agreement"
+  title="Equipment Rental Agreement Template – Free Word & PDF"
+  description="Free equipment rental agreement for contractors: equipment schedule, hourly to monthly rates, bare or operated, fuel, damage and insurance. Word and PDF."
+  h1="Equipment Rental Agreement Template"
+  intro="A rental agreement for construction equipment that works for a rental house or for one contractor renting to another. Page 1 is a fillable Rental Summary with the equipment schedule, rates and terms; twelve numbered terms cover bare and operated rentals, damage, insurance and return; a condition record checks each machine out and back in."
+  downloads={[
+    { format: 'pdf', label: 'Download PDF (fillable page 1)' },
+    { format: 'docx', label: 'Download Word template' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Lessor and renter blocks with representatives and a PO or account number',
+    'Jobsite, rental start and estimated return, and who delivers and picks up',
+    'Equipment schedule: description, unit or serial number, bare or operated, rate basis, rate, estimated quantity and amount',
+    'Charges summary: estimated rent, delivery and pickup, damage waiver, fuel and other, estimated total before tax',
+    'Usage allowance per day, week and month, fuel-on-return option and refuel charge',
+    'Damage waiver accepted or declined, deposit, payment terms, late interest and governing state',
+    'Insurance limits: liability, rented-equipment coverage and auto liability',
+    'Twelve numbered terms, including bare vs. operated rental, loss and damage, insurance and indemnity',
+    'Signature block and a delivery/return condition record with hour meter and fuel readings',
+    'A completed example: lifts, a telehandler and an operated crane for a rooftop-unit set',
+  ]}
+  howTo={[
+    [
+      'Fill in the parties and the job',
+      'Legal names and addresses, the jobsite the equipment is allowed on, the start date and the estimated return. Mark who delivers and who picks up.',
+    ],
+    [
+      'List every item in the schedule',
+      'One row per machine, with the unit or serial number from the delivery ticket, bare or operated, the rate basis and rate, and an estimated quantity. The estimate is for budgeting; the invoice follows the actual rental period and hour meter.',
+    ],
+    [
+      'Set the rental terms',
+      'Hours included per day, week and month; fuel on return; damage waiver accepted or declined; deposit, payment terms and the insurance limits the lessor requires.',
+    ],
+    [
+      'Check it out on delivery',
+      'Walk each machine with the driver and record hours, fuel and any existing damage on the condition record. Both parties initial.',
+    ],
+    [
+      'Call it off rent and check it back in',
+      'Call the lessor off rent when you are done and get an off-rent number, then record hours, fuel and condition at pickup. Rent runs until the machine leaves your site.',
+    ],
+  ]}
+  faqs={faqs}
+  related={[
+    'construction-contract',
+    'subcontractor-agreement',
+    'construction-estimate',
+    'work-order',
+  ]}
+  feature={{
+    href: '/features/construction-bidding/',
+    label: 'See bidding in BuildWorkPro',
+    heading: 'Price the rental into the bid',
+    body: 'Equipment you rent for a job belongs in the price. In <a href="/features/construction-bidding/" class="font-semibold text-brand-700 hover:underline">BuildWorkPro’s bids</a>, job-wide costs such as mobilization or a rented lift go on the Project Costs tab and are spread into your line items’ sell prices, so the rental is covered before the bid goes out. $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Bid the equipment, then track the job',
+    body: 'BuildWorkPro spreads job-wide costs like equipment rental across your bid line items, and keeps the signed agreement in the project’s documents once the job is won.',
+  }}
+  disclaimer="General-purpose form, not legal advice. Rental terms, insurance requirements, operator certification rules and sales tax on equipment rentals vary by state and by equipment type. Have an attorney and your insurance agent review before you sign or issue a rental agreement."
+  updated="2026-09-24"
+>
+  <h2>When you need a written equipment rental agreement</h2>
+  <p>
+    Rental houses always have one — theirs. It is usually printed on the back of the delivery ticket
+    and written entirely for the lessor. When you rent from another contractor, or rent your own
+    machine out, there is often nothing in writing at all until a boom lift comes back with a
+    cracked platform. This template gives both sides the same page to agree on: what was rented, at
+    what rate, for how many hours, who operates it, who pays when it is damaged, and what condition
+    it must come back in.
+  </p>
+
+  <h2>Bare rental vs. operated rental</h2>
+  <p>
+    The most important box on each schedule row is <strong>bare</strong> or <strong>operated</strong
+    >. On a bare rental the renter supplies the operator and takes responsibility for operation,
+    rigging, loads and ground conditions, and must use operators who are trained, qualified and
+    certified as the law and the manufacturer require. On an operated rental the lessor supplies the
+    operator, who stays the lessor’s employee; the renter still directs the work and is responsible
+    for site access, ground bearing and the loads and signals it provides. Section 3 of the terms
+    spells out that split, and the operator can refuse any lift they consider unsafe.
+  </p>
+
+  <h2>Rates, hours and the fine print that costs money</h2>
+  <ul>
+    <li>
+      <strong>Rate basis.</strong> Hour, day, week or month per item. A partial period is charged at the
+      lower of the next shorter rate or the full period.
+    </li>
+    <li>
+      <strong>Hours included.</strong> A day, week or month includes a set number of engine hours; extra
+      hours are charged pro rata from the hour meter readings on the condition record.
+    </li>
+    <li>
+      <strong>Off rent.</strong> Rent runs until the lessor picks the machine up after your off-rent call.
+      Get an off-rent number.
+    </li>
+    <li>
+      <strong>Fuel and cleaning.</strong> Return it full (or as delivered) and clean, or pay the refuel
+      and cleaning charges.
+    </li>
+    <li>
+      <strong>Breakdowns.</strong> Stop using and report a broken machine; rent does not run while it
+      is down for a breakdown you did not cause.
+    </li>
+  </ul>
+
+  <h2>Damage, loss and insurance</h2>
+  <p>
+    From delivery until pickup, the renter carries the risk of loss, theft and damage other than
+    ordinary wear and tear or the lessor’s own negligence, and pays for repair — or fair market
+    value if the machine is lost — plus rent while it is out of service, up to a reasonable period.
+    There are two ways to cover that: buy the lessor’s damage waiver, which limits accidental damage
+    but usually excludes theft, misuse and unqualified operators, or decline it and carry your own
+    coverage for rented equipment at full replacement value with the lessor as loss payee. Either
+    way, the lessor will want certificates for general liability (naming it additional insured),
+    auto liability if you haul the equipment, and workers’ compensation before the truck leaves the
+    yard.
+  </p>
+
+  <h2>A worked example</h2>
+  <p>
+    The completed example is Summit Mechanical renting from a Denver rental house for the
+    rooftop-unit set on the Harbor Point medical office, August 3–28, 2026: a 60 ft boom lift at
+    $1,450 a week for four weeks ($5,800), a 26 ft scissor lift at $395 a week ($1,580), a 10,000 lb
+    telehandler at $525 a day for three days ($1,575), and a 40-ton crane with a certified operator
+    at $245 an hour for eight hours ($1,960). Estimated rent is $10,915.00, plus $1,050.00 for
+    delivery and pickup, for an estimated $11,965.00 before tax. Summit declines the damage waiver
+    because its own policy covers rented equipment at full replacement value, and the hour
+    allowances are 8 per day, 40 per week and 160 per month.
+  </p>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>No condition record at delivery, so pre-existing damage becomes yours.</li>
+    <li>Forgetting to call the machine off rent, and paying for another week.</li>
+    <li>Letting an uncertified operator run a bare-rented machine that requires certification.</li>
+    <li>Declining the damage waiver without confirming your policy covers rented equipment.</li>
+    <li>
+      Leaving the equipment cost out of the bid — see the <a
+        href="/templates/construction-estimate/">construction estimate template</a
+      >.
+    </li>
+  </ul>
+</TemplatePage>
