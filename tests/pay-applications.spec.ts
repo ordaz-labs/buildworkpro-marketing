@@ -5,19 +5,25 @@ import { test, expect } from '@playwright/test';
 // template-page feeder, FAQ + SoftwareApplication schema).
 
 test.describe('pay applications / AIA billing feature', () => {
-  test('title and H1 lead with AIA billing software', async ({ page }) => {
+  test('title and H1 lead with pay application software', async ({ page }) => {
     const response = await page.goto('/features/pay-applications/');
     expect(response?.status()).toBe(200);
 
-    await expect(page).toHaveTitle(/AIA Billing Software for Subcontractors/);
-    await expect(page.locator('main h1')).toHaveText(/AIA Billing Software for Subcontractors/);
+    await expect(page).toHaveTitle(/^Pay Application Software for Subcontractors \| AIA-Style$/);
+    expect((await page.title()).length).toBeLessThanOrEqual(60);
+    await expect(page.locator('main h1')).toHaveText(/Pay Application Software for Subcontractors/);
+    await expect(page.locator('main h1 + p')).toContainText(/AIA billing software/i);
     await expect(page.locator('main h2').first()).toHaveText(/Pay application software/i);
   });
 
-  test('meta description leads with G702/G703, retainage, and $79/mo', async ({ page }) => {
+  test('meta description leads with pay application software, G702/G703, and $79/mo', async ({
+    page,
+  }) => {
     await page.goto('/features/pay-applications/');
     const description = await page.locator('meta[name="description"]').getAttribute('content');
-    expect(description).toMatch(/AIA G702\/G703/i);
+    expect(description).toMatch(/^Pay application software/i);
+    expect(description).toMatch(/AIA-style G702\/G703/i);
+    expect(description!.length).toBeLessThanOrEqual(155);
     expect(description).toMatch(/schedule of values/i);
     expect(description).toMatch(/retainage/i);
     expect(description).toMatch(/\$79/);
