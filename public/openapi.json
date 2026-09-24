@@ -85,6 +85,7 @@
           "messaging:read",
           "messaging:send",
           "support:read",
+          "support:write",
           "reports:read",
           "signatures:read",
           "signatures:send",
@@ -1513,6 +1514,115 @@
           }
         }
       },
+      "BidLineItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "bidId": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "item",
+              "section",
+              "note"
+            ],
+            "description": "item = priced line; section = header grouping the rows after it; note = customer-visible text."
+          },
+          "isOptional": {
+            "type": "boolean",
+            "description": "An optional (alternate) priced line, quoted outside the bid total."
+          },
+          "markName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Human-friendly mark name, e.g. W-01. Null on section and note rows."
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "quantity": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Quantity. Sections and notes are not priced."
+          },
+          "unitPrice": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Pre-markup direct cost per unit (before margin, overhead, commission, and distributed project costs). Not the customer price — use customerUnitPrice."
+          },
+          "total": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Pre-markup line cost. Summing these does not equal the bid subtotal. Use customerTotal."
+          },
+          "customerUnitPrice": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Customer-facing unit price after markup and this line's share of distributed costs. Null on section and note rows. An optional line is priced on its own and is excluded from the bid subtotal."
+          },
+          "customerTotal": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Customer-facing line total in dollars, reconciled to the cent. Null on section and note rows. The sum over priced, non-optional lines equals the bid's pre-discount subtotal."
+          },
+          "sellTaxPercent": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Per-line sales-tax rate (0–100). Null inherits the bid's tax rate; 0 exempts the line."
+          },
+          "buyTaxPercent": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Per-line purchase-tax rate (0–100) on a flat line's cost. Null inherits the product's rate."
+          },
+          "order": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Sort position within the bid. A section covers every following row until the next section."
+          }
+        },
+        "required": [
+          "id",
+          "bidId",
+          "kind",
+          "isOptional",
+          "markName",
+          "description",
+          "quantity",
+          "unitPrice",
+          "total",
+          "customerUnitPrice",
+          "customerTotal",
+          "sellTaxPercent",
+          "buyTaxPercent",
+          "order"
+        ]
+      },
       "Bid": {
         "type": "object",
         "properties": {
@@ -1560,6 +1670,13 @@
               "string",
               "null"
             ]
+          },
+          "lineItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BidLineItem"
+            },
+            "description": "Present on GET /bids/{id}. unitPrice and total are pre-markup cost; customerUnitPrice and customerTotal are the customer-facing prices. Omitted from list responses."
           },
           "discountAmount": {
             "type": [
@@ -1714,80 +1831,6 @@
           "acceptedBy",
           "createdAt",
           "updatedAt"
-        ]
-      },
-      "BidLineItem": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "bidId": {
-            "type": "integer"
-          },
-          "kind": {
-            "type": "string",
-            "enum": [
-              "item",
-              "section",
-              "note"
-            ],
-            "description": "item = priced line; section = header grouping the rows after it; note = customer-visible text."
-          },
-          "isOptional": {
-            "type": "boolean",
-            "description": "An optional (alternate) priced line, quoted outside the bid total."
-          },
-          "markName": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Human-friendly mark name, e.g. W-01. Null on section and note rows."
-          },
-          "description": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "quantity": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "unitPrice": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "total": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "order": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "description": "Sort position within the bid. A section covers every following row until the next section."
-          }
-        },
-        "required": [
-          "id",
-          "bidId",
-          "kind",
-          "isOptional",
-          "markName",
-          "description",
-          "quantity",
-          "unitPrice",
-          "total",
-          "order"
         ]
       },
       "PayApp": {
@@ -2984,6 +3027,42 @@
           "joinedAt"
         ]
       },
+      "Me": {
+        "type": "object",
+        "properties": {
+          "keyId": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "API key id when the caller is an API key. Null for an OAuth access token."
+          },
+          "keyName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "API key name when the caller is an API key. Null for an OAuth access token."
+          },
+          "tenantId": {
+            "type": "integer",
+            "description": "Organization this credential is bound to."
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Scopes granted to this credential."
+          }
+        },
+        "required": [
+          "keyId",
+          "keyName",
+          "tenantId",
+          "scopes"
+        ]
+      },
       "ProjectTemplate": {
         "type": "object",
         "properties": {
@@ -4029,6 +4108,50 @@
           "role",
           "scopes"
         ]
+      },
+      "SendBidBody": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "minItems": 1,
+                "maxItems": 20
+              }
+            ]
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "maxItems": 20
+          },
+          "templateId": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "subject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "customMessage": {
+            "type": "string",
+            "maxLength": 5000
+          }
+        }
       },
       "ProjectBillingFigures": {
         "type": "object",
@@ -5401,7 +5524,7 @@
     "/leads/summary": {
       "get": {
         "summary": "Aggregate lead totals and breakdowns by stage and source",
-        "description": "Returns flat totals (count, estimated_value_total) plus a breakdown by pipeline stage (with stage name joined from lead_stages) and a breakdown by source. Null source becomes its own bucket. Money values are decimal strings. Date filter applies to createdAt.",
+        "description": "Returns flat totals (count, estimated_value_total) plus a breakdown by pipeline stage (with stage name joined from lead_stages) and a breakdown by source. `totals.count` counts every matching lead; `totals.estimated_value_total` and each `by_source[].estimated_value_total` are the OPEN pipeline value — leads in a Won or Lost stage are excluded, matching the app's Pipeline Value. `by_stage[]` reports each stage's own sum (a Won/Lost bucket carries its closed value) and flags closed stages with `isWon` / `isLost`. Null source becomes its own bucket. Money values are decimal strings. Date filter applies to createdAt.",
         "security": [
           {
             "bearerAuth": [
@@ -5493,6 +5616,18 @@
                                   "null"
                                 ]
                               },
+                              "isWon": {
+                                "type": [
+                                  "boolean",
+                                  "null"
+                                ]
+                              },
+                              "isLost": {
+                                "type": [
+                                  "boolean",
+                                  "null"
+                                ]
+                              },
                               "count": {
                                 "type": "integer"
                               },
@@ -5503,6 +5638,8 @@
                             "required": [
                               "stageId",
                               "stageName",
+                              "isWon",
+                              "isLost",
                               "count",
                               "estimated_value_total"
                             ]
@@ -8734,7 +8871,8 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Bid-level sales tax rate. A percent, not a fraction: 7 means 7% (send 7, not 0.07). 0-100, at most 3 decimal places."
                   },
                   "discountType": {
                     "type": [
@@ -8747,7 +8885,8 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Discount amount, or a percent when discountType is \"percentage\". At most 2 decimal places."
                   },
                   "siteAddress": {
                     "type": [
@@ -8818,19 +8957,22 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Margin as a percent of the selling price (18 means 18%). At most 2 decimal places."
                   },
                   "companyOhPercent": {
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Company overhead as a percent of the selling price (10 means 10%). At most 2 decimal places."
                   },
                   "commissionPercent": {
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Sales commission as a percent of the selling price. At most 2 decimal places."
                   },
                   "showSublines": {
                     "type": [
@@ -8895,7 +9037,7 @@
     "/bids/{id}": {
       "get": {
         "summary": "Get bid by id",
-        "description": "Returns a single bid.",
+        "description": "Returns a single bid, including its line items. Each line's unitPrice and total are the pre-markup direct cost; customerUnitPrice and customerTotal are the customer-facing prices. A soft-deleted bid is not found.",
         "security": [
           {
             "bearerAuth": [
@@ -9071,7 +9213,8 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Bid-level sales tax rate. A percent, not a fraction: 7 means 7% (send 7, not 0.07). 0-100, at most 3 decimal places."
                   },
                   "discountType": {
                     "type": [
@@ -9084,7 +9227,8 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Discount amount, or a percent when discountType is \"percentage\". At most 2 decimal places."
                   },
                   "siteAddress": {
                     "type": [
@@ -9155,19 +9299,22 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Margin as a percent of the selling price (18 means 18%). At most 2 decimal places."
                   },
                   "companyOhPercent": {
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Company overhead as a percent of the selling price (10 means 10%). At most 2 decimal places."
                   },
                   "commissionPercent": {
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Sales commission as a percent of the selling price. At most 2 decimal places."
                   },
                   "showSublines": {
                     "type": [
@@ -9306,7 +9453,7 @@
     "/bids/{id}/send": {
       "post": {
         "summary": "Send a bid to the customer",
-        "description": "Transitions a draft bid to sent and emails the customer. A `validUntil` already in the past is moved to today plus the organization's default bid validity, so the bid is not re-expired the night it is sent.",
+        "description": "Emails a draft bid to the customer with the PDF attached, then marks it sent. `to` and `cc` are optional; when `to` is omitted the bid's contact email is used. If there is no recipient, the bid is left unchanged. A `validUntil` already in the past is moved to today plus the organization's default bid validity, so the bid is not re-expired the night it is sent. E-signature is not available on this endpoint. A soft-deleted bid is not found.",
         "security": [
           {
             "bearerAuth": [
@@ -9330,6 +9477,15 @@
             "in": "path"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendBidBody"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Sent",
@@ -9364,6 +9520,16 @@
             }
           },
           "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
             "description": "Error",
             "content": {
               "application/problem+json": {
@@ -9856,6 +10022,7 @@
     "/bids/{id}/line-items": {
       "get": {
         "summary": "List bid line items",
+        "description": "Returns every line of the bid, including sections and notes. unitPrice and total are the pre-markup direct cost. customerUnitPrice and customerTotal are the customer-facing prices (null on sections and notes). The sum of customerTotal over priced, non-optional lines equals the bid's pre-discount subtotal. A soft-deleted bid is not found.",
         "security": [
           {
             "bearerAuth": [
@@ -10011,13 +10178,15 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Purchase-tax rate on the cost. A percent, not a fraction: 7 means 7% (send 7, not 0.07). 0-100, at most 3 decimal places."
                   },
                   "sellTaxPercent": {
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Sales-tax rate for this line. null inherits the bid rate, 0 exempts. A percent, not a fraction: 7 means 7% (send 7, not 0.07). 0-100, at most 3 decimal places."
                   },
                   "kind": {
                     "type": "string",
@@ -10041,7 +10210,8 @@
                     "maximum": 2147483647
                   },
                   "unitPrice": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Pre-markup direct cost per unit for a flat line with no sublines. Not the customer price — read customerUnitPrice. Ignored once the line has sublines."
                   }
                 },
                 "required": [
@@ -10213,13 +10383,15 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Purchase-tax rate on the cost. A percent, not a fraction: 7 means 7% (send 7, not 0.07). 0-100, at most 3 decimal places."
                   },
                   "sellTaxPercent": {
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Sales-tax rate for this line. null inherits the bid rate, 0 exempts. A percent, not a fraction: 7 means 7% (send 7, not 0.07). 0-100, at most 3 decimal places."
                   },
                   "kind": {
                     "type": "string",
@@ -10243,7 +10415,8 @@
                     "maximum": 2147483647
                   },
                   "unitPrice": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Pre-markup direct cost per unit for a flat line with no sublines. Not the customer price — read customerUnitPrice. Ignored once the line has sublines."
                   }
                 }
               }
@@ -12625,6 +12798,176 @@
         },
         "operationId": "postPayAppsByIdPdf",
         "x-rate-limit-cost": 50
+      }
+    },
+    "/pay-apps/{id}/send": {
+      "post": {
+        "summary": "Email a pay application to the customer",
+        "description": "Emails the pay application PDF to the given recipients and marks it sent. Same delivery pipeline as the product's send action. Requires pay_apps:send.",
+        "security": [
+          {
+            "bearerAuth": [
+              "pay_apps:send"
+            ]
+          }
+        ],
+        "tags": [
+          "PayApps"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "templateId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  },
+                  "recipientEmails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "minItems": 1,
+                    "maxItems": 20
+                  },
+                  "cc": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "maxItems": 20
+                  },
+                  "bcc": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "maxItems": 20
+                  },
+                  "subject": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "body": {
+                    "type": "string",
+                    "maxLength": 50000
+                  }
+                },
+                "required": [
+                  "recipientEmails"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "messageId": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "recipientCount": {
+                          "type": "integer"
+                        },
+                        "payAppId": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "messageId",
+                        "recipientCount",
+                        "payAppId"
+                      ]
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postPayAppsByIdSend",
+        "x-rate-limit-cost": 5
       }
     },
     "/invoices": {
@@ -16749,6 +17092,176 @@
         },
         "operationId": "postChangeOrdersByIdPdf",
         "x-rate-limit-cost": 50
+      }
+    },
+    "/change-orders/{id}/send": {
+      "post": {
+        "summary": "Email a change order to the customer",
+        "description": "Emails the change order PDF to the given recipients and marks it sent. Same delivery pipeline as the product's send action. Requires change_orders:send.",
+        "security": [
+          {
+            "bearerAuth": [
+              "change_orders:send"
+            ]
+          }
+        ],
+        "tags": [
+          "ChangeOrders"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "templateId": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  },
+                  "recipientEmails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "minItems": 1,
+                    "maxItems": 20
+                  },
+                  "cc": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "maxItems": 20
+                  },
+                  "bcc": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "maxItems": 20
+                  },
+                  "subject": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "body": {
+                    "type": "string",
+                    "maxLength": 50000
+                  }
+                },
+                "required": [
+                  "recipientEmails"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "messageId": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "recipientCount": {
+                          "type": "integer"
+                        },
+                        "changeOrderId": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "messageId",
+                        "recipientCount",
+                        "changeOrderId"
+                      ]
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postChangeOrdersByIdSend",
+        "x-rate-limit-cost": 5
       }
     },
     "/site-logs": {
@@ -21198,7 +21711,7 @@
     "/documents/{id}/download": {
       "get": {
         "summary": "Download document file",
-        "description": "Streams the file bytes with appropriate Content-Type / Content-Disposition.",
+        "description": "Streams the file bytes with appropriate Content-Type / Content-Disposition. Refuses a file that is still being scanned or whose scan failed (409) and a file the malware scan flagged (403).",
         "security": [
           {
             "bearerAuth": [
@@ -21223,7 +21736,27 @@
           "200": {
             "description": "File bytes"
           },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
             "description": "Error",
             "content": {
               "application/problem+json": {
@@ -22020,6 +22553,51 @@
           }
         },
         "operationId": "getUsersById",
+        "x-rate-limit-cost": 1
+      }
+    },
+    "/me": {
+      "get": {
+        "summary": "Identify the caller",
+        "description": "Returns the API key or OAuth token that authenticated this request: its id, name, organization, and granted scopes. No scope is required beyond a valid credential.",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Caller identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Me"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid credential",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getMe",
         "x-rate-limit-cost": 1
       }
     },
@@ -23474,7 +24052,7 @@
     "/webhook-endpoints/{id}/deliveries": {
       "get": {
         "summary": "List recent deliveries for an endpoint",
-        "description": "Returns up to 100 most recent webhook delivery rows for the endpoint, ordered most-recent-first.",
+        "description": "Returns the 100 most recent webhook delivery rows for the endpoint, ordered most-recent-first. When more exist, meta.pagination.has_more is true and cursor stays null — page the rest with GET /webhook-deliveries.",
         "security": [
           {
             "bearerAuth": [
@@ -23540,7 +24118,7 @@
       "get": {
         "operationId": "listWebhookDeliveries",
         "summary": "List webhook deliveries (tenant-wide)",
-        "description": "Returns cursor-paginated webhook delivery rows for the calling tenant across all endpoints. Filterable by endpoint, status, event type, and createdAt date range. Replaces the per-endpoint `GET /webhook-endpoints/{id}/deliveries` (still available but hard-capped at 100 rows with no pagination).",
+        "description": "Returns cursor-paginated webhook delivery rows for the calling tenant across all endpoints. Filterable by endpoint, status, event type, and createdAt date range. The per-endpoint list is capped at 100 and sets has_more when that cap is hit; use this endpoint to page further.",
         "security": [
           {
             "bearerAuth": [
@@ -24183,7 +24761,7 @@
     "/signature-requests/{id}/resend": {
       "post": {
         "summary": "Resend an e-signature request",
-        "description": "Re-emails the SAME signing link. No new document is created. 409s when the request is not pending or sent.",
+        "description": "Re-emails the SAME signing link. No new document is created. 409s when the request is not pending or sent. Shares the app's resend budget (20 per hour per organization and user); 429 past it.",
         "security": [
           {
             "bearerAuth": [
@@ -24255,6 +24833,16 @@
             }
           },
           "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
             "description": "Error",
             "content": {
               "application/problem+json": {
