@@ -2616,13 +2616,15 @@
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Unit cost in dollars. For a kit (isKit: true) this is calculated from its components and read-only: a value sent on create or update is ignored."
           },
           "sellPrice": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Unit sell price in dollars. For a kit (isKit: true) this is calculated from its components and read-only: a value sent on create or update is ignored."
           },
           "unit": {
             "type": [
@@ -19676,6 +19678,7 @@
       },
       "post": {
         "summary": "Create product",
+        "description": "Creates a product. A kit's costPrice and sellPrice are calculated from its components, so values sent with isKit: true are ignored and a new kit starts at 0; add components with POST /products/{id}/kit-items.",
         "security": [
           {
             "bearerAuth": [
@@ -20038,6 +20041,7 @@
       },
       "patch": {
         "summary": "Update product",
+        "description": "Updates only the fields sent. A kit's costPrice and sellPrice are calculated from its components: values sent for a kit are ignored, setting isKit to true recalculates them, and the response carries the calculated prices.",
         "security": [
           {
             "bearerAuth": [
