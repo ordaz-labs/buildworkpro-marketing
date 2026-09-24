@@ -1,0 +1,30 @@
+{
+  "slug": "equipment-rental-agreement",
+  "name": "Equipment Rental Agreement Template",
+  "basename": "equipment-rental-agreement-template",
+  "files": {
+    "pdf": {
+      "file": "equipment-rental-agreement-template.pdf",
+      "bytes": 123218,
+      "pages": 3
+    },
+    "example": {
+      "file": "equipment-rental-agreement-template-example.pdf",
+      "bytes": 80803,
+      "pages": 3
+    },
+    "docx": {
+      "file": "equipment-rental-agreement-template.docx",
+      "bytes": 17063
+    }
+  },
+  "previews": [
+    {
+      "file": "equipment-rental-agreement.png",
+      "webp": "equipment-rental-agreement.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}
