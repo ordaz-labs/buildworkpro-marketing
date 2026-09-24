@@ -1849,32 +1849,18 @@
             "type": "string"
           },
           "periodStart": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
           },
           "periodEnd": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
           },
           "contractSum": {
             "type": [
@@ -2519,15 +2505,8 @@
             ]
           },
           "date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "string"
-              }
-            ]
+            "type": "string",
+            "format": "date"
           },
           "hours": {
             "type": "string"
@@ -2897,6 +2876,54 @@
           "title",
           "start",
           "end"
+        ]
+      },
+      "SearchResult": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "project",
+              "contact",
+              "site_log",
+              "document",
+              "bid",
+              "lead",
+              "invoice",
+              "pay_app",
+              "change_order"
+            ],
+            "description": "Entity type of the match."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Id of the matched record; fetch it from that type's own endpoint."
+          },
+          "title": {
+            "type": "string",
+            "description": "Display title (name, number or filename)."
+          },
+          "subtitle": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Short secondary text — email, project number, or the start of the matched body. Null when there is none."
+          },
+          "projectId": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Parent project for change orders, pay apps, site logs and invoices; null when the record has none. Absent for other types."
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "title",
+          "subtitle"
         ]
       },
       "Comment": {
@@ -3977,6 +4004,77 @@
           "userLastName"
         ]
       },
+      "BriefingDismissal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "itemKey": {
+            "type": "string",
+            "description": "`<category>:<entityType>:<entityId>`, as on the briefing row."
+          },
+          "dismissedUntil": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Snooze end, or null until the row's state changes."
+          },
+          "createdAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "updatedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "deletedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "itemKey",
+          "dismissedUntil",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
       "OauthClientRegistration": {
         "type": "object",
         "properties": {
@@ -4150,6 +4248,15 @@
           "customMessage": {
             "type": "string",
             "maxLength": 5000
+          }
+        }
+      },
+      "ShareBidBody": {
+        "type": "object",
+        "properties": {
+          "rotate": {
+            "type": "boolean",
+            "description": "When true, replace any existing public link. Otherwise reuse a live link."
           }
         }
       },
@@ -9544,6 +9651,113 @@
         "x-rate-limit-cost": 5
       }
     },
+    "/bids/{id}/share": {
+      "post": {
+        "summary": "Create a public share link for a bid",
+        "description": "Returns a `/b/:token` URL the customer can open without an account. Reuses a live link unless `rotate` is true. Draft and cancelled bids are refused — send the bid first. A soft-deleted bid is not found.",
+        "security": [
+          {
+            "bearerAuth": [
+              "bids:send"
+            ]
+          }
+        ],
+        "tags": [
+          "Bids"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareBidBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Share link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string"
+                        },
+                        "shareTokenCreatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "url",
+                        "shareTokenCreatedAt"
+                      ]
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postBidsByIdShare",
+        "x-rate-limit-cost": 5
+      }
+    },
     "/bids/{id}/accept": {
       "post": {
         "summary": "Accept a bid",
@@ -11744,13 +11958,15 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Calendar day, YYYY-MM-DD. A datetime is accepted and read as the day it names."
                   },
                   "periodEnd": {
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Calendar day, YYYY-MM-DD. A datetime is accepted and read as the day it names."
                   },
                   "contractSum": {
                     "type": [
@@ -11989,13 +12205,15 @@
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Calendar day, YYYY-MM-DD. A datetime is accepted and read as the day it names."
                   },
                   "periodEnd": {
                     "type": [
                       "string",
                       "null"
-                    ]
+                    ],
+                    "description": "Calendar day, YYYY-MM-DD. A datetime is accepted and read as the day it names."
                   },
                   "contractSum": {
                     "type": [
@@ -17499,6 +17717,14 @@
                     ],
                     "minimum": -180,
                     "maximum": 180
+                  },
+                  "clientId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "uuid",
+                    "description": "Optional idempotency key (a UUID the client mints once per queued create and repeats on every retry). A repeat with the same key from the same user returns the existing record with 200 instead of creating a duplicate."
                   }
                 },
                 "required": [
@@ -17511,6 +17737,28 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Replay of an earlier create with the same `clientId` — the existing site log, unchanged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/SiteLog"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
           "201": {
             "description": "Created",
             "content": {
@@ -17529,6 +17777,16 @@
                     "data",
                     "meta"
                   ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -18220,17 +18478,21 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "First work day to include (YYYY-MM-DD, inclusive). A datetime is read as the day it names."
             },
             "required": false,
+            "description": "First work day to include (YYYY-MM-DD, inclusive). A datetime is read as the day it names.",
             "name": "dateFrom",
             "in": "query"
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Last work day to include (YYYY-MM-DD, inclusive). A datetime is read as the day it names."
             },
             "required": false,
+            "description": "Last work day to include (YYYY-MM-DD, inclusive). A datetime is read as the day it names.",
             "name": "dateTo",
             "in": "query"
           },
@@ -18347,10 +18609,8 @@
                     "maximum": 2147483647
                   },
                   "date": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": "string",
+                    "description": "Calendar day, YYYY-MM-DD. A datetime is accepted and read as the day it names."
                   },
                   "hours": {
                     "type": "number",
@@ -18426,6 +18686,14 @@
                     ],
                     "minimum": 0,
                     "maximum": 100000
+                  },
+                  "clientId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "uuid",
+                    "description": "Optional idempotency key (a UUID the client mints once per queued create and repeats on every retry). A repeat with the same key from the same user returns the existing record with 200 instead of creating a duplicate."
                   }
                 },
                 "required": [
@@ -18439,6 +18707,28 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Replay of an earlier create with the same `clientId` — the existing time entry, unchanged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/TimeEntry"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
           "201": {
             "description": "Created",
             "content": {
@@ -18457,6 +18747,16 @@
                     "data",
                     "meta"
                   ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -18535,10 +18835,8 @@
                     "maximum": 2147483647
                   },
                   "date": {
-                    "type": [
-                      "string",
-                      "null"
-                    ]
+                    "type": "string",
+                    "description": "Calendar day, YYYY-MM-DD. A datetime is accepted and read as the day it names."
                   },
                   "hours": {
                     "type": "number",
@@ -19041,17 +19339,21 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "First work day to include (YYYY-MM-DD, inclusive). A datetime is read as the day it names."
             },
             "required": false,
+            "description": "First work day to include (YYYY-MM-DD, inclusive). A datetime is read as the day it names.",
             "name": "dateFrom",
             "in": "query"
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Last work day to include (YYYY-MM-DD, inclusive). A datetime is read as the day it names."
             },
             "required": false,
+            "description": "Last work day to include (YYYY-MM-DD, inclusive). A datetime is read as the day it names.",
             "name": "dateTo",
             "in": "query"
           },
@@ -22079,6 +22381,106 @@
           }
         },
         "operationId": "getCalendarEvents",
+        "x-rate-limit-cost": 1
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Search across records",
+        "description": "Full-text and fuzzy search across projects, contacts, site logs, documents, bids, leads, invoices, pay apps and change orders, blended into one relevance-ranked list. Requires `projects:read`; each other type is included only when the credential also holds that type's read scope (e.g. `bids:read`), and results are limited to records the authorizing user may open.",
+        "security": [
+          {
+            "bearerAuth": [
+              "projects:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "description": "Search text, at least 2 characters. `*` lists recent records."
+            },
+            "required": true,
+            "description": "Search text, at least 2 characters. `*` lists recent records.",
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "description": "Maximum results (default 20, max 50)."
+            },
+            "required": false,
+            "description": "Maximum results (default 20, max 50).",
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matches, best first",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SearchResult"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getSearch",
         "x-rate-limit-cost": 1
       }
     },
@@ -25342,6 +25744,238 @@
         "x-rate-limit-cost": 5
       }
     },
+    "/dashboard/briefing/dismissals": {
+      "post": {
+        "summary": "Dismiss or snooze a briefing row",
+        "description": "Hides one \"Needs you today\" row for the credential's user. `until` of `7d` / `30d` snoozes it; null or omitted hides it until the row's underlying state changes (a bid is re-sent, an invoice balance moves). Re-dismissing an already-dismissed row refreshes it. 404 when the entity does not exist or the credential's user cannot read it (the two are indistinguishable on purpose). Requires the read scope of the entity the row points at: invoices:read, bids:read, pay_apps:read, site_logs:read or projects:read.",
+        "security": [
+          {
+            "bearerAuth": [
+              "invoices:read",
+              "bids:read",
+              "pay_apps:read",
+              "site_logs:read",
+              "projects:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Briefing"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "itemKey": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                  },
+                  "until": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "7d",
+                      "30d"
+                    ]
+                  }
+                },
+                "required": [
+                  "itemKey"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Dismissed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/BriefingDismissal"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postDashboardBriefingDismissals",
+        "x-rate-limit-cost": 5
+      }
+    },
+    "/dashboard/briefing/dismissals/{itemKey}": {
+      "delete": {
+        "summary": "Undo a briefing dismissal",
+        "description": "Brings a dismissed or snoozed row back for the credential's user. 404 when the row is not currently dismissed. Requires the read scope of the entity the row points at: invoices:read, bids:read, pay_apps:read, site_logs:read or projects:read.",
+        "security": [
+          {
+            "bearerAuth": [
+              "invoices:read",
+              "bids:read",
+              "pay_apps:read",
+              "site_logs:read",
+              "projects:read"
+            ]
+          }
+        ],
+        "tags": [
+          "Briefing"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "description": "The row's itemKey, URL-encoded."
+            },
+            "required": true,
+            "description": "The row's itemKey, URL-encoded.",
+            "name": "itemKey",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Undone",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/BriefingDismissal"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/ResponseMeta"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "meta"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteDashboardBriefingDismissalsByItemKey",
+        "x-rate-limit-cost": 5
+      }
+    },
     "/oauth/authorize": {
       "get": {
         "summary": "OAuth 2.1 authorization endpoint (consent screen)",
@@ -25738,6 +26372,10 @@
       "description": "Daily crew assignments of tenant users to jobs (the dispatch board)."
     },
     {
+      "name": "Briefing",
+      "description": "Per-user Dismiss / Snooze of rows on the \"Needs you today\" morning briefing."
+    },
+    {
       "name": "Products",
       "description": "The catalog of materials and labor items bids are built from, including kits."
     },
@@ -25748,6 +26386,10 @@
     {
       "name": "Calendar",
       "description": "Scheduled events derived from project phases, tasks and bid deadlines."
+    },
+    {
+      "name": "Search",
+      "description": "One ranked search across records, limited to the types and rows the credential may read."
     },
     {
       "name": "Comments",
