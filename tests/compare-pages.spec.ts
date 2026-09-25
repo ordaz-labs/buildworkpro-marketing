@@ -58,11 +58,13 @@ test('procore pricing title, H1, and meta lead with the money query', async ({ p
   const response = await page.goto('/blog/procore-pricing-for-subcontractors/');
   expect(response?.status()).toBe(200);
 
-  await expect(page).toHaveTitle(/^Procore Pricing 2026: Cost, Plans & Quotes$/);
+  await expect(page).toHaveTitle(/^Procore Pricing & Cost 2026: What Subcontractors Pay$/);
   const title = await page.title();
   expect(title.length).toBeLessThanOrEqual(60);
 
-  await expect(page.locator('main h1')).toHaveText(/Procore Pricing 2026: Cost, Plans & Quotes/);
+  await expect(page.locator('main h1')).toHaveText(
+    /Procore Pricing & Cost 2026: What Subcontractors Pay/
+  );
 
   const description = await page.locator('meta[name="description"]').getAttribute('content');
   expect(description).toMatch(/^Procore pricing/i);
@@ -77,6 +79,13 @@ test('procore pricing title, H1, and meta lead with the money query', async ({ p
     page.locator('main a[href="/features/construction-bidding/"]').first()
   ).toBeVisible();
   await expect(page.locator('main a[href="/pricing/"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/features/pay-applications/"]').first()).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'How much does Procore cost?' })
+  ).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'Is Procore free for subcontractors?' })
+  ).toBeVisible();
 
   const jsonld = await page.locator('script[type="application/ld+json"]').allTextContents();
   expect(jsonld.some((s) => s.includes('FAQPage'))).toBe(true);

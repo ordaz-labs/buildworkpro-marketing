@@ -1,0 +1,190 @@
+---
+// Unconditional lien waiver: "unconditional lien waiver" 1,000/mo, KD 10 (US,
+// DataForSEO, 2026-09). Dedicated page for the two unconditional forms from the
+// four-form set on /templates/lien-waiver/ (which stays; the three cross-link).
+// Florida's statutory waiver forms: Fla. Stat. § 713.20(4)–(6), checked against
+// The 2026 Florida Statutes at leg.state.fl.us. Not legal advice.
+import TemplatePage from '../../components/templates/TemplatePage.astro';
+
+const faqs = [
+  {
+    question: 'What is an unconditional lien waiver?',
+    answer:
+      'A signed statement that you have been paid a stated amount and that, for that amount, you release your lien, stop-notice and payment-bond rights — effective the moment you sign it. There is no condition: if the check later bounces, the waiver still stands. That is why it should be signed only after the payment has cleared your account.',
+  },
+  {
+    question: 'When should I sign an unconditional lien waiver?',
+    answer:
+      'After the money is in your account, not when the check is in your hand. The usual sequence is a conditional waiver with the pay application, then the matching unconditional waiver once that payment clears — often delivered with the next application. At closeout, the unconditional final waiver is signed only after the final payment, retention included, has cleared.',
+  },
+  {
+    question: 'Is an unconditional lien waiver binding if I was not paid?',
+    answer:
+      'Generally, yes — that is what makes it unconditional, and the notice printed on these forms says so: it is enforceable against you if you sign it, even if you have not been paid. Some states limit that result or void waivers signed before payment, but you should not rely on it. If you have not been paid, sign a conditional waiver instead.',
+  },
+  {
+    question: 'What is the difference between an unconditional progress and final waiver?',
+    answer:
+      'The progress waiver releases rights for one payment for work through a stated date, and keeps retention, pending change orders, disputed items and later work. The final waiver releases everything on the job, retention included, except disputed claims you list, and adds a representation that you have paid, or will pay from the proceeds, your own subs and suppliers.',
+  },
+  {
+    question: 'Which states require a statutory lien waiver form?',
+    answer:
+      'At least twelve states prescribe waiver wording by statute — California, Texas, Arizona, Nevada, Utah, Georgia, Florida, Massachusetts, Michigan, Missouri, Mississippi and Wyoming. In those states a waiver on another form, including this one, may be ineffective, so use the statutory form and check it is current. In Florida the forms are in Fla. Stat. § 713.20(4) and (5), and § 713.20(6) says no one may require a different form.',
+  },
+  {
+    question: 'The GC wants an unconditional waiver before paying. What should I do?',
+    answer:
+      'Offer the conditional waiver for the same payment instead — it gives the GC a signed release that becomes effective the moment the payment clears. If your subcontract requires an unconditional waiver up front, ask for the check at the same time and sign only when it has cleared, or exchange it for a wire you can confirm.',
+  },
+];
+---
+
+<TemplatePage
+  slug="unconditional-lien-waiver"
+  title="Unconditional Lien Waiver Form – Free PDF & Word Template"
+  description="Free unconditional lien waiver forms for progress and final payment, with the notice-to-claimant warning. Fillable PDF and Word. No email required."
+  h1="Unconditional Lien Waiver Form"
+  intro="Two one-page unconditional waivers — on progress payment and on final payment — for signing once the payment has cleared. Each carries the boxed notice to the claimant, the exceptions that keep retention and pending change orders out of a progress release, and the list of states that require their own statutory form."
+  downloads={[
+    { format: 'pdf', label: 'Download fillable PDF (2 forms)' },
+    { format: 'docx', label: 'Download Word template (2 forms)' },
+    { format: 'example' },
+  ]}
+  whatsInside={[
+    'Form 1 — Unconditional waiver and release on progress payment',
+    'Form 2 — Unconditional waiver and release on final payment, with the paid-your-subs representation',
+    'Boxed notice to claimant: enforceable when signed, even if you have not been paid',
+    'Parties block: claimant, customer (who hired you), owner of the property, project and address',
+    'Payment block: through date, payment amount, maker of the check, application or check reference',
+    'Exceptions on the progress form: retention withheld, pending change orders, disputed claims, later work',
+    'Disputed-claims exception on the final form, with a description box',
+    'Claimant signature, printed name, company and date, plus an optional notary acknowledgment',
+    'Statutory-form states named in the fine print of each form',
+    'A completed example: the progress form for pay application no. 3, the final form for the retention release',
+  ]}
+  howTo={[
+    [
+      'Confirm the payment has cleared',
+      'Check your bank, not the mailbox. An unconditional waiver is effective when signed, so the payment it describes must already be good funds.',
+    ],
+    [
+      'Check your state and your subcontract',
+      'In a statutory-form state, use that state’s form. Elsewhere, use the form your subcontract specifies, or this one if none is specified.',
+    ],
+    [
+      'Copy the paid amount and through date',
+      'The payment amount is what you actually received for that application; the through date is the period end. Reference the check number or the application number.',
+    ],
+    [
+      'Keep your exceptions',
+      'On a progress waiver, enter retention held to date, pending change orders and disputed amounts, and describe them. On a final waiver, list disputed claims for extra work or write “none.”',
+    ],
+    [
+      'Sign last, file with the pay app',
+      'Sign, notarize if the contract requires it, and file the signed copy with the pay application it belongs to. Collect matching unconditional waivers from your own subs and suppliers once you have paid them.',
+    ],
+  ]}
+  faqs={faqs}
+  related={['conditional-lien-waiver', 'lien-waiver', 'aia-g702-g703', 'certificate-of-completion']}
+  feature={{
+    href: '/features/pay-applications/',
+    label: 'See pay applications in BuildWorkPro',
+    heading: 'Know which payments have actually cleared',
+    body: 'An unconditional waiver should match a payment you have received. <a href="/features/pay-applications/" class="font-semibold text-brand-700 hover:underline">BuildWorkPro’s pay applications</a> keep each period’s schedule of values, retainage, previous applications and approval history, so the amount and through date on the waiver come from the billing record. $79/month flat, 14-day free trial.',
+  }}
+  cta={{
+    heading: 'Every waiver tied to the payment it releases',
+    body: 'BuildWorkPro tracks every pay application and its retainage per project, and the signed waiver can be attached to the pay app it belongs to.',
+  }}
+  disclaimer="General forms, not legal advice. At least twelve states prescribe statutory lien waiver forms — California, Texas, Arizona, Nevada, Utah, Georgia, Florida (Fla. Stat. § 713.20), Massachusetts, Michigan, Missouri, Mississippi and Wyoming — and this form may be ineffective there. Lien and waiver rules vary by state; have a construction attorney licensed in the project's state review before relying on any waiver."
+  updated="2026-09-24"
+>
+  <h2>What makes a waiver unconditional</h2>
+  <p>
+    An unconditional waiver states that you have been paid and releases your rights for that payment
+    with no strings attached. It is simpler for the owner and the lender to rely on, which is why
+    they ask for it — and riskier for you, because it takes effect whether or not the money is good.
+    The forms here print a boxed notice to the claimant saying exactly that, so nobody signs the
+    wrong form by accident.
+  </p>
+  <p>
+    If you have not been paid yet, you want the
+    <a href="/templates/conditional-lien-waiver/">conditional lien waiver</a> instead. The
+    <a href="/templates/lien-waiver/">four-form lien waiver set</a> has both kinds together.
+  </p>
+
+  <h2>Progress or final</h2>
+  <table>
+    <thead>
+      <tr><th></th><th>Unconditional progress (form 1)</th><th>Unconditional final (form 2)</th></tr
+      >
+    </thead>
+    <tbody>
+      <tr
+        ><td><strong>Covers</strong></td><td
+          >One payment received, for work through the through date</td
+        ><td>The whole job, retention included</td></tr
+      >
+      <tr
+        ><td><strong>Keeps</strong></td><td
+          >Retention, pending change orders, disputed items, later work</td
+        ><td>Only the disputed claims you list</td></tr
+      >
+      <tr
+        ><td><strong>Sign when</strong></td><td>That payment has cleared</td><td
+          >The final payment, retention included, has cleared</td
+        ></tr
+      >
+    </tbody>
+  </table>
+
+  <h2>Statutory-form states</h2>
+  <p>
+    At least twelve states — California, Texas, Arizona, Nevada, Utah, Georgia, Florida,
+    Massachusetts, Michigan, Missouri, Mississippi and Wyoming — prescribe the wording of lien
+    waivers by statute; the <a href="/templates/lien-waiver/">lien waiver forms page</a> lists the statute
+    for each. Florida’s progress and final forms are in § 713.20(4) and (5), and § 713.20(6) says a person
+    may not require a lienor to furnish a different form. In those states, use the statutory form rather
+    than this general one.
+  </p>
+
+  <h2>A worked example</h2>
+  <p>
+    The completed example follows the pay application sample. Application no. 3 billed August 2026
+    with a current payment due of $122,557.50; the conditional waiver went with the application on
+    September 3. When the payment cleared, the subcontractor signed the unconditional progress
+    waiver for the same $122,557.50 through August 31, dated October 2, still carving out $28,680.50
+    of retention and a $5,784.50 change order that had not been approved when the waiver was
+    drafted. The unconditional final waiver is dated January 8, 2027, after the retention release of
+    $49,735.45 cleared, with no disputed claims.
+  </p>
+
+  <h2>Why owners and lenders ask for it</h2>
+  <p>
+    A conditional waiver proves you will release your rights once paid; an unconditional waiver
+    proves you were paid. Construction lenders and title companies usually want the unconditional
+    waiver for the previous payment before they release the next draw, because it closes the loop on
+    money that has already gone out. That is why the normal rhythm on a monthly job is a conditional
+    waiver for this month’s application and an unconditional waiver for last month’s payment, sent
+    together.
+  </p>
+  <p>
+    Before you sign, reconcile the payment against your billing: the amount received, the
+    application it pays, and the retention still held. If the payment was short, do not sign an
+    unconditional waiver for the full amount billed — sign for what you received and list the
+    shortfall as a disputed amount in the exceptions. At closeout, the unconditional final waiver
+    usually sits in the package with the <a href="/templates/certificate-of-completion/"
+      >certificate of substantial completion</a
+    > and your warranties, but it should not be signed until the final payment clears.
+  </p>
+
+  <h2>Common mistakes</h2>
+  <ul>
+    <li>Signing when the check arrives instead of when it clears.</li>
+    <li>Signing an unconditional final waiver before the retention is paid.</li>
+    <li>Leaving the exceptions blank on a progress waiver.</li>
+    <li>Using a general form in a statutory-form state.</li>
+    <li>Not getting matching waivers from your own subs and suppliers after you pay them.</li>
+  </ul>
+</TemplatePage>

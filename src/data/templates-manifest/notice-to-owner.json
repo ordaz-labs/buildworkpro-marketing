@@ -1,0 +1,30 @@
+{
+  "slug": "notice-to-owner",
+  "name": "Notice to Owner (Florida)",
+  "basename": "notice-to-owner-florida",
+  "files": {
+    "pdf": {
+      "file": "notice-to-owner-florida.pdf",
+      "bytes": 53543,
+      "pages": 1
+    },
+    "example": {
+      "file": "notice-to-owner-florida-example.pdf",
+      "bytes": 39234,
+      "pages": 1
+    },
+    "docx": {
+      "file": "notice-to-owner-florida.docx",
+      "bytes": 12707
+    }
+  },
+  "previews": [
+    {
+      "file": "notice-to-owner.png",
+      "webp": "notice-to-owner.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

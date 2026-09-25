@@ -62,9 +62,14 @@ const faqs = [
       'AIA billing software is construction pay application software that produces G702/G703-style progress billing: a schedule of values, retainage, stored materials, and previous applications rolled into the current amount due. BuildWorkPro is AIA billing software for subcontractors — it prefills the contract sum from your accepted bid, carries every period forward, tracks retainage, and emails an AIA-style PDF to your GC. It is not a licensed AIA Contract Documents product; confirm with your GC whether they require the official forms.',
   },
   {
-    question: 'What is a pay application?',
+    question: 'What is a pay application in construction?',
     answer:
       'A pay application (or pay app) is the document a subcontractor submits to a general contractor to bill for work completed during a billing period. It breaks the contract into a schedule of values, shows what was billed in prior periods, what was completed this period, and any materials stored on site, then accounts for retainage to arrive at the current amount due. In BuildWorkPro, each pay app is tied to one project and moves through an approval workflow from Draft to Paid.',
+  },
+  {
+    question: 'Can I make an AIA-style pay app without Excel?',
+    answer:
+      'Yes. In BuildWorkPro, each pay app is built from the project: the contract sum prefills from your accepted bid and approved change orders, previous periods carry forward, retainage is tracked, and the AIA-style PDF is emailed to your GC from the app — no workbook to rebuild each month. For a single job, the free Pay App Builder at buildworkpro.com/tools/pay-app/ runs in your browser: type your schedule of values, get the math and a filled G702/G703-style PDF, and roll it forward next month. Prefer a spreadsheet? The free template at buildworkpro.com/templates/aia-g702-g703/ has the math wired.',
   },
   {
     question: 'How does the schedule of values work in BuildWorkPro?',
@@ -95,8 +100,8 @@ const faqs = [
 ---
 
 <Layout
-  title="AIA Billing Software for Subcontractors | G702/G703 Pay Apps"
-  description="AIA G702/G703 pay apps for subcontractors: schedule of values, retainage, approval workflow, and PDF billing for your GC. $79/mo, 14-day free trial."
+  title="Pay Application Software for Subcontractors | AIA-Style"
+  description="Pay application software for subcontractors: AIA-style G702/G703 pay apps with schedule of values, retainage and GC-ready PDFs. $79/mo flat, 14-day trial."
 >
   <script
     is:inline
@@ -110,10 +115,11 @@ const faqs = [
       <div class="text-center">
         <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Features</p>
         <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
-          AIA Billing Software for Subcontractors
+          Pay Application Software for Subcontractors
         </h1>
         <p class="mt-6 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-          Bill your GC each period with G702/G703-style pay applications: a schedule of values that
+          BuildWorkPro is pay application software and AIA billing software for trade subs. Bill
+          your GC each period with G702/G703-style pay applications: a schedule of values that
           prefills from your accepted bid and approved change orders, retainage tracked on every pay
           app, and an approval workflow from draft through paid. Email the PDF without leaving
           BuildWorkPro.
@@ -178,7 +184,8 @@ const faqs = [
           >
           is in: punch list, closeout documents, and lien waivers. If you still bill from a spreadsheet,
           start with the free
-          <a href="/templates/aia-g702-g703/">G702/G703-style pay application template</a>.
+          <a href="/templates/aia-g702-g703/">G702/G703-style pay application template</a>, or fill
+          one out in your browser with the free <a href="/tools/pay-app/">Pay App Builder</a>.
         </p>
       </div>
     </section>

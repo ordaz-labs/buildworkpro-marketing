@@ -88,10 +88,65 @@ test.describe('signup CTA attribution passthrough', () => {
     });
   });
 
-  test('leaves the signup link untouched for organic visits', async ({ page }) => {
+  test('leaves the signup link untouched for direct visits', async ({ page }) => {
     await page.goto('/');
 
-    // No attribution to forward — no stray query string on the CTA.
+    // No referrer and no params — no stray query string on the CTA.
+    expect(await signupHref(page)).toBe(SIGNUP_ORIGIN);
+  });
+
+  test('labels a Google search arrival as google / organic with its landing page', async ({
+    page,
+  }) => {
+    await page.goto('/templates/aia-g702-g703/', { referer: 'https://www.google.com/' });
+
+    expect(await signupParams(page)).toEqual({
+      utm_source: 'google',
+      utm_medium: 'organic',
+      landing_page: '/templates/aia-g702-g703/',
+    });
+  });
+
+  test('labels AI assistants and other sites distinctly from search', async ({ page }) => {
+    await page.goto('/', { referer: 'https://chatgpt.com/' });
+    expect(await signupParams(page)).toMatchObject({
+      utm_source: 'chatgpt',
+      utm_medium: 'ai-assistant',
+    });
+
+    await page.evaluate(() => sessionStorage.clear());
+    await page.goto('/pricing/', { referer: 'https://www.reddit.com/r/Construction/' });
+    expect(await signupParams(page)).toMatchObject({
+      utm_source: 'reddit.com',
+      utm_medium: 'referral',
+      landing_page: '/pricing/',
+    });
+  });
+
+  test('organic first touch survives browsing to another page', async ({ page }) => {
+    await page.goto('/blog/procore-pricing-for-subcontractors/', {
+      referer: 'https://www.bing.com/',
+    });
+    await page.goto('/features/pay-applications/');
+
+    expect(await signupParams(page)).toMatchObject({
+      utm_source: 'bing',
+      utm_medium: 'organic',
+      landing_page: '/blog/procore-pricing-for-subcontractors/',
+    });
+  });
+
+  test('an organic arrival never overwrites a stored ad touch', async ({ page }) => {
+    await page.goto('/?utm_source=facebook&utm_medium=paid&fbclid=IwAR_x');
+    await page.goto('/features/', { referer: 'https://www.google.com/' });
+
+    const params = await signupParams(page);
+    expect(params).toMatchObject({ utm_source: 'facebook', utm_medium: 'paid', fbclid: 'IwAR_x' });
+  });
+
+  test('internal navigation is not treated as a referral', async ({ page, baseURL }) => {
+    await page.goto('/features/', { referer: `${baseURL}/` });
+
     expect(await signupHref(page)).toBe(SIGNUP_ORIGIN);
   });
 

@@ -5,6 +5,9 @@ export const SLUGS = [
   'schedule-of-values',
   'construction-invoice',
   'lien-waiver',
+  'conditional-lien-waiver',
+  'unconditional-lien-waiver',
+  'notice-to-owner',
   // estimates, bids & proposals
   'construction-estimate',
   'construction-bid-proposal',
@@ -16,6 +19,9 @@ export const SLUGS = [
   'scope-of-work',
   'change-order',
   'notice-to-proceed',
+  'notice-of-commencement',
+  'letter-of-intent',
+  'equipment-rental-agreement',
   'certificate-of-completion',
   // field & daily paperwork
   'daily-report',

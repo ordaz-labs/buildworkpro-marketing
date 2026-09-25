@@ -52,11 +52,14 @@ Unlike platforms built for general contractors (Procore) or residential home bui
 
 ## Free templates
 
-- [Templates hub](https://buildworkpro.com/templates/): 26 free construction templates for subcontractors as fillable PDF, Excel and Word, each with a completed example — no email required
+- [Templates hub](https://buildworkpro.com/templates/): 32 free construction templates for subcontractors as fillable PDF, Excel and Word, each with a completed example — no email required
 - [Pay application template (G702/G703 style)](https://buildworkpro.com/templates/aia-g702-g703/): application and certificate for payment + continuation sheet with retainage math and carry-forward (Excel, fillable PDF)
 - [Schedule of values template](https://buildworkpro.com/templates/schedule-of-values/): SOV with % of contract math, tie-out check and a billing tracker (Excel, PDF)
 - [Contractor invoice template](https://buildworkpro.com/templates/construction-invoice/): line items, tax, retainage and balance due (Excel, Word, fillable PDF)
 - [Lien waiver forms](https://buildworkpro.com/templates/lien-waiver/): conditional and unconditional waivers for progress and final payment (Word, fillable PDF)
+- [Conditional lien waiver form](https://buildworkpro.com/templates/conditional-lien-waiver/): conditional waiver and release on progress and final payment (Word, fillable PDF)
+- [Unconditional lien waiver form](https://buildworkpro.com/templates/unconditional-lien-waiver/): unconditional waiver and release on progress and final payment (Word, fillable PDF)
+- [Notice to owner (Florida)](https://buildworkpro.com/templates/notice-to-owner/): Florida preliminary notice under Fla. Stat. § 713.06 with the statutory warnings (Word, fillable PDF)
 - [Construction estimate template](https://buildworkpro.com/templates/construction-estimate/): material/labor/equipment/sub sections with overhead and true-margin pricing (Excel, PDF)
 - [Construction bid proposal template](https://buildworkpro.com/templates/construction-bid-proposal/): scope, price with alternates, inclusions/exclusions, terms, acceptance block (Word, PDF)
 - [Construction quote template](https://buildworkpro.com/templates/construction-quote/): one-page fixed-price quote with options and acceptance (Excel, Word, PDF)
@@ -66,6 +69,9 @@ Unlike platforms built for general contractors (Procore) or residential home bui
 - [Scope of work template](https://buildworkpro.com/templates/scope-of-work/): included work, exclusions, assumptions, by others, acceptance (Word, PDF)
 - [Change order template](https://buildworkpro.com/templates/change-order/): line-item pricing, contract-sum ladder, time extension, dual signatures, plus a change order log (fillable PDF, Word, Excel)
 - [Notice to proceed template](https://buildworkpro.com/templates/notice-to-proceed/): start authorization with the contract time clock (Word, fillable PDF)
+- [Notice of commencement (Florida)](https://buildworkpro.com/templates/notice-of-commencement/): the recorded Florida form under Fla. Stat. § 713.13 (Word, fillable PDF)
+- [Equipment rental agreement](https://buildworkpro.com/templates/equipment-rental-agreement/): bare or operated equipment rental with an equipment schedule, rates, damage and insurance terms (Word, PDF)
+- [Construction letter of intent](https://buildworkpro.com/templates/letter-of-intent/): GC-to-subcontractor award letter pending the formal subcontract, with a capped early-work authorization (Word, fillable PDF)
 - [Certificate of substantial completion template](https://buildworkpro.com/templates/certificate-of-completion/): completion date, punch list, warranty start, retainage release (Word, fillable PDF)
 - [Construction daily report template](https://buildworkpro.com/templates/daily-report/): crew, weather, work performed, deliveries, delays, safety, photos (fillable PDF, Word, Excel)
 - [Work order template](https://buildworkpro.com/templates/work-order/): requested work, labor and materials, completion sign-off, with a work order log (fillable PDF, Word, Excel)

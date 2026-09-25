@@ -1,0 +1,30 @@
+{
+  "slug": "unconditional-lien-waiver",
+  "name": "Unconditional Lien Waiver Forms",
+  "basename": "unconditional-lien-waiver-form",
+  "files": {
+    "pdf": {
+      "file": "unconditional-lien-waiver-form.pdf",
+      "bytes": 89067,
+      "pages": 2
+    },
+    "example": {
+      "file": "unconditional-lien-waiver-form-example.pdf",
+      "bytes": 45649,
+      "pages": 2
+    },
+    "docx": {
+      "file": "unconditional-lien-waiver-form.docx",
+      "bytes": 13910
+    }
+  },
+  "previews": [
+    {
+      "file": "unconditional-lien-waiver.png",
+      "webp": "unconditional-lien-waiver.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

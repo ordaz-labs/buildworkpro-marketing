@@ -1,0 +1,30 @@
+{
+  "slug": "notice-of-commencement",
+  "name": "Notice of Commencement (Florida)",
+  "basename": "notice-of-commencement-florida",
+  "files": {
+    "pdf": {
+      "file": "notice-of-commencement-florida.pdf",
+      "bytes": 69870,
+      "pages": 1
+    },
+    "example": {
+      "file": "notice-of-commencement-florida-example.pdf",
+      "bytes": 38391,
+      "pages": 1
+    },
+    "docx": {
+      "file": "notice-of-commencement-florida.docx",
+      "bytes": 12937
+    }
+  },
+  "previews": [
+    {
+      "file": "notice-of-commencement.png",
+      "webp": "notice-of-commencement.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

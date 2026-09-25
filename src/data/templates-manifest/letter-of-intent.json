@@ -1,0 +1,30 @@
+{
+  "slug": "letter-of-intent",
+  "name": "Construction Letter of Intent Template",
+  "basename": "construction-letter-of-intent-template",
+  "files": {
+    "pdf": {
+      "file": "construction-letter-of-intent-template.pdf",
+      "bytes": 63659,
+      "pages": 1
+    },
+    "example": {
+      "file": "construction-letter-of-intent-template-example.pdf",
+      "bytes": 38997,
+      "pages": 1
+    },
+    "docx": {
+      "file": "construction-letter-of-intent-template.docx",
+      "bytes": 12629
+    }
+  },
+  "previews": [
+    {
+      "file": "letter-of-intent.png",
+      "webp": "letter-of-intent.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "conditional-lien-waiver",
+  "name": "Conditional Lien Waiver Forms",
+  "basename": "conditional-lien-waiver-form",
+  "files": {
+    "pdf": {
+      "file": "conditional-lien-waiver-form.pdf",
+      "bytes": 85105,
+      "pages": 2
+    },
+    "example": {
+      "file": "conditional-lien-waiver-form-example.pdf",
+      "bytes": 43833,
+      "pages": 2
+    },
+    "docx": {
+      "file": "conditional-lien-waiver-form.docx",
+      "bytes": 13725
+    }
+  },
+  "previews": [
+    {
+      "file": "conditional-lien-waiver.png",
+      "webp": "conditional-lien-waiver.webp",
+      "width": 1200,
+      "height": 1553,
+      "landscape": false
+    }
+  ]
+}
