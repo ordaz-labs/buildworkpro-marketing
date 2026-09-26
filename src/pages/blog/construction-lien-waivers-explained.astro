@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import { config } from '../../config';
 
 const faqs = [
@@ -49,7 +50,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Construction Lien Waivers Explained: Conditional vs. Unconditional
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published June 23, 2026 · 7 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published June 23, 2026 · 7 min read</p>
       </div>
 
       <div
@@ -271,7 +273,10 @@ const faqs = [
           Texas, Nevada, and others — mandate specific statutory forms, and using a non-compliant
           form can leave the waiver legally ineffective or create grounds for dispute. In those
           states, whatever form the GC sends you should match the statutory language; if it doesn't,
-          raise it before signing.
+          raise it before signing. The lien rights themselves follow state notice rules too — on a
+          Florida private job, for example, the owner records a
+          <a href="/templates/notice-of-commencement/">notice of commencement</a> before work starts,
+          and your lien notices follow from it.
         </p>
         <p>
           In states without mandatory forms, the language in whatever document you sign is what

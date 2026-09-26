@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import { config } from '../../config';
 
 const faqs = [
@@ -49,7 +50,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Bid Bonds vs. Performance Bonds: A Sub's Guide
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published July 17, 2026 · 8 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published July 17, 2026 · 8 min read</p>
       </div>
 
       <div
@@ -141,9 +143,10 @@ const faqs = [
           Performance bonds and payment bonds are almost always required together — the combination
           is called a P&amp;P bond. They're two sides of the same obligation: completing the work
           and paying everyone involved. A project with a performance bond but no payment bond
-          protects the owner from an unfinished building but leaves the framing crew or lumber yard
-          with no recourse if money stops flowing. The Miller Act and state equivalents require both
-          precisely because both protections are needed.
+          protects the owner from an unfinished building but leaves the <a
+            href="/solutions/framing-contractors/">framing crew</a
+          > or lumber yard with no recourse if money stops flowing. The Miller Act and state equivalents
+          require both precisely because both protections are needed.
         </p>
 
         <h2>When do subcontractors need bonds?</h2>

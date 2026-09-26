@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import { config } from '../../config';
@@ -44,7 +45,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Construction Change Order Management: Best Practices
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published March 5, 2026 · 7 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published March 5, 2026 · 7 min read</p>
       </div>
 
       <div
@@ -174,8 +176,9 @@ const faqs = [
             time — someone has to coordinate the extra work.
           </li>
           <li>
-            <strong>Materials.</strong> Actual supplier quotes, including delivery and tax. If the change
-            creates waste on materials you already purchased for the base scope, include that too.
+            <strong>Materials.</strong> Actual supplier quotes, including delivery and tax — if you took
+            more than one, <a href="/templates/bid-tabulation/">level them</a> first. If the change creates
+            waste on materials you already purchased for the base scope, include that too.
           </li>
           <li>
             <strong>Equipment.</strong> Any additional rentals, fuel, or small tools required.

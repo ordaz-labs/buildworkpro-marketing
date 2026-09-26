@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import { config } from '../../config';
 
 const faqs = [
@@ -49,7 +50,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Punch List Management for Subcontractors
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published August 14, 2026 · 8 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published August 14, 2026 · 8 min read</p>
       </div>
 
       <div
@@ -128,10 +130,11 @@ const faqs = [
         <p>
           The punch list is formally triggered at substantial completion, the contractual milestone
           at which the work is complete enough for its intended use. On most commercial jobs, an
-          architect or GC representative walks the site, the Certificate of Substantial Completion
-          is signed (often using a form like the AIA G704), and the punch list is attached or issued
-          separately. After that, you have a defined window — often specified in the contract — to
-          correct every item.
+          architect or GC representative walks the site, the <a
+            href="/templates/certificate-of-completion/">Certificate of Substantial Completion</a
+          >
+          is signed (often using a form like the AIA G704), and the punch list is attached or issued separately.
+          After that, you have a defined window — often specified in the contract — to correct every item.
         </p>
         <p>
           In practice, punch list walks happen throughout a job too. A GC who catches quality issues

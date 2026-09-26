@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import { config } from '../../config';
 
 const faqs = [
@@ -49,7 +50,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Job Costing for Subcontractors: A Complete Guide
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published August 21, 2026 · 8 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published August 21, 2026 · 8 min read</p>
       </div>
 
       <div
@@ -166,9 +168,10 @@ const faqs = [
         </p>
         <h3>3. Other direct costs</h3>
         <p>
-          Equipment rental tied to the job, subcontractor invoices for portions of the work you
-          pulled out, permit fees for a specific project. These are easier to attribute correctly
-          because they usually arrive with their own invoice referencing the job.
+          <a href="/templates/equipment-rental-agreement/">Equipment rental</a> tied to the job, subcontractor
+          invoices for portions of the work you pulled out, permit fees for a specific project. These
+          are easier to attribute correctly because they usually arrive with their own invoice referencing
+          the job.
         </p>
         <p>
           Overhead — shop rent, vehicles, insurance, tools, back-office staff — is a fourth

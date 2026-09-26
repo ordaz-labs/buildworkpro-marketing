@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import { config } from '../../config';
@@ -44,7 +45,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Construction CRM: How to Build a Sales Pipeline That Wins More Bids
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published February 15, 2026 · 6 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published February 15, 2026 · 6 min read</p>
       </div>
 
       <div
@@ -52,9 +54,10 @@ const faqs = [
       >
         <p>
           Most subcontractors don't think of themselves as salespeople. You're electricians,
-          plumbers, HVAC techs, concrete finishers — you build things. But here's the reality: your
-          business lives or dies based on your ability to consistently win work. And the subs who
-          are growing aren't just better at their trade. They're better at managing their pipeline.
+          plumbers, HVAC techs, <a href="/solutions/concrete-contractors/">concrete finishers</a> — you
+          build things. But here's the reality: your business lives or dies based on your ability to consistently
+          win work. And the subs who are growing aren't just better at their trade. They're better at
+          managing their pipeline.
         </p>
         <p>
           A <a href="/features/construction-crm/">construction CRM</a> (customer relationship management
@@ -133,8 +136,8 @@ const faqs = [
           </li>
           <li>
             <strong>Estimating / Bid in Progress.</strong> You've decided to bid and your estimating team
-            is working on it. Takeoff is underway, material quotes are coming in, you're building the
-            number.
+            is working on it. <a href="/blog/how-to-read-construction-plans-takeoff/">Takeoff</a> is underway,
+            material quotes are coming in, you're building the number.
           </li>
           <li>
             <strong>Bid Submitted.</strong> Your proposal is in the GC's hands. Now you're waiting for
@@ -146,7 +149,8 @@ const faqs = [
             matters most.
           </li>
           <li>
-            <strong>Won / Awarded.</strong> You got the job. Time to move into <a
+            <strong>Won / Awarded.</strong> You got the job — often first by
+            <a href="/templates/letter-of-intent/">letter of intent</a>. Time to move into <a
               href="/features/project-management/">project execution</a
             >.
           </li>

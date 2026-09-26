@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import { config } from '../../config';
 
 const faqs = [
@@ -49,7 +50,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Retainage in Construction: How It Works & How to Track It
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published June 16, 2026 · 8 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published June 16, 2026 · 8 min read</p>
       </div>
 
       <div
@@ -162,7 +164,11 @@ const faqs = [
           release triggers include:
         </p>
         <ul>
-          <li>Substantial completion of the project</li>
+          <li>
+            Substantial completion of the project, documented by a
+            <a href="/templates/certificate-of-completion/">certificate of substantial completion</a
+            >
+          </li>
           <li>Final completion and punch list sign-off</li>
           <li>A specified number of days after final completion</li>
           <li>Owner's receipt of lien waivers from all subs</li>

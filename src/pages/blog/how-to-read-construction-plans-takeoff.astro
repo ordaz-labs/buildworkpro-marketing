@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import { config } from '../../config';
 
 const faqs = [
@@ -49,7 +50,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           How to Read Construction Plans & Do a Takeoff
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published June 30, 2026 · 9 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published June 30, 2026 · 9 min read</p>
       </div>
 
       <div
@@ -113,16 +115,16 @@ const faqs = [
             <strong>S-sheets</strong> — structural drawings for the building frame, foundations, and slabs.
           </li>
           <li>
-            <strong>M-sheets</strong> — mechanical (HVAC), including ductwork layouts, equipment schedules,
-            and details.
+            <strong>M-sheets</strong> — mechanical (<a href="/solutions/hvac-contractors/">HVAC</a
+            >), including ductwork layouts, equipment schedules, and details.
           </li>
           <li>
-            <strong>P-sheets</strong> — plumbing, including pipe routing, fixture schedules, and riser
-            diagrams.
+            <strong>P-sheets</strong> — <a href="/solutions/plumbing-contractors/">plumbing</a>,
+            including pipe routing, fixture schedules, and riser diagrams.
           </li>
           <li>
-            <strong>E-sheets</strong> — electrical, including panel schedules, lighting plans, power plans,
-            and single-line diagrams.
+            <strong>E-sheets</strong> — <a href="/solutions/electrical-contractors/">electrical</a>,
+            including panel schedules, lighting plans, power plans, and single-line diagrams.
           </li>
           <li>
             <strong>FP-sheets</strong> — fire protection, sprinkler layouts, and riser diagrams.

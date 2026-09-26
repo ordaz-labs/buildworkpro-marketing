@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import { config } from '../../config';
@@ -44,7 +45,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Construction Site Log Best Practices: What to Record Daily
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published February 28, 2026 · 6 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published February 28, 2026 · 6 min read</p>
       </div>
 
       <div
@@ -109,7 +111,10 @@ const faqs = [
           >, and what they were assigned to. This serves multiple purposes:
         </p>
         <ul>
-          <li>Supports your labor billing on time-and-material work or change orders</li>
+          <li>
+            Supports your labor billing on <a href="/templates/tm-ticket/">time-and-material work</a
+            > or change orders
+          </li>
           <li>Demonstrates you were properly staffed if a delay claim arises</li>
           <li>
             Helps your own project management — you can look back and see actual vs. planned
@@ -132,10 +137,10 @@ const faqs = [
 
         <h3>Equipment on Site</h3>
         <p>
-          List major equipment — boom lifts, excavators, welding machines, generators. Note rental
-          equipment separately with start and end dates. If equipment sat idle due to delays caused
-          by others, record that too. Idle equipment time is a recoverable cost in many delay
-          claims.
+          List major equipment — boom lifts, excavators, welding machines, generators. Note <a
+            href="/templates/equipment-rental-agreement/">rental equipment</a
+          > separately with start and end dates. If equipment sat idle due to delays caused by others,
+          record that too. Idle equipment time is a recoverable cost in many delay claims.
         </p>
 
         <h3>Material Deliveries</h3>

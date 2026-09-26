@@ -8,9 +8,20 @@ type Feature = {
   anchor?: string;
 };
 
+const trades = [
+  { label: 'glazing', href: '/solutions/glazing-contractors/' },
+  { label: 'HVAC', href: '/solutions/hvac-contractors/' },
+  { label: 'electrical', href: '/solutions/electrical-contractors/' },
+  { label: 'plumbing', href: '/solutions/plumbing-contractors/' },
+  { label: 'concrete', href: '/solutions/concrete-contractors/' },
+  { label: 'framing', href: '/solutions/framing-contractors/' },
+  { label: 'roofing', href: '/solutions/roofing-contractors/' },
+];
+
 const features: Feature[] = [
   {
     title: 'Project Management',
+    href: '/features/project-management/',
     description:
       'Track every project from bid to completion with phases, tasks, Gantt charts, and team assignments. Kanban boards and timeline views keep your crew aligned.',
     icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
@@ -18,6 +29,7 @@ const features: Feature[] = [
   },
   {
     title: 'CRM & Lead Tracking',
+    href: '/features/construction-crm/',
     description:
       'Visual Kanban pipeline with configurable stages, pipeline values, and probability tracking. Convert a won lead straight into a bid — no re-entry.',
     icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
@@ -25,6 +37,7 @@ const features: Feature[] = [
   },
   {
     title: 'Bids & Estimates',
+    href: '/features/construction-bidding/',
     description:
       'Professional bids with line items, marks, labor rates, and distributed costs. Send the PDF for legally-binding e-signature — a signed bid accepts itself and converts straight into a project.',
     icon: 'M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z',
@@ -50,6 +63,7 @@ const features: Feature[] = [
   },
   {
     title: 'Site Logs',
+    href: '/features/site-logs/',
     description:
       'Daily field documentation with personnel on site, work performed, materials received, issues, and photos. A dated record of every jobsite day when disputes surface.',
     icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
@@ -64,6 +78,7 @@ const features: Feature[] = [
   },
   {
     title: 'Time Tracking',
+    href: '/features/time-tracking/',
     description:
       'Log crew hours against projects and tasks in quarter-hour increments. Managers review entries before they are finalized, with hours and labor cost totaled per period.',
     icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
@@ -123,7 +138,15 @@ const colorMap: Record<string, { bg: string; icon: string; ring: string }> = {
                   <path stroke-linecap="round" stroke-linejoin="round" d={feature.icon} />
                 </svg>
               </div>
-              <h3 class="text-lg font-semibold text-slate-900 mb-2">{feature.title}</h3>
+              <h3 class="text-lg font-semibold text-slate-900 mb-2">
+                {feature.href && !feature.anchor ? (
+                  <a href={feature.href} class="hover:text-brand-600 transition-colors">
+                    {feature.title}
+                  </a>
+                ) : (
+                  feature.title
+                )}
+              </h3>
               <p class="text-slate-500 leading-relaxed">
                 {feature.href && feature.anchor ? (
                   <>
@@ -143,6 +166,25 @@ const colorMap: Record<string, { bg: string; icon: string; ring: string }> = {
           );
         })
       }
+    </div>
+
+    <!-- Separators come from CSS: Prettier's JSX line breaks would otherwise put a space before each comma. -->
+    <div class="mt-12 text-center text-slate-500">
+      Built for specialty trades:
+      <ul class="inline">
+        {
+          trades.map((trade) => (
+            <li class="inline-flex mr-[0.3em] last:mr-0 after:content-[','] last:after:content-['.']">
+              <a
+                href={trade.href}
+                class="font-medium text-brand-600 hover:text-brand-700 hover:underline"
+              >
+                {trade.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </section>

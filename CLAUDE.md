@@ -82,6 +82,13 @@ Run the full suite locally before pushing: `npm run check && npm run lint && npm
 - Starlight uses `loadEnv(..., 'PUBLIC_')` at build time to inject `PUBLIC_EMAIL_SUPPORT` into the social links — keep the `PUBLIC_` prefix on anything that needs to be available at config-evaluation time.
 - The Cloudflare adapter is configured with `prerenderEnvironment: 'node'`, so the static prerender step runs under Node — but anything that runs at request time must work under Workers.
 
+### Internal linking & authorship (SEO)
+
+- **A new page is not done until older pages link to it.** Links written into a new post only point _out_; nothing points back unless you add it. When publishing any blog post, template or feature page, as a separate pass after writing: add in-prose links **to** it from 3–5 existing related pages (blog posts, templates, feature/solution pages, product docs), with descriptive anchor text. Update the `related` cards of the most related older posts too.
+- `npm run build && npm run check:links` — fails on broken internal links (CI runs it in the Build job) and lists ranking-section pages (`blog`, `templates`, `features`, `solutions`, `compare`, `tools`) with fewer than 3 inbound links from body content (header/footer/nav/aside don't count). `npm run check:links -- --page /blog/foo/` lists who links to one page. A new page should leave that list no longer than it found it.
+- **Refresh before you publish.** Pages already sitting at positions 8–20 in Search Console are the cheapest wins: more inbound links, current numbers, a sharper intro. Set `dateModified` on `BlogPostFooter` when a post gets a real content update.
+- **Author.** Every blog post renders `<AuthorByline />` under the H1 and an author box + `Person` schema via `BlogPostFooter`, both from `config.author` in `src/config.ts`, linking to `/about/` (which carries the `AboutPage`/`Person` schema). New posts must import and render `AuthorByline`. Only add entries to `config.author.profiles` for profiles that exist and are filled out.
+
 ### Styling
 
 - **Tailwind CSS v4** via `@tailwindcss/vite` (not the legacy `@astrojs/tailwind` integration). Global styles live in `src/styles/`. The Starlight theme is overridden in `src/styles/docs.css`.
