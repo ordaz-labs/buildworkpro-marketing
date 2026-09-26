@@ -27,6 +27,6 @@ export const config = {
     jobTitle: 'Founder, BuildWorkPro',
     bio: 'Ivan runs National Glass and Construction, a South Florida glass and glazing subcontractor, and built BuildWorkPro to run it. These guides come from the bids, change orders and pay applications that shop runs through every week.',
     url: '/about/',
-    profiles: [] as { label: string; href: string }[],
+    profiles: [{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/iordaz/' }],
   },
 };
