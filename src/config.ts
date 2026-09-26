@@ -16,4 +16,17 @@ export const config = {
     access: import.meta.env.PUBLIC_EMAIL_ACCESS || 'access@buildworkpro.com',
   },
   turnstileSiteKey: import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA',
+  /**
+   * Byline for blog posts (visible byline + BlogPosting/AboutPage Person
+   * schema). `profiles` feeds schema.org `sameAs` and the author box links —
+   * only list profiles that exist and are filled out; a dead link is worse
+   * than none.
+   */
+  author: {
+    name: 'Ivan Ordaz',
+    jobTitle: 'Founder, BuildWorkPro',
+    bio: 'Ivan runs National Glass and Construction, a South Florida glass and glazing subcontractor, and built BuildWorkPro to run it. These guides come from the bids, change orders and pay applications that shop runs through every week.',
+    url: '/about/',
+    profiles: [{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/iordaz/' }],
+  },
 };

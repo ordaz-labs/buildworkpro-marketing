@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import Screenshot from '../../components/Screenshot.astro';
 import { config } from '../../config';
@@ -44,7 +45,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Subcontractor vs General Contractor Software: Key Differences
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published February 20, 2026 · 6 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published February 20, 2026 · 6 min read</p>
       </div>
 
       <div
@@ -137,8 +139,9 @@ const faqs = [
           <li>
             <strong>Estimating and bidding (sending side).</strong> Subs <a
               href="/features/construction-bidding/">build bids</a
-            > from scratch — takeoffs, labor pricing, material quotes, markup. You need tools that help
-            you put numbers together, not compare other people's numbers.
+            > from scratch — <a href="/blog/how-to-read-construction-plans-takeoff/">takeoffs</a>,
+            labor pricing, material quotes, markup. You need tools that help you put numbers
+            together, not compare other people's numbers.
           </li>
           <li>
             <strong
@@ -197,11 +200,13 @@ const faqs = [
           team costs $500-750/month for software that's 70% irrelevant.
         </p>
         <p>
-          The big platforms don't publish prices at all. Procore quotes based on your annual
-          construction volume — independent analyses commonly report $4,500–$10,000+ per year for
-          small contractors — and <a href="/compare/buildertrend-alternative/">Buildertrend</a> is also
-          quote-based as of 2026, with entry tiers historically running around $339–$499+ per month. Compare
-          that to flat-rate, sub-focused tools like BuildWorkPro at $79/month with unlimited users.
+          The big platforms don't publish prices at all. <a
+            href="/blog/procore-pricing-for-subcontractors/"
+            >Procore quotes based on your annual construction volume</a
+          > — independent analyses commonly report $4,500–$10,000+ per year for small contractors — and
+          <a href="/compare/buildertrend-alternative/">Buildertrend</a> is also quote-based as of 2026,
+          with entry tiers historically running around $339–$499+ per month. Compare that to flat-rate,
+          sub-focused tools like BuildWorkPro at $79/month with unlimited users.
         </p>
 
         <h3>Missing Sub-Specific Features</h3>
@@ -239,8 +244,10 @@ const faqs = [
             it's too complex. The best tools feel intuitive on day one.
           </li>
           <li>
-            <strong>CRM included.</strong> Your sales pipeline is your lifeline. The software should track
-            leads, manage contacts, and give you visibility into your bid pipeline.
+            <strong>CRM included.</strong> Your <a href="/blog/construction-crm-tips/"
+              >sales pipeline</a
+            > is your lifeline. The software should track leads, manage contacts, and give you visibility
+            into your bid pipeline.
           </li>
           <li>
             <strong>Pay apps and change orders.</strong> Native support for generating pay applications

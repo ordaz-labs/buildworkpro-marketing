@@ -1,0 +1,12 @@
+---
+// Byline under a blog post's H1. The author box at the end of the post and
+// the BlogPosting schema live in BlogPostFooter; both read config.author.
+import { config } from '../config';
+
+const { author } = config;
+---
+
+<p class="mt-4 text-sm text-slate-500">
+  By <a href={author.url} class="font-medium text-slate-700 hover:text-brand-600">{author.name}</a>
+  · {author.jobTitle}
+</p>

@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import DemoVideo from '../../components/DemoVideo.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import BlogPostFooter from '../../components/BlogPostFooter.astro';
+import AuthorByline from '../../components/AuthorByline.astro';
 import { config } from '../../config';
 
 const faqs = [
@@ -49,7 +50,8 @@ const faqs = [
         <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Construction Daily Report: What to Include (+ Template)
         </h1>
-        <p class="mt-4 text-sm text-slate-400">Published July 31, 2026 · 7 min read</p>
+        <AuthorByline />
+        <p class="mt-1 text-sm text-slate-400">Published July 31, 2026 · 7 min read</p>
       </div>
 
       <div
@@ -153,8 +155,8 @@ const faqs = [
         </p>
         <ul>
           <li>
-            Supports labor billing on time-and-material work and <a href="/features/change-orders/"
-              >change orders</a
+            Supports labor billing on <a href="/templates/tm-ticket/">time-and-material work</a> and <a
+              href="/features/change-orders/">change orders</a
             > — you can tie hours to scope
           </li>
           <li>Demonstrates adequate staffing if a delay claim arises against your schedule</li>
@@ -183,10 +185,10 @@ const faqs = [
         <h3>4. Equipment on site</h3>
         <p>
           List major equipment — boom lifts, excavators, welding machines, compressors, generators.
-          Note rental equipment separately with start and end dates. If equipment sat idle due to
-          access issues, weather, or delays caused by other trades, record that explicitly. Idle
-          equipment time is a recoverable cost in many delay and disruption claims — but only if you
-          documented it at the time.
+          Note <a href="/templates/equipment-rental-agreement/">rental equipment</a> separately with start
+          and end dates. If equipment sat idle due to access issues, weather, or delays caused by other
+          trades, record that explicitly. Idle equipment time is a recoverable cost in many delay and
+          disruption claims — but only if you documented it at the time.
         </p>
 
         <h3>5. Materials received and stored</h3>
